@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1',
+              600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            card: '0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04)',
+            soft: '0 4px 24px rgba(15,23,42,.06)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+    body { font-family: Inter, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
+    .view { display: none; }
+    .view.active { display: block; animation: fadeIn .25s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+    .nav-item.active {
+      background: linear-gradient(90deg, #eef2ff 0%, #e0e7ff 100%);
+      color: #4338ca;
+      border-right: 3px solid #4f46e5;
+      font-weight: 600;
+    }
+    .status-pill { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
+    .table-row:hover { background: #f8fafc; }
+    .metric-card { transition: transform .15s, box-shadow .15s; }
+    .metric-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(15,23,42,.08); }
+    .demo-badge {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #78350f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .platform-badge { font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+  </style>
+  <title>OMS 订单履约 · 跨境电商AI套件</title>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <div class="flex h-screen overflow-hidden">
+    <aside class="w-56 shrink-0 bg-white border-r border-slate-200 flex flex-col z-20">
+      <div class="px-4 py-5 border-b border-slate-100">
+        <a href="../" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-soft">
+            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-sm font-bold text-slate-900 leading-tight group-hover:text-brand-600 transition">OMS 订单履约</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">多平台 · 审拆合 · 物流</div>
+          </div>
+        </a>
+      </div>
+      <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
+        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="overview">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          履约总览
+        </button>
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="pool">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          订单池
+        </button>
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="review">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          审单中心
+        </button>
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="split">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+          拆合单
+        </button>
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="tracking">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+          物流单号
+        </button>
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="sla">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          履约时效
+        </button>
+        <div class="pt-3 mt-2 border-t border-slate-100 px-2">
+          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-slate-50 hover:text-brand-600 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            返回总门户
+          </a>
+        </div>
+      </nav>
+      <div class="px-4 py-3 border-t border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">演</div>
+          <div class="min-w-0">
+            <div class="text-xs font-semibold truncate">演示账号</div>
+            <div class="text-[10px] text-slate-400">demo@crossborder.ai</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="h-14 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 gap-4 z-10">
+        <div class="flex items-center gap-3 min-w-0">
+          <h1 id="page-title" class="text-base font-semibold text-slate-900">履约总览</h1>
+          <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-slate-500">
+          <span class="hidden md:inline">跨境电商AI套件</span>
+          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 hover:bg-brand-100 font-medium border border-brand-100 transition">总门户</a>
+        </div>
+      </header>
+      <main class="flex-1 overflow-y-auto p-5">
+
+        <section id="view-overview" class="view active space-y-5">
+          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+              <div class="text-xs text-slate-500 mb-1">今日新增订单</div>
+              <div class="text-2xl font-bold">1,248</div>
+              <div class="text-xs text-emerald-600 mt-1">↑ 8.4% vs 昨日</div>
+            </div>
+            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+              <div class="text-xs text-slate-500 mb-1">待审单</div>
+              <div class="text-2xl font-bold text-amber-600">86</div>
+              <div class="text-xs text-slate-400 mt-1">含 12 高风险</div>
+            </div>
+            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+              <div class="text-xs text-slate-500 mb-1">今日已发货</div>
+              <div class="text-2xl font-bold">1,092</div>
+              <div class="text-xs text-emerald-600 mt-1">履约率 94.6%</div>
+            </div>
+            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+              <div class="text-xs text-slate-500 mb-1">平均发货时效</div>
+              <div class="text-2xl font-bold">14.2h</div>
+              <div class="text-xs text-emerald-600 mt-1">SLA 达标 97.1%</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+              <h3 class="text-sm font-semibold mb-4">近7日订单量（按平台）</h3>
+              <div class="h-56"><canvas id="oms-chart-vol"></canvas></div>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+              <h3 class="text-sm font-semibold mb-4">履约状态分布</h3>
+              <div class="h-56"><canvas id="oms-chart-status"></canvas></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-pool" class="view space-y-4">
+          <div class="flex flex-wrap gap-2 mb-2">
+            <span class="platform-badge bg-orange-100 text-orange-700">Amazon 412</span>
+            <span class="platform-badge bg-orange-50 text-orange-600">Shopee 286</span>
+            <span class="platform-badge bg-slate-900 text-white">TikTok 198</span>
+            <span class="platform-badge bg-blue-100 text-blue-700">Lazada 142</span>
+            <span class="platform-badge bg-orange-100 text-orange-800">Temu 156</span>
+            <span class="platform-badge bg-blue-50 text-blue-600">Walmart 54</span>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-slate-500 text-xs">
+                <tr><th class="text-left px-4 py-3">订单号</th><th class="text-left px-4 py-3">平台</th><th class="text-left px-4 py-3">买家</th><th class="text-left px-4 py-3">SKU</th><th class="text-right px-4 py-3">金额</th><th class="text-left px-4 py-3">状态</th><th class="text-left px-4 py-3">下单时间</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AMZ-113-9284716</td><td class="px-4 py-3"><span class="platform-badge bg-orange-100 text-orange-700">Amazon</span></td><td class="px-4 py-3">J***n US</td><td class="px-4 py-3 text-xs">LED-2401 ×2</td><td class="px-4 py-3 text-right">$78.90</td><td class="px-4 py-3"><span class="status-pill bg-amber-50 text-amber-700">待审单</span></td><td class="px-4 py-3 text-slate-500 text-xs">09-24 14:22</td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SHP-240924-8821</td><td class="px-4 py-3"><span class="platform-badge bg-orange-50 text-orange-600">Shopee</span></td><td class="px-4 py-3">A***a MY</td><td class="px-4 py-3 text-xs">BAG-8812 ×1</td><td class="px-4 py-3 text-right">RM 45.00</td><td class="px-4 py-3"><span class="status-pill bg-blue-50 text-blue-700">已审核</span></td><td class="px-4 py-3 text-slate-500 text-xs">09-24 13:58</td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">TT-580291447</td><td class="px-4 py-3"><span class="platform-badge bg-slate-900 text-white">TikTok</span></td><td class="px-4 py-3">M***e US</td><td class="px-4 py-3 text-xs">CBL-3309 ×5</td><td class="px-4 py-3 text-right">$39.95</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">已发货</span></td><td class="px-4 py-3 text-slate-500 text-xs">09-24 12:10</td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">LZD-ID-9920183</td><td class="px-4 py-3"><span class="platform-badge bg-blue-100 text-blue-700">Lazada</span></td><td class="px-4 py-3">R***i ID</td><td class="px-4 py-3 text-xs">KIT-5520 ×1</td><td class="px-4 py-3 text-right">Rp 289,000</td><td class="px-4 py-3"><span class="status-pill bg-violet-50 text-violet-700">拣货中</span></td><td class="px-4 py-3 text-slate-500 text-xs">09-24 11:45</td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">TEMU-PO-772819</td><td class="px-4 py-3"><span class="platform-badge bg-orange-100 text-orange-800">Temu</span></td><td class="px-4 py-3">S***h US</td><td class="px-4 py-3 text-xs">BAG-8812 ×3</td><td class="px-4 py-3 text-right">$27.00</td><td class="px-4 py-3"><span class="status-pill bg-rose-50 text-rose-700">异常</span></td><td class="px-4 py-3 text-slate-500 text-xs">09-24 10:33</td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">WMT-44829103</td><td class="px-4 py-3"><span class="platform-badge bg-blue-50 text-blue-600">Walmart</span></td><td class="px-4 py-3">K***y US</td><td class="px-4 py-3 text-xs">LED-2401 ×1</td><td class="px-4 py-3 text-right">$39.99</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">已发货</span></td><td class="px-4 py-3 text-slate-500 text-xs">09-24 09:18</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="view-review" class="view space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><div class="text-xs text-amber-700">待人工审核</div><div class="text-2xl font-bold text-amber-800 mt-1">86</div></div>
+            <div class="bg-rose-50 border border-rose-200 rounded-xl p-4"><div class="text-xs text-rose-700">高风险拦截</div><div class="text-2xl font-bold text-rose-800 mt-1">12</div></div>
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4"><div class="text-xs text-emerald-700">今日自动通过</div><div class="text-2xl font-bold text-emerald-800 mt-1">1,102</div></div>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-slate-500 text-xs">
+                <tr><th class="text-left px-4 py-3">订单</th><th class="text-left px-4 py-3">风险原因</th><th class="text-left px-4 py-3">建议</th><th class="text-left px-4 py-3">操作</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AMZ-113-9284716</td><td class="px-4 py-3">新买家 · 收货地址变更</td><td class="px-4 py-3 text-amber-600">人工确认地址</td><td class="px-4 py-3"><button class="text-xs text-brand-600 font-medium">通过</button> <button class="text-xs text-rose-600 font-medium ml-2">拦截</button></td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">TEMU-PO-772819</td><td class="px-4 py-3">库存不足 · SKU BAG-8812</td><td class="px-4 py-3 text-rose-600">拆单或补货</td><td class="px-4 py-3"><button class="text-xs text-brand-600 font-medium">拆单</button></td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SHP-240924-7902</td><td class="px-4 py-3">敏感品目申报校验</td><td class="px-4 py-3 text-amber-600">核对海关编码</td><td class="px-4 py-3"><button class="text-xs text-brand-600 font-medium">通过</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="view-split" class="view space-y-4">
+          <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+            <h3 class="text-sm font-semibold mb-3">拆合单工作台</h3>
+            <p class="text-sm text-slate-500 mb-4">多仓缺货自动拆单 · 同买家同日订单可合单发货</p>
+            <div class="space-y-3">
+              <div class="border border-slate-200 rounded-lg p-4 flex items-center justify-between">
+                <div>
+                  <div class="font-mono text-xs text-slate-500">AMZ-113-9102844 · 3 SKU</div>
+                  <div class="text-sm mt-1">美西仓缺货 1 SKU → 建议拆为 2 包裹</div>
+                </div>
+                <button class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold">确认拆单</button>
+              </div>
+              <div class="border border-slate-200 rounded-lg p-4 flex items-center justify-between">
+                <div>
+                  <div class="font-mono text-xs text-slate-500">SHP-8821 + SHP-8825 · 同买家</div>
+                  <div class="text-sm mt-1">同一收件地址 · 可合并节省运费约 $2.40</div>
+                </div>
+                <button class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold">确认合单</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-tracking" class="view space-y-4">
+          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-slate-500 text-xs">
+                <tr><th class="text-left px-4 py-3">订单号</th><th class="text-left px-4 py-3">物流商</th><th class="text-left px-4 py-3">运单号</th><th class="text-left px-4 py-3">最新轨迹</th><th class="text-left px-4 py-3">状态</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">TT-580291447</td><td class="px-4 py-3">YunExpress</td><td class="px-4 py-3 font-mono text-xs">YT2492847192CN</td><td class="px-4 py-3 text-xs">Departed from origin facility</td><td class="px-4 py-3"><span class="status-pill bg-blue-50 text-blue-700">运输中</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">WMT-44829103</td><td class="px-4 py-3">USPS</td><td class="px-4 py-3 font-mono text-xs">94001118995628471928</td><td class="px-4 py-3 text-xs">Out for delivery</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">派送中</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">LZD-ID-9920183</td><td class="px-4 py-3">J&T Express</td><td class="px-4 py-3 font-mono text-xs">JT1988273645</td><td class="px-4 py-3 text-xs">Picked up by courier</td><td class="px-4 py-3"><span class="status-pill bg-violet-50 text-violet-700">已揽收</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AMZ-113-8829100</td><td class="px-4 py-3">Amazon Logistics</td><td class="px-4 py-3 font-mono text-xs">TBA048291738291</td><td class="px-4 py-3 text-xs">Delivered</td><td class="px-4 py-3"><span class="status-pill bg-slate-100 text-slate-600">已签收</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="view-sla" class="view space-y-4">
+          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">平均审核时长</div><div class="text-xl font-bold mt-1">18 min</div></div>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">平均拣货时长</div><div class="text-xl font-bold mt-1">2.4 h</div></div>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">平均交运时长</div><div class="text-xl font-bold mt-1">14.2 h</div></div>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">超时订单</div><div class="text-xl font-bold mt-1 text-rose-600">23</div></div>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+            <h3 class="text-sm font-semibold mb-4">近7日履约时效（小时）</h3>
+            <div class="h-56"><canvas id="oms-chart-sla"></canvas></div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const view = btn.dataset.view;
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        const el = document.getElementById('view-' + view);
+        if (el) el.classList.add('active');
+        document.getElementById('page-title').textContent = btn.textContent.trim();
+      });
+    });
+
+    const o = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } };
+    new Chart(document.getElementById('oms-chart-vol'), {
+      type: 'bar',
+      data: {
+        labels: ['9/18','9/19','9/20','9/21','9/22','9/23','9/24'],
+        datasets: [
+          { label: 'Amazon', data: [380,410,390,450,420,440,412], backgroundColor: '#FF9900', borderRadius: 4 },
+          { label: 'Shopee', data: [250,270,260,290,280,300,286], backgroundColor: '#EE4D2D', borderRadius: 4 },
+          { label: 'TikTok', data: [160,180,170,200,190,210,198], backgroundColor: '#1e293b', borderRadius: 4 },
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }, scales: { x: { stacked: true }, y: { stacked: true } } }
+    });
+    new Chart(document.getElementById('oms-chart-status'), {
+      type: 'doughnut',
+      data: { labels: ['已发货','拣货中','待审单','异常','已签收'], datasets: [{ data: [1092,186,86,23,420], backgroundColor: ['#10b981','#8b5cf6','#f59e0b','#f43f5e','#94a3b8'] }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
+    });
+    new Chart(document.getElementById('oms-chart-sla'), {
+      type: 'line',
+      data: { labels: ['9/18','9/19','9/20','9/21','9/22','9/23','9/24'], datasets: [{ data: [15.8,14.9,16.2,13.8,14.5,15.1,14.2], borderColor: '#4f46e5', backgroundColor: 'rgba(79,70,229,.1)', fill: true, tension: .35 }] },
+      options: o
+    });
+
+  </script>
+</body>
+</html>

@@ -1,26 +1,42 @@
-# 跨境电商AI中台 · 官方演示
+# 跨境电商AI套件 · 官方演示
 
-本仓库为 **跨境电商AI中台** 的官方网页演示（演示数据），可直接通过 GitHub Pages 访问。
+全链路跨境电商经营演示套件（演示数据），适合客户演示与方案讲解。通过 GitHub Pages 一键访问。
 
-## 在线演示
+## 在线演示门户
 
 👉 **https://rong001.github.io/crossborder-ai-midplatform/**
 
-## 说明
+## 产品矩阵入口
 
-- 界面为中文，覆盖中台核心能力展示（数据为演示用途）
-- 单页自包含：`index.html`（Tailwind CSS + Chart.js CDN）
-- 无需登录，适合作为「官网演示通道」给客户打开
+| 系统 | 说明 | 链接 |
+|------|------|------|
+| 🏠 总门户 | 产品矩阵官网入口 | [打开](https://rong001.github.io/crossborder-ai-midplatform/) |
+| AI运营中台 | 多平台看板 · AI洞察 | [打开](https://rong001.github.io/crossborder-ai-midplatform/midplatform/) |
+| ERP 进销存 | 采购 · 供应商 · 成本 · 应付 | [打开](https://rong001.github.io/crossborder-ai-midplatform/erp/) |
+| OMS 订单履约 | 多平台订单 · 审拆合单 · 物流 | [打开](https://rong001.github.io/crossborder-ai-midplatform/oms/) |
+| WMS 海外仓 | 库位 · 拣货波次 · 出入库 | [打开](https://rong001.github.io/crossborder-ai-midplatform/wms/) |
+| 广告投放中心 | ACOS/ROAS · 关键词 · AI优化 | [打开](https://rong001.github.io/crossborder-ai-midplatform/ads/) |
+| 智能客服中心 | 多语言工单 · 自动回复 · 差评预警 | [打开](https://rong001.github.io/crossborder-ai-midplatform/cs/) |
+| 选品与数据BI | 榜单 · 趋势 · 竞品 · 利润测算 | [打开](https://rong001.github.io/crossborder-ai-midplatform/bi/) |
+| 财务结算对账 | 回款 · 费用 · 毛利净利 · 差异 | [打开](https://rong001.github.io/crossborder-ai-midplatform/finance/) |
+
+> **路径变更说明**：原先根路径 `/` 即为 AI 中台单页；现已升级为套件总门户，原中台迁移至 `/midplatform/`。
+
+## 技术说明
+
+- 全部为自包含 HTML（Tailwind CSS + Chart.js CDN），无构建步骤
+- 界面中文，统一 light SaaS 视觉（indigo/blue）与「演示数据」标识
+- 支持平台徽章：Amazon / Shopee / TikTok / Lazada / Temu / Walmart
+- 无需登录，适合屏幕共享演示
 
 ## 本地预览
 
-直接用浏览器打开 `index.html`，或：
-
 ```bash
+cd crossborder-suite   # 或本仓库根目录
 python3 -m http.server 8080
 ```
 
-然后访问 `http://localhost:8080`。
+访问 `http://localhost:8080`。
 
 ## 许可
 
