@@ -1,42 +1,308 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Finance 财务 · Crossborder AI OS</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><link rel="stylesheet" href="../shared.css"/><script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script><style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style></head><body class="bg-surface-page text-gray-900 antialiased"><div class="flex h-screen overflow-hidden"><aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20"><div class="px-4 py-4 border-b border-gray-200"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><div class="text-sm font-semibold text-gray-900 leading-tight">Finance 财务</div><div class="text-[10px] text-gray-400 mt-0.5">Finance · True P&L</div></div></div></div><nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto"><button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="pnl" data-title="真利润"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>真利润</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="orchestrate" data-title="Agent 编排"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Agent 编排</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="settle" data-title="结算对账"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>结算对账</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="timeline" data-title="自动化时间线"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>自动化时间线</button><div class="pt-3 mt-2 border-t border-gray-200 px-1"><a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>架构总览（回门户）</a></div></nav><div class="px-4 py-3 border-t border-gray-200"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div><div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示账号</div><div class="text-[10px] text-gray-400">demo@crossborder.ai</div></div></div></div></aside><div class="flex-1 flex flex-col min-w-0"><header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10"><div class="flex items-center gap-3 min-w-0"><div class="breadcrumb hidden sm:block">AI OS / <span id="breadcrumb-current">真利润</span></div><h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">真利润</h1><span class="ai-native-badge px-2 py-0.5 rounded">AI Native</span><span class="demo-badge px-2 py-0.5 rounded">演示数据</span></div><div class="flex items-center gap-2.5"><span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Agent 编排在线</span><button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.agent-rail').classList.toggle('hidden')">Agent</button></div></header><main class="flex-1 overflow-y-auto p-5">
-<div id="view-pnl" class="view active space-y-5">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>财务对账 / 毛利 · 跨境 AI 中台</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../shared.css"/>
+<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
+<style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style>
+</head>
+<body class="bg-surface-page text-gray-900 antialiased">
+
+<div class="flex h-screen overflow-hidden">
+<aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
+  <div class="px-4 py-3.5 border-b border-gray-200">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+      <div>
+        <div class="text-sm font-semibold text-gray-900 leading-tight">财务对账 / 毛利</div>
+        <div class="text-[10px] text-gray-400 mt-0.5">公式 · 结算 · 对账</div>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+    <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="margin" data-title="毛利公式 / 结算"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>毛利公式 / 结算</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="recon" data-title="平台账单对账"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>平台账单对账</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="sku" data-title="SKU/ASIN 利润"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>SKU/ASIN 利润</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="fx" data-title="汇率 / 汇损"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>汇率 / 汇损</button>
+    <div class="pt-3 mt-2 border-t border-gray-200 px-1">
+      <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>回门户</a>
+    </div>
+  </nav>
+  <div class="px-4 py-3 border-t border-gray-200">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
+      <div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示卖家</div><div class="text-[10px] text-gray-400">demo@cbec.cn</div></div>
+    </div>
+  </div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+  <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-4 gap-3 z-10">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="breadcrumb hidden sm:block">跨境中台 / <span id="breadcrumb-current">毛利公式 / 结算</span></div>
+      <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">毛利公式 / 结算</h1>
+      <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <select class="text-xs border border-gray-200 rounded-md px-2 py-1.5 bg-white text-gray-600 hidden sm:block">
+        <option>全部店铺</option><option>Amazon US · 主店</option><option>Shopee MY</option><option>TikTok US</option>
+      </select>
+      <button class="btn-ghost btn-sm text-xs" onclick="toast('已触发同步订单/产品（演示）')">同步</button>
+      <button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.ai-rail').classList.toggle('hidden')">AI推荐</button>
+    </div>
+  </header>
+  <main class="flex-1 overflow-y-auto p-4">
+<div id="view-margin" class="view active space-y-4">
   <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-    <div class="metric-card p-4"><div class="section-label">今日真利润</div><div class="mt-1.5 text-2xl font-semibold tabular text-emerald-700" id="kpi-tp" data-val="28420">$28,420</div><div class="mt-1 text-xs text-gray-500">GMV $128,420</div></div>
-    <div class="metric-card p-4"><div class="section-label">平台佣金</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-fee" data-val="15410">$15,410</div><div class="mt-1 text-xs text-gray-500">含支付手续费</div></div>
-    <div class="metric-card p-4"><div class="section-label">FBA / 仓配</div><div class="mt-1.5 text-2xl font-semibold tabular">$9,860</div><div class="mt-1 text-xs text-gray-500">履约成本</div></div>
-    <div class="metric-card p-4"><div class="section-label">广告花费</div><div class="mt-1.5 text-2xl font-semibold tabular">$18,260</div><div class="mt-1 text-xs text-gray-500">ACOS 18.4%</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">销售额</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-sales" data-val="128420">$128,420</div><div class="mt-0.5 text-[11px] text-gray-500">本期</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">销售毛利</div><div class="mt-1 text-xl font-semibold tabular text-emerald-700" id="kpi-gm" data-val="78250">$78,250</div><div class="mt-0.5 text-[11px] text-gray-500">可配置费项</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">净毛利</div><div class="mt-1 text-xl font-semibold tabular text-emerald-700" id="kpi-nm" data-val="67050">$67,050</div><div class="mt-0.5 text-[11px] text-gray-500">−仓储 −广告</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">结算利润</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-settle" data-val="64880">$64,880</div><div class="mt-0.5 text-[11px] text-gray-500">结算口径</div></div>
   </div>
-  <div class="panel p-4">
-    <div class="section-label mb-3">SKU 真利润（费用归因后）</div>
-    <table class="w-full text-sm dense-table"><thead class="sticky-th"><tr>
-      <th class="text-left px-3 py-2">SKU</th><th class="text-right px-3 py-2">GMV</th><th class="text-right px-3 py-2">佣金</th><th class="text-right px-3 py-2">FBA</th><th class="text-right px-3 py-2">广告</th><th class="text-right px-3 py-2">退款</th><th class="text-right px-3 py-2">真利润</th>
-    </tr></thead>
-    <tbody>
-      <tr class="border-t border-gray-100"><td class="px-3 font-medium">SKU-8821</td><td class="px-3 text-right tabular">$24,600</td><td class="px-3 text-right tabular">$2,952</td><td class="px-3 text-right tabular">$1,840</td><td class="px-3 text-right tabular">$3,210</td><td class="px-3 text-right tabular">$420</td><td class="px-3 text-right tabular text-emerald-600 font-semibold">$6,180</td></tr>
-      <tr class="border-t border-gray-100"><td class="px-3 font-medium">SKU-2201</td><td class="px-3 text-right tabular">$18,200</td><td class="px-3 text-right tabular">$2,184</td><td class="px-3 text-right tabular">$1,520</td><td class="px-3 text-right tabular">$2,880</td><td class="px-3 text-right tabular">$310</td><td class="px-3 text-right tabular text-emerald-600 font-semibold">$4,020</td></tr>
-      <tr class="border-t border-gray-100"><td class="px-3 font-medium">SKU-3310</td><td class="px-3 text-right tabular">$9,400</td><td class="px-3 text-right tabular">$1,128</td><td class="px-3 text-right tabular">$780</td><td class="px-3 text-right tabular">$1,960</td><td class="px-3 text-right tabular">$510</td><td class="px-3 text-right tabular text-amber-600 font-semibold">$890</td></tr>
-    </tbody></table>
+
+  <div class="grid lg:grid-cols-5 gap-4">
+    <div class="lg:col-span-3 panel p-4">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <div class="text-sm font-semibold">可配置毛利公式</div>
+          <p class="text-[11px] text-gray-500 mt-0.5">勾选费项实时重算 · 对标积加字段级毛利</p>
+        </div>
+        <button class="btn-ghost btn-sm text-[11px]" onclick="toast('公式已保存到本机（演示）')">保存配置</button>
+      </div>
+      <div class="text-xs text-gray-500 mb-2 leading-relaxed bg-gray-50 rounded-md p-2.5 border border-gray-100">
+        <div><strong class="text-gray-700">销售毛利</strong> ≈ 销售额 −（采购 + 头程 + 配送 + 佣金 + 促销 + 平台费 + 退款）± 退货补回</div>
+        <div class="mt-1"><strong class="text-gray-700">净毛利</strong> = 销售毛利 − 仓储 − 广告（− Coupon/Deal）</div>
+      </div>
+      <div class="fee-panel max-h-[360px] overflow-y-auto pr-1"><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="purchase" data-amt="18200" data-sign="-1" checked onchange="recalcMargin()"/>采购成本</span>
+          <span class="tabular text-gray-600">−$18,200</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="firstleg" data-amt="2100" data-sign="-1" checked onchange="recalcMargin()"/>头程分摊</span>
+          <span class="tabular text-gray-600">−$2,100</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="fulfill" data-amt="9800" data-sign="-1" checked onchange="recalcMargin()"/>配送 / FBA</span>
+          <span class="tabular text-gray-600">−$9,800</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="commission" data-amt="15410" data-sign="-1" checked onchange="recalcMargin()"/>平台佣金</span>
+          <span class="tabular text-gray-600">−$15,410</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="promo" data-amt="3200" data-sign="-1" checked onchange="recalcMargin()"/>促销折扣</span>
+          <span class="tabular text-gray-600">−$3,200</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="platform" data-amt="860" data-sign="-1" checked onchange="recalcMargin()"/>平台费 / 其他</span>
+          <span class="tabular text-gray-600">−$860</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="refund" data-amt="2400" data-sign="-1" checked onchange="recalcMargin()"/>退款</span>
+          <span class="tabular text-gray-600">−$2,400</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="refund_back" data-amt="800" data-sign="1" onchange="recalcMargin()"/>退货补回成本</span>
+          <span class="tabular text-gray-600">+$800</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="storage" data-amt="1680" data-sign="-1" checked onchange="recalcMargin()"/>仓储费</span>
+          <span class="tabular text-gray-600">−$1,680</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="ads" data-amt="8420" data-sign="-1" checked onchange="recalcMargin()"/>广告花费</span>
+          <span class="tabular text-gray-600">−$8,420</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="coupon" data-amt="1100" data-sign="-1" onchange="recalcMargin()"/>Coupon / Deal</span>
+          <span class="tabular text-gray-600">−$1,100</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="fxloss" data-amt="420" data-sign="-1" checked onchange="recalcMargin()"/>汇损</span>
+          <span class="tabular text-gray-600">−$420</span>
+        </label><label class="fee-check flex items-center justify-between gap-2 py-1.5 border-b border-gray-50 text-sm">
+          <span class="flex items-center gap-2"><input type="checkbox" data-fee="pack" data-amt="360" data-sign="-1" checked onchange="recalcMargin()"/>包装 / 辅料</span>
+          <span class="tabular text-gray-600">−$360</span>
+        </label></div>
+      <div class="mt-3 pt-3 border-t border-gray-100 grid grid-cols-2 gap-3 text-sm">
+        <div>销售毛利 <strong class="tabular text-emerald-700" id="out-gm">$78,250</strong></div>
+        <div>净毛利 <strong class="tabular text-emerald-700" id="out-nm">$67,050</strong></div>
+        <div>毛利率 <strong class="tabular" id="out-gmr">60.9%</strong></div>
+        <div>净毛利率 <strong class="tabular" id="out-nmr">52.2%</strong></div>
+      </div>
+    </div>
+    <div class="lg:col-span-2 space-y-3">
+      <div class="panel p-4">
+        <div class="section-label mb-2">结算利润 vs 销售利润（预估）</div>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span class="text-gray-500">销售利润（预估）</span><span class="tabular font-medium" id="cmp-sales">$67,050</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">结算利润（账单）</span><span class="tabular font-medium" id="cmp-settle">$64,880</span></div>
+          <div class="flex justify-between border-t pt-2"><span class="text-gray-500">差异</span><span class="tabular text-amber-600 font-medium">−$2,170</span></div>
+        </div>
+        <p class="text-[11px] text-gray-400 mt-3">未结算单用历史权重预估佣金/配送（90/60/30 天 · 0.2/0.3/0.5）。财务月结以结算报告为准。</p>
+      </div>
+      <div class="panel p-4">
+        <div class="section-label mb-2">必须单列的成本项</div>
+        <div class="flex flex-wrap gap-1.5 text-[11px]">
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">佣金</span>
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">FBA</span>
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">仓储</span>
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">广告</span>
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">退货损耗</span>
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">头程</span>
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">汇损</span>
+          <span class="px-2 py-0.5 rounded bg-gray-50 border">包装</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="suggestion-card p-4"><div class="flex justify-between gap-4"><div><div class="text-sm font-semibold">14 日回款预测草稿</div><p class="text-xs text-gray-500 mt-1">综合 Amazon 两周账期、Shopee 周结、Temu 半月结。预计净回款 $186,400，现金缺口风险低。</p></div><button class="btn-primary btn-sm shrink-0" onclick="approveAction(this,'回款预测','kpi-tp',0,'money')">批准采用</button></div></div>
 </div>
-<div id="view-orchestrate" class="view space-y-5"><div class="flex items-center justify-between"><div><h2 class="text-base font-semibold text-gray-900">结算 Agent 编排</h2><p class="text-xs text-gray-500 mt-1">点击节点模拟编排：触发 → Agent → 动作 → 人机门</p></div><button class="btn-primary text-xs px-3 py-1.5" onclick="runOrchestration('结算编排')">模拟运行</button></div><div class="orch-canvas"><div id="orch-flow" class="flex items-center gap-0 min-w-max"><div class="orch-node trigger" onclick="runOrchestration('结算编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">trigger</div><div class="text-sm font-semibold text-gray-900">结算文件</div><div class="text-[11px] text-gray-500 mt-0.5">平台回传</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('结算编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">自动对账</div><div class="text-[11px] text-gray-500 mt-0.5">差异检测</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('结算编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">费用归因</div><div class="text-[11px] text-gray-500 mt-0.5">分摊至 SKU</div></div><div class="orch-edge"></div><div class="orch-node action" onclick="runOrchestration('结算编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">action</div><div class="text-sm font-semibold text-gray-900">刷新真利润</div><div class="text-[11px] text-gray-500 mt-0.5">P&L 写入</div></div><div class="orch-edge"></div><div class="orch-node gate" onclick="runOrchestration('结算编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">gate</div><div class="text-sm font-semibold text-gray-900">差异>$500</div><div class="text-[11px] text-gray-500 mt-0.5">人工核销</div></div></div></div><div class="panel p-4"><div class="section-label mb-2">编排说明</div><p class="text-sm text-gray-600 leading-relaxed">低置信度或高金额动作进入人机审批门；高置信度可自动执行并写入时间线。可回放、可暂停 Agent。</p></div></div>
-<div id="view-settle" class="view space-y-5"><h2 class="text-base font-semibold">结算对账</h2>
-  <div class="panel p-4 text-sm text-gray-600 space-y-2">
-    <div class="flex justify-between"><span>Shopee MY 周结算</span><span class="status-pill status-success">已对齐</span></div>
-    <div class="flex justify-between"><span>Amazon US 两周结算</span><span class="status-pill status-scheduled">预计明日</span></div>
-    <div class="flex justify-between"><span>TikTok Shop 结算</span><span class="status-pill status-warning">差异 $128 待核</span></div>
+
+<div id="view-recon" class="view space-y-4">
+  <div class="flex justify-between items-center">
+    <div><h2 class="text-base font-semibold">平台账单对账差异队列</h2>
+      <p class="text-xs text-gray-500 mt-1">Settlement / 费用明细 / 广告发票</p></div>
+    <button class="btn-primary btn-sm" onclick="toast('已拉取最新结算报告（演示）')">同步账单</button>
+  </div>
+  <div class="panel overflow-hidden">
+    <table class="w-full text-sm dense-table">
+      <thead class="sticky-th"><tr>
+        <th class="w-8 px-3"><input type="checkbox"/></th>
+        <th class="text-left px-3 py-2">平台</th><th class="text-left px-3 py-2">账单期</th>
+        <th class="text-right px-3 py-2">系统预估</th><th class="text-right px-3 py-2">结算金额</th>
+        <th class="text-right px-3 py-2">差异</th><th class="text-left px-3 py-2">原因</th>
+        <th class="text-left px-3 py-2">操作</th>
+      </tr></thead>
+      <tbody>
+        <tr class="border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3"><span class="platform-badge">Amazon</span></td><td class="px-3 text-xs">2026-09-01~15</td>
+          <td class="px-3 text-right tabular">$42,100</td><td class="px-3 text-right tabular">$41,280</td>
+          <td class="px-3 text-right tabular text-amber-600">−$820</td>
+          <td class="px-3 text-xs">FBA 仓储未入账</td>
+          <td class="px-3"><button class="btn-primary btn-sm text-[11px]" onclick="toast('已标记核销差异')">核销</button></td></tr>
+        <tr class="border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3"><span class="platform-badge">Shopee</span></td><td class="px-3 text-xs">W37</td>
+          <td class="px-3 text-right tabular">$8,640</td><td class="px-3 text-right tabular">$8,210</td>
+          <td class="px-3 text-right tabular text-amber-600">−$430</td>
+          <td class="px-3 text-xs">活动费未匹配</td>
+          <td class="px-3"><button class="btn-ghost btn-sm text-[11px]" onclick="toast('打开费用明细')">明细</button></td></tr>
+        <tr class="border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3"><span class="platform-badge">TikTok</span></td><td class="px-3 text-xs">2026-09</td>
+          <td class="px-3 text-right tabular">$12,400</td><td class="px-3 text-right tabular">$12,050</td>
+          <td class="px-3 text-right tabular text-amber-600">−$350</td>
+          <td class="px-3 text-xs">达人佣金</td>
+          <td class="px-3"><button class="btn-ghost btn-sm text-[11px]" onclick="toast('已派财务复核')">复核</button></td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
-<div id="view-timeline" class="view space-y-5"><div><h2 class="text-base font-semibold text-gray-900">自动化时间线</h2><p class="text-xs text-gray-500 mt-1">Agent 实时动作流 · 采纳/批准后自动追加</p></div><div class="panel p-5"><div id="live-timeline"><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">03:02:18</div><div class="text-sm text-gray-800 mt-0.5">自动对账完成 Shopee MY</div></div><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">02:55:40</div><div class="text-sm text-gray-800 mt-0.5">费用归因刷新 1,842 订单行</div></div><div class="timeline-item pb-4"><div class="timeline-dot warning"></div><div class="text-xs text-gray-400 tabular">02:40:00</div><div class="text-sm text-gray-800 mt-0.5">回款预测草稿进入审批</div></div></div></div></div></main></div><aside class="agent-rail hidden lg:flex shrink-0"><div class="px-4 py-3 border-b border-gray-200"><div class="text-xs font-semibold text-gray-900">Agent 控制台</div><div class="text-[10px] text-gray-400 mt-0.5">运行中 / <span class="text-amber-700 font-medium">等待审批</span> / 已暂停 · AI 起草需人确认</div></div><div class="flex-1 overflow-y-auto"><div class="agent-card" data-agent="Reconcile"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">自动对账</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">Shopee MY 周结算已对齐</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:97%"></span></div><span class="text-[10px] tabular text-gray-400">97%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Reconcile')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Attrib"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">费用归因</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">FBA+佣金+广告→SKU</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:93%"></span></div><span class="text-[10px] tabular text-gray-400">93%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Attrib')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Profit"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">真利润 Agent</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">刷新 SKU 级 P&L</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:91%"></span></div><span class="text-[10px] tabular text-gray-400">91%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Profit')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Cash"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">回款预测</div><span class="status-pill status-approve agent-status">等待审批</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">14 日现金流草稿</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:86%"></span></div><span class="text-[10px] tabular text-gray-400">86%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Cash')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div></div></aside></div><div id="toast-host"></div>
+
+<div id="view-sku" class="view space-y-4">
+  <h2 class="text-base font-semibold">SKU / ASIN 利润表</h2>
+  <div class="panel overflow-hidden">
+    <table class="w-full text-sm dense-table">
+      <thead class="sticky-th"><tr>
+        <th class="text-left px-3 py-2">ASIN/SKU</th><th class="text-right px-3 py-2">销售额</th>
+        <th class="text-right px-3 py-2">佣金</th><th class="text-right px-3 py-2">FBA</th>
+        <th class="text-right px-3 py-2">广告</th><th class="text-right px-3 py-2">头程</th>
+        <th class="text-right px-3 py-2">退货</th><th class="text-right px-3 py-2">净毛利</th>
+      </tr></thead>
+      <tbody>
+        <tr class="border-t"><td class="px-3 font-mono text-xs">B07X9K2M</td><td class="px-3 text-right tabular">$12,400</td>
+          <td class="px-3 text-right tabular">$1,860</td><td class="px-3 text-right tabular">$2,100</td>
+          <td class="px-3 text-right tabular">$980</td><td class="px-3 text-right tabular">$210</td>
+          <td class="px-3 text-right tabular">$120</td><td class="px-3 text-right tabular text-emerald-600">$4,820</td></tr>
+        <tr class="border-t"><td class="px-3 font-mono text-xs">SKU-8821</td><td class="px-3 text-right tabular">$8,200</td>
+          <td class="px-3 text-right tabular">$1,230</td><td class="px-3 text-right tabular">$1,640</td>
+          <td class="px-3 text-right tabular">$1,820</td><td class="px-3 text-right tabular">$160</td>
+          <td class="px-3 text-right tabular">$340</td><td class="px-3 text-right tabular text-amber-600">$890</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="view-fx" class="view space-y-4">
+  <h2 class="text-base font-semibold">汇率 / 汇损（领星「我的汇率」）</h2>
+  <div class="panel p-4 space-y-3 text-sm">
+    <label class="flex justify-between items-center"><span>本月 USD→CNY 预算汇率</span><input class="border rounded px-2 py-1 w-28 text-right" value="7.18"/></label>
+    <label class="flex justify-between items-center"><span>收入用结算日汇率</span><input type="checkbox" checked/></label>
+    <label class="flex justify-between items-center"><span>成本用付款日汇率</span><input type="checkbox" checked/></label>
+    <p class="text-xs text-gray-500">差额进「汇兑损益」科目。</p>
+    <button class="btn-primary btn-sm" onclick="toast('汇率已保存')">保存</button>
+  </div>
+</div>
+</main>
+</div>
+<aside class="ai-rail hidden lg:flex shrink-0 w-[260px] bg-white border-l border-gray-200 flex-col">
+  <div class="px-4 py-3 border-b border-gray-200">
+    <div class="text-xs font-semibold text-gray-900">AI 推荐</div>
+    <div class="text-[10px] text-gray-400 mt-0.5">草稿 / 需确认 · 非黑盒一键</div>
+  </div>
+  <div class="flex-1 overflow-y-auto p-3 space-y-2.5"><div class="suggestion-card p-3">
+  <div class="text-xs font-semibold text-gray-900">对账差异 3 条</div>
+  <p class="text-[11px] text-gray-500 mt-1 leading-snug">FBA 仓储 / 活动费 / 达人佣金待核销。</p>
+  <button class="btn-primary btn-sm mt-2 text-[11px]" onclick="showView('recon')">去对账</button>
+</div></div>
+</aside>
+</div>
+<div id="toast-host"></div>
+
 <script>
 function toast(msg){var h=document.getElementById('toast-host');var e=document.createElement('div');e.className='toast';e.textContent=msg;h.appendChild(e);setTimeout(function(){e.remove()},2800);}
-function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});var el=document.getElementById('view-'+id);if(el)el.classList.add('active');document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});var btn=document.querySelector('.nav-item[data-view="'+id+'"]');if(btn){var t=btn.dataset.title||id;var bc=document.getElementById('breadcrumb-current');var pt=document.getElementById('page-title');if(bc)bc.textContent=t;if(pt)pt.textContent=t;}}
+function showView(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});
+  var el=document.getElementById('view-'+id); if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});
+  var btn=document.querySelector('.nav-item[data-view="'+id+'"]');
+  if(btn){var t=btn.dataset.title||id; var bc=document.getElementById('breadcrumb-current'); var pt=document.getElementById('page-title'); if(bc)bc.textContent=t; if(pt)pt.textContent=t;}
+}
 document.querySelectorAll('.nav-item').forEach(function(btn){btn.addEventListener('click',function(){showView(btn.dataset.view)})});
-function pauseAgent(id){var card=document.querySelector('[data-agent="'+id+'"]');if(!card)return;var st=card.querySelector('.agent-status');var was=st.textContent.indexOf('暂停')>=0;if(was){st.textContent='运行中';st.className='status-pill status-running agent-status';card.classList.remove('paused');toast(id+' 已恢复');}else{st.textContent='已暂停';st.className='status-pill status-paused agent-status';card.classList.add('paused');toast(id+' 已暂停');}}
-function acceptSuggestion(btn,kpiId,delta,fmt){var card=btn.closest('.suggestion-card');if(card&&card.classList.contains('accepted'))return;if(card)card.classList.add('accepted');btn.textContent='已采纳';btn.disabled=true;bumpKpi(kpiId,delta,fmt);prependTimeline('已采纳建议并写入编排','success');toast('已采纳 · KPI 已更新');}
-function approveAction(btn,label,kpiId,delta,fmt){if(btn.dataset.done)return;btn.dataset.done='1';btn.textContent='已批准执行';btn.classList.remove('btn-primary');btn.classList.add('btn-success');bumpKpi(kpiId,delta,fmt);prependTimeline('批准执行：'+label,'success');var aq=document.getElementById('kpi-approve');if(aq){var v=parseInt(aq.dataset.val||aq.textContent,10);if(!isNaN(v)&&v>0){v-=1;aq.dataset.val=v;aq.textContent=v;}}toast('已批准：'+label);}
-function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
-function prependTimeline(text,kind){var host=document.getElementById('live-timeline');if(!host)return;var t=new Date().toTimeString().slice(0,8);var dot=kind==='warning'?'warning':kind==='danger'?'danger':'success';var item=document.createElement('div');item.className='timeline-item pb-4';item.innerHTML='<div class="timeline-dot '+dot+'"></div><div class="text-xs text-gray-400 tabular">'+t+'</div><div class="text-sm text-gray-800 mt-0.5">'+text+'</div>';host.insertBefore(item,host.firstChild);}
-function runOrchestration(name){document.querySelectorAll('.orch-node').forEach(function(n){n.classList.remove('running')});var nodes=document.querySelectorAll('#orch-flow .orch-node');var i=0;function step(){if(i>0)nodes[i-1].classList.remove('running');if(i>=nodes.length){prependTimeline('编排完成：'+name,'success');toast('编排模拟完成：'+name);return;}nodes[i].classList.add('running');i++;setTimeout(step,450);}step();}
+function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='¥'+Math.round(v).toLocaleString();else if(fmt==='usd')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
+function confirmAction(btn,label,kpiId,delta,fmt){
+  if(btn.dataset.done)return; btn.dataset.done='1';
+  btn.textContent='已确认'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+  bumpKpi(kpiId,delta,fmt); toast('已确认：'+label);
+  var card=btn.closest('.suggestion-card'); if(card) card.classList.add('accepted');
+}
+function setTab(group, name, btn){
+  document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(p){p.classList.toggle('hidden', p.dataset.tab!==name)});
+  if(btn){ var bar=btn.parentElement; bar.querySelectorAll('.status-tab').forEach(function(t){t.classList.remove('active')}); btn.classList.add('active'); }
+}
+function toggleAll(master, sel){ document.querySelectorAll(sel).forEach(function(c){c.checked=master.checked}); updateBatchBar(); }
+function updateBatchBar(){ var n=document.querySelectorAll('.row-check:checked').length; var bar=document.getElementById('batch-bar'); if(!bar)return; bar.style.display=n?'flex':'none'; var c=document.getElementById('batch-count'); if(c)c.textContent=n; }
+document.addEventListener('change',function(e){ if(e.target && e.target.classList.contains('row-check')) updateBatchBar(); });
+function mockOAuth(btn, platform){
+  btn.disabled=true; btn.textContent='授权中…';
+  setTimeout(function(){ btn.textContent='已授权'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+    var st=btn.closest('tr')||btn.closest('.auth-card'); if(st){ var badge=st.querySelector('.auth-status'); if(badge){ badge.textContent='已授权'; badge.className='status-pill status-success auth-status'; } }
+    toast(platform+' 官方 OAuth 授权成功（演示）');
+  }, 800);
+}
+function claimToBox(btn, name){
+  if(btn.dataset.done)return; btn.dataset.done='1'; btn.textContent='已认领'; btn.disabled=true;
+  bumpKpi('kpi-claim',1,'int'); toast('已认领到采集箱：'+name);
+}
 </script>
-<script>window.CB_APP={id:"finance",name:"Finance 财务"};</script><script src="../guides.js"></script><script src="../shared.js"></script></body></html>
+
+
+<script>
+function recalcMargin(){
+  var sales=128420, gm=sales, ads=0, storage=0, coupon=0;
+  document.querySelectorAll('[data-fee]').forEach(function(cb){
+    var amt=parseFloat(cb.getAttribute('data-amt')||0);
+    var sign=parseInt(cb.getAttribute('data-sign')||'-1',10);
+    var key=cb.getAttribute('data-fee');
+    if(!cb.checked) return;
+    if(key==='ads') ads+=amt;
+    else if(key==='storage') storage+=amt;
+    else if(key==='coupon') coupon+=amt;
+    else gm += sign*amt;
+  });
+  var nm = gm - storage - ads - coupon;
+  function fmt(n){ return '$'+Math.round(n).toLocaleString(); }
+  var el=document.getElementById('out-gm'); if(el) el.textContent=fmt(gm);
+  el=document.getElementById('out-nm'); if(el) el.textContent=fmt(nm);
+  el=document.getElementById('out-gmr'); if(el) el.textContent=(gm/sales*100).toFixed(1)+'%';
+  el=document.getElementById('out-nmr'); if(el) el.textContent=(nm/sales*100).toFixed(1)+'%';
+  el=document.getElementById('kpi-gm'); if(el){ el.dataset.val=gm; el.textContent=fmt(gm); }
+  el=document.getElementById('kpi-nm'); if(el){ el.dataset.val=nm; el.textContent=fmt(nm); }
+  el=document.getElementById('cmp-sales'); if(el) el.textContent=fmt(nm);
+  toast('毛利已按勾选费项重算');
+}
+</script>
+
+<script>window.CB_APP={id:"finance",name:"财务对账 / 毛利"};</script>
+<script src="../guides.js"></script>
+<script src="../shared.js"></script>
+</body></html>

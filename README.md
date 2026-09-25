@@ -1,33 +1,39 @@
-# Crossborder AI OS · 跨境电商 AI 原生操作系统
+# 跨境 AI 中台 · Crossborder AI Midplatform
 
-多平台连接 + 统一经营数据 + 多 Agent 自动运营 + **人机协同审批**。
+专为中国跨境卖家打造的 Demo Suite（对标马帮 / 店小秘 / 积加 / 领星 / 赛狐使用习惯）。
+
+**定位**：降本增效 —— 少人打单、少广告浪费、算清真毛利、不断货。
+
+## 气质
+
+左导航 + 待办队列 + 可批量的密集表 + 认领/打单/采购/标发动词 + 可展开的中国式毛利。
+
+AI = **推荐 / 草稿 / 需确认**，不是黑盒一键。
+
+## 模块 URL
+
+| 路径 | 卖家说法 |
+|------|----------|
+| `/` | 门户（三条剧本 + 对标 + 数据接入） |
+| `/midplatform/` | 工作台：待办、店铺授权、采集箱认领、配对 |
+| `/oms/` | 订单：待审核 / 待打单 / 已发货 / 异常 |
+| `/erp/` | 供应链：缺货→采购单、1688 |
+| `/wms/` | 仓库：本地仓 / FBA / 海外仓推单 / 头程 |
+| `/ads/` | 广告：SP/SB/SD、ACOS、预算需确认 |
+| `/cs/` | 客服：站内信+邮件、留言耦合发货 |
+| `/bi/` | 选品：选品池、竞品、1688 货源、认领 |
+| `/finance/` | 财务：可配置毛利公式、对账、结算利润 |
+
+## 本地
+
+静态站点。直接打开 `index.html`，或任意静态服务器：
+
+```bash
+python3 -m http.server 8080
+```
+
+重建：`python3 _build_cn_seller.py`
 
 ## Live
+
 https://rong001.github.io/crossborder-ai-midplatform/
-
-## Positioning
-AI-native OS for cross-border commerce — **not** legacy ERP with a chat box, and **not** a black-box one-click Agent.
-
-Design default: **guided onboarding + human-in-the-loop**. AI proposes/drafts; humans approve high-risk actions. Full automation is an optional advanced demo only.
-
-## Demo tip（给客户演示）
-1. 打开任意模块顶栏 **操作手册** 讲解「解决什么 / 第一周怎么用 / 知识库与规则」
-2. 点 **上手向导**，逐步勾选范围、标记知识库、保存阈值、载入演示数据
-3. 在建议卡点 **批准此条** / **查看推荐并确认**（不要默认点全自动）
-4. 「进阶：模拟全自动」仅在披露展开后演示架构能力
-
-## Architecture (4 layers)
-1. **Applications** — 8 business modules（每模块含手册 + 向导）
-2. **Multi-Agent Orchestration** — Listing / Pricing / Ads / Replenishment / Fulfillment / CS / Finance
-3. **Unified Data + Event Bus** — orders, inventory, ads, tickets, settlements, true P&L
-4. **Platform Connectors** — Amazon, Shopee, TikTok Shop, Lazada, Temu, Walmart
-
-## Structure
-- `/` architecture-first portal（含「为什么这样设计」「如何开始」）
-- `/midplatform/` command center
-- `/bi/` `/erp/` `/wms/` `/oms/` `/ads/` `/cs/` `/finance/`
-- `shared.css` + `shared.js` + `guides.js` — 手册/向导共用
-
-## Stack
-Self-contained HTML + Tailwind CDN + Chart.js. Demo data only. Chinese UI.
-Wizard progress persists in `localStorage` per app (`cb-wizard-<appId>`).

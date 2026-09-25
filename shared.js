@@ -192,7 +192,7 @@
       b.addEventListener('click', function () {
         var st = $('#cb-data-status-manual');
         var kind = b.getAttribute('data-cb-mock');
-        if (kind === 'connect') st.textContent = '已模拟授权 2 个平台（演示）';
+        if (kind === 'connect') st.textContent = '已模拟官方 OAuth 授权 2 个平台（禁止 Cookie）';
         else if (kind === 'csv') st.textContent = '已模拟导入 sample_orders.csv（演示）';
         else st.textContent = '已载入演示数据（可继续向导）';
         st.classList.add('ok');
@@ -326,7 +326,7 @@
     if (step.type === 'data') {
       var mode = sdata.dataMode || 'demo';
       return '<div class="cb-data-step">' +
-        '<label class="cb-radio"><input type="radio" name="cb-data-mode" value="connect"' + (mode === 'connect' ? ' checked' : '') + '/> 模拟连接平台</label>' +
+        '<label class="cb-radio"><input type="radio" name="cb-data-mode" value="connect"' + (mode === 'connect' ? ' checked' : '') + '/> 模拟官方 OAuth 授权（禁止 Cookie）</label>' +
         '<label class="cb-radio"><input type="radio" name="cb-data-mode" value="csv"' + (mode === 'csv' ? ' checked' : '') + '/> 模拟上传 CSV</label>' +
         '<label class="cb-radio"><input type="radio" name="cb-data-mode" value="demo"' + (mode === 'demo' ? ' checked' : '') + '/> 使用演示数据（推荐）</label>' +
         '<div class="cb-data-panel mt-3">' +

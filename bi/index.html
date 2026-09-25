@@ -1,35 +1,228 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>选品 BI · Crossborder AI OS</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><link rel="stylesheet" href="../shared.css"/><script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script><style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style></head><body class="bg-surface-page text-gray-900 antialiased"><div class="flex h-screen overflow-hidden"><aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20"><div class="px-4 py-4 border-b border-gray-200"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><div class="text-sm font-semibold text-gray-900 leading-tight">选品 BI</div><div class="text-[10px] text-gray-400 mt-0.5">BI · Opportunity</div></div></div></div><nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto"><button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="radar" data-title="机会雷达"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>机会雷达</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="orchestrate" data-title="Agent 编排"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Agent 编排</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="dispatch" data-title="派发刊登"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>派发刊登</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="timeline" data-title="自动化时间线"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>自动化时间线</button><div class="pt-3 mt-2 border-t border-gray-200 px-1"><a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>架构总览（回门户）</a></div></nav><div class="px-4 py-3 border-t border-gray-200"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div><div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示账号</div><div class="text-[10px] text-gray-400">demo@crossborder.ai</div></div></div></div></aside><div class="flex-1 flex flex-col min-w-0"><header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10"><div class="flex items-center gap-3 min-w-0"><div class="breadcrumb hidden sm:block">AI OS / <span id="breadcrumb-current">机会雷达</span></div><h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">机会雷达</h1><span class="ai-native-badge px-2 py-0.5 rounded">AI Native</span><span class="demo-badge px-2 py-0.5 rounded">演示数据</span></div><div class="flex items-center gap-2.5"><span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Agent 编排在线</span><button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.agent-rail').classList.toggle('hidden')">Agent</button></div></header><main class="flex-1 overflow-y-auto p-5">
-<div id="view-radar" class="view active space-y-5">
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-    <div class="metric-card p-4"><div class="section-label">今日机会</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-opp" data-val="18">18</div><div class="mt-1 text-xs text-gray-500">利润模拟通过 7</div></div>
-    <div class="metric-card p-4"><div class="section-label">预测爆款</div><div class="mt-1.5 text-2xl font-semibold tabular">3</div><div class="mt-1 text-xs text-emerald-600">7日概率 &gt; 65%</div></div>
-    <div class="metric-card p-4"><div class="section-label">模拟真利润/月</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-sim" data-val="18600">$18,600</div><div class="mt-1 text-xs text-gray-500">含 FBA/佣金/广告</div></div>
-    <div class="metric-card p-4"><div class="section-label">待派发刊登</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-dispatch" data-val="3">3</div><div class="mt-1 text-xs text-amber-600">Listing Agent 待命</div></div>
-  </div>
-  <div class="panel p-4">
-    <div class="section-label mb-3">机会雷达 · 选品 Agent</div>
-    <div class="space-y-3">
-      <div class="suggestion-card p-4"><div class="flex justify-between gap-4"><div><div class="text-sm font-semibold">Portable Blender · US Amazon</div><p class="text-xs text-gray-500 mt-1">搜索增速 +38% · 竞品均价 $29.9 · 模拟毛利 31% · 预计 ACOS 18% · 真利润/月 ~$6,200</p><div class="mt-2 flex gap-2 text-[11px]"><span class="platform-badge">Amazon</span><span class="text-gray-400">置信度 86%</span></div></div><button class="btn-primary btn-sm shrink-0" onclick="acceptSuggestion(this,'kpi-dispatch',-1,'int'); bumpKpi('kpi-sim',6200,'money');">查看推荐并确认</button></div></div>
-      <div class="suggestion-card p-4"><div class="flex justify-between gap-4"><div><div class="text-sm font-semibold">LED Desk Lamp · Shopee MY/SG</div><p class="text-xs text-gray-500 mt-1">节日动能 · 退款率预估 2.4% · 海外仓 lead time 12 天 · 真利润/月 ~$4,100</p></div><button class="btn-primary btn-sm shrink-0" onclick="acceptSuggestion(this,'kpi-dispatch',-1,'int'); bumpKpi('kpi-sim',4100,'money');">查看推荐并确认</button></div></div>
-      <div class="suggestion-card p-4"><div class="flex justify-between gap-4"><div><div class="text-sm font-semibold">Pet Grooming Kit · TikTok Shop</div><p class="text-xs text-gray-500 mt-1">短视频转化高 · 佣金 5% · 广告弹性好 · 真利润/月 ~$8,300</p></div><button class="btn-primary btn-sm shrink-0" onclick="acceptSuggestion(this,'kpi-dispatch',-1,'int'); bumpKpi('kpi-sim',8300,'money');">查看推荐并确认</button></div></div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>选品 / 市场 · 跨境 AI 中台</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../shared.css"/>
+<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
+<style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style>
+</head>
+<body class="bg-surface-page text-gray-900 antialiased">
+
+<div class="flex h-screen overflow-hidden">
+<aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
+  <div class="px-4 py-3.5 border-b border-gray-200">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+      <div>
+        <div class="text-sm font-semibold text-gray-900 leading-tight">选品 / 市场</div>
+        <div class="text-[10px] text-gray-400 mt-0.5">选品池 · 竞品 · 1688 货源</div>
+      </div>
     </div>
   </div>
+  <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+    <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="pool" data-title="选品池"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>选品池</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="compete" data-title="竞品对比"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>竞品对比</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="source" data-title="1688 货源比价"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>1688 货源比价</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="claim" data-title="认领到采集箱"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>认领到采集箱</button>
+    <div class="pt-3 mt-2 border-t border-gray-200 px-1">
+      <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>回门户</a>
+    </div>
+  </nav>
+  <div class="px-4 py-3 border-t border-gray-200">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
+      <div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示卖家</div><div class="text-[10px] text-gray-400">demo@cbec.cn</div></div>
+    </div>
+  </div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+  <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-4 gap-3 z-10">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="breadcrumb hidden sm:block">跨境中台 / <span id="breadcrumb-current">选品池</span></div>
+      <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">选品池</h1>
+      <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <select class="text-xs border border-gray-200 rounded-md px-2 py-1.5 bg-white text-gray-600 hidden sm:block">
+        <option>全部店铺</option><option>Amazon US · 主店</option><option>Shopee MY</option><option>TikTok US</option>
+      </select>
+      <button class="btn-ghost btn-sm text-xs" onclick="toast('已触发同步订单/产品（演示）')">同步</button>
+      <button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.ai-rail').classList.toggle('hidden')">AI推荐</button>
+    </div>
+  </header>
+  <main class="flex-1 overflow-y-auto p-4">
+<div id="view-pool" class="view active space-y-4">
+  <div class="panel p-3">
+    <div class="flex flex-wrap gap-2 items-end text-xs">
+      <label class="flex flex-col gap-1">站点<select class="border rounded px-2 py-1.5"><option>Amazon US</option><option>Amazon UK</option></select></label>
+      <label class="flex flex-col gap-1">类目<input class="border rounded px-2 py-1.5 w-40" value="Sports & Outdoors"/></label>
+      <label class="flex flex-col gap-1">月销 ≥<input class="border rounded px-2 py-1.5 w-20" value="1000"/></label>
+      <label class="flex flex-col gap-1">评论数 ≤<input class="border rounded px-2 py-1.5 w-20" value="200"/></label>
+      <label class="flex flex-col gap-1">上架月数 ≤<input class="border rounded px-2 py-1.5 w-20" value="12"/></label>
+      <label class="flex flex-col gap-1">变体数 ≤<input class="border rounded px-2 py-1.5 w-20" value="5"/></label>
+      <label class="flex flex-col gap-1">卖家类型<select class="border rounded px-2 py-1.5"><option>不限</option><option>FBA 为主</option><option>分散卖家</option></select></label>
+      <label class="flex items-center gap-1 pb-1.5"><input type="checkbox"/> 排除高跟卖风险</label>
+      <button class="btn-primary btn-sm" onclick="toast('已按蓝海初筛刷新选品池')">筛选</button>
+      <button class="btn-ghost btn-sm" onclick="toast('已加载预设：蓝海初筛')">蓝海预设</button>
+    </div>
+  </div>
+  <div class="flex justify-between items-center">
+    <div class="text-sm text-gray-500">选品池 · 卖家精灵习惯 · 结果 <strong class="text-gray-800">128</strong></div>
+    <div class="flex gap-2">
+      <span class="text-xs text-gray-400">已认领 <strong id="kpi-claim" data-val="0">0</strong></span>
+      <button class="btn-primary btn-sm" onclick="toast('批量认领到采集箱（演示）')">认领到采集箱</button>
+    </div>
+  </div>
+  <div class="panel overflow-hidden">
+    <table class="w-full text-sm dense-table">
+      <thead class="sticky-th"><tr>
+        <th class="w-8 px-3"><input type="checkbox" onchange="toggleAll(this,'.row-check')"/></th>
+        <th class="text-left px-3 py-2">ASIN</th><th class="text-left px-3 py-2">标题</th>
+        <th class="text-right px-3 py-2">月销</th><th class="text-right px-3 py-2">价格</th>
+        <th class="text-right px-3 py-2">评论</th><th class="text-right px-3 py-2">上架月</th>
+        <th class="text-right px-3 py-2">变体</th><th class="text-left px-3 py-2">跟卖风险</th>
+        <th class="text-left px-3 py-2">操作</th>
+      </tr></thead>
+      <tbody>
+        <tr class="table-row border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3 font-mono text-xs">B0CXXXX1</td><td class="px-3 max-w-[180px] truncate">Resistance Bands Set</td>
+          <td class="px-3 text-right tabular">2,400</td><td class="px-3 text-right tabular">$18.9</td>
+          <td class="px-3 text-right tabular">86</td><td class="px-3 text-right tabular">4</td>
+          <td class="px-3 text-right tabular">3</td>
+          <td class="px-3"><span class="status-pill status-success">低</span></td>
+          <td class="px-3 flex gap-1">
+            <button class="btn-primary btn-sm text-[11px]" onclick="claimToBox(this,'B0CXXXX1')">认领到采集箱</button>
+            <button class="btn-ghost btn-sm text-[11px]" onclick="showView('source')">找货源</button></td></tr>
+        <tr class="table-row border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3 font-mono text-xs">B0CYYYY2</td><td class="px-3 max-w-[180px] truncate">Yoga Mat Non-Slip</td>
+          <td class="px-3 text-right tabular">1,680</td><td class="px-3 text-right tabular">$24.5</td>
+          <td class="px-3 text-right tabular">142</td><td class="px-3 text-right tabular">7</td>
+          <td class="px-3 text-right tabular">2</td>
+          <td class="px-3"><span class="status-pill status-warning">中</span></td>
+          <td class="px-3 flex gap-1">
+            <button class="btn-primary btn-sm text-[11px]" onclick="claimToBox(this,'B0CYYYY2')">认领到采集箱</button>
+            <button class="btn-ghost btn-sm text-[11px]" onclick="showView('compete')">竞品对比</button></td></tr>
+        <tr class="table-row border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3 font-mono text-xs">B0CZZZZ3</td><td class="px-3 max-w-[180px] truncate">Jump Rope Weighted</td>
+          <td class="px-3 text-right tabular">3,100</td><td class="px-3 text-right tabular">$14.2</td>
+          <td class="px-3 text-right tabular">51</td><td class="px-3 text-right tabular">2</td>
+          <td class="px-3 text-right tabular">1</td>
+          <td class="px-3"><span class="status-pill status-danger">高·品牌</span></td>
+          <td class="px-3 flex gap-1">
+            <button class="btn-ghost btn-sm text-[11px]" onclick="toast('跟卖风险高，建议跳过')">跳过</button>
+            <button class="btn-ghost btn-sm text-[11px]" onclick="showView('compete')">对比</button></td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<div id="view-orchestrate" class="view space-y-5"><div class="flex items-center justify-between"><div><h2 class="text-base font-semibold text-gray-900">选品 → 刊登 编排</h2><p class="text-xs text-gray-500 mt-1">点击节点模拟编排：触发 → Agent → 动作 → 人机门</p></div><button class="btn-primary text-xs px-3 py-1.5" onclick="runOrchestration('选品派发编排')">模拟运行</button></div><div class="orch-canvas"><div id="orch-flow" class="flex items-center gap-0 min-w-max"><div class="orch-node trigger" onclick="runOrchestration('选品派发编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">trigger</div><div class="text-sm font-semibold text-gray-900">趋势信号</div><div class="text-[11px] text-gray-500 mt-0.5">搜索/社媒增速</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('选品派发编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">选品 Agent</div><div class="text-[11px] text-gray-500 mt-0.5">机会评分</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('选品派发编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">利润模拟</div><div class="text-[11px] text-gray-500 mt-0.5">FBA+佣金+广告</div></div><div class="orch-edge"></div><div class="orch-node action" onclick="runOrchestration('选品派发编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">action</div><div class="text-sm font-semibold text-gray-900">派发 Listing</div><div class="text-[11px] text-gray-500 mt-0.5">生成草稿</div></div><div class="orch-edge"></div><div class="orch-node gate" onclick="runOrchestration('选品派发编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">gate</div><div class="text-sm font-semibold text-gray-900">运营确认</div><div class="text-[11px] text-gray-500 mt-0.5">上架审批</div></div></div></div><div class="panel p-4"><div class="section-label mb-2">编排说明</div><p class="text-sm text-gray-600 leading-relaxed">低置信度或高金额动作进入人机审批门；高置信度可自动执行并写入时间线。可回放、可暂停 Agent。</p></div></div>
-<div id="view-dispatch" class="view space-y-5">
-  <h2 class="text-base font-semibold">派发队列 → Listing Agent</h2>
-  <div class="panel p-4 text-sm text-gray-600">查看推荐并确认</div>
+
+<div id="view-compete" class="view space-y-4">
+  <h2 class="text-base font-semibold">竞品对比（2–5 ASIN）</h2>
+  <div class="panel overflow-x-auto">
+    <table class="w-full text-sm dense-table min-w-[640px]">
+      <thead class="sticky-th"><tr>
+        <th class="text-left px-4 py-2">维度</th><th class="text-left px-4 py-2">B0CXXXX1</th>
+        <th class="text-left px-4 py-2">B0CYYYY2</th><th class="text-left px-4 py-2">竞品A</th>
+      </tr></thead>
+      <tbody>
+        <tr class="border-t"><td class="px-4 text-gray-500">月销</td><td class="px-4">2,400</td><td class="px-4">1,680</td><td class="px-4">5,200</td></tr>
+        <tr class="border-t"><td class="px-4 text-gray-500">评论/星级</td><td class="px-4">86 / 4.4</td><td class="px-4">142 / 4.2</td><td class="px-4">2,100 / 4.6</td></tr>
+        <tr class="border-t"><td class="px-4 text-gray-500">上架时间</td><td class="px-4">4 个月</td><td class="px-4">7 个月</td><td class="px-4">36 个月</td></tr>
+        <tr class="border-t"><td class="px-4 text-gray-500">变体数</td><td class="px-4">3</td><td class="px-4">2</td><td class="px-4">12</td></tr>
+        <tr class="border-t"><td class="px-4 text-gray-500">卖家数</td><td class="px-4">6</td><td class="px-4">11</td><td class="px-4">1（品牌）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <button class="btn-ghost btn-sm" onclick="toast('已导出 Excel（前 3000 演示）')">导出 Excel</button>
 </div>
-<div id="view-timeline" class="view space-y-5"><div><h2 class="text-base font-semibold text-gray-900">自动化时间线</h2><p class="text-xs text-gray-500 mt-1">Agent 实时动作流 · 采纳/批准后自动追加</p></div><div class="panel p-5"><div id="live-timeline"><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">01:42:11</div><div class="text-sm text-gray-800 mt-0.5">选品 Agent 发现 Portable Blender 机会</div></div><div class="timeline-item pb-4"><div class="timeline-dot warning"></div><div class="text-xs text-gray-400 tabular">01:40:02</div><div class="text-sm text-gray-800 mt-0.5">竞品监控：竞品 A 降价 8%，已更新模拟</div></div><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">01:22:55</div><div class="text-sm text-gray-800 mt-0.5">爆款预测上调 SKU-8821 至 72%</div></div></div></div></div></main></div><aside class="agent-rail hidden lg:flex shrink-0"><div class="px-4 py-3 border-b border-gray-200"><div class="text-xs font-semibold text-gray-900">Agent 控制台</div><div class="text-[10px] text-gray-400 mt-0.5">运行中 / <span class="text-amber-700 font-medium">等待审批</span> / 已暂停 · AI 起草需人确认</div></div><div class="flex-1 overflow-y-auto"><div class="agent-card" data-agent="Select"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">选品 Agent</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">扫描 1,240 个机会关键词</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:89%"></span></div><span class="text-[10px] tabular text-gray-400">89%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Select')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Viral"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">爆款预测</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">SKU-8821 7日爆发概率 72%</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:72%"></span></div><span class="text-[10px] tabular text-gray-400">72%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Viral')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Compete"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">竞品监控</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">跟踪 38 个竞品价格变动</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:93%"></span></div><span class="text-[10px] tabular text-gray-400">93%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Compete')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Listing"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">Listing Agent</div><span class="status-pill status-approve agent-status">等待审批</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">待接收选品派发 x3</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:90%"></span></div><span class="text-[10px] tabular text-gray-400">90%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Listing')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div></div></aside></div><div id="toast-host"></div>
+
+<div id="view-source" class="view space-y-4">
+  <h2 class="text-base font-semibold">1688 货源比价（店雷达感）</h2>
+  <p class="text-xs text-gray-500">选完品立刻找供货价算利润 · 图搜 / 飙升榜</p>
+  <div class="panel overflow-hidden">
+    <table class="w-full text-sm dense-table">
+      <thead class="sticky-th"><tr>
+        <th class="text-left px-4 py-2">货源</th><th class="text-right px-4 py-2">单价</th>
+        <th class="text-right px-4 py-2">起订</th><th class="text-right px-4 py-2">预估毛利</th>
+        <th class="text-left px-4 py-2">操作</th>
+      </tr></thead>
+      <tbody>
+        <tr class="border-t"><td class="px-4">1688 · 健身弹力带厂家</td><td class="px-4 text-right tabular">¥9.8</td>
+          <td class="px-4 text-right">50</td><td class="px-4 text-right tabular text-emerald-600">32%</td>
+          <td class="px-4"><button class="btn-primary btn-sm text-[11px]" onclick="claimToBox(this,'弹力带货源')">认领到采集箱</button></td></tr>
+        <tr class="border-t"><td class="px-4">1688 · 义乌运动户外</td><td class="px-4 text-right tabular">¥11.2</td>
+          <td class="px-4 text-right">20</td><td class="px-4 text-right tabular text-emerald-600">28%</td>
+          <td class="px-4"><button class="btn-ghost btn-sm text-[11px]" onclick="toast('已加入比价')">加入比价</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="view-claim" class="view space-y-4">
+  <h2 class="text-base font-semibold">认领到采集箱</h2>
+  <div class="panel p-4 text-sm text-gray-600 space-y-2">
+    <p>路径：选品池 / 货源 → <strong>认领</strong> → 中台采集箱编辑 → 刊登 / 一键多店。</p>
+    <a class="btn-primary btn-sm inline-block" href="../midplatform/">打开采集箱</a>
+  </div>
+</div>
+</main>
+</div>
+<aside class="ai-rail hidden lg:flex shrink-0 w-[260px] bg-white border-l border-gray-200 flex-col">
+  <div class="px-4 py-3 border-b border-gray-200">
+    <div class="text-xs font-semibold text-gray-900">AI 推荐</div>
+    <div class="text-[10px] text-gray-400 mt-0.5">草稿 / 需确认 · 非黑盒一键</div>
+  </div>
+  <div class="flex-1 overflow-y-auto p-3 space-y-2.5"><div class="suggestion-card p-3">
+  <div class="text-xs font-semibold text-gray-900">蓝海初筛命中 12</div>
+  <p class="text-[11px] text-gray-500 mt-1 leading-snug">月销有量、评论偏低、上架近、变体少。</p>
+  <button class="btn-primary btn-sm mt-2 text-[11px]" onclick="showView('pool')">查看选品池</button>
+</div></div>
+</aside>
+</div>
+<div id="toast-host"></div>
+
 <script>
 function toast(msg){var h=document.getElementById('toast-host');var e=document.createElement('div');e.className='toast';e.textContent=msg;h.appendChild(e);setTimeout(function(){e.remove()},2800);}
-function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});var el=document.getElementById('view-'+id);if(el)el.classList.add('active');document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});var btn=document.querySelector('.nav-item[data-view="'+id+'"]');if(btn){var t=btn.dataset.title||id;var bc=document.getElementById('breadcrumb-current');var pt=document.getElementById('page-title');if(bc)bc.textContent=t;if(pt)pt.textContent=t;}}
+function showView(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});
+  var el=document.getElementById('view-'+id); if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});
+  var btn=document.querySelector('.nav-item[data-view="'+id+'"]');
+  if(btn){var t=btn.dataset.title||id; var bc=document.getElementById('breadcrumb-current'); var pt=document.getElementById('page-title'); if(bc)bc.textContent=t; if(pt)pt.textContent=t;}
+}
 document.querySelectorAll('.nav-item').forEach(function(btn){btn.addEventListener('click',function(){showView(btn.dataset.view)})});
-function pauseAgent(id){var card=document.querySelector('[data-agent="'+id+'"]');if(!card)return;var st=card.querySelector('.agent-status');var was=st.textContent.indexOf('暂停')>=0;if(was){st.textContent='运行中';st.className='status-pill status-running agent-status';card.classList.remove('paused');toast(id+' 已恢复');}else{st.textContent='已暂停';st.className='status-pill status-paused agent-status';card.classList.add('paused');toast(id+' 已暂停');}}
-function acceptSuggestion(btn,kpiId,delta,fmt){var card=btn.closest('.suggestion-card');if(card&&card.classList.contains('accepted'))return;if(card)card.classList.add('accepted');btn.textContent='已采纳';btn.disabled=true;bumpKpi(kpiId,delta,fmt);prependTimeline('已采纳建议并写入编排','success');toast('已采纳 · KPI 已更新');}
-function approveAction(btn,label,kpiId,delta,fmt){if(btn.dataset.done)return;btn.dataset.done='1';btn.textContent='已批准执行';btn.classList.remove('btn-primary');btn.classList.add('btn-success');bumpKpi(kpiId,delta,fmt);prependTimeline('批准执行：'+label,'success');var aq=document.getElementById('kpi-approve');if(aq){var v=parseInt(aq.dataset.val||aq.textContent,10);if(!isNaN(v)&&v>0){v-=1;aq.dataset.val=v;aq.textContent=v;}}toast('已批准：'+label);}
-function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
-function prependTimeline(text,kind){var host=document.getElementById('live-timeline');if(!host)return;var t=new Date().toTimeString().slice(0,8);var dot=kind==='warning'?'warning':kind==='danger'?'danger':'success';var item=document.createElement('div');item.className='timeline-item pb-4';item.innerHTML='<div class="timeline-dot '+dot+'"></div><div class="text-xs text-gray-400 tabular">'+t+'</div><div class="text-sm text-gray-800 mt-0.5">'+text+'</div>';host.insertBefore(item,host.firstChild);}
-function runOrchestration(name){document.querySelectorAll('.orch-node').forEach(function(n){n.classList.remove('running')});var nodes=document.querySelectorAll('#orch-flow .orch-node');var i=0;function step(){if(i>0)nodes[i-1].classList.remove('running');if(i>=nodes.length){prependTimeline('编排完成：'+name,'success');toast('编排模拟完成：'+name);return;}nodes[i].classList.add('running');i++;setTimeout(step,450);}step();}
+function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='¥'+Math.round(v).toLocaleString();else if(fmt==='usd')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
+function confirmAction(btn,label,kpiId,delta,fmt){
+  if(btn.dataset.done)return; btn.dataset.done='1';
+  btn.textContent='已确认'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+  bumpKpi(kpiId,delta,fmt); toast('已确认：'+label);
+  var card=btn.closest('.suggestion-card'); if(card) card.classList.add('accepted');
+}
+function setTab(group, name, btn){
+  document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(p){p.classList.toggle('hidden', p.dataset.tab!==name)});
+  if(btn){ var bar=btn.parentElement; bar.querySelectorAll('.status-tab').forEach(function(t){t.classList.remove('active')}); btn.classList.add('active'); }
+}
+function toggleAll(master, sel){ document.querySelectorAll(sel).forEach(function(c){c.checked=master.checked}); updateBatchBar(); }
+function updateBatchBar(){ var n=document.querySelectorAll('.row-check:checked').length; var bar=document.getElementById('batch-bar'); if(!bar)return; bar.style.display=n?'flex':'none'; var c=document.getElementById('batch-count'); if(c)c.textContent=n; }
+document.addEventListener('change',function(e){ if(e.target && e.target.classList.contains('row-check')) updateBatchBar(); });
+function mockOAuth(btn, platform){
+  btn.disabled=true; btn.textContent='授权中…';
+  setTimeout(function(){ btn.textContent='已授权'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+    var st=btn.closest('tr')||btn.closest('.auth-card'); if(st){ var badge=st.querySelector('.auth-status'); if(badge){ badge.textContent='已授权'; badge.className='status-pill status-success auth-status'; } }
+    toast(platform+' 官方 OAuth 授权成功（演示）');
+  }, 800);
+}
+function claimToBox(btn, name){
+  if(btn.dataset.done)return; btn.dataset.done='1'; btn.textContent='已认领'; btn.disabled=true;
+  bumpKpi('kpi-claim',1,'int'); toast('已认领到采集箱：'+name);
+}
 </script>
-<script>window.CB_APP={id:"bi",name:"选品 BI"};</script><script src="../guides.js"></script><script src="../shared.js"></script></body></html>
+
+
+<script>window.CB_APP={id:"bi",name:"选品 / 市场"};</script>
+<script src="../guides.js"></script>
+<script src="../shared.js"></script>
+</body></html>

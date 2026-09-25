@@ -544,3 +544,65 @@ body {
   .cb-btn-wizard span:not(.cb-wiz-progress) { display: none; }
   .cb-drawer { width: 100vw; }
 }
+
+
+
+/* —— CN CBEC dense seller admin additions —— */
+.status-tabs {
+  display: flex; flex-wrap: wrap; gap: 2px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px;
+}
+.status-tab {
+  appearance: none; border: 0; background: transparent;
+  padding: 6px 12px; font-size: 12px; color: var(--text-secondary);
+  border-radius: 6px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.status-tab:hover { color: var(--text); background: var(--bg-hover); }
+.status-tab.active {
+  background: var(--accent-soft); color: var(--accent); font-weight: 600;
+}
+.status-tab .tab-count {
+  font-size: 10px; font-variant-numeric: tabular-nums;
+  background: var(--bg-muted); color: var(--text-secondary);
+  padding: 0 6px; border-radius: 999px; min-width: 18px; text-align: center;
+}
+.status-tab.active .tab-count { background: var(--accent-muted); color: var(--accent); }
+
+.batch-bar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 8px 12px; background: var(--accent-soft);
+  border: 1px solid var(--accent-muted); border-radius: var(--radius);
+  font-size: 12px; color: var(--text);
+  margin-bottom: 8px;
+}
+
+.ai-rail {
+  width: 260px; background: var(--bg-surface);
+  border-left: 1px solid var(--border);
+  display: none; flex-direction: column;
+}
+aside.ai-rail { flex-direction: column; }
+
+.dense-table td, .dense-table th { padding-top: 7px; padding-bottom: 7px; }
+.dense-table { font-size: 13px; }
+.fee-check input { accent-color: var(--accent); }
+.fee-panel label:last-child { border-bottom: 0 !important; }
+
+.platform-badge {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 600; padding: 2px 7px;
+  border-radius: 4px; background: var(--bg-muted); color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Keep agent-rail compat if old pages linger */
+.agent-rail { width: var(--rail-w); background: var(--bg-surface); border-left: 1px solid var(--border); flex-direction: column; }
+
+.btn-success {
+  background: var(--success-bg) !important; color: var(--success) !important;
+  border: 1px solid #A7F3D0 !important;
+}

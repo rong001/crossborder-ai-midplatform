@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>跨境电商 AI 原生操作系统 · Crossborder AI OS</title>
+  <title>跨境 AI 中台 · 专为中国跨境卖家打造</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="shared.css" />
   <script>
@@ -11,15 +11,10 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#EFF6FF', 100: '#DBEAFE', 200: '#BFDBFE',
-              500: '#2563EB', 600: '#1D4ED8', 700: '#1E40AF',
-            },
-            surface: { DEFAULT: '#FFFFFF', muted: '#F3F4F6', page: '#F6F8FA' },
+            brand: { 50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',500:'#2563EB',600:'#1D4ED8',700:'#1E40AF' },
+            surface: { DEFAULT:'#FFFFFF', muted:'#F3F4F6', page:'#F6F8FA' },
           },
-          fontFamily: {
-            sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Inter','PingFang SC','Microsoft YaHei','system-ui','sans-serif'] },
         }
       }
     }
@@ -28,502 +23,243 @@
 </head>
 <body class="bg-surface-page text-gray-900 antialiased">
 
-  <!-- Nav -->
-  <nav class="portal-nav sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-        </div>
-        <div>
-          <span class="font-semibold text-gray-900 tracking-tight">Crossborder AI OS</span>
-          <span class="hidden sm:inline text-xs text-gray-400 ml-2">跨境电商 AI 原生操作系统</span>
-        </div>
+<nav class="portal-nav sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
       </div>
-      <div class="flex items-center gap-5 text-sm">
-        <a href="#architecture" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">架构</a>
-        <a href="#chain" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">业务链</a>
-        <a href="#products" class="text-gray-500 hover:text-gray-900 hidden sm:inline transition">产品矩阵</a>
-        <a href="#design-why" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">为什么这样设计</a>
-        <a href="#how-to-start" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">如何开始</a>
-        <a href="#why" class="text-gray-500 hover:text-gray-900 hidden lg:inline transition">痛点解法</a>
-        <a href="https://github.com/rong001/crossborder-ai-midplatform" target="_blank" class="text-gray-500 hover:text-gray-900 transition">GitHub</a>
-        <a href="midplatform/?wizard=1" class="btn-primary px-3.5 py-1.5 text-xs">开始上手向导</a>
+      <div>
+        <span class="font-semibold text-gray-900 tracking-tight">跨境 AI 中台</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-2">中国跨境卖家 SaaS</span>
       </div>
     </div>
-  </nav>
+    <div class="flex items-center gap-4 text-sm">
+      <a href="#playbooks" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">三条剧本</a>
+      <a href="#products" class="text-gray-500 hover:text-gray-900 hidden sm:inline transition">模块</a>
+      <a href="#data-in" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">数据接入</a>
+      <a href="#design-why" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">为什么这样设计</a>
+      <a href="#competitors" class="text-gray-500 hover:text-gray-900 hidden lg:inline transition">对标</a>
+      <a href="https://github.com/rong001/crossborder-ai-midplatform" target="_blank" class="text-gray-500 hover:text-gray-900 transition">GitHub</a>
+      <a href="midplatform/?wizard=1" class="btn-primary px-3.5 py-1.5 text-xs">开始上手向导</a>
+    </div>
+  </div>
+</nav>
 
-  <!-- Hero -->
-  <section class="bg-white border-b border-gray-200">
-    <div class="max-w-6xl mx-auto px-5 py-16 md:py-20">
-      <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-600 text-xs font-medium mb-6">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          AI-Native Architecture · 非传统 ERP 加聊天框
-        </div>
-        <h1 class="text-3xl md:text-5xl font-semibold text-gray-900 leading-tight tracking-tight mb-5">
-          AI 原生操作系统<br/>专为跨境电商而生
-        </h1>
-        <p class="text-lg text-gray-500 leading-relaxed mb-3 max-w-2xl">
-          多平台连接 + 统一经营数据 + 多 Agent 自动运营 + 人机协同审批
-        </p>
-        <p class="text-sm text-gray-400 mb-8 max-w-2xl">
-          覆盖 Amazon · Shopee · TikTok Shop · Lazada · Temu · Walmart。以真利润为核心，用 Agent 编排替代人工巡检。
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="#how-to-start" class="btn-primary px-5 py-2.5 text-sm">如何开始（上手向导）</a>
-          <a href="#design-why" class="btn-ghost px-5 py-2.5 text-sm">为什么这样设计</a>
-          <a href="midplatform/" class="btn-ghost px-5 py-2.5 text-sm">打开指挥中心 →</a>
-        </div>
-        <div class="mt-12 flex flex-wrap gap-10 text-sm text-gray-500">
-          <div><span class="text-2xl font-semibold text-gray-900 tabular">4</span><span class="ml-1.5">层 AI 原生架构</span></div>
-          <div><span class="text-2xl font-semibold text-gray-900 tabular">7+</span><span class="ml-1.5">专职运营 Agent</span></div>
-          <div><span class="text-2xl font-semibold text-gray-900 tabular">8</span><span class="ml-1.5">业务应用模块</span></div>
-          <div><span class="text-2xl font-semibold text-gray-900 tabular">6</span><span class="ml-1.5">主流跨境平台</span></div>
-        </div>
+<!-- Hero: restrained, not glassmorphism -->
+<section class="bg-white border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-5 py-12 md:py-16">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-600 text-xs font-medium mb-5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        专为中国跨境卖家打造 · 马帮/店小秘/积加/领星习惯
+      </div>
+      <h1 class="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight tracking-tight mb-4">
+        AI 中台：降本增效<br/>
+        <span class="text-brand-600">少人打单 · 少广告浪费 · 算清真毛利 · 不断货</span>
+      </h1>
+      <p class="text-base text-gray-500 leading-relaxed mb-2 max-w-2xl">
+        左导航 + 待办队列 + 密集表格 + 批量勾选 —— 用你们熟悉的词：
+        <strong class="text-gray-700 font-medium">店铺授权、配对、认领、刊登、待审核、打单、标发、采购单、1688、对账、结算利润</strong>。
+      </p>
+      <p class="text-sm text-gray-400 mb-8 max-w-2xl">
+        AI 只做<strong>推荐 / 草稿 / 需确认</strong>，不是黑盒一键。进阶全自动放在披露里。
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="#playbooks" class="btn-primary px-5 py-2.5 text-sm">选一条 15–20 分钟剧本</a>
+        <a href="oms/" class="btn-ghost px-5 py-2.5 text-sm">直接打开订单（待审核）→</a>
+        <a href="finance/" class="btn-ghost px-5 py-2.5 text-sm">看毛利公式 →</a>
+      </div>
+      <div class="mt-10 flex flex-wrap gap-8 text-sm text-gray-500">
+        <div><span class="text-2xl font-semibold text-gray-900 tabular">8</span><span class="ml-1.5">业务模块</span></div>
+        <div><span class="text-2xl font-semibold text-gray-900 tabular">3</span><span class="ml-1.5">上手剧本</span></div>
+        <div><span class="text-2xl font-semibold text-gray-900 tabular">8</span><span class="ml-1.5">步初始化向导</span></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Architecture Diagram — MOST IMPORTANT -->
-  <section id="architecture" class="border-b border-gray-200 bg-surface-page">
-    <div class="max-w-6xl mx-auto px-5 py-14">
-      <div class="mb-8">
-        <p class="section-label mb-2">Architecture</p>
-        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">四层 AI 原生架构</h2>
-        <p class="mt-2 text-sm text-gray-500 max-w-2xl">不是「在旧 ERP 上贴 AI 按钮」，而是应用、Agent 编排、统一数据事件、平台连接从底层原生设计。适合企业销售架构路演。</p>
+<!-- Playbooks -->
+<section id="playbooks" class="border-b border-gray-200 bg-surface-page">
+  <div class="max-w-6xl mx-auto px-5 py-12">
+    <div class="mb-6">
+      <div class="section-label mb-1">Playbooks</div>
+      <h2 class="text-xl font-semibold text-gray-900">三条剧本 · 按卖家成熟度选</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <a href="midplatform/?wizard=1" class="panel p-5 hover:border-brand-200 transition block">
+        <div class="text-xs font-medium text-brand-600 mb-2">剧本 A · 约 15 分钟</div>
+        <div class="text-base font-semibold mb-2">铺货上手</div>
+        <ol class="text-xs text-gray-500 space-y-1.5 list-decimal list-inside leading-relaxed">
+          <li>店铺授权（模拟 OAuth）</li>
+          <li>同步订单 → 待审核配对+设物流</li>
+          <li>申请运单号 → 打印面单 → 标发</li>
+          <li>旁路：采集 URL → 认领 → 刊登草稿</li>
+        </ol>
+        <div class="mt-4 text-xs text-brand-600 font-medium">对标店小秘 / 芒果 →</div>
+      </a>
+      <a href="erp/" class="panel p-5 hover:border-brand-200 transition block">
+        <div class="text-xs font-medium text-brand-600 mb-2">剧本 B · 约 20 分钟</div>
+        <div class="text-base font-semibold mb-2">供应链</div>
+        <ol class="text-xs text-gray-500 space-y-1.5 list-decimal list-inside leading-relaxed">
+          <li>缺货订单 → 生成采购单</li>
+          <li>1688 / 供应商确认</li>
+          <li>入库 → 库存可用 → 再审核发货</li>
+          <li>多仓库存（本地 / FBA / 海外仓）</li>
+        </ol>
+        <div class="mt-4 text-xs text-brand-600 font-medium">对标马帮供应链 →</div>
+      </a>
+      <a href="finance/" class="panel p-5 hover:border-brand-200 transition block">
+        <div class="text-xs font-medium text-brand-600 mb-2">剧本 C · 约 20 分钟</div>
+        <div class="text-base font-semibold mb-2">精品亚马逊</div>
+        <ol class="text-xs text-gray-500 space-y-1.5 list-decimal list-inside leading-relaxed">
+          <li>Listing 配对</li>
+          <li>销售利润表展开佣金/FBA/广告/头程/退货</li>
+          <li>广告活动调一档预算（需确认）</li>
+          <li>补货建议</li>
+        </ol>
+        <div class="mt-4 text-xs text-brand-600 font-medium">对标领星广告利润 →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Competitors -->
+<section id="competitors" class="bg-white border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-5 py-12">
+    <div class="mb-6">
+      <div class="section-label mb-1">Competitive</div>
+      <h2 class="text-xl font-semibold text-gray-900">对标熟悉的工具 · 我们多了什么</h2>
+    </div>
+    <div class="panel overflow-hidden">
+      <table class="w-full text-sm dense-table">
+        <thead class="sticky-th"><tr>
+          <th class="text-left px-4 py-2.5">对标</th>
+          <th class="text-left px-4 py-2.5">他们擅长</th>
+          <th class="text-left px-4 py-2.5">本中台增量</th>
+        </tr></thead>
+        <tbody>
+          <tr class="border-t"><td class="px-4 font-medium">马帮</td><td class="px-4 text-gray-500">供应链 / WMS 深</td><td class="px-4">同构采购入库 + <strong>AI 补货建议需确认</strong></td></tr>
+          <tr class="border-t"><td class="px-4 font-medium">店小秘</td><td class="px-4 text-gray-500">铺货认领打单快</td><td class="px-4">认领→刊登路径保留 + 向导式 onboarding</td></tr>
+          <tr class="border-t"><td class="px-4 font-medium">领星</td><td class="px-4 text-gray-500">广告 + ASIN 利润</td><td class="px-4">SP/SB/SD + <strong>可配置毛利公式</strong></td></tr>
+          <tr class="border-t"><td class="px-4 font-medium">积加</td><td class="px-4 text-gray-500">规则引擎 + 业财</td><td class="px-4">审核/标发规则 + 结算 vs 销售利润对比</td></tr>
+          <tr class="border-t"><td class="px-4 font-medium">赛狐</td><td class="px-4 text-gray-500">广告与客服一体</td><td class="px-4">客服留言与发货强耦合提示</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="border-b border-gray-200 bg-surface-page">
+  <div class="max-w-6xl mx-auto px-5 py-12">
+    <div class="mb-6">
+      <div class="section-label mb-1">Modules</div>
+      <h2 class="text-xl font-semibold text-gray-900">模块入口 · 用卖家的词</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <a href="midplatform/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">工作台</div>
+        <div class="text-xs text-gray-500 mt-1">待办 · 店铺授权 · 采集箱 · 配对</div>
+      </a>
+      <a href="oms/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">订单</div>
+        <div class="text-xs text-gray-500 mt-1">待审核 · 打单 · 标发 · 异常</div>
+      </a>
+      <a href="erp/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">采购 / 供应链</div>
+        <div class="text-xs text-gray-500 mt-1">缺货 · 采购单 · 1688 · 补货</div>
+      </a>
+      <a href="wms/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">仓库</div>
+        <div class="text-xs text-gray-500 mt-1">本地仓 · FBA · 海外仓推单 · 头程</div>
+      </a>
+      <a href="ads/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">广告</div>
+        <div class="text-xs text-gray-500 mt-1">SP/SB/SD · ACOS · 预算需确认</div>
+      </a>
+      <a href="cs/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">客服</div>
+        <div class="text-xs text-gray-500 mt-1">站内信 · 邮件 · 留言耦合发货</div>
+      </a>
+      <a href="bi/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">选品</div>
+        <div class="text-xs text-gray-500 mt-1">选品池 · 竞品 · 1688 货源 · 认领</div>
+      </a>
+      <a href="finance/" class="panel p-4 hover:border-brand-200 transition">
+        <div class="text-sm font-semibold">财务</div>
+        <div class="text-xs text-gray-500 mt-1">毛利公式 · 对账 · 结算利润</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Data in -->
+<section id="data-in" class="bg-white border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-5 py-12">
+    <div class="mb-6">
+      <div class="section-label mb-1">Data</div>
+      <h2 class="text-xl font-semibold text-gray-900">平台数据怎么进</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="panel p-5">
+        <div class="text-sm font-semibold mb-2">官方 OAuth（推荐）</div>
+        <p class="text-xs text-gray-500 leading-relaxed">店铺 / 广告 / 邮箱<strong>分项授权</strong>。跳转平台同意页 → refresh_token。Amazon SP-API、Shopee/TikTok/Lazada/Temu/Walmart OpenAPI。</p>
+        <a href="midplatform/" class="btn-primary btn-sm mt-3 inline-block">打开店铺授权中心</a>
       </div>
-
-      <div class="space-y-3">
-        <!-- Layer 4: Applications -->
-        <div class="arch-layer p-5">
-          <div class="flex items-center justify-between mb-3">
-            <div>
-              <span class="arch-layer-label">L4 · 应用层 Applications</span>
-              <p class="text-xs text-gray-400 mt-0.5">业务人员日常工作面 · 8 大模块</p>
-            </div>
-            <span class="text-[10px] font-semibold text-gray-400 tracking-wider">USER FACING</span>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
-            <a href="midplatform/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">指挥中台</a>
-            <a href="bi/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">选品 BI</a>
-            <a href="erp/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">ERP 采购</a>
-            <a href="wms/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">WMS 仓储</a>
-            <a href="oms/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">OMS 履约</a>
-            <a href="ads/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">Ads 投放</a>
-            <a href="cs/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">CS 客服</a>
-            <a href="finance/" class="arch-node hover:border-brand-500 hover:text-brand-500 transition">Finance</a>
-          </div>
-        </div>
-
-        <div class="arch-arrow">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
-
-        <!-- Layer 3: Multi-Agent Orchestration -->
-        <div class="arch-layer p-5 border-brand-200" style="border-width:1.5px; background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 40%);">
-          <div class="flex items-center justify-between mb-3">
-            <div>
-              <span class="arch-layer-label">L3 · Agent 编排层 Multi-Agent Orchestration</span>
-              <p class="text-xs text-gray-500 mt-0.5">触发 → Agent 推理 → 动作 → 人机审批门 · 可暂停 / 可回放</p>
-            </div>
-            <span class="ai-native-badge px-2 py-0.5 rounded">CORE</span>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
-            <div class="arch-node agent">Listing Agent<br/><span class="text-[10px] font-normal opacity-70">刊登生成</span></div>
-            <div class="arch-node agent">Pricing Agent<br/><span class="text-[10px] font-normal opacity-70">动态定价</span></div>
-            <div class="arch-node agent">Ads Agent<br/><span class="text-[10px] font-normal opacity-70">预算 / ACOS</span></div>
-            <div class="arch-node agent">Replenish Agent<br/><span class="text-[10px] font-normal opacity-70">补货预测</span></div>
-            <div class="arch-node agent">Fulfillment Agent<br/><span class="text-[10px] font-normal opacity-70">审单履约</span></div>
-            <div class="arch-node agent">CS Agent<br/><span class="text-[10px] font-normal opacity-70">多语言客服</span></div>
-            <div class="arch-node agent">Finance Agent<br/><span class="text-[10px] font-normal opacity-70">真利润对账</span></div>
-          </div>
-          <div class="mt-3 flex flex-wrap gap-2 text-[11px] text-gray-500">
-            <span class="px-2 py-1 rounded bg-white border border-gray-200">事件驱动调度</span>
-            <span class="px-2 py-1 rounded bg-white border border-gray-200">置信度阈值</span>
-            <span class="px-2 py-1 rounded bg-white border border-gray-200">人机协同审批</span>
-            <span class="px-2 py-1 rounded bg-white border border-gray-200">Playbook 策略</span>
-            <span class="px-2 py-1 rounded bg-white border border-gray-200">跨 Agent 派发</span>
-          </div>
-        </div>
-
-        <div class="arch-arrow">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
-
-        <!-- Layer 2: Unified Data + Event Bus -->
-        <div class="arch-layer p-5">
-          <div class="flex items-center justify-between mb-3">
-            <div>
-              <span class="arch-layer-label">L2 · 数据与事件层 Unified Data + Event Bus</span>
-              <p class="text-xs text-gray-400 mt-0.5">统一经营事实 · 实时事件驱动 Agent</p>
-            </div>
-            <span class="text-[10px] font-semibold text-gray-400 tracking-wider">SINGLE SOURCE OF TRUTH</span>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
-            <div class="arch-node">Orders<br/><span class="text-[10px] text-gray-400">订单事实</span></div>
-            <div class="arch-node">Inventory<br/><span class="text-[10px] text-gray-400">库存 / 在途</span></div>
-            <div class="arch-node">Ads Spend<br/><span class="text-[10px] text-gray-400">广告消耗</span></div>
-            <div class="arch-node">Tickets<br/><span class="text-[10px] text-gray-400">客服工单</span></div>
-            <div class="arch-node">Settlements<br/><span class="text-[10px] text-gray-400">结算回款</span></div>
-            <div class="arch-node">True P&amp;L<br/><span class="text-[10px] text-gray-400">真利润</span></div>
-          </div>
-        </div>
-
-        <div class="arch-arrow">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
-
-        <!-- Layer 1: Platform Connectors -->
-        <div class="arch-layer p-5">
-          <div class="flex items-center justify-between mb-3">
-            <div>
-              <span class="arch-layer-label">L1 · 连接层 Platform Connectors</span>
-              <p class="text-xs text-gray-400 mt-0.5">标准化 API / Webhook · 账号健康监控</p>
-            </div>
-            <span class="text-[10px] font-semibold text-gray-400 tracking-wider">INGEST</span>
-          </div>
-          <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
-            <div class="arch-node connector">Amazon</div>
-            <div class="arch-node connector">Shopee</div>
-            <div class="arch-node connector">TikTok Shop</div>
-            <div class="arch-node connector">Lazada</div>
-            <div class="arch-node connector">Temu</div>
-            <div class="arch-node connector">Walmart</div>
-          </div>
-        </div>
+      <div class="panel p-5">
+        <div class="text-sm font-semibold mb-2">CSV / 手工导入</div>
+        <p class="text-xs text-gray-500 leading-relaxed">未对接平台用后台导出表头映射。演示支持「使用演示数据」一键载入待审核单与采集箱草稿。</p>
+      </div>
+      <div class="panel p-5 border-red-100">
+        <div class="text-sm font-semibold mb-2 text-red-700">禁止 Cookie</div>
+        <p class="text-xs text-gray-500 leading-relaxed">不提供粘贴 Cookie / 填密码进自有库。与官方 OAuth 习惯相反且危险。紫鸟等环境隔离<strong>不替代</strong> SP-API。</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- End-to-end business chain -->
-  <section id="chain" class="border-b border-gray-200 bg-white">
-    <div class="max-w-6xl mx-auto px-5 py-14">
-      <div class="mb-8">
-        <p class="section-label mb-2">Business Chain</p>
-        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">端到端业务链 · AI 触点标注</h2>
-        <p class="mt-2 text-sm text-gray-500 max-w-2xl">从选品到真利润，每一步都有专职 Agent 介入；蓝色角标表示 AI 自动执行 / 人机审批节点。</p>
+<!-- Why design -->
+<section id="design-why" class="border-b border-gray-200 bg-surface-page">
+  <div class="max-w-6xl mx-auto px-5 py-12">
+    <div class="mb-6">
+      <div class="section-label mb-1">Design</div>
+      <h2 class="text-xl font-semibold text-gray-900">为什么这样设计</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="panel p-5">
+        <div class="text-sm font-semibold mb-2">日活在队列，不在大屏</div>
+        <p class="text-xs text-gray-500 leading-relaxed">中国卖家打开系统先看<strong>待审核 / 未配对 / 缺货 / 留言</strong>。所以首屏是密集表 + 状态 Tab + 批量勾选，不是 Agent 画布或玻璃拟态营销墙。</p>
       </div>
-      <div class="overflow-x-auto pb-2">
-        <div class="flex items-stretch gap-2 min-w-[900px]">
-          <div class="chain-step flex-1">
-            <span class="ai-touch">AI</span>
-            <div class="text-sm font-semibold text-gray-900">选品</div>
-            <div class="text-[11px] text-gray-400 mt-1">机会雷达</div>
-          </div>
-          <div class="chain-arrow"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          <div class="chain-step flex-1">
-            <span class="ai-touch">AI</span>
-            <div class="text-sm font-semibold text-gray-900">采购备货</div>
-            <div class="text-[11px] text-gray-400 mt-1">需求预测 PO</div>
-          </div>
-          <div class="chain-arrow"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          <div class="chain-step flex-1">
-            <span class="ai-touch">AI</span>
-            <div class="text-sm font-semibold text-gray-900">海外仓</div>
-            <div class="text-[11px] text-gray-400 mt-1">库位 / 波次</div>
-          </div>
-          <div class="chain-arrow"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          <div class="chain-step flex-1">
-            <span class="ai-touch">AI</span>
-            <div class="text-sm font-semibold text-gray-900">刊登</div>
-            <div class="text-[11px] text-gray-400 mt-1">Listing 生成</div>
-          </div>
-          <div class="chain-arrow"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          <div class="chain-step flex-1">
-            <span class="ai-touch">AI</span>
-            <div class="text-sm font-semibold text-gray-900">广告</div>
-            <div class="text-[11px] text-gray-400 mt-1">ACOS 守卫</div>
-          </div>
-          <div class="chain-arrow"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          <div class="chain-step flex-1">
-            <span class="ai-touch">AI</span>
-            <div class="text-sm font-semibold text-gray-900">订单履约</div>
-            <div class="text-[11px] text-gray-400 mt-1">风险审单</div>
-          </div>
-          <div class="chain-arrow"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          <div class="chain-step flex-1">
-            <span class="ai-touch">AI</span>
-            <div class="text-sm font-semibold text-gray-900">客服</div>
-            <div class="text-[11px] text-gray-400 mt-1">多语言草稿</div>
-          </div>
-          <div class="chain-arrow"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          <div class="chain-step flex-1" style="border-color:#86EFAC; background:#ECFDF5;">
-            <span class="ai-touch" style="background:#059669;">AI</span>
-            <div class="text-sm font-semibold text-gray-900">真利润</div>
-            <div class="text-[11px] text-gray-500 mt-1">费用归因</div>
-          </div>
-        </div>
+      <div class="panel p-5">
+        <div class="text-sm font-semibold mb-2">AI = 推荐，不是替代审批</div>
+        <p class="text-xs text-gray-500 leading-relaxed">真实 SaaS 是规则 + 异常人工。默认 CTA：查看推荐并确认 / 批准此条。全自动仅在「进阶」披露内。</p>
+      </div>
+      <div class="panel p-5">
+        <div class="text-sm font-semibold mb-2">毛利必须展开平台费项</div>
+        <p class="text-xs text-gray-500 leading-relaxed">只显示「收入−采购」会被当成外行。财务模块可勾选佣金、FBA、仓储、广告、退货、头程、汇损、包装。</p>
+      </div>
+      <div class="panel p-5">
+        <div class="text-sm font-semibold mb-2">操作手册 + 上手向导</div>
+        <p class="text-xs text-gray-500 leading-relaxed">每个模块顶栏保留。向导对齐行业 onboarding：授权 → 配对 → 仓库 → 物流 → 规则 → 演示数据 → 走通一单 → 配置毛利。</p>
       </div>
     </div>
-  </section>
-
-  <!-- Product matrix -->
-  <section id="products" class="border-b border-gray-200 bg-surface-page">
-    <div class="max-w-6xl mx-auto px-5 py-14">
-      <div class="mb-8">
-        <p class="section-label mb-2">Product Matrix</p>
-        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">八大应用 · 各驻场 Agent</h2>
-        <p class="mt-2 text-sm text-gray-500">每个模块都是 AI 原生壳：顶栏提供「操作手册」与「上手向导」；默认 AI 起草、人确认，全自动仅作进阶演示。</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-        <a href="midplatform/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">AI 指挥中台</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">跨平台健康、Agent 舰队、今夜任务、全局审批队列</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">Anomaly Agent</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">Fleet Orchestrator</span>
-          </div>
-        </a>
-
-        <a href="bi/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">选品 BI</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">机会雷达、爆款预测、竞品监控，利润模拟后派发刊登</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">选品 Agent</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">Listing Agent</span>
-          </div>
-        </a>
-
-        <a href="erp/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">ERP 采购补货</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">需求预测 → PO 草稿 → 审批；成本异常自动告警</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">补货 Agent</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">成本 Agent</span>
-          </div>
-        </a>
-
-        <a href="wms/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">WMS 海外仓</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">库位优化、波次合并、预测补货工单</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">仓储 Agent</span>
-          </div>
-        </a>
-
-        <a href="oms/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">OMS 履约</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">风险审单、拆合单、渠道选择、批量自动履约</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">履约 Agent</span>
-          </div>
-        </a>
-
-        <a href="ads/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">Ads 投放</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">预算再分配、出价、否定词、ACOS 守卫自动暂停</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">投放 Agent</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">ACOS Guard</span>
-          </div>
-        </a>
-
-        <a href="cs/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">CS 客服</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">分类、多语言草稿、危机升级、CSAT 预测</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">客服 Agent</span>
-          </div>
-        </a>
-
-        <a href="finance/" class="product-card p-5 block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="icon-tile">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            <span class="ai-native-badge px-1.5 py-0.5 rounded">AI Native</span>
-          </div>
-          <h3 class="font-semibold text-gray-900">Finance 财务</h3>
-          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">自动对账、费用归因、真利润、回款预测</p>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-50 text-brand-600 border border-brand-100">结算 Agent</span>
-          </div>
-        </a>
-
-      </div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <button type="button" class="btn-primary px-4 py-2 text-sm" id="portal-manual-btn" onclick="document.getElementById('cb-btn-manual')&&document.getElementById('cb-btn-manual').click()">打开门户操作手册</button>
+      <a href="midplatform/?wizard=1" class="btn-ghost px-4 py-2 text-sm">打开上手向导</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Why sellers want this -->
-  <section id="why" class="border-b border-gray-200 bg-white">
-    <div class="max-w-6xl mx-auto px-5 py-14">
-      <div class="mb-8">
-        <p class="section-label mb-2">Why Sellers Want This</p>
-        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">卖家真正痛点 → AI OS 解法</h2>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="pain-card">
-          <div class="pain">账号健康失控</div>
-          <div class="sol">Anomaly Agent 7×24 监控绩效指标、ODR、政策风险，异常秒级推送到审批队列，避免封号。</div>
-        </div>
-        <div class="pain-card">
-          <div class="pain">只看 GMV，不见真利润</div>
-          <div class="sol">Finance Agent 归因 FBA 费、佣金、广告、退款、头程，输出 SKU 级真利润与回款预测。</div>
-        </div>
-        <div class="pain-card">
-          <div class="pain">人效瓶颈</div>
-          <div class="sol">多 Agent 自动跑巡检与草稿，人只审高风险门；运营人效可从「盯屏」升级为「审批编排」。</div>
-        </div>
-        <div class="pain-card">
-          <div class="pain">多平台割裂</div>
-          <div class="sol">连接层统一 Amazon / Shopee / TikTok / Lazada / Temu / Walmart，数据层一份经营事实。</div>
-        </div>
-        <div class="pain-card">
-          <div class="pain">广告预算浪费</div>
-          <div class="sol">投放 Agent + ACOS 守卫：超标自动暂停、预算再分配、否定词建议，减少无效花费。</div>
-        </div>
-        <div class="pain-card">
-          <div class="pain">断货与滞销并存</div>
-          <div class="sol">补货 Agent 结合海外仓 lead time 与销量预测生成 PO；仓储 Agent 优化库位与波次。</div>
-        </div>
-      </div>
+<footer class="bg-white border-t border-gray-200">
+  <div class="max-w-6xl mx-auto px-5 py-8 flex flex-wrap justify-between gap-4 text-xs text-gray-400">
+    <div>跨境 AI 中台 Demo · 基于马帮/店小秘/积加/领星/赛狐使用习惯调研</div>
+    <div class="flex gap-4">
+      <a href="https://github.com/rong001/crossborder-ai-midplatform" class="hover:text-gray-700">GitHub</a>
+      <a href="https://rong001.github.io/crossborder-ai-midplatform/" class="hover:text-gray-700">GitHub Pages</a>
     </div>
-  </section>
-
-
-  <!-- Why designed this way -->
-  <section id="design-why" class="border-b border-gray-200 bg-white">
-    <div class="max-w-6xl mx-auto px-5 py-14">
-      <div class="mb-8">
-        <p class="section-label mb-2">Design Philosophy</p>
-        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">为什么这样设计</h2>
-        <p class="mt-2 text-sm text-gray-500 max-w-3xl">许多市场与团队仍在用表格和卖家原生后台。黑盒「一键 Agent 跑完全流程」会制造不信任，也学不到 Day-1 步骤。本套演示刻意做成：引导上手 + 人机协同。</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="pain-card">
-          <div class="text-xs font-semibold text-brand-600 mb-2">信任 Trust</div>
-          <div class="text-sm text-gray-700 leading-relaxed">AI 提出建议与草稿，高风险动作进入审批门；界面清楚展示「等待审批」，而不是静默改价/下单。</div>
-        </div>
-        <div class="pain-card">
-          <div class="text-xs font-semibold text-brand-600 mb-2">本地化 Localization</div>
-          <div class="text-sm text-gray-700 leading-relaxed">阈值、话术、科目映射按站点/平台适配；向导要求先准备知识库与规则，而不是一套全球默认值闷头跑。</div>
-        </div>
-        <div class="pain-card">
-          <div class="text-xs font-semibold text-brand-600 mb-2">上手 Onboarding</div>
-          <div class="text-sm text-gray-700 leading-relaxed">每个模块顶栏有「操作手册」与「上手向导」（5～7 步清单）。进度存 localStorage，可随时重开，无需销售员代点魔法按钮。</div>
-        </div>
-        <div class="pain-card">
-          <div class="text-xs font-semibold text-brand-600 mb-2">人机门 Human Gates</div>
-          <div class="text-sm text-gray-700 leading-relaxed">默认 CTA：按向导下一步 / 查看推荐并确认 / 批准此条。「模拟全自动」收在进阶披露里，仅作架构演示。</div>
-        </div>
-      </div>
-      <div class="mt-6 p-4 rounded-lg border border-amber-200 bg-amber-50 text-sm text-amber-900 leading-relaxed">
-        <strong>给客户演示时请强调：</strong>打开任意模块 → 先看操作手册 → 走上手向导勾选知识库与规则 → 对一条 AI 建议点「批准此条」。不要默认演示「一键跑完」。
-      </div>
-    </div>
-  </section>
-
-  <!-- How to start -->
-  <section id="how-to-start" class="border-b border-gray-200 bg-surface-page">
-    <div class="max-w-6xl mx-auto px-5 py-14">
-      <div class="mb-8">
-        <p class="section-label mb-2">Getting Started</p>
-        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">如何开始</h2>
-        <p class="mt-2 text-sm text-gray-500 max-w-3xl">新手可在无人陪同下完成：读手册 → 走向导 → 批准一条推荐。建议从指挥中台开始。</p>
-      </div>
-      <div class="grid lg:grid-cols-3 gap-4">
-        <div class="panel p-5">
-          <div class="text-xs font-semibold text-gray-400 mb-2">步骤 01</div>
-          <h3 class="font-semibold text-gray-900">打开指挥中台上手向导</h3>
-          <p class="text-sm text-gray-500 mt-2 leading-relaxed">确认业务范围、标记知识库、保存 ODR/ACOS/审批阈值，再载入演示数据。</p>
-          <a href="midplatform/?wizard=1" class="btn-primary inline-block mt-4 px-3.5 py-1.5 text-xs">进入中台向导 →</a>
-        </div>
-        <div class="panel p-5">
-          <div class="text-xs font-semibold text-gray-400 mb-2">步骤 02</div>
-          <h3 class="font-semibold text-gray-900">每个模块都有手册 + 向导</h3>
-          <p class="text-sm text-gray-500 mt-2 leading-relaxed">ERP / OMS / WMS / Ads / CS / BI / Finance 顶栏同样提供「操作手册」与「上手向导」，进度按模块分别保存。</p>
-          <button type="button" class="btn-ghost inline-block mt-4 px-3.5 py-1.5 text-xs" onclick="window.CBGuide&&CBGuide.openManual()">查看门户操作手册</button>
-        </div>
-        <div class="panel p-5">
-          <div class="text-xs font-semibold text-gray-400 mb-2">步骤 03</div>
-          <h3 class="font-semibold text-gray-900">体验「推荐 → 人确认」</h3>
-          <p class="text-sm text-gray-500 mt-2 leading-relaxed">在建议收件箱点「批准此条」或「查看推荐并确认」。全自动编排仅在「进阶」披露中，需显式展开。</p>
-          <a href="#products" class="btn-ghost inline-block mt-4 px-3.5 py-1.5 text-xs">浏览产品矩阵</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Platforms strip -->
-  <section class="border-b border-gray-200 bg-surface-page">
-    <div class="max-w-6xl mx-auto px-5 py-8">
-      <p class="text-center section-label mb-4">已连接平台 Connectors</p>
-      <div class="flex flex-wrap justify-center gap-2">
-        <span class="px-3 py-1.5 rounded-md border border-gray-200 text-xs font-medium text-gray-600 bg-white">Amazon</span>
-        <span class="px-3 py-1.5 rounded-md border border-gray-200 text-xs font-medium text-gray-600 bg-white">Shopee</span>
-        <span class="px-3 py-1.5 rounded-md border border-gray-200 text-xs font-medium text-gray-600 bg-white">TikTok Shop</span>
-        <span class="px-3 py-1.5 rounded-md border border-gray-200 text-xs font-medium text-gray-600 bg-white">Lazada</span>
-        <span class="px-3 py-1.5 rounded-md border border-gray-200 text-xs font-medium text-gray-600 bg-white">Temu</span>
-        <span class="px-3 py-1.5 rounded-md border border-gray-200 text-xs font-medium text-gray-600 bg-white">Walmart</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="bg-white">
-    <div class="max-w-6xl mx-auto px-5 py-14 text-center">
-      <h2 class="text-xl font-semibold text-gray-900 mb-2">从向导开始，而不是从一键全自动开始</h2>
-      <p class="text-sm text-gray-500 mb-6">每个模块都有操作手册与上手向导。AI 起草，人批准高风险；全自动仅作进阶演示。</p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="midplatform/?wizard=1" class="btn-primary inline-block px-6 py-2.5 text-sm">开始指挥中台上手向导</a>
-        <a href="#design-why" class="btn-ghost inline-block px-6 py-2.5 text-sm">阅读设计理念</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="border-t border-gray-200 bg-surface-page">
-    <div class="max-w-6xl mx-auto px-5 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
-      <div>Crossborder AI OS · 跨境电商 AI 原生操作系统 · Demo</div>
-      <div class="flex gap-4">
-        <a href="https://github.com/rong001/crossborder-ai-midplatform" class="hover:text-gray-600">GitHub</a>
-        <span>演示数据 · 非生产系统</span>
-      </div>
-    </div>
-  </footer>
+  </div>
+</footer>
 
 <script>window.CB_APP={id:"portal",name:"门户总览"};</script>
 <script src="guides.js"></script>

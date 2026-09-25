@@ -1,28 +1,186 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>WMS 海外仓 · Crossborder AI OS</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><link rel="stylesheet" href="../shared.css"/><script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script><style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style></head><body class="bg-surface-page text-gray-900 antialiased"><div class="flex h-screen overflow-hidden"><aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20"><div class="px-4 py-4 border-b border-gray-200"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><div class="text-sm font-semibold text-gray-900 leading-tight">WMS 海外仓</div><div class="text-[10px] text-gray-400 mt-0.5">WMS · Fulfillment Yard</div></div></div></div><nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto"><button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="warehouse" data-title="仓储指挥"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>仓储指挥</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="orchestrate" data-title="Agent 编排"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Agent 编排</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="waves" data-title="波次计划"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>波次计划</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="timeline" data-title="自动化时间线"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>自动化时间线</button><div class="pt-3 mt-2 border-t border-gray-200 px-1"><a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>架构总览（回门户）</a></div></nav><div class="px-4 py-3 border-t border-gray-200"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div><div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示账号</div><div class="text-[10px] text-gray-400">demo@crossborder.ai</div></div></div></div></aside><div class="flex-1 flex flex-col min-w-0"><header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10"><div class="flex items-center gap-3 min-w-0"><div class="breadcrumb hidden sm:block">AI OS / <span id="breadcrumb-current">仓储指挥</span></div><h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">仓储指挥</h1><span class="ai-native-badge px-2 py-0.5 rounded">AI Native</span><span class="demo-badge px-2 py-0.5 rounded">演示数据</span></div><div class="flex items-center gap-2.5"><span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Agent 编排在线</span><button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.agent-rail').classList.toggle('hidden')">Agent</button></div></header><main class="flex-1 overflow-y-auto p-5">
-<div id="view-warehouse" class="view active space-y-5">
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-    <div class="metric-card p-4"><div class="section-label">今日出库</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-out" data-val="1842">1,842</div><div class="mt-1 text-xs text-gray-500">订单行</div></div>
-    <div class="metric-card p-4"><div class="section-label">波次合并节省</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-save" data-val="18">18%</div><div class="mt-1 text-xs text-emerald-600">拣货路径</div></div>
-    <div class="metric-card p-4"><div class="section-label">库位优化待执行</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-slot" data-val="86">86</div><div class="mt-1 text-xs text-gray-500">LA 仓</div></div>
-    <div class="metric-card p-4"><div class="section-label">补货工单</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-whpo" data-val="7">7</div><div class="mt-1 text-xs text-amber-600">待批准</div></div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>仓库 / 海外仓 · 跨境 AI 中台</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../shared.css"/>
+<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
+<style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style>
+</head>
+<body class="bg-surface-page text-gray-900 antialiased">
+
+<div class="flex h-screen overflow-hidden">
+<aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
+  <div class="px-4 py-3.5 border-b border-gray-200">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+      <div>
+        <div class="text-sm font-semibold text-gray-900 leading-tight">仓库 / 海外仓</div>
+        <div class="text-[10px] text-gray-400 mt-0.5">本地仓 · FBA · 推单 · 头程</div>
+      </div>
+    </div>
   </div>
-  <div class="grid lg:grid-cols-2 gap-4">
-    <div class="suggestion-card p-4"><div class="text-sm font-semibold">库位优化建议 · 热销区前移</div><p class="text-xs text-gray-500 mt-1">将 SKU-8821/2201 移至 A 区近打包台，预计拣货时效 +14%。lead time 无影响。</p><button class="btn-primary btn-sm mt-3" onclick="acceptSuggestion(this,'kpi-slot',-86,'int'); bumpKpi('kpi-save',2,'pct');">查看推荐并确认</button></div>
-    <div class="suggestion-card p-4"><div class="text-sm font-semibold">预测补货工单 x7</div><p class="text-xs text-gray-500 mt-1">基于明日波次预测，从存储区补至拣选位，避免晨峰断档。</p><button class="btn-primary btn-sm mt-3" onclick="approveAction(this,'仓内补货','kpi-whpo',-7,'int')">批准此条</button></div>
+  <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+    <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="stock" data-title="库存总览"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>库存总览</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="local" data-title="本地仓"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>本地仓</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="fba" data-title="FBA"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10m10 0h4a1 1 0 001-1v-4a1 1 0 00-.293-.707l-2-2A1 1 0 0015 8h-2"/></svg>FBA</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="oversea" data-title="海外仓推单"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10m10 0h4a1 1 0 001-1v-4a1 1 0 00-.293-.707l-2-2A1 1 0 0015 8h-2"/></svg>海外仓推单</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="first" data-title="头程分摊"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>头程分摊</button>
+    <div class="pt-3 mt-2 border-t border-gray-200 px-1">
+      <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>回门户</a>
+    </div>
+  </nav>
+  <div class="px-4 py-3 border-t border-gray-200">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
+      <div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示卖家</div><div class="text-[10px] text-gray-400">demo@cbec.cn</div></div>
+    </div>
+  </div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+  <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-4 gap-3 z-10">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="breadcrumb hidden sm:block">跨境中台 / <span id="breadcrumb-current">库存总览</span></div>
+      <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">库存总览</h1>
+      <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <select class="text-xs border border-gray-200 rounded-md px-2 py-1.5 bg-white text-gray-600 hidden sm:block">
+        <option>全部店铺</option><option>Amazon US · 主店</option><option>Shopee MY</option><option>TikTok US</option>
+      </select>
+      <button class="btn-ghost btn-sm text-xs" onclick="toast('已触发同步订单/产品（演示）')">同步</button>
+      <button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.ai-rail').classList.toggle('hidden')">AI推荐</button>
+    </div>
+  </header>
+  <main class="flex-1 overflow-y-auto p-4">
+<div id="view-stock" class="view active space-y-4">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="metric-card p-3.5"><div class="section-label">本地仓 SKU</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-local" data-val="320">320</div><div class="mt-0.5 text-[11px] text-gray-500">深圳+义乌</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">FBA 在库</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-fba" data-val="1842">1,842</div><div class="mt-0.5 text-[11px] text-gray-500">US+EU</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">海外仓</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-ow" data-val="456">456</div><div class="mt-0.5 text-[11px] text-gray-500">LA+UK</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">待推单</div><div class="mt-1 text-xl font-semibold tabular text-amber-600" id="kpi-push" data-val="14">14</div><div class="mt-0.5 text-[11px] text-gray-500">海外仓</div></div>
+  </div>
+  <div class="panel overflow-hidden">
+    <table class="w-full text-sm dense-table">
+      <thead class="sticky-th"><tr>
+        <th class="text-left px-4 py-2">SKU</th><th class="text-left px-4 py-2">品名</th>
+        <th class="text-right px-4 py-2">本地仓</th><th class="text-right px-4 py-2">FBA</th>
+        <th class="text-right px-4 py-2">海外仓</th><th class="text-right px-4 py-2">在途</th>
+      </tr></thead>
+      <tbody>
+        <tr class="border-t"><td class="px-4 font-mono text-xs">SKU-8821</td><td class="px-4">化妆刷套装</td>
+          <td class="px-4 text-right tabular text-red-600">0</td><td class="px-4 text-right tabular">120</td>
+          <td class="px-4 text-right tabular">40</td><td class="px-4 text-right tabular">200</td></tr>
+        <tr class="border-t"><td class="px-4 font-mono text-xs">SKU-EAR-01</td><td class="px-4">蓝牙耳机</td>
+          <td class="px-4 text-right tabular">8</td><td class="px-4 text-right tabular">340</td>
+          <td class="px-4 text-right tabular">60</td><td class="px-4 text-right tabular">0</td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
-<div id="view-orchestrate" class="view space-y-5"><div class="flex items-center justify-between"><div><h2 class="text-base font-semibold text-gray-900">仓储 Agent 编排</h2><p class="text-xs text-gray-500 mt-1">点击节点模拟编排：触发 → Agent → 动作 → 人机门</p></div><button class="btn-primary text-xs px-3 py-1.5" onclick="runOrchestration('仓储编排')">模拟运行</button></div><div class="orch-canvas"><div id="orch-flow" class="flex items-center gap-0 min-w-max"><div class="orch-node trigger" onclick="runOrchestration('仓储编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">trigger</div><div class="text-sm font-semibold text-gray-900">订单积压</div><div class="text-[11px] text-gray-500 mt-0.5">波次窗口</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('仓储编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">波次合并</div><div class="text-[11px] text-gray-500 mt-0.5">路径优化</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('仓储编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">库位 Agent</div><div class="text-[11px] text-gray-500 mt-0.5">热力重排</div></div><div class="orch-edge"></div><div class="orch-node action" onclick="runOrchestration('仓储编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">action</div><div class="text-sm font-semibold text-gray-900">下发 WMS</div><div class="text-[11px] text-gray-500 mt-0.5">工单/波次</div></div><div class="orch-edge"></div><div class="orch-node gate" onclick="runOrchestration('仓储编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">gate</div><div class="text-sm font-semibold text-gray-900">仓经确认</div><div class="text-[11px] text-gray-500 mt-0.5">大改库位</div></div></div></div><div class="panel p-4"><div class="section-label mb-2">编排说明</div><p class="text-sm text-gray-600 leading-relaxed">低置信度或高金额动作进入人机审批门；高置信度可自动执行并写入时间线。可回放、可暂停 Agent。</p></div></div>
-<div id="view-waves" class="view space-y-5"><h2 class="text-base font-semibold">今夜波次预合并</h2><div class="panel p-4 text-sm text-gray-600">仓储 Agent 已将 28 个小波次合并为 12 个，预计拣货人时 -18%。可在编排视图回放。</div></div>
-<div id="view-timeline" class="view space-y-5"><div><h2 class="text-base font-semibold text-gray-900">自动化时间线</h2><p class="text-xs text-gray-500 mt-1">Agent 实时动作流 · 采纳/批准后自动追加</p></div><div class="panel p-5"><div id="live-timeline"><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">04:02:11</div><div class="text-sm text-gray-800 mt-0.5">波次合并 Agent 完成预合并 12 波</div></div><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">03:55:00</div><div class="text-sm text-gray-800 mt-0.5">库位优化草稿生成（86 库位）</div></div><div class="timeline-item pb-4"><div class="timeline-dot warning"></div><div class="text-xs text-gray-400 tabular">03:40:22</div><div class="text-sm text-gray-800 mt-0.5">预测补货工单 x7 进入审批</div></div></div></div></div></main></div><aside class="agent-rail hidden lg:flex shrink-0"><div class="px-4 py-3 border-b border-gray-200"><div class="text-xs font-semibold text-gray-900">Agent 控制台</div><div class="text-[10px] text-gray-400 mt-0.5">运行中 / <span class="text-amber-700 font-medium">等待审批</span> / 已暂停 · AI 起草需人确认</div></div><div class="flex-1 overflow-y-auto"><div class="agent-card" data-agent="Slot"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">库位优化 Agent</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">LA 仓重排 86 个库位</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:90%"></span></div><span class="text-[10px] tabular text-gray-400">90%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Slot')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Wave"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">波次合并 Agent</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">今夜预合并 12 波次</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:93%"></span></div><span class="text-[10px] tabular text-gray-400">93%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Wave')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="WhRepl"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">仓内补货工单</div><span class="status-pill status-approve agent-status">等待审批</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">生成 7 张预测补货单</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:85%"></span></div><span class="text-[10px] tabular text-gray-400">85%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('WhRepl')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div></div></aside></div><div id="toast-host"></div>
+<div id="view-local" class="view space-y-4">
+  <h2 class="text-base font-semibold">本地仓 · 出入库 / 仓位</h2>
+  <div class="panel p-4 text-sm text-gray-600">深圳仓 · 义乌仓。支持库存初值导入、拣货单、扫码验货出库。</div>
+</div>
+<div id="view-fba" class="view space-y-4">
+  <h2 class="text-base font-semibold">FBA 库存</h2>
+  <div class="panel p-4 text-sm text-gray-600">FBA 在库 / 在途 / 不可售。MCF 多渠道履约可从订单侧发起。</div>
+</div>
+<div id="view-oversea" class="view space-y-4">
+  <div class="flex justify-between"><h2 class="text-base font-semibold">海外仓推单</h2>
+    <button class="btn-primary btn-sm" onclick="confirmAction(this,'推单 14','kpi-push',-14,'int')">批量推单</button></div>
+  <div class="panel overflow-hidden">
+    <table class="w-full text-sm dense-table">
+      <thead class="sticky-th"><tr>
+        <th class="w-8 px-3"><input type="checkbox"/></th>
+        <th class="text-left px-3 py-2">订单</th><th class="text-left px-3 py-2">海外仓</th>
+        <th class="text-left px-3 py-2">仓 SKU</th><th class="text-left px-3 py-2">状态</th>
+        <th class="text-left px-3 py-2">操作</th>
+      </tr></thead>
+      <tbody>
+        <tr class="border-t"><td class="px-3"><input type="checkbox" class="row-check" checked/></td>
+          <td class="px-3 font-mono text-xs">ORD-88001</td><td class="px-3">LA 仓</td>
+          <td class="px-3 font-mono text-xs">OW-8821</td>
+          <td class="px-3"><span class="status-pill status-approve">待推单</span></td>
+          <td class="px-3"><button class="btn-primary btn-sm text-[11px]" onclick="toast('已推仓 · 等待回传追踪号')">推单</button></td></tr>
+        <tr class="border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3 font-mono text-xs">ORD-88012</td><td class="px-3">UK 仓</td>
+          <td class="px-3 font-mono text-xs">OW-EAR01</td>
+          <td class="px-3"><span class="status-pill status-running">已出库</span></td>
+          <td class="px-3"><button class="btn-ghost btn-sm text-[11px]" onclick="toast('追踪号: 1Z999AA101')">查看回传</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="view-first" class="view space-y-4">
+  <h2 class="text-base font-semibold">头程费用分摊</h2>
+  <div class="panel p-4 space-y-3 text-sm">
+    <p class="text-gray-600">备货单装箱规格（外箱长宽高、单箱数、毛重）→ 头程费按重量/体积分摊到 SKU。</p>
+    <div class="grid sm:grid-cols-3 gap-3">
+      <div class="metric-card p-3"><div class="section-label">本票头程</div><div class="text-lg font-semibold tabular">$1,280</div></div>
+      <div class="metric-card p-3"><div class="section-label">分摊方式</div><div class="text-sm mt-1">体积重优先</div></div>
+      <div class="metric-card p-3"><div class="section-label">SKU 均摊示例</div><div class="text-lg font-semibold tabular">$0.42</div></div>
+    </div>
+    <button class="btn-primary btn-sm" onclick="toast('头程已分摊到 48 个 SKU（演示）')">确认分摊</button>
+  </div>
+</div>
+</main>
+</div>
+<aside class="ai-rail hidden lg:flex shrink-0 w-[260px] bg-white border-l border-gray-200 flex-col">
+  <div class="px-4 py-3 border-b border-gray-200">
+    <div class="text-xs font-semibold text-gray-900">AI 推荐</div>
+    <div class="text-[10px] text-gray-400 mt-0.5">草稿 / 需确认 · 非黑盒一键</div>
+  </div>
+  <div class="flex-1 overflow-y-auto p-3 space-y-2.5"><div class="suggestion-card p-3">
+  <div class="text-xs font-semibold text-gray-900">14 单可推海外仓</div>
+  <p class="text-[11px] text-gray-500 mt-1 leading-snug">已配对仓 SKU，成本低于直发。</p>
+  <button class="btn-primary btn-sm mt-2 text-[11px]" onclick="showView('oversea')">查看推荐并确认</button>
+</div></div>
+</aside>
+</div>
+<div id="toast-host"></div>
+
 <script>
 function toast(msg){var h=document.getElementById('toast-host');var e=document.createElement('div');e.className='toast';e.textContent=msg;h.appendChild(e);setTimeout(function(){e.remove()},2800);}
-function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});var el=document.getElementById('view-'+id);if(el)el.classList.add('active');document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});var btn=document.querySelector('.nav-item[data-view="'+id+'"]');if(btn){var t=btn.dataset.title||id;var bc=document.getElementById('breadcrumb-current');var pt=document.getElementById('page-title');if(bc)bc.textContent=t;if(pt)pt.textContent=t;}}
+function showView(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});
+  var el=document.getElementById('view-'+id); if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});
+  var btn=document.querySelector('.nav-item[data-view="'+id+'"]');
+  if(btn){var t=btn.dataset.title||id; var bc=document.getElementById('breadcrumb-current'); var pt=document.getElementById('page-title'); if(bc)bc.textContent=t; if(pt)pt.textContent=t;}
+}
 document.querySelectorAll('.nav-item').forEach(function(btn){btn.addEventListener('click',function(){showView(btn.dataset.view)})});
-function pauseAgent(id){var card=document.querySelector('[data-agent="'+id+'"]');if(!card)return;var st=card.querySelector('.agent-status');var was=st.textContent.indexOf('暂停')>=0;if(was){st.textContent='运行中';st.className='status-pill status-running agent-status';card.classList.remove('paused');toast(id+' 已恢复');}else{st.textContent='已暂停';st.className='status-pill status-paused agent-status';card.classList.add('paused');toast(id+' 已暂停');}}
-function acceptSuggestion(btn,kpiId,delta,fmt){var card=btn.closest('.suggestion-card');if(card&&card.classList.contains('accepted'))return;if(card)card.classList.add('accepted');btn.textContent='已采纳';btn.disabled=true;bumpKpi(kpiId,delta,fmt);prependTimeline('已采纳建议并写入编排','success');toast('已采纳 · KPI 已更新');}
-function approveAction(btn,label,kpiId,delta,fmt){if(btn.dataset.done)return;btn.dataset.done='1';btn.textContent='已批准执行';btn.classList.remove('btn-primary');btn.classList.add('btn-success');bumpKpi(kpiId,delta,fmt);prependTimeline('批准执行：'+label,'success');var aq=document.getElementById('kpi-approve');if(aq){var v=parseInt(aq.dataset.val||aq.textContent,10);if(!isNaN(v)&&v>0){v-=1;aq.dataset.val=v;aq.textContent=v;}}toast('已批准：'+label);}
-function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
-function prependTimeline(text,kind){var host=document.getElementById('live-timeline');if(!host)return;var t=new Date().toTimeString().slice(0,8);var dot=kind==='warning'?'warning':kind==='danger'?'danger':'success';var item=document.createElement('div');item.className='timeline-item pb-4';item.innerHTML='<div class="timeline-dot '+dot+'"></div><div class="text-xs text-gray-400 tabular">'+t+'</div><div class="text-sm text-gray-800 mt-0.5">'+text+'</div>';host.insertBefore(item,host.firstChild);}
-function runOrchestration(name){document.querySelectorAll('.orch-node').forEach(function(n){n.classList.remove('running')});var nodes=document.querySelectorAll('#orch-flow .orch-node');var i=0;function step(){if(i>0)nodes[i-1].classList.remove('running');if(i>=nodes.length){prependTimeline('编排完成：'+name,'success');toast('编排模拟完成：'+name);return;}nodes[i].classList.add('running');i++;setTimeout(step,450);}step();}
+function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='¥'+Math.round(v).toLocaleString();else if(fmt==='usd')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
+function confirmAction(btn,label,kpiId,delta,fmt){
+  if(btn.dataset.done)return; btn.dataset.done='1';
+  btn.textContent='已确认'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+  bumpKpi(kpiId,delta,fmt); toast('已确认：'+label);
+  var card=btn.closest('.suggestion-card'); if(card) card.classList.add('accepted');
+}
+function setTab(group, name, btn){
+  document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(p){p.classList.toggle('hidden', p.dataset.tab!==name)});
+  if(btn){ var bar=btn.parentElement; bar.querySelectorAll('.status-tab').forEach(function(t){t.classList.remove('active')}); btn.classList.add('active'); }
+}
+function toggleAll(master, sel){ document.querySelectorAll(sel).forEach(function(c){c.checked=master.checked}); updateBatchBar(); }
+function updateBatchBar(){ var n=document.querySelectorAll('.row-check:checked').length; var bar=document.getElementById('batch-bar'); if(!bar)return; bar.style.display=n?'flex':'none'; var c=document.getElementById('batch-count'); if(c)c.textContent=n; }
+document.addEventListener('change',function(e){ if(e.target && e.target.classList.contains('row-check')) updateBatchBar(); });
+function mockOAuth(btn, platform){
+  btn.disabled=true; btn.textContent='授权中…';
+  setTimeout(function(){ btn.textContent='已授权'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+    var st=btn.closest('tr')||btn.closest('.auth-card'); if(st){ var badge=st.querySelector('.auth-status'); if(badge){ badge.textContent='已授权'; badge.className='status-pill status-success auth-status'; } }
+    toast(platform+' 官方 OAuth 授权成功（演示）');
+  }, 800);
+}
+function claimToBox(btn, name){
+  if(btn.dataset.done)return; btn.dataset.done='1'; btn.textContent='已认领'; btn.disabled=true;
+  bumpKpi('kpi-claim',1,'int'); toast('已认领到采集箱：'+name);
+}
 </script>
-<script>window.CB_APP={id:"wms",name:"WMS 海外仓"};</script><script src="../guides.js"></script><script src="../shared.js"></script></body></html>
+
+
+<script>window.CB_APP={id:"wms",name:"仓库 / 海外仓"};</script>
+<script src="../guides.js"></script>
+<script src="../shared.js"></script>
+</body></html>

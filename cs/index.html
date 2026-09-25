@@ -1,27 +1,172 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>CS 客服 · Crossborder AI OS</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><link rel="stylesheet" href="../shared.css"/><script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script><style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style></head><body class="bg-surface-page text-gray-900 antialiased"><div class="flex h-screen overflow-hidden"><aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20"><div class="px-4 py-4 border-b border-gray-200"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><div class="text-sm font-semibold text-gray-900 leading-tight">CS 客服</div><div class="text-[10px] text-gray-400 mt-0.5">CS · Service</div></div></div></div><nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto"><button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="inbox" data-title="客服收件箱"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>客服收件箱</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="orchestrate" data-title="Agent 编排"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Agent 编排</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="crisis" data-title="危机升级"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>危机升级</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="timeline" data-title="自动化时间线"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>自动化时间线</button><div class="pt-3 mt-2 border-t border-gray-200 px-1"><a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>架构总览（回门户）</a></div></nav><div class="px-4 py-3 border-t border-gray-200"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div><div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示账号</div><div class="text-[10px] text-gray-400">demo@crossborder.ai</div></div></div></div></aside><div class="flex-1 flex flex-col min-w-0"><header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10"><div class="flex items-center gap-3 min-w-0"><div class="breadcrumb hidden sm:block">AI OS / <span id="breadcrumb-current">客服收件箱</span></div><h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">客服收件箱</h1><span class="ai-native-badge px-2 py-0.5 rounded">AI Native</span><span class="demo-badge px-2 py-0.5 rounded">演示数据</span></div><div class="flex items-center gap-2.5"><span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Agent 编排在线</span><button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.agent-rail').classList.toggle('hidden')">Agent</button></div></header><main class="flex-1 overflow-y-auto p-5">
-<div id="view-inbox" class="view active space-y-5">
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-    <div class="metric-card p-4"><div class="section-label">待回复</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-open" data-val="67">67</div><div class="mt-1 text-xs text-gray-500">草稿已备 52</div></div>
-    <div class="metric-card p-4"><div class="section-label">AI 草稿采纳率</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-adopt" data-val="78">78%</div><div class="mt-1 text-xs text-emerald-600">近 7 日</div></div>
-    <div class="metric-card p-4"><div class="section-label">危机工单</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-crisis" data-val="23">23</div><div class="mt-1 text-xs text-amber-600">待统一策略</div></div>
-    <div class="metric-card p-4"><div class="section-label">预测 CSAT</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-csat" data-val="4.6">4.6</div><div class="mt-1 text-xs text-gray-500">目标 ≥ 4.5</div></div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>客服 · 跨境 AI 中台</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../shared.css"/>
+<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
+<style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style>
+</head>
+<body class="bg-surface-page text-gray-900 antialiased">
+
+<div class="flex h-screen overflow-hidden">
+<aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
+  <div class="px-4 py-3.5 border-b border-gray-200">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+      <div>
+        <div class="text-sm font-semibold text-gray-900 leading-tight">客服</div>
+        <div class="text-[10px] text-gray-400 mt-0.5">站内信 · 邮件 · 留言</div>
+      </div>
+    </div>
   </div>
-  <div class="suggestion-card p-4"><div class="flex justify-between gap-4"><div><div class="text-sm font-semibold">查看推荐并确认</div><p class="text-xs text-gray-500 mt-1">分类完成 · 语气合规检查通过 · 预计 CSAT +0.1。高风险 6 条仍需人工改写。</p></div><button class="btn-primary btn-sm shrink-0" onclick="acceptSuggestion(this,'kpi-open',-52,'int'); bumpKpi('kpi-adopt',2,'pct');">批准此条</button></div></div>
+  <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+    <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="inbox" data-title="统一收件箱"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>统一收件箱</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="tpl" data-title="话术模板"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>话术模板</button>
+<button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="ship" data-title="与发货耦合"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10m10 0h4a1 1 0 001-1v-4a1 1 0 00-.293-.707l-2-2A1 1 0 0015 8h-2"/></svg>与发货耦合</button>
+    <div class="pt-3 mt-2 border-t border-gray-200 px-1">
+      <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>回门户</a>
+    </div>
+  </nav>
+  <div class="px-4 py-3 border-t border-gray-200">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
+      <div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示卖家</div><div class="text-[10px] text-gray-400">demo@cbec.cn</div></div>
+    </div>
+  </div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+  <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-4 gap-3 z-10">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="breadcrumb hidden sm:block">跨境中台 / <span id="breadcrumb-current">统一收件箱</span></div>
+      <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">统一收件箱</h1>
+      <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <select class="text-xs border border-gray-200 rounded-md px-2 py-1.5 bg-white text-gray-600 hidden sm:block">
+        <option>全部店铺</option><option>Amazon US · 主店</option><option>Shopee MY</option><option>TikTok US</option>
+      </select>
+      <button class="btn-ghost btn-sm text-xs" onclick="toast('已触发同步订单/产品（演示）')">同步</button>
+      <button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.ai-rail').classList.toggle('hidden')">AI推荐</button>
+    </div>
+  </header>
+  <main class="flex-1 overflow-y-auto p-4">
+<div id="view-inbox" class="view active space-y-4">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="metric-card p-3.5"><div class="section-label">待回复</div><div class="mt-1 text-xl font-semibold tabular text-amber-600" id="kpi-cs" data-val="18">18</div><div class="mt-0.5 text-[11px] text-gray-500">站内信+邮件</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">留言阻塞发货</div><div class="mt-1 text-xl font-semibold tabular text-red-600" id="kpi-block" data-val="8">8</div><div class="mt-0.5 text-[11px] text-gray-500">不处理不能审</div></div>
+    <div class="metric-card p-3.5"><div class="section-label">今日已回</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-done" data-val="42">42</div><div class="mt-0.5 text-[11px] text-gray-500"></div></div>
+    <div class="metric-card p-3.5"><div class="section-label">差评工单</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-neg" data-val="3">3</div><div class="mt-0.5 text-[11px] text-gray-500">本周</div></div>
+  </div>
+  <div class="status-tabs"><button type="button" class="status-tab active" onclick="setTab('cs','mail',this)">站内信/邮件<span class="tab-count">18</span></button><button type="button" class="status-tab" onclick="setTab('cs','order',this)">订单留言<span class="tab-count">8</span></button><button type="button" class="status-tab" onclick="setTab('cs','return',this)">退货/差评<span class="tab-count">3</span></button></div>
+  <div data-tab-group="cs" data-tab="mail" class="panel overflow-hidden">
+    <table class="w-full text-sm dense-table">
+      <thead class="sticky-th"><tr>
+        <th class="w-8 px-3"><input type="checkbox"/></th>
+        <th class="text-left px-3 py-2">渠道</th><th class="text-left px-3 py-2">买家</th>
+        <th class="text-left px-3 py-2">主题/摘要</th><th class="text-left px-3 py-2">关联订单</th>
+        <th class="text-left px-3 py-2">操作</th>
+      </tr></thead>
+      <tbody>
+        <tr class="border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3 text-xs">Amazon 邮件</td><td class="px-3">J***n</td>
+          <td class="px-3 max-w-[200px] truncate">Where is my package?</td>
+          <td class="px-3 font-mono text-xs">ORD-99100</td>
+          <td class="px-3"><button class="btn-primary btn-sm text-[11px]" onclick="toast('打开回复 · AI 草稿已生成')">回复</button></td></tr>
+        <tr class="border-t"><td class="px-3"><input type="checkbox" class="row-check"/></td>
+          <td class="px-3 text-xs">Shopee 站内信</td><td class="px-3">A***i</td>
+          <td class="px-3 max-w-[200px] truncate">可以改地址吗？</td>
+          <td class="px-3 font-mono text-xs">ORD-99290</td>
+          <td class="px-3"><button class="btn-primary btn-sm text-[11px]" onclick="confirmAction(this,'处理留言 ORD-99290','kpi-block',-1,'int'); bumpKpi('kpi-cs',-1,'int')">处理留言</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-tab-group="cs" data-tab="order" class="hidden panel p-4 text-sm text-gray-600">
+    <p class="mb-2"><strong>领星习惯：</strong>订单侧「留言待处理」不处理则不能审核发货。</p>
+    <a class="btn-primary btn-sm" href="../oms/">回 OMS 待审核</a>
+  </div>
+  <div data-tab-group="cs" data-tab="return" class="hidden panel p-4 text-sm text-gray-500">差评 / 退货工单 3 条</div>
+  <div class="suggestion-card p-4">
+    <div class="text-sm font-semibold">AI 回复草稿 · 需确认后发送</div>
+    <p class="text-xs text-gray-500 mt-1">「您好，包裹已由云途发出，追踪号 YT123456CN，预计 8–12 个工作日送达…」</p>
+    <div class="mt-2 flex gap-2">
+      <button class="btn-primary btn-sm" onclick="confirmAction(this,'发送回复草稿','kpi-cs',-1,'int')">确认发送</button>
+      <button class="btn-ghost btn-sm" onclick="toast('已打开编辑')">编辑草稿</button>
+    </div>
+  </div>
 </div>
-<div id="view-orchestrate" class="view space-y-5"><div class="flex items-center justify-between"><div><h2 class="text-base font-semibold text-gray-900">客服 Agent 编排</h2><p class="text-xs text-gray-500 mt-1">点击节点模拟编排：触发 → Agent → 动作 → 人机门</p></div><button class="btn-primary text-xs px-3 py-1.5" onclick="runOrchestration('客服编排')">模拟运行</button></div><div class="orch-canvas"><div id="orch-flow" class="flex items-center gap-0 min-w-max"><div class="orch-node trigger" onclick="runOrchestration('客服编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">trigger</div><div class="text-sm font-semibold text-gray-900">新工单</div><div class="text-[11px] text-gray-500 mt-0.5">多平台拉取</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('客服编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">分类 Agent</div><div class="text-[11px] text-gray-500 mt-0.5">意图/情绪/语言</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('客服编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">草稿 Agent</div><div class="text-[11px] text-gray-500 mt-0.5">多语言回复</div></div><div class="orch-edge"></div><div class="orch-node action" onclick="runOrchestration('客服编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">action</div><div class="text-sm font-semibold text-gray-900">自动回复</div><div class="text-[11px] text-gray-500 mt-0.5">低风险发送</div></div><div class="orch-edge"></div><div class="orch-node gate" onclick="runOrchestration('客服编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">gate</div><div class="text-sm font-semibold text-gray-900">危机升级</div><div class="text-[11px] text-gray-500 mt-0.5">批量/舆情</div></div></div></div><div class="panel p-4"><div class="section-label mb-2">编排说明</div><p class="text-sm text-gray-600 leading-relaxed">低置信度或高金额动作进入人机审批门；高置信度可自动执行并写入时间线。可回放、可暂停 Agent。</p></div></div>
-<div id="view-crisis" class="view space-y-5"><h2 class="text-base font-semibold">危机升级</h2>
-  <div class="suggestion-card p-4"><div class="text-sm font-semibold">物流延误批量投诉 x23 · Shopee MY</div><p class="text-xs text-gray-500 mt-1">建议统一致歉话术 + 部分运费补偿（预估 $460），避免差评冲击账号健康。</p><button class="btn-primary btn-sm mt-3" onclick="approveAction(this,'危机话术','kpi-crisis',-23,'int')">批准此条</button></div>
+<div id="view-tpl" class="view space-y-4">
+  <h2 class="text-base font-semibold">话术模板</h2>
+  <div class="panel p-4 space-y-2 text-sm">
+    <div class="flex justify-between border-b py-2"><span>物流延误安抚</span><button class="btn-ghost btn-sm text-[11px]" onclick="toast('已插入')">使用</button></div>
+    <div class="flex justify-between border-b py-2"><span>改地址指引</span><button class="btn-ghost btn-sm text-[11px]" onclick="toast('已插入')">使用</button></div>
+    <div class="flex justify-between py-2"><span>退货政策说明</span><button class="btn-ghost btn-sm text-[11px]" onclick="toast('已插入')">使用</button></div>
+  </div>
 </div>
-<div id="view-timeline" class="view space-y-5"><div><h2 class="text-base font-semibold text-gray-900">自动化时间线</h2><p class="text-xs text-gray-500 mt-1">Agent 实时动作流 · 采纳/批准后自动追加</p></div><div class="panel p-5"><div id="live-timeline"><div class="timeline-item pb-4"><div class="timeline-dot warning"></div><div class="text-xs text-gray-400 tabular">02:11:08</div><div class="text-sm text-gray-800 mt-0.5">危机升级：物流延误 x23 进入审批</div></div><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">02:04:22</div><div class="text-sm text-gray-800 mt-0.5">多语言草稿生成 52 条</div></div><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">01:50:00</div><div class="text-sm text-gray-800 mt-0.5">分类 Agent 完成批次 486</div></div></div></div></div></main></div><aside class="agent-rail hidden lg:flex shrink-0"><div class="px-4 py-3 border-b border-gray-200"><div class="text-xs font-semibold text-gray-900">Agent 控制台</div><div class="text-[10px] text-gray-400 mt-0.5">运行中 / <span class="text-amber-700 font-medium">等待审批</span> / 已暂停 · AI 起草需人确认</div></div><div class="flex-1 overflow-y-auto"><div class="agent-card" data-agent="Classify"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">分类 Agent</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">今日已分类 486 工单</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:95%"></span></div><span class="text-[10px] tabular text-gray-400">95%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Classify')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Draft"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">多语言草稿</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">EN/TH/ID/MS 草稿就绪</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:89%"></span></div><span class="text-[10px] tabular text-gray-400">89%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Draft')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Crisis"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">危机升级</div><span class="status-pill status-approve agent-status">等待审批</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">物流延误批量投诉 x23</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:84%"></span></div><span class="text-[10px] tabular text-gray-400">84%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Crisis')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="CSAT"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">CSAT 预测</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">预测今日 CSAT 4.6</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:81%"></span></div><span class="text-[10px] tabular text-gray-400">81%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('CSAT')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div></div></aside></div><div id="toast-host"></div>
+<div id="view-ship" class="view space-y-4">
+  <h2 class="text-base font-semibold">客服与发货耦合</h2>
+  <div class="panel p-4 text-sm text-gray-600 space-y-2">
+    <p>订单客服备注可传仓；留言未处理的订单在 OMS 审核按钮禁用。</p>
+    <p>当前阻塞发货：<strong id="kpi-block2">8</strong> 单。</p>
+  </div>
+</div>
+</main>
+</div>
+<aside class="ai-rail hidden lg:flex shrink-0 w-[260px] bg-white border-l border-gray-200 flex-col">
+  <div class="px-4 py-3 border-b border-gray-200">
+    <div class="text-xs font-semibold text-gray-900">AI 推荐</div>
+    <div class="text-[10px] text-gray-400 mt-0.5">草稿 / 需确认 · 非黑盒一键</div>
+  </div>
+  <div class="flex-1 overflow-y-auto p-3 space-y-2.5"><div class="suggestion-card p-3">
+  <div class="text-xs font-semibold text-gray-900">物流延误统一话术</div>
+  <p class="text-[11px] text-gray-500 mt-1 leading-snug">批量投诉可一键套模板，仍需确认发送。</p>
+  <button class="btn-primary btn-sm mt-2 text-[11px]" onclick="showView('inbox')">查看推荐并确认</button>
+</div></div>
+</aside>
+</div>
+<div id="toast-host"></div>
+
 <script>
 function toast(msg){var h=document.getElementById('toast-host');var e=document.createElement('div');e.className='toast';e.textContent=msg;h.appendChild(e);setTimeout(function(){e.remove()},2800);}
-function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});var el=document.getElementById('view-'+id);if(el)el.classList.add('active');document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});var btn=document.querySelector('.nav-item[data-view="'+id+'"]');if(btn){var t=btn.dataset.title||id;var bc=document.getElementById('breadcrumb-current');var pt=document.getElementById('page-title');if(bc)bc.textContent=t;if(pt)pt.textContent=t;}}
+function showView(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});
+  var el=document.getElementById('view-'+id); if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});
+  var btn=document.querySelector('.nav-item[data-view="'+id+'"]');
+  if(btn){var t=btn.dataset.title||id; var bc=document.getElementById('breadcrumb-current'); var pt=document.getElementById('page-title'); if(bc)bc.textContent=t; if(pt)pt.textContent=t;}
+}
 document.querySelectorAll('.nav-item').forEach(function(btn){btn.addEventListener('click',function(){showView(btn.dataset.view)})});
-function pauseAgent(id){var card=document.querySelector('[data-agent="'+id+'"]');if(!card)return;var st=card.querySelector('.agent-status');var was=st.textContent.indexOf('暂停')>=0;if(was){st.textContent='运行中';st.className='status-pill status-running agent-status';card.classList.remove('paused');toast(id+' 已恢复');}else{st.textContent='已暂停';st.className='status-pill status-paused agent-status';card.classList.add('paused');toast(id+' 已暂停');}}
-function acceptSuggestion(btn,kpiId,delta,fmt){var card=btn.closest('.suggestion-card');if(card&&card.classList.contains('accepted'))return;if(card)card.classList.add('accepted');btn.textContent='已采纳';btn.disabled=true;bumpKpi(kpiId,delta,fmt);prependTimeline('已采纳建议并写入编排','success');toast('已采纳 · KPI 已更新');}
-function approveAction(btn,label,kpiId,delta,fmt){if(btn.dataset.done)return;btn.dataset.done='1';btn.textContent='已批准执行';btn.classList.remove('btn-primary');btn.classList.add('btn-success');bumpKpi(kpiId,delta,fmt);prependTimeline('批准执行：'+label,'success');var aq=document.getElementById('kpi-approve');if(aq){var v=parseInt(aq.dataset.val||aq.textContent,10);if(!isNaN(v)&&v>0){v-=1;aq.dataset.val=v;aq.textContent=v;}}toast('已批准：'+label);}
-function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
-function prependTimeline(text,kind){var host=document.getElementById('live-timeline');if(!host)return;var t=new Date().toTimeString().slice(0,8);var dot=kind==='warning'?'warning':kind==='danger'?'danger':'success';var item=document.createElement('div');item.className='timeline-item pb-4';item.innerHTML='<div class="timeline-dot '+dot+'"></div><div class="text-xs text-gray-400 tabular">'+t+'</div><div class="text-sm text-gray-800 mt-0.5">'+text+'</div>';host.insertBefore(item,host.firstChild);}
-function runOrchestration(name){document.querySelectorAll('.orch-node').forEach(function(n){n.classList.remove('running')});var nodes=document.querySelectorAll('#orch-flow .orch-node');var i=0;function step(){if(i>0)nodes[i-1].classList.remove('running');if(i>=nodes.length){prependTimeline('编排完成：'+name,'success');toast('编排模拟完成：'+name);return;}nodes[i].classList.add('running');i++;setTimeout(step,450);}step();}
+function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='¥'+Math.round(v).toLocaleString();else if(fmt==='usd')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
+function confirmAction(btn,label,kpiId,delta,fmt){
+  if(btn.dataset.done)return; btn.dataset.done='1';
+  btn.textContent='已确认'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+  bumpKpi(kpiId,delta,fmt); toast('已确认：'+label);
+  var card=btn.closest('.suggestion-card'); if(card) card.classList.add('accepted');
+}
+function setTab(group, name, btn){
+  document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(p){p.classList.toggle('hidden', p.dataset.tab!==name)});
+  if(btn){ var bar=btn.parentElement; bar.querySelectorAll('.status-tab').forEach(function(t){t.classList.remove('active')}); btn.classList.add('active'); }
+}
+function toggleAll(master, sel){ document.querySelectorAll(sel).forEach(function(c){c.checked=master.checked}); updateBatchBar(); }
+function updateBatchBar(){ var n=document.querySelectorAll('.row-check:checked').length; var bar=document.getElementById('batch-bar'); if(!bar)return; bar.style.display=n?'flex':'none'; var c=document.getElementById('batch-count'); if(c)c.textContent=n; }
+document.addEventListener('change',function(e){ if(e.target && e.target.classList.contains('row-check')) updateBatchBar(); });
+function mockOAuth(btn, platform){
+  btn.disabled=true; btn.textContent='授权中…';
+  setTimeout(function(){ btn.textContent='已授权'; btn.classList.remove('btn-primary'); btn.classList.add('btn-success');
+    var st=btn.closest('tr')||btn.closest('.auth-card'); if(st){ var badge=st.querySelector('.auth-status'); if(badge){ badge.textContent='已授权'; badge.className='status-pill status-success auth-status'; } }
+    toast(platform+' 官方 OAuth 授权成功（演示）');
+  }, 800);
+}
+function claimToBox(btn, name){
+  if(btn.dataset.done)return; btn.dataset.done='1'; btn.textContent='已认领'; btn.disabled=true;
+  bumpKpi('kpi-claim',1,'int'); toast('已认领到采集箱：'+name);
+}
 </script>
-<script>window.CB_APP={id:"cs",name:"CS 客服"};</script><script src="../guides.js"></script><script src="../shared.js"></script></body></html>
+
+
+<script>window.CB_APP={id:"cs",name:"客服"};</script>
+<script src="../guides.js"></script>
+<script src="../shared.js"></script>
+</body></html>
