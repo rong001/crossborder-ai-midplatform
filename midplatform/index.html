@@ -1,573 +1,73 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI运营中台 · 跨境电商AI套件</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<link rel="stylesheet" href="../shared.css" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#EFF6FF', 100: '#DBEAFE', 200: '#BFDBFE',
-              500: '#2563EB', 600: '#1D4ED8', 700: '#1E40AF',
-            },
-            surface: { DEFAULT: '#FFFFFF', muted: '#F3F4F6', page: '#F6F8FA' },
-          },
-          fontFamily: {
-            sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');</style>
-</head>
-
-<body class="bg-surface-page text-gray-900 antialiased">
-  <div class="flex h-screen overflow-hidden">
-    <aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
-      <div class="px-4 py-4 border-b border-gray-200">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          </div>
-          <div>
-            <div class="text-sm font-semibold text-gray-900 leading-tight">AI运营中台</div>
-            <div class="text-[10px] text-gray-400 mt-0.5">套件 · Midplatform</div>
-          </div>
-        </div>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>AI 指挥中台 · Crossborder AI OS</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><link rel="stylesheet" href="../shared.css"/><script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script><style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style></head><body class="bg-surface-page text-gray-900 antialiased"><div class="flex h-screen overflow-hidden"><aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20"><div class="px-4 py-4 border-b border-gray-200"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><div class="text-sm font-semibold text-gray-900 leading-tight">AI 指挥中台</div><div class="text-[10px] text-gray-400 mt-0.5">Midplatform · Command</div></div></div></div><nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto"><button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="command" data-title="指挥中心"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>指挥中心</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="orchestrate" data-title="Agent 编排"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Agent 编排</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="approve" data-title="全局审批"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>全局审批</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="tonight" data-title="今夜任务"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>今夜任务</button><button class="nav-item w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="timeline" data-title="自动化时间线"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>自动化时间线</button><div class="pt-3 mt-2 border-t border-gray-200 px-1"><a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>架构总览（回门户）</a></div></nav><div class="px-4 py-3 border-t border-gray-200"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div><div class="min-w-0"><div class="text-xs font-semibold text-gray-900 truncate">演示账号</div><div class="text-[10px] text-gray-400">demo@crossborder.ai</div></div></div></div></aside><div class="flex-1 flex flex-col min-w-0"><header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10"><div class="flex items-center gap-3 min-w-0"><div class="breadcrumb hidden sm:block">AI OS / <span id="breadcrumb-current">指挥中心</span></div><h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">指挥中心</h1><span class="ai-native-badge px-2 py-0.5 rounded">AI Native</span><span class="demo-badge px-2 py-0.5 rounded">演示数据</span></div><div class="flex items-center gap-2.5"><span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Agent 编排在线</span><button class="lg:hidden btn-ghost btn-sm text-xs" onclick="document.querySelector('.agent-rail').classList.toggle('hidden')">Agent</button></div></header><main class="flex-1 overflow-y-auto p-5">
+<div id="view-command" class="view active space-y-5">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="metric-card p-4"><div class="section-label">今日真利润</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-profit" data-val="28420">$28,420</div><div class="mt-1 text-xs text-gray-500">GMV $128,420 · 利润率 22.1%</div></div>
+    <div class="metric-card p-4"><div class="section-label">Agent 舰队</div><div class="mt-1.5 text-2xl font-semibold tabular">12<span class="text-sm font-normal text-gray-400"> / 14</span></div><div class="mt-1 text-xs text-emerald-600">运行中 · 2 等待审批</div></div>
+    <div class="metric-card p-4"><div class="section-label">待审批</div><div class="mt-1.5 text-2xl font-semibold tabular" id="kpi-approve" data-val="5">5</div><div class="mt-1 text-xs text-amber-600">含 1 条账号健康高优</div></div>
+    <div class="metric-card p-4"><div class="section-label">跨平台健康</div><div class="mt-1.5 text-2xl font-semibold tabular">96.2%</div><div class="mt-1 text-xs text-gray-500">6 平台综合评分</div></div>
+  </div>
+  <div class="grid lg:grid-cols-3 gap-4">
+    <div class="lg:col-span-2 panel p-4">
+      <div class="flex items-center justify-between mb-3"><div class="section-label">平台健康矩阵</div><span class="text-[11px] text-gray-400">Anomaly Agent 实时</span></div>
+      <table class="w-full text-sm dense-table"><thead class="sticky-th"><tr><th class="text-left px-3 py-2">平台</th><th class="text-right px-3 py-2">GMV</th><th class="text-right px-3 py-2">真利润</th><th class="text-right px-3 py-2">退款率</th><th class="text-right px-3 py-2">健康分</th><th class="text-left px-3 py-2">Agent</th></tr></thead>
+      <tbody>
+        <tr class="table-row border-t border-gray-100"><td class="px-3"><span class="platform-badge">Amazon</span></td><td class="px-3 text-right tabular">$62,400</td><td class="px-3 text-right tabular text-emerald-600">$14,120</td><td class="px-3 text-right tabular">2.1%</td><td class="px-3 text-right"><span class="status-pill status-warning">88</span></td><td class="px-3 text-xs text-amber-600">ODR 预警</td></tr>
+        <tr class="table-row border-t border-gray-100"><td class="px-3"><span class="platform-badge">Shopee</span></td><td class="px-3 text-right tabular">$24,800</td><td class="px-3 text-right tabular text-emerald-600">$5,210</td><td class="px-3 text-right tabular">3.4%</td><td class="px-3 text-right"><span class="status-pill status-success">97</span></td><td class="px-3 text-xs text-gray-400">正常</td></tr>
+        <tr class="table-row border-t border-gray-100"><td class="px-3"><span class="platform-badge">TikTok</span></td><td class="px-3 text-right tabular">$18,620</td><td class="px-3 text-right tabular text-emerald-600">$3,890</td><td class="px-3 text-right tabular">4.2%</td><td class="px-3 text-right"><span class="status-pill status-success">94</span></td><td class="px-3 text-xs text-gray-400">正常</td></tr>
+        <tr class="table-row border-t border-gray-100"><td class="px-3"><span class="platform-badge">Lazada</span></td><td class="px-3 text-right tabular">$9,400</td><td class="px-3 text-right tabular text-emerald-600">$1,980</td><td class="px-3 text-right tabular">2.8%</td><td class="px-3 text-right"><span class="status-pill status-success">95</span></td><td class="px-3 text-xs text-gray-400">正常</td></tr>
+        <tr class="table-row border-t border-gray-100"><td class="px-3"><span class="platform-badge">Temu</span></td><td class="px-3 text-right tabular">$8,120</td><td class="px-3 text-right tabular text-emerald-600">$1,720</td><td class="px-3 text-right tabular">5.1%</td><td class="px-3 text-right"><span class="status-pill status-success">92</span></td><td class="px-3 text-xs text-gray-400">正常</td></tr>
+        <tr class="table-row border-t border-gray-100"><td class="px-3"><span class="platform-badge">Walmart</span></td><td class="px-3 text-right tabular">$5,080</td><td class="px-3 text-right tabular text-emerald-600">$1,500</td><td class="px-3 text-right tabular">1.6%</td><td class="px-3 text-right"><span class="status-pill status-success">98</span></td><td class="px-3 text-xs text-gray-400">正常</td></tr>
+      </tbody></table>
+    </div>
+    <div class="panel p-4">
+      <div class="section-label mb-3">今夜自动任务</div>
+      <div class="space-y-2.5 text-sm">
+        <div class="flex justify-between gap-2"><span class="text-gray-700">Ads ACOS 守卫巡检</span><span class="status-pill status-scheduled">02:00</span></div>
+        <div class="flex justify-between gap-2"><span class="text-gray-700">补货预测 → PO 草稿</span><span class="status-pill status-scheduled">02:30</span></div>
+        <div class="flex justify-between gap-2"><span class="text-gray-700">结算对账回流</span><span class="status-pill status-scheduled">03:00</span></div>
+        <div class="flex justify-between gap-2"><span class="text-gray-700">客服危机扫描</span><span class="status-pill status-scheduled">每小时</span></div>
+        <div class="flex justify-between gap-2"><span class="text-gray-700">海外仓波次预合并</span><span class="status-pill status-scheduled">04:00</span></div>
       </div>
-      <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
-        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="overview" data-title="总览看板">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-          总览看板
-        </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="automation" data-title="自动化中心">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          自动化中心
-        </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="suggestions" data-title="AI 建议">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
-          AI 建议
-        </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="tonight" data-title="今夜自动任务">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          今夜自动任务
-        </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="assistant" data-title="经营助手">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-          经营助手
-        </button>
-        <div class="pt-3 mt-2 border-t border-gray-200 px-1">
-          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>
-            返回总门户
-          </a>
-        </div>
-      </nav>
-      <div class="px-4 py-3 border-t border-gray-200">
-        <div class="flex items-center gap-2">
-          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
-          <div class="min-w-0">
-            <div class="text-xs font-semibold text-gray-900 truncate">演示账号</div>
-            <div class="text-[10px] text-gray-400">demo@crossborder.ai</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <div class="flex-1 flex flex-col min-w-0">
-      <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="breadcrumb hidden sm:block">套件 / <span id="breadcrumb-current">总览看板</span></div>
-          <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">总览看板</h1>
-          <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
-        </div>
-        <div class="flex items-center gap-2.5">
-          
-          <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            AI 自动化在线
-          </span>
-        </div>
-      </header>
-      <main class="flex-1 overflow-y-auto p-5">
-
-        <div id="view-overview" class="view active space-y-5">
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            
-        <div class="metric-card p-4">
-          <div class="section-label">今日 GMV</div>
-          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-gmv" data-val="128420" data-fmt="money">$128,420</div>
-          <div class="mt-1 text-xs text-gray-500">较昨日 +6.2%</div>
-        </div>
-            
-        <div class="metric-card p-4">
-          <div class="section-label">广告花费</div>
-          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">$18,260</div>
-          <div class="mt-1 text-xs text-gray-500">ACOS 18.4%</div>
-        </div>
-            
-        <div class="metric-card p-4">
-          <div class="section-label">待处理异常</div>
-          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-alerts" data-val="7" data-fmt="int">7</div>
-          <div class="mt-1 text-xs text-gray-500">3 条高优</div>
-        </div>
-            
-        <div class="metric-card p-4">
-          <div class="section-label">AI 已处置</div>
-          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">23</div>
-          <div class="mt-1 text-xs text-gray-500">今日自动闭环</div>
-        </div>
-          </div>
-          <div class="grid lg:grid-cols-3 gap-4">
-            <div class="lg:col-span-2 panel p-4">
-              <div class="flex items-center justify-between mb-3">
-                <div><div class="section-label">Performance</div><h3 class="text-sm font-semibold">近 14 日 GMV</h3></div>
-                <button class="filter-chip active text-xs" onclick="document.getElementById('kpi-alerts').textContent='2';document.getElementById('kpi-alerts').dataset.val='2';toast('已应用 AI 洞察：仅显示高风险平台')">应用 AI 筛选</button>
-              </div>
-              <canvas id="chart-gmv" height="120"></canvas>
-            </div>
-            
-      <div class="panel p-4">
-        <div class="section-label mb-1">Activity</div>
-        <h3 class="text-sm font-semibold text-gray-900 mb-4">AI 刚刚自动完成了…</h3>
-        <div>
-        <div class="timeline-item pb-4">
-          <div class="timeline-dot"></div>
-          <div class="text-[11px] text-gray-400 tabular">刚刚</div>
-          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：将 Temu 低效关键词移入否定词库（12 个）</div>
-        </div>
-        <div class="timeline-item pb-4">
-          <div class="timeline-dot"></div>
-          <div class="text-[11px] text-gray-400 tabular">12 分钟前</div>
-          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：对 3 笔高风险订单标记人工复核</div>
-        </div>
-        <div class="timeline-item pb-4">
-          <div class="timeline-dot"></div>
-          <div class="text-[11px] text-gray-400 tabular">1 小时前</div>
-          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：生成明日波次预合并方案（WMS）</div>
-        </div>
-        <div class="timeline-item pb-4">
-          <div class="timeline-dot"></div>
-          <div class="text-[11px] text-gray-400 tabular">今日 09:14</div>
-          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：对账匹配成功 148 / 152 笔</div>
-        </div></div>
-      </div>
-          </div>
-          <div class="panel p-4">
-            <div class="section-label mb-1">Cross-platform Anomalies</div>
-            <h3 class="text-sm font-semibold mb-3">跨平台异常检测</h3>
-            <table class="w-full text-sm dense-table">
-              <thead class="sticky-th"><tr class="text-left border-b border-gray-200">
-                <th class="py-2 px-2">平台</th><th class="py-2 px-2">指标</th><th class="py-2 px-2">偏离</th><th class="py-2 px-2">状态</th><th class="py-2 px-2"></th>
-              </tr></thead>
-              <tbody>
-                <tr class="table-row border-b border-gray-100"><td class="px-2"><span class="platform-badge">TikTok</span></td><td class="px-2">ACOS</td><td class="px-2 text-rose-600 tabular">+14.2pp</td><td class="px-2"><span class="status-pill status-danger">高</span></td><td class="px-2"><button class="text-xs text-brand-500" onclick="toast('已下钻至广告组 TG-884')">处置</button></td></tr>
-                <tr class="table-row border-b border-gray-100"><td class="px-2"><span class="platform-badge">Shopee</span></td><td class="px-2">可售天数</td><td class="px-2 text-amber-600 tabular">6.2 天</td><td class="px-2"><span class="status-pill status-warning">中</span></td><td class="px-2"><button class="text-xs text-brand-500" onclick="switchView('suggestions','AI 建议');toast('已跳转补货建议')">处置</button></td></tr>
-                <tr class="table-row"><td class="px-2"><span class="platform-badge">Amazon</span></td><td class="px-2">退款率</td><td class="px-2 text-gray-700 tabular">+1.1pp</td><td class="px-2"><span class="status-pill status-info">低</span></td><td class="px-2"><button class="text-xs text-brand-500" onclick="toast('已创建监控规则')">处置</button></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div id="view-automation" class="view space-y-5">
-          
-      <div class="panel overflow-hidden">
-        <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
-          <div>
-            <div class="section-label">Automation Center</div>
-            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">AI Agents</h3>
-          </div>
-          <button class="btn-ghost px-2.5 py-1 text-xs" onclick="toast('已刷新 Agent 状态')">刷新</button>
-        </div>
-        <div class="px-4 py-2 bg-gray-50 border-b border-gray-200 hidden md:flex text-[11px] uppercase tracking-wide text-gray-400 font-semibold gap-4">
-          <div class="flex-1">Agent</div>
-          <div class="w-28">上次运行</div>
-          <div class="w-28 hidden lg:block">下次运行</div>
-          <div class="w-14 text-right">成功率</div>
-          <div class="w-9"></div>
-        </div>
-        
-        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2">
-              <span class="text-sm font-medium text-gray-900">跨平台异常检测</span>
-              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
-            </div>
-            <div class="text-xs text-gray-500 mt-0.5 truncate">监控 GMV/ACOS/库存突变并推送</div>
-          </div>
-          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">2 分钟前</div>
-          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">持续</div>
-          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">98.2%</div>
-          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
-        </div>
-        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2">
-              <span class="text-sm font-medium text-gray-900">今夜自动调价</span>
-              <span class="status-pill status-scheduled" data-status>已调度</span>
-            </div>
-            <div class="text-xs text-gray-500 mt-0.5 truncate">低转化广告组预算再分配</div>
-          </div>
-          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">昨日 23:00</div>
-          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">今晚 23:00</div>
-          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">94.1%</div>
-          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
-        </div>
-        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2">
-              <span class="text-sm font-medium text-gray-900">库存风险扫描</span>
-              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
-            </div>
-            <div class="text-xs text-gray-500 mt-0.5 truncate">可售天数 < 10 自动建任务</div>
-          </div>
-          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">18 分钟前</div>
-          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">每小时</div>
-          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">99.0%</div>
-          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
-        </div>
-        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2">
-              <span class="text-sm font-medium text-gray-900">竞品价格哨兵</span>
-              <span class="status-pill status-paused" data-status>已暂停</span>
-            </div>
-            <div class="text-xs text-gray-500 mt-0.5 truncate">Top SKU 竞品变价提醒</div>
-          </div>
-          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">3 天前</div>
-          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">—</div>
-          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">91.5%</div>
-          <div class="toggle " onclick="toggleAgent(this)" title="启停"></div>
-        </div>
-      </div>
-          
-      <div class="panel overflow-hidden">
-        <div class="px-4 py-3 border-b border-gray-200">
-          <div class="section-label">Playbooks</div>
-          <h3 class="text-sm font-semibold text-gray-900 mt-0.5">自动化规则</h3>
-        </div>
-        
-        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
-          <div class="flex-1 min-w-0">
-            <div class="text-sm font-medium text-gray-900">GMV 突降 >15% 告警</div>
-            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF gmv_wow < -0.15 THEN notify + create_task</div>
-          </div>
-          <div class="toggle on" onclick="togglePlaybook(this)"></div>
-        </div>
-        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
-          <div class="flex-1 min-w-0">
-            <div class="text-sm font-medium text-gray-900">ACOS 超标自动缩预算</div>
-            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF acos > 0.35 THEN set_budget *= 0.7</div>
-          </div>
-          <div class="toggle on" onclick="togglePlaybook(this)"></div>
-        </div>
-        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
-          <div class="flex-1 min-w-0">
-            <div class="text-sm font-medium text-gray-900">新品测款自动加预算</div>
-            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF roas_3d > 3.5 AND spend < 200 THEN boost</div>
-          </div>
-          <div class="toggle " onclick="togglePlaybook(this)"></div>
-        </div>
-      </div>
-        </div>
-
-        <div id="view-suggestions" class="view space-y-5">
-          <div class="grid lg:grid-cols-3 gap-4">
-            <div class="lg:col-span-2">
-      <div>
-        <div class="flex items-center justify-between mb-3">
-          <div>
-            <div class="section-label">AI Suggestions</div>
-            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">待处理建议</h3>
-          </div>
-          <span class="status-pill status-info">3 条待处理</span>
-        </div>
-        <div class="space-y-3">
-        <div class="suggestion-card p-4">
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0 flex-1">
-              <div class="text-sm font-medium text-gray-900">暂停 TikTok 广告组 TG-884（ACOS 42%）</div>
-              <div class="text-xs text-gray-500 mt-1 leading-relaxed">近 3 天转化骤降，模型建议暂停并转移预算至 AMZ-SP-12。</div>
-              <div class="mt-3 flex items-center gap-4">
-                <div class="flex items-center gap-2">
-                  <span class="text-[11px] text-gray-400">置信度</span>
-                  <span class="text-xs font-semibold conf-high tabular">91%</span>
-                  <div class="conf-bar w-16"><span style="width:91%"></span></div>
-                </div>
-                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">预计节省 $1,240/周</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="mt-3 flex items-center gap-2">
-            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved',1240)">一键采纳</button>
-            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
-            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
-          </div>
-        </div>
-        <div class="suggestion-card p-4">
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0 flex-1">
-              <div class="text-sm font-medium text-gray-900">Shopee SKU-A19 补货提前 5 天</div>
-              <div class="text-xs text-gray-500 mt-1 leading-relaxed">销量加速 + 交期拉长，建议今晚生成采购草稿。</div>
-              <div class="mt-3 flex items-center gap-4">
-                <div class="flex items-center gap-2">
-                  <span class="text-[11px] text-gray-400">置信度</span>
-                  <span class="text-xs font-semibold conf-high tabular">87%</span>
-                  <div class="conf-bar w-16"><span style="width:87%"></span></div>
-                </div>
-                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">避免缺货损失 ~$3,800</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="mt-3 flex items-center gap-2">
-            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved',0)">一键采纳</button>
-            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
-            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
-          </div>
-        </div>
-        <div class="suggestion-card p-4">
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0 flex-1">
-              <div class="text-sm font-medium text-gray-900">合并 Amazon 两场闪促活动预算</div>
-              <div class="text-xs text-gray-500 mt-1 leading-relaxed">受众重叠 67%，合并后预计降低 CPA。</div>
-              <div class="mt-3 flex items-center gap-4">
-                <div class="flex items-center gap-2">
-                  <span class="text-[11px] text-gray-400">置信度</span>
-                  <span class="text-xs font-semibold conf-mid tabular">78%</span>
-                  <div class="conf-bar w-16"><span style="width:78%"></span></div>
-                </div>
-                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">ROAS +0.4 预估</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="mt-3 flex items-center gap-2">
-            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved',0)">一键采纳</button>
-            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
-            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
-          </div>
-        </div></div>
-      </div></div>
-            <div class="space-y-4">
-              
-        <div class="metric-card p-4">
-          <div class="section-label">本周 AI 预估节省</div>
-          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-saved" data-val="0" data-fmt="money">$0</div>
-          <div class="mt-1 text-xs text-gray-500">采纳建议后累加</div>
-        </div>
-              
-      <div class="panel p-4">
-        <div class="section-label mb-1">Activity</div>
-        <h3 class="text-sm font-semibold text-gray-900 mb-4">AI 刚刚自动完成了…</h3>
-        <div>
-        <div class="timeline-item pb-4">
-          <div class="timeline-dot"></div>
-          <div class="text-[11px] text-gray-400 tabular">刚刚</div>
-          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：将 Temu 低效关键词移入否定词库（12 个）</div>
-        </div>
-        <div class="timeline-item pb-4">
-          <div class="timeline-dot"></div>
-          <div class="text-[11px] text-gray-400 tabular">12 分钟前</div>
-          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：对 3 笔高风险订单标记人工复核</div>
-        </div>
-        <div class="timeline-item pb-4">
-          <div class="timeline-dot"></div>
-          <div class="text-[11px] text-gray-400 tabular">1 小时前</div>
-          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：生成明日波次预合并方案（WMS）</div>
-        </div></div>
-      </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="view-tonight" class="view space-y-5">
-          <div class="panel overflow-hidden">
-            <div class="px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-              <div><div class="section-label">Tonight</div><h3 class="text-sm font-semibold">今夜自动任务 · 23:00–06:00</h3></div>
-              <button class="btn-primary px-3 py-1.5 text-xs" onclick="toast('已确认今夜任务清单（6 项）')">确认全部</button>
-            </div>
-            <table class="w-full text-sm dense-table">
-              <thead class="sticky-th"><tr class="text-left border-b border-gray-200">
-                <th class="py-2 px-4">任务</th><th class="py-2 px-4">模块</th><th class="py-2 px-4">计划</th><th class="py-2 px-4">影响</th><th class="py-2 px-4">状态</th>
-              </tr></thead>
-              <tbody class="divide-y divide-gray-100">
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">重分配低效广告预算</td><td class="px-4"><span class="platform-badge">Ads</span></td><td class="px-4 text-gray-500 tabular">23:00</td><td class="px-4 text-gray-500">~$800</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">生成 A19/B02 采购草稿</td><td class="px-4"><span class="platform-badge">ERP</span></td><td class="px-4 text-gray-500 tabular">23:30</td><td class="px-4 text-gray-500">2 SKU</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">波次预合并（深圳仓）</td><td class="px-4"><span class="platform-badge">WMS</span></td><td class="px-4 text-gray-500 tabular">00:15</td><td class="px-4 text-gray-500">~18%</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">自动对账 Amazon 结算</td><td class="px-4"><span class="platform-badge">Finance</span></td><td class="px-4 text-gray-500 tabular">01:00</td><td class="px-4 text-gray-500">152 笔</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">差评危机巡检</td><td class="px-4"><span class="platform-badge">CS</span></td><td class="px-4 text-gray-500 tabular">每 2h</td><td class="px-4 text-gray-500">—</td><td class="px-4"><span class="status-pill status-running">运行中</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">竞品价格快照</td><td class="px-4"><span class="platform-badge">BI</span></td><td class="px-4 text-gray-500 tabular">04:00</td><td class="px-4 text-gray-500">48 SKU</td><td class="px-4"><span class="status-pill status-paused">已暂停</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div id="view-assistant" class="view space-y-5">
-          <div class="panel p-4 max-w-2xl">
-            <div class="section-label mb-1">AI 经营助手</div>
-            <h3 class="text-sm font-semibold mb-4">对话式洞察</h3>
-            <div class="space-y-3 mb-4" id="chat-log">
-              <div class="ai-bubble-bot px-3 py-2 text-sm max-w-[90%]">你好。我可以解释异常、生成行动清单，或直接应用筛选。试试：「今晚优先处理什么？」</div>
-            </div>
-            <div class="flex gap-2">
-              <button class="btn-ghost px-3 py-1.5 text-xs" onclick="askAI('今晚优先处理什么？')">今晚优先处理什么？</button>
-              <button class="btn-ghost px-3 py-1.5 text-xs" onclick="askAI('哪些平台 ACOS 异常？')">哪些平台 ACOS 异常？</button>
-              <button class="btn-primary px-3 py-1.5 text-xs" onclick="askAI('应用高风险筛选')">应用高风险筛选</button>
-            </div>
-          </div>
-        </div>
-
-      </main>
     </div>
   </div>
-
-  <div id="drawer-detail" class="drawer">
-    <div class="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-gray-900">建议详情</h3>
-      <button class="text-gray-400 hover:text-gray-700" onclick="closeDrawer()">✕</button>
-    </div>
-    <div class="flex-1 overflow-y-auto p-5 space-y-4 text-sm">
-      <div>
-        <div class="section-label mb-1">Reasoning</div>
-        <p class="text-gray-700 leading-relaxed">基于近 14 天销量、库存周转、广告 ACOS 与季节性因子综合评估。模型置信度来自交叉验证与历史同类决策回测。</p>
-      </div>
-      <div>
-        <div class="section-label mb-1">Expected Impact</div>
-        <ul class="text-gray-700 space-y-1.5 list-disc pl-4">
-          <li>预计 7 日内毛利提升 2.1–3.4%</li>
-          <li>库存周转天数缩短约 4 天</li>
-          <li>相关 SKU 缺货风险下降 60%</li>
-        </ul>
-      </div>
-      <div>
-        <div class="section-label mb-1">Evidence</div>
-        <div class="panel p-3 text-xs text-gray-600 space-y-1">
-          <div>· 销量增速 +28% WoW（同品类均值 +9%）</div>
-          <div>· 当前可售天数 6.2（安全线 14）</div>
-          <div>· 供应商交期 9 天，建议提前下单</div>
-        </div>
-      </div>
-    </div>
-    <div class="px-5 py-3 border-t border-gray-200 flex gap-2">
-      <button class="btn-primary flex-1 py-2 text-sm" onclick="closeDrawer();toast('已从详情页采纳建议')">采纳建议</button>
-      <button class="btn-ghost px-4 py-2 text-sm" onclick="closeDrawer()">关闭</button>
+  <div class="panel p-4">
+    <div class="section-label mb-3">建议收件箱 · 跨模块</div>
+    <div class="space-y-3">
+      <div class="suggestion-card p-4"><div class="flex items-start justify-between gap-3"><div><div class="text-sm font-semibold">Amazon US · ODR 将触及 1% 阈值</div><p class="text-xs text-gray-500 mt-1">Anomaly Agent 建议：暂停 3 个高退款 SKU 广告，并派发 CS Agent 优先处理相关工单。</p><div class="mt-2 text-[11px] text-gray-400">置信度 88% · 影响真利润约 -$420/日（若封号则更大）</div></div><div class="flex flex-col gap-1.5 shrink-0"><button class="btn-primary btn-sm" onclick="approveAction(this,'ODR 防护','kpi-approve',0,'int')">批准执行</button><button class="btn-ghost btn-sm" onclick="showView('orchestrate')">查看编排</button></div></div></div>
+      <div class="suggestion-card p-4"><div class="flex items-start justify-between gap-3"><div><div class="text-sm font-semibold">TikTok Shop · 爆款 SKU-8821 可扩预算</div><p class="text-xs text-gray-500 mt-1">选品 + 投放 Agent 协同：利润模拟后建议日预算 +$800，预计真利润 +$1,240/周。</p></div><button class="btn-primary btn-sm shrink-0" onclick="acceptSuggestion(this,'kpi-profit',1240,'money')">一键采纳</button></div></div>
     </div>
   </div>
-
-  <div id="toast-host"></div>
-  <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
-  <script>
-
-function toast(msg){
-  const host=document.getElementById('toast-host');
-  const el=document.createElement('div');
-  el.className='toast';
-  el.textContent=msg;
-  host.appendChild(el);
-  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300)},2800);
-}
-function switchView(id, title){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const t=document.getElementById('view-'+id);
-  if(t) t.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active', n.dataset.view===id));
-  const pt=document.getElementById('page-title');
-  if(pt && title) pt.textContent=title;
-  const bc=document.getElementById('breadcrumb-current');
-  if(bc && title) bc.textContent=title;
-}
-document.querySelectorAll('.nav-item[data-view]').forEach(btn=>{
-  btn.addEventListener('click',()=>switchView(btn.dataset.view, btn.dataset.title||btn.textContent.trim()));
-});
-function acceptSuggestion(btn, impactEl, delta){
-  const card=btn.closest('.suggestion-card');
-  if(card.classList.contains('accepted')) return;
-  card.classList.add('accepted');
-  btn.disabled=true;
-  btn.textContent='已采纳';
-  btn.className='px-2.5 py-1 text-xs font-medium rounded bg-emerald-100 text-emerald-700 cursor-default';
-  if(impactEl && delta){
-    const el=document.getElementById(impactEl);
-    if(el){
-      const cur=parseFloat(el.dataset.val||el.textContent.replace(/[^0-9.-]/g,''))||0;
-      const next=cur+delta;
-      el.dataset.val=next;
-      if(el.dataset.fmt==='money') el.textContent='$'+next.toLocaleString(undefined,{maximumFractionDigits:0});
-      else if(el.dataset.fmt==='pct') el.textContent=next.toFixed(1)+'%';
-      else if(el.dataset.fmt==='int') el.textContent=Math.round(next).toLocaleString();
-      else el.textContent=next;
-      el.classList.add('text-emerald-600');
-    }
-  }
-  toast('已采纳 AI 建议，相关指标已更新');
-}
-function ignoreSuggestion(btn){
-  const card=btn.closest('.suggestion-card');
-  card.style.opacity='0.45';
-  card.querySelectorAll('button').forEach(b=>b.disabled=true);
-  toast('已忽略该建议');
-}
-function toggleAgent(el){
-  el.classList.toggle('on');
-  const row=el.closest('.agent-row')||el.closest('[data-agent]');
-  const pill=row && row.querySelector('[data-status]');
-  if(pill){
-    if(el.classList.contains('on')){
-      pill.className='status-pill status-running';
-      pill.innerHTML='<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中';
-      toast('Agent 已启动');
-    } else {
-      pill.className='status-pill status-paused';
-      pill.innerHTML='已暂停';
-      toast('Agent 已暂停');
-    }
-  }
-}
-function togglePlaybook(el){
-  el.classList.toggle('on');
-  toast(el.classList.contains('on')?'规则已启用':'规则已停用');
-}
-function openDrawer(id){
-  document.getElementById('drawer-overlay').classList.add('open');
-  document.getElementById(id).classList.add('open');
-}
-function closeDrawer(){
-  document.getElementById('drawer-overlay').classList.remove('open');
-  document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
-}
-
-
-function askAI(q){
-  const log=document.getElementById('chat-log');
-  const u=document.createElement('div');
-  u.className='ai-bubble-user px-3 py-2 text-sm max-w-[80%] ml-auto';
-  u.textContent=q;
-  log.appendChild(u);
-  setTimeout(()=>{
-    const b=document.createElement('div');
-    b.className='ai-bubble-bot px-3 py-2 text-sm max-w-[90%]';
-    if(q.includes('今晚')) b.innerHTML='建议优先：① 暂停 TG-884（ACOS 42%）；② 确认 A19 采购草稿；③ 深圳仓波次预合并。可在「今夜自动任务」一键确认。';
-    else if(q.includes('ACOS')) b.innerHTML='TikTok 整体 ACOS 偏高 14pp；Amazon SP 正常。已为你标出 2 个可暂停广告组。';
-    else { b.innerHTML='已应用「高风险」筛选，异常数从 7 → 2。'; document.getElementById('kpi-alerts').textContent='2'; document.getElementById('kpi-alerts').dataset.val='2'; }
-    log.appendChild(b);
-    toast('AI 助手已回复');
-  },400);
-}
-Chart.defaults.color='#9CA3AF';
-Chart.defaults.borderColor='#E5E7EB';
-new Chart(document.getElementById('chart-gmv'),{
-  type:'line',
-  data:{labels:['D-13','D-11','D-9','D-7','D-5','D-3','D-1'],datasets:[
-    {label:'GMV',data:[98,105,112,108,121,118,128],borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.35,pointRadius:0,borderWidth:2}
-  ]},
-  options:{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#F3F4F6'},ticks:{callback:v=>'$'+v+'k'}}},maintainAspectRatio:true}
-});
-
-  </script>
-</body>
-</html>
+</div>
+<div id="view-orchestrate" class="view space-y-5"><div class="flex items-center justify-between"><div><h2 class="text-base font-semibold text-gray-900">全局 Agent 编排</h2><p class="text-xs text-gray-500 mt-1">点击节点模拟编排：触发 → Agent → 动作 → 人机门</p></div><button class="btn-primary text-xs px-3 py-1.5" onclick="runOrchestration('全局异常编排')">模拟运行</button></div><div class="orch-canvas"><div id="orch-flow" class="flex items-center gap-0 min-w-max"><div class="orch-node trigger" onclick="runOrchestration('全局异常编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">trigger</div><div class="text-sm font-semibold text-gray-900">指标越阈</div><div class="text-[11px] text-gray-500 mt-0.5">ODR / ACOS / 断货</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('全局异常编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">Anomaly Agent</div><div class="text-[11px] text-gray-500 mt-0.5">根因归因</div></div><div class="orch-edge"></div><div class="orch-node agent-n" onclick="runOrchestration('全局异常编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">agent</div><div class="text-sm font-semibold text-gray-900">Fleet Router</div><div class="text-[11px] text-gray-500 mt-0.5">派发下游 Agent</div></div><div class="orch-edge"></div><div class="orch-node action" onclick="runOrchestration('全局异常编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">action</div><div class="text-sm font-semibold text-gray-900">自动动作</div><div class="text-[11px] text-gray-500 mt-0.5">暂停广告 / 草稿 PO</div></div><div class="orch-edge"></div><div class="orch-node gate" onclick="runOrchestration('全局异常编排')"><div class="text-[10px] uppercase tracking-wider text-gray-400 mb-1">gate</div><div class="text-sm font-semibold text-gray-900">人机审批</div><div class="text-[11px] text-gray-500 mt-0.5">高风险确认</div></div></div></div><div class="panel p-4"><div class="section-label mb-2">编排说明</div><p class="text-sm text-gray-600 leading-relaxed">低置信度或高金额动作进入人机审批门；高置信度可自动执行并写入时间线。可回放、可暂停 Agent。</p></div></div>
+<div id="view-approve" class="view space-y-5">
+  <h2 class="text-base font-semibold">全局审批队列</h2>
+  <div class="space-y-3">
+    <div class="suggestion-card p-4 flex items-center justify-between gap-4"><div><div class="text-sm font-semibold">补货 PO-10482 · $48,200</div><div class="text-xs text-gray-500 mt-1">补货 Agent · US 海外仓 lead time 18 天 · 置信度 91%</div></div><button class="btn-primary btn-sm" onclick="approveAction(this,'PO-10482','kpi-approve',0,'int')">批准执行</button></div>
+    <div class="suggestion-card p-4 flex items-center justify-between gap-4"><div><div class="text-sm font-semibold">Ads 活动 CAM-229 暂停（ACOS 42%）</div><div class="text-xs text-gray-500 mt-1">ACOS Guard · 超标自动建议暂停 · 置信度 96%</div></div><button class="btn-primary btn-sm" onclick="approveAction(this,'暂停 CAM-229','kpi-approve',0,'int')">批准执行</button></div>
+    <div class="suggestion-card p-4 flex items-center justify-between gap-4"><div><div class="text-sm font-semibold">客服危机升级 · 批量物流延误投诉</div><div class="text-xs text-gray-500 mt-1">CS Agent · 建议统一话术 + 部分退款策略 · 置信度 84%</div></div><button class="btn-primary btn-sm" onclick="approveAction(this,'危机话术','kpi-approve',0,'int')">批准执行</button></div>
+  </div>
+</div>
+<div id="view-tonight" class="view space-y-5">
+  <h2 class="text-base font-semibold">今夜自动任务</h2>
+  <div class="panel overflow-hidden"><table class="w-full text-sm dense-table"><thead class="sticky-th"><tr><th class="text-left px-4 py-2">时间</th><th class="text-left px-4 py-2">任务</th><th class="text-left px-4 py-2">Agent</th><th class="text-left px-4 py-2">状态</th></tr></thead>
+  <tbody>
+    <tr class="border-t border-gray-100"><td class="px-4 tabular text-gray-500">02:00</td><td class="px-4">ACOS 守卫全量巡检</td><td class="px-4">Ads Agent</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+    <tr class="border-t border-gray-100"><td class="px-4 tabular text-gray-500">02:30</td><td class="px-4">需求预测生成 PO 草稿</td><td class="px-4">补货 Agent</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+    <tr class="border-t border-gray-100"><td class="px-4 tabular text-gray-500">03:00</td><td class="px-4">平台结算自动对账</td><td class="px-4">结算 Agent</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+    <tr class="border-t border-gray-100"><td class="px-4 tabular text-gray-500">04:00</td><td class="px-4">波次预合并 · LA 仓</td><td class="px-4">仓储 Agent</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+    <tr class="border-t border-gray-100"><td class="px-4 tabular text-gray-500">每小时</td><td class="px-4">危机工单扫描</td><td class="px-4">客服 Agent</td><td class="px-4"><span class="status-pill status-running">运行中</span></td></tr>
+  </tbody></table></div>
+</div>
+<div id="view-timeline" class="view space-y-5"><div><h2 class="text-base font-semibold text-gray-900">自动化时间线</h2><p class="text-xs text-gray-500 mt-1">Agent 实时动作流 · 采纳/批准后自动追加</p></div><div class="panel p-5"><div id="live-timeline"><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">02:14:08</div><div class="text-sm text-gray-800 mt-0.5">Fleet Orchestrator 完成跨模块心跳检查</div></div><div class="timeline-item pb-4"><div class="timeline-dot warning"></div><div class="text-xs text-gray-400 tabular">02:12:41</div><div class="text-sm text-gray-800 mt-0.5">Anomaly Agent 标记 Amazon US ODR 风险 → 进入审批</div></div><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">02:10:03</div><div class="text-sm text-gray-800 mt-0.5">Ads Agent 暂停 CAM-188（ACOS 38% → 自动）</div></div><div class="timeline-item pb-4"><div class="timeline-dot success"></div><div class="text-xs text-gray-400 tabular">01:58:22</div><div class="text-sm text-gray-800 mt-0.5">结算 Agent 完成 Shopee MY 周结算对账</div></div></div></div></div></main></div><aside class="agent-rail hidden lg:flex shrink-0"><div class="px-4 py-3 border-b border-gray-200"><div class="text-xs font-semibold text-gray-900">Agent 控制台</div><div class="text-[10px] text-gray-400 mt-0.5">运行中 / 等待审批 / 已暂停</div></div><div class="flex-1 overflow-y-auto"><div class="agent-card" data-agent="Fleet"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">Fleet Orchestrator</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">调度今夜 14 个跨模块任务</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:94%"></span></div><span class="text-[10px] tabular text-gray-400">94%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Fleet')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Anomaly"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">Anomaly Agent</div><span class="status-pill status-approve agent-status">等待审批</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">Amazon US ODR 接近阈值</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:88%"></span></div><span class="text-[10px] tabular text-gray-400">88%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Anomaly')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="Health"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">Account Health</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">扫描 6 平台账号绩效</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:91%"></span></div><span class="text-[10px] tabular text-gray-400">91%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('Health')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div><div class="agent-card" data-agent="ApproveQ"><div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold text-gray-900">Approve Router</div><span class="status-pill status-running agent-status">运行中</span></div><div class="mt-1.5 text-[11px] text-gray-500 leading-snug">队列中 5 条待人工确认</div><div class="mt-2 flex items-center gap-2"><div class="conf-bar flex-1"><span style="width:97%"></span></div><span class="text-[10px] tabular text-gray-400">97%</span></div><div class="mt-2 flex gap-1.5"><button class="btn-ghost btn-sm text-[11px]" onclick="pauseAgent('ApproveQ')">暂停</button><button class="btn-ghost btn-sm text-[11px]" onclick="showView('orchestrate')">查看编排</button></div></div></div></aside></div><div id="toast-host"></div>
+<script>
+function toast(msg){var h=document.getElementById('toast-host');var e=document.createElement('div');e.className='toast';e.textContent=msg;h.appendChild(e);setTimeout(function(){e.remove()},2800);}
+function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});var el=document.getElementById('view-'+id);if(el)el.classList.add('active');document.querySelectorAll('.nav-item').forEach(function(b){b.classList.toggle('active',b.dataset.view===id)});var btn=document.querySelector('.nav-item[data-view="'+id+'"]');if(btn){var t=btn.dataset.title||id;var bc=document.getElementById('breadcrumb-current');var pt=document.getElementById('page-title');if(bc)bc.textContent=t;if(pt)pt.textContent=t;}}
+document.querySelectorAll('.nav-item').forEach(function(btn){btn.addEventListener('click',function(){showView(btn.dataset.view)})});
+function pauseAgent(id){var card=document.querySelector('[data-agent="'+id+'"]');if(!card)return;var st=card.querySelector('.agent-status');var was=st.textContent.indexOf('暂停')>=0;if(was){st.textContent='运行中';st.className='status-pill status-running agent-status';card.classList.remove('paused');toast(id+' 已恢复');}else{st.textContent='已暂停';st.className='status-pill status-paused agent-status';card.classList.add('paused');toast(id+' 已暂停');}}
+function acceptSuggestion(btn,kpiId,delta,fmt){var card=btn.closest('.suggestion-card');if(card&&card.classList.contains('accepted'))return;if(card)card.classList.add('accepted');btn.textContent='已采纳';btn.disabled=true;bumpKpi(kpiId,delta,fmt);prependTimeline('已采纳建议并写入编排','success');toast('已采纳 · KPI 已更新');}
+function approveAction(btn,label,kpiId,delta,fmt){if(btn.dataset.done)return;btn.dataset.done='1';btn.textContent='已批准执行';btn.classList.remove('btn-primary');btn.classList.add('btn-success');bumpKpi(kpiId,delta,fmt);prependTimeline('批准执行：'+label,'success');var aq=document.getElementById('kpi-approve');if(aq){var v=parseInt(aq.dataset.val||aq.textContent,10);if(!isNaN(v)&&v>0){v-=1;aq.dataset.val=v;aq.textContent=v;}}toast('已批准：'+label);}
+function bumpKpi(id,delta,fmt){if(!id)return;var el=document.getElementById(id);if(!el)return;var v=parseFloat(el.dataset.val||'0');v+=delta;el.dataset.val=v;if(fmt==='money')el.textContent='$'+Math.round(v).toLocaleString();else if(fmt==='pct')el.textContent=(Math.round(v*10)/10)+'%';else el.textContent=Math.round(v).toLocaleString();}
+function prependTimeline(text,kind){var host=document.getElementById('live-timeline');if(!host)return;var t=new Date().toTimeString().slice(0,8);var dot=kind==='warning'?'warning':kind==='danger'?'danger':'success';var item=document.createElement('div');item.className='timeline-item pb-4';item.innerHTML='<div class="timeline-dot '+dot+'"></div><div class="text-xs text-gray-400 tabular">'+t+'</div><div class="text-sm text-gray-800 mt-0.5">'+text+'</div>';host.insertBefore(item,host.firstChild);}
+function runOrchestration(name){document.querySelectorAll('.orch-node').forEach(function(n){n.classList.remove('running')});var nodes=document.querySelectorAll('#orch-flow .orch-node');var i=0;function step(){if(i>0)nodes[i-1].classList.remove('running');if(i>=nodes.length){prependTimeline('编排完成：'+name,'success');toast('编排模拟完成：'+name);return;}nodes[i].classList.add('running');i++;setTimeout(step,450);}step();}
+</script>
+</body></html>
