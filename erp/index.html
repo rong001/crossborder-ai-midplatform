@@ -5,161 +5,138 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="../shared.css" />
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1',
-              600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+              50: '#eef2ff', 100: '#e0e7ff', 400: '#818cf8',
+              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+            },
+            ink: {
+              950: '#0B0F19', 900: '#111827', 850: '#151B2B',
+              800: '#1C2438', 700: '#243049',
             }
           },
           fontFamily: {
             sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
           },
-          boxShadow: {
-            card: '0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04)',
-            soft: '0 4px 24px rgba(15,23,42,.06)',
-          }
         }
       }
     }
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
-    body { font-family: Inter, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
-    .view { display: none; }
-    .view.active { display: block; animation: fadeIn .25s ease; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
-    }
-    .nav-item.active {
-      background: linear-gradient(90deg, #eef2ff 0%, #e0e7ff 100%);
-      color: #4338ca;
-      border-right: 3px solid #4f46e5;
-      font-weight: 600;
-    }
-    .status-pill { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
-    .table-row:hover { background: #f8fafc; }
-    .metric-card { transition: transform .15s, box-shadow .15s; }
-    .metric-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(15,23,42,.08); }
-    .demo-badge {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #78350f;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .02em;
-    }
-    .platform-badge {
-      font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600;
-    }
   </style>
+
+  
+  
   <title>ERP 进销存 · 跨境电商AI套件</title>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="dark bg-ink-950 text-slate-100 antialiased">
   <div class="flex h-screen overflow-hidden">
-    <aside class="w-56 shrink-0 bg-white border-r border-slate-200 flex flex-col z-20">
-      <div class="px-4 py-5 border-b border-slate-100">
+    <aside class="w-56 shrink-0 bg-ink-900 border-r border-white/[0.06] flex flex-col z-20">
+      <div class="px-4 py-5 border-b border-white/[0.06]">
         <a href="../" class="flex items-center gap-2.5 group">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-soft">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <div class="w-9 h-9 rounded-lg bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
+            <svg class="w-5 h-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
           <div>
-            <div class="text-sm font-bold text-slate-900 leading-tight group-hover:text-brand-600 transition">ERP 进销存</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">采购 · 成本 · 应付</div>
+            <div class="text-sm font-semibold text-slate-50 leading-tight group-hover:text-brand-400 transition">ERP 进销存</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">采购 · 成本 · 应付</div>
           </div>
         </a>
       </div>
       <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="overview">
+        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="overview">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
           经营总览
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="purchase">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="purchase">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
           采购单
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="suppliers">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="suppliers">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
           供应商
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="costs">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="costs">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
           SKU成本
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="carry">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="carry">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
           库存结转
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="payable">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="payable">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           应付账款
         </button>
-        <div class="pt-3 mt-2 border-t border-slate-100 px-2">
-          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-slate-50 hover:text-brand-600 transition">
+        <div class="pt-3 mt-2 border-t border-white/[0.06] px-2">
+          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] hover:text-brand-400 transition">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             返回总门户
           </a>
         </div>
       </nav>
-      <div class="px-4 py-3 border-t border-slate-100">
+      <div class="px-4 py-3 border-t border-white/[0.06]">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">演</div>
+          <div class="w-8 h-8 rounded-full bg-brand-500/15 text-brand-400 flex items-center justify-center text-xs font-bold">演</div>
           <div class="min-w-0">
             <div class="text-xs font-semibold truncate">演示账号</div>
-            <div class="text-[10px] text-slate-400">demo@crossborder.ai</div>
+            <div class="text-[10px] text-slate-500">demo@crossborder.ai</div>
           </div>
         </div>
       </div>
     </aside>
 
     <div class="flex-1 flex flex-col min-w-0">
-      <header class="h-14 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 gap-4 z-10">
+      <header class="h-14 shrink-0 bg-ink-950/90 backdrop-blur-xl border-b border-white/[0.06] flex items-center justify-between px-5 gap-4 z-10">
         <div class="flex items-center gap-3 min-w-0">
-          <h1 id="page-title" class="text-base font-semibold text-slate-900">经营总览</h1>
+          <h1 id="page-title" class="text-base font-semibold text-slate-50">经营总览</h1>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
         <div class="flex items-center gap-2 text-xs text-slate-500">
           <span class="hidden md:inline">跨境电商AI套件</span>
-          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 hover:bg-brand-100 font-medium border border-brand-100 transition">总门户</a>
+          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 font-medium border border-brand-500/25 transition">总门户</a>
         </div>
       </header>
       <main class="flex-1 overflow-y-auto p-5">
 
         <section id="view-overview" class="view active space-y-5">
           <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+            <div class="metric-card panel panel-inner p-4">
               <div class="text-xs text-slate-500 mb-1">本月采购额</div>
-              <div class="text-2xl font-bold text-slate-900">¥286.4万</div>
-              <div class="text-xs text-emerald-600 mt-1">↑ 12.3% vs 上月</div>
+              <div class="text-2xl font-bold text-slate-50 tabular">¥286.4万</div>
+              <div class="text-xs text-emerald-400 mt-1">↑ 12.3% vs 上月</div>
             </div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+            <div class="metric-card panel panel-inner p-4">
               <div class="text-xs text-slate-500 mb-1">在途采购单</div>
-              <div class="text-2xl font-bold text-slate-900">38</div>
-              <div class="text-xs text-amber-600 mt-1">7 单即将到期</div>
+              <div class="text-2xl font-bold text-slate-50 tabular">38</div>
+              <div class="text-xs text-amber-400 mt-1">7 单即将到期</div>
             </div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+            <div class="metric-card panel panel-inner p-4">
               <div class="text-xs text-slate-500 mb-1">SKU 平均成本</div>
-              <div class="text-2xl font-bold text-slate-900">¥42.8</div>
-              <div class="text-xs text-slate-400 mt-1">较上月 -¥1.2</div>
+              <div class="text-2xl font-bold text-slate-50 tabular">¥42.8</div>
+              <div class="text-xs text-slate-500 mt-1">较上月 -¥1.2</div>
             </div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4">
+            <div class="metric-card panel panel-inner p-4">
               <div class="text-xs text-slate-500 mb-1">应付账款余额</div>
-              <div class="text-2xl font-bold text-slate-900">¥94.2万</div>
-              <div class="text-xs text-rose-600 mt-1">逾期 3 笔 / ¥12.6万</div>
+              <div class="text-2xl font-bold text-slate-50 tabular">¥94.2万</div>
+              <div class="text-xs text-rose-400 mt-1">逾期 3 笔 / ¥12.6万</div>
             </div>
           </div>
           <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+            <div class="metric-card rounded-xl p-5">
               <h3 class="text-sm font-semibold mb-4">采购额趋势（万元）</h3>
               <div class="h-56"><canvas id="erp-chart-po"></canvas></div>
             </div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+            <div class="metric-card rounded-xl p-5">
               <h3 class="text-sm font-semibold mb-4">库存结转成本结构</h3>
               <div class="h-56"><canvas id="erp-chart-cost"></canvas></div>
             </div>
@@ -171,17 +148,17 @@
             <p class="text-sm text-slate-500">共 24 条采购单 · 演示数据</p>
             <button class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold">+ 新建采购单</button>
           </div>
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+          <div class="panel panel-inner overflow-hidden">
             <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-500 text-xs">
+              <thead class="bg-ink-950 text-slate-500 text-xs">
                 <tr><th class="text-left px-4 py-3 font-medium">采购单号</th><th class="text-left px-4 py-3 font-medium">供应商</th><th class="text-left px-4 py-3 font-medium">SKU数</th><th class="text-right px-4 py-3 font-medium">金额</th><th class="text-left px-4 py-3 font-medium">状态</th><th class="text-left px-4 py-3 font-medium">交期</th></tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">PO-20260918-084</td><td class="px-4 py-3">深圳华创电子</td><td class="px-4 py-3">12</td><td class="px-4 py-3 text-right font-medium">¥48,620</td><td class="px-4 py-3"><span class="status-pill bg-amber-50 text-amber-700">在途</span></td><td class="px-4 py-3 text-slate-500">09-28</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">PO-20260915-071</td><td class="px-4 py-3">义乌锦辉家居</td><td class="px-4 py-3">28</td><td class="px-4 py-3 text-right font-medium">¥126,800</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">已入库</span></td><td class="px-4 py-3 text-slate-500">09-22</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">PO-20260912-063</td><td class="px-4 py-3">东莞精工塑料</td><td class="px-4 py-3">8</td><td class="px-4 py-3 text-right font-medium">¥31,450</td><td class="px-4 py-3"><span class="status-pill bg-blue-50 text-blue-700">已审核</span></td><td class="px-4 py-3 text-slate-500">10-05</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">PO-20260910-055</td><td class="px-4 py-3">佛山美居灯饰</td><td class="px-4 py-3">15</td><td class="px-4 py-3 text-right font-medium">¥72,300</td><td class="px-4 py-3"><span class="status-pill bg-rose-50 text-rose-700">部分到货</span></td><td class="px-4 py-3 text-slate-500">09-25</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">PO-20260908-048</td><td class="px-4 py-3">广州数码配件厂</td><td class="px-4 py-3">45</td><td class="px-4 py-3 text-right font-medium">¥198,000</td><td class="px-4 py-3"><span class="status-pill bg-slate-100 text-slate-600">草稿</span></td><td class="px-4 py-3 text-slate-500">10-12</td></tr>
+              <tbody class="divide-y divide-white/[0.06]">
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">PO-20260918-084</td><td class="px-4 py-2.5">深圳华创电子</td><td class="px-4 py-2.5">12</td><td class="px-4 py-2.5 text-right font-medium">¥48,620</td><td class="px-4 py-2.5"><span class="status-pill bg-amber-500/15 text-amber-400">在途</span></td><td class="px-4 py-2.5 text-slate-500">09-28</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">PO-20260915-071</td><td class="px-4 py-2.5">义乌锦辉家居</td><td class="px-4 py-2.5">28</td><td class="px-4 py-2.5 text-right font-medium">¥126,800</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">已入库</span></td><td class="px-4 py-2.5 text-slate-500">09-22</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">PO-20260912-063</td><td class="px-4 py-2.5">东莞精工塑料</td><td class="px-4 py-2.5">8</td><td class="px-4 py-2.5 text-right font-medium">¥31,450</td><td class="px-4 py-2.5"><span class="status-pill bg-blue-500/15 text-blue-400">已审核</span></td><td class="px-4 py-2.5 text-slate-500">10-05</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">PO-20260910-055</td><td class="px-4 py-2.5">佛山美居灯饰</td><td class="px-4 py-2.5">15</td><td class="px-4 py-2.5 text-right font-medium">¥72,300</td><td class="px-4 py-2.5"><span class="status-pill bg-rose-500/15 text-rose-400">部分到货</span></td><td class="px-4 py-2.5 text-slate-500">09-25</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">PO-20260908-048</td><td class="px-4 py-2.5">广州数码配件厂</td><td class="px-4 py-2.5">45</td><td class="px-4 py-2.5 text-right font-medium">¥198,000</td><td class="px-4 py-2.5"><span class="status-pill bg-ink-800 text-slate-500">草稿</span></td><td class="px-4 py-2.5 text-slate-500">10-12</td></tr>
               </tbody>
             </table>
           </div>
@@ -189,39 +166,39 @@
 
         <section id="view-suppliers" class="view space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+            <div class="metric-card rounded-xl p-5">
               <div class="flex items-start justify-between mb-3">
-                <div><h4 class="font-semibold">深圳华创电子</h4><p class="text-xs text-slate-400 mt-0.5">电子配件 · 广东</p></div>
-                <span class="status-pill bg-emerald-50 text-emerald-700">A级</span>
+                <div><h4 class="font-semibold">深圳华创电子</h4><p class="text-xs text-slate-500 mt-0.5">电子配件 · 广东</p></div>
+                <span class="status-pill bg-emerald-500/15 text-emerald-400">A级</span>
               </div>
-              <div class="text-sm space-y-1.5 text-slate-600">
+              <div class="text-sm space-y-1.5 text-slate-500">
                 <div class="flex justify-between"><span>合作SKU</span><span class="font-medium">86</span></div>
                 <div class="flex justify-between"><span>账期</span><span class="font-medium">月结30天</span></div>
-                <div class="flex justify-between"><span>准时交货率</span><span class="font-medium text-emerald-600">96.2%</span></div>
+                <div class="flex justify-between"><span>准时交货率</span><span class="font-medium text-emerald-400">96.2%</span></div>
                 <div class="flex justify-between"><span>应付余额</span><span class="font-medium">¥28.4万</span></div>
               </div>
             </div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+            <div class="metric-card rounded-xl p-5">
               <div class="flex items-start justify-between mb-3">
-                <div><h4 class="font-semibold">义乌锦辉家居</h4><p class="text-xs text-slate-400 mt-0.5">家居百货 · 浙江</p></div>
-                <span class="status-pill bg-emerald-50 text-emerald-700">A级</span>
+                <div><h4 class="font-semibold">义乌锦辉家居</h4><p class="text-xs text-slate-500 mt-0.5">家居百货 · 浙江</p></div>
+                <span class="status-pill bg-emerald-500/15 text-emerald-400">A级</span>
               </div>
-              <div class="text-sm space-y-1.5 text-slate-600">
+              <div class="text-sm space-y-1.5 text-slate-500">
                 <div class="flex justify-between"><span>合作SKU</span><span class="font-medium">214</span></div>
                 <div class="flex justify-between"><span>账期</span><span class="font-medium">款到发货</span></div>
-                <div class="flex justify-between"><span>准时交货率</span><span class="font-medium text-emerald-600">98.1%</span></div>
+                <div class="flex justify-between"><span>准时交货率</span><span class="font-medium text-emerald-400">98.1%</span></div>
                 <div class="flex justify-between"><span>应付余额</span><span class="font-medium">¥0</span></div>
               </div>
             </div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+            <div class="metric-card rounded-xl p-5">
               <div class="flex items-start justify-between mb-3">
-                <div><h4 class="font-semibold">东莞精工塑料</h4><p class="text-xs text-slate-400 mt-0.5">注塑件 · 广东</p></div>
-                <span class="status-pill bg-amber-50 text-amber-700">B级</span>
+                <div><h4 class="font-semibold">东莞精工塑料</h4><p class="text-xs text-slate-500 mt-0.5">注塑件 · 广东</p></div>
+                <span class="status-pill bg-amber-500/15 text-amber-400">B级</span>
               </div>
-              <div class="text-sm space-y-1.5 text-slate-600">
+              <div class="text-sm space-y-1.5 text-slate-500">
                 <div class="flex justify-between"><span>合作SKU</span><span class="font-medium">42</span></div>
                 <div class="flex justify-between"><span>账期</span><span class="font-medium">月结15天</span></div>
-                <div class="flex justify-between"><span>准时交货率</span><span class="font-medium text-amber-600">88.5%</span></div>
+                <div class="flex justify-between"><span>准时交货率</span><span class="font-medium text-amber-400">88.5%</span></div>
                 <div class="flex justify-between"><span>应付余额</span><span class="font-medium">¥15.6万</span></div>
               </div>
             </div>
@@ -229,45 +206,45 @@
         </section>
 
         <section id="view-costs" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+          <div class="panel panel-inner overflow-hidden">
             <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-500 text-xs">
+              <thead class="bg-ink-950 text-slate-500 text-xs">
                 <tr><th class="text-left px-4 py-3">SKU</th><th class="text-left px-4 py-3">品名</th><th class="text-right px-4 py-3">采购成本</th><th class="text-right px-4 py-3">头程运费</th><th class="text-right px-4 py-3">仓储分摊</th><th class="text-right px-4 py-3">全成本</th><th class="text-right px-4 py-3">毛利率</th></tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SKU-LED-2401</td><td class="px-4 py-3">LED台灯 Pro</td><td class="px-4 py-3 text-right">¥18.50</td><td class="px-4 py-3 text-right">¥3.20</td><td class="px-4 py-3 text-right">¥1.10</td><td class="px-4 py-3 text-right font-semibold">¥22.80</td><td class="px-4 py-3 text-right text-emerald-600">41.2%</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SKU-BAG-8812</td><td class="px-4 py-3">旅行收纳袋套装</td><td class="px-4 py-3 text-right">¥9.80</td><td class="px-4 py-3 text-right">¥2.40</td><td class="px-4 py-3 text-right">¥0.60</td><td class="px-4 py-3 text-right font-semibold">¥12.80</td><td class="px-4 py-3 text-right text-emerald-600">52.8%</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SKU-CBL-3309</td><td class="px-4 py-3">Type-C 快充线</td><td class="px-4 py-3 text-right">¥4.20</td><td class="px-4 py-3 text-right">¥1.10</td><td class="px-4 py-3 text-right">¥0.35</td><td class="px-4 py-3 text-right font-semibold">¥5.65</td><td class="px-4 py-3 text-right text-amber-600">28.4%</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SKU-KIT-5520</td><td class="px-4 py-3">厨房硅胶套装</td><td class="px-4 py-3 text-right">¥22.00</td><td class="px-4 py-3 text-right">¥5.80</td><td class="px-4 py-3 text-right">¥1.50</td><td class="px-4 py-3 text-right font-semibold">¥29.30</td><td class="px-4 py-3 text-right text-emerald-600">38.6%</td></tr>
+              <tbody class="divide-y divide-white/[0.06]">
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SKU-LED-2401</td><td class="px-4 py-2.5">LED台灯 Pro</td><td class="px-4 py-2.5 text-right">¥18.50</td><td class="px-4 py-2.5 text-right">¥3.20</td><td class="px-4 py-2.5 text-right">¥1.10</td><td class="px-4 py-2.5 text-right font-semibold">¥22.80</td><td class="px-4 py-2.5 text-right text-emerald-400">41.2%</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SKU-BAG-8812</td><td class="px-4 py-2.5">旅行收纳袋套装</td><td class="px-4 py-2.5 text-right">¥9.80</td><td class="px-4 py-2.5 text-right">¥2.40</td><td class="px-4 py-2.5 text-right">¥0.60</td><td class="px-4 py-2.5 text-right font-semibold">¥12.80</td><td class="px-4 py-2.5 text-right text-emerald-400">52.8%</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SKU-CBL-3309</td><td class="px-4 py-2.5">Type-C 快充线</td><td class="px-4 py-2.5 text-right">¥4.20</td><td class="px-4 py-2.5 text-right">¥1.10</td><td class="px-4 py-2.5 text-right">¥0.35</td><td class="px-4 py-2.5 text-right font-semibold">¥5.65</td><td class="px-4 py-2.5 text-right text-amber-400">28.4%</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SKU-KIT-5520</td><td class="px-4 py-2.5">厨房硅胶套装</td><td class="px-4 py-2.5 text-right">¥22.00</td><td class="px-4 py-2.5 text-right">¥5.80</td><td class="px-4 py-2.5 text-right">¥1.50</td><td class="px-4 py-2.5 text-right font-semibold">¥29.30</td><td class="px-4 py-2.5 text-right text-emerald-400">38.6%</td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
         <section id="view-carry" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+          <div class="metric-card rounded-xl p-5">
             <h3 class="text-sm font-semibold mb-4">2026年9月库存结转摘要</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">期初库存金额</div><div class="text-lg font-bold mt-1">¥412.6万</div></div>
-              <div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">本期入库</div><div class="text-lg font-bold mt-1 text-emerald-600">+¥286.4万</div></div>
-              <div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">本期出库(销售)</div><div class="text-lg font-bold mt-1 text-rose-600">-¥251.8万</div></div>
-              <div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">期末库存金额</div><div class="text-lg font-bold mt-1">¥447.2万</div></div>
+              <div class="bg-ink-950 rounded-lg p-3"><div class="text-xs text-slate-500">期初库存金额</div><div class="text-lg font-bold mt-1">¥412.6万</div></div>
+              <div class="bg-ink-950 rounded-lg p-3"><div class="text-xs text-slate-500">本期入库</div><div class="text-lg font-bold mt-1 text-emerald-400">+¥286.4万</div></div>
+              <div class="bg-ink-950 rounded-lg p-3"><div class="text-xs text-slate-500">本期出库(销售)</div><div class="text-lg font-bold mt-1 text-rose-400">-¥251.8万</div></div>
+              <div class="bg-ink-950 rounded-lg p-3"><div class="text-xs text-slate-500">期末库存金额</div><div class="text-lg font-bold mt-1">¥447.2万</div></div>
             </div>
             <div class="h-48"><canvas id="erp-chart-carry"></canvas></div>
           </div>
         </section>
 
         <section id="view-payable" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+          <div class="panel panel-inner overflow-hidden">
             <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-500 text-xs">
+              <thead class="bg-ink-950 text-slate-500 text-xs">
                 <tr><th class="text-left px-4 py-3">应付单号</th><th class="text-left px-4 py-3">供应商</th><th class="text-right px-4 py-3">金额</th><th class="text-left px-4 py-3">到期日</th><th class="text-left px-4 py-3">状态</th></tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AP-20260901-012</td><td class="px-4 py-3">深圳华创电子</td><td class="px-4 py-3 text-right font-medium">¥86,400</td><td class="px-4 py-3">09-30</td><td class="px-4 py-3"><span class="status-pill bg-amber-50 text-amber-700">待付款</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AP-20260820-089</td><td class="px-4 py-3">东莞精工塑料</td><td class="px-4 py-3 text-right font-medium text-rose-600">¥42,100</td><td class="px-4 py-3 text-rose-600">09-15</td><td class="px-4 py-3"><span class="status-pill bg-rose-50 text-rose-700">已逾期</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AP-20260828-095</td><td class="px-4 py-3">佛山美居灯饰</td><td class="px-4 py-3 text-right font-medium">¥55,800</td><td class="px-4 py-3">10-05</td><td class="px-4 py-3"><span class="status-pill bg-blue-50 text-blue-700">已排期</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AP-20260810-071</td><td class="px-4 py-3">广州数码配件厂</td><td class="px-4 py-3 text-right font-medium">¥128,000</td><td class="px-4 py-3">09-10</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">已付款</span></td></tr>
+              <tbody class="divide-y divide-white/[0.06]">
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">AP-20260901-012</td><td class="px-4 py-2.5">深圳华创电子</td><td class="px-4 py-2.5 text-right font-medium">¥86,400</td><td class="px-4 py-2.5">09-30</td><td class="px-4 py-2.5"><span class="status-pill bg-amber-500/15 text-amber-400">待付款</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">AP-20260820-089</td><td class="px-4 py-2.5">东莞精工塑料</td><td class="px-4 py-2.5 text-right font-medium text-rose-400">¥42,100</td><td class="px-4 py-2.5 text-rose-400">09-15</td><td class="px-4 py-2.5"><span class="status-pill bg-rose-500/15 text-rose-400">已逾期</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">AP-20260828-095</td><td class="px-4 py-2.5">佛山美居灯饰</td><td class="px-4 py-2.5 text-right font-medium">¥55,800</td><td class="px-4 py-2.5">10-05</td><td class="px-4 py-2.5"><span class="status-pill bg-blue-500/15 text-blue-400">已排期</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">AP-20260810-071</td><td class="px-4 py-2.5">广州数码配件厂</td><td class="px-4 py-2.5 text-right font-medium">¥128,000</td><td class="px-4 py-2.5">09-10</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">已付款</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -302,10 +279,17 @@
     });
     new Chart(document.getElementById('erp-chart-carry'), {
       type: 'line',
-      data: { labels: ['期初','W1','W2','W3','W4','期末'], datasets: [{ data: [412,428,445,438,452,447], borderColor: '#4f46e5', backgroundColor: 'rgba(79,70,229,.1)', fill: true, tension: .35 }] },
+      data: { labels: ['期初','W1','W2','W3','W4','期末'], datasets: [{ data: [412,428,445,438,452,447], borderColor: '#6366F1', backgroundColor: 'rgba(99,102,241,0.15)', fill: true, tension: .35 }] },
       options: { ...chartOpts, scales: { y: { ticks: { callback: v => v + '万' } } } }
     });
 
   </script>
+<script>
+  if (window.Chart) {
+    Chart.defaults.color = '#64748B';
+    Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+    Chart.defaults.plugins.legend.labels.color = '#94A3B8';
+  }
+</script>
 </body>
 </html>

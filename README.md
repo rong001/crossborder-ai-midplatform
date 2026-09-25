@@ -25,7 +25,8 @@
 ## 技术说明
 
 - 全部为自包含 HTML（Tailwind CSS + Chart.js CDN），无构建步骤
-- 界面中文，统一 light SaaS 视觉（indigo/blue）与「演示数据」标识
+- 界面中文，统一 **Dark Premium Enterprise** 视觉（石墨深色壳 + indigo 品牌色）与「演示数据」标识
+- 共享样式：`shared.css`（CSS 变量 + 布局 chrome），各页 Tailwind CDN + Chart.js CDN，无构建
 - 支持平台徽章：Amazon / Shopee / TikTok / Lazada / Temu / Walmart
 - 无需登录，适合屏幕共享演示
 

@@ -1,262 +1,241 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>跨境电商AI套件 · 官方演示门户</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="shared.css" />
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1',
-              600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+              50: '#eef2ff', 100: '#e0e7ff', 400: '#818cf8',
+              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+            },
+            ink: {
+              950: '#0B0F19', 900: '#111827', 850: '#151B2B',
+              800: '#1C2438', 700: '#243049',
             }
           },
           fontFamily: {
             sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
           },
-          boxShadow: {
-            card: '0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04)',
-            soft: '0 4px 24px rgba(15,23,42,.06)',
-          }
         }
       }
     }
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
-    body { font-family: Inter, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
-    .view { display: none; }
-    .view.active { display: block; animation: fadeIn .25s ease; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
-    }
-    .nav-item.active {
-      background: linear-gradient(90deg, #eef2ff 0%, #e0e7ff 100%);
-      color: #4338ca;
-      border-right: 3px solid #4f46e5;
-      font-weight: 600;
-    }
-    .status-pill { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
-    .table-row:hover { background: #f8fafc; }
-    .metric-card { transition: transform .15s, box-shadow .15s; }
-    .metric-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(15,23,42,.08); }
-    .demo-badge {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #78350f;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .02em;
-    }
-    .platform-badge {
-      font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600;
-    }
-  </style>
-  <title>跨境电商AI套件 · 官方演示门户</title>
-  <style>
-    .hero-bg {
-      background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(99,102,241,.25), transparent),
-                  linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #f8fafc 100%);
-    }
-    .glow-orb {
-      position: absolute; border-radius: 50%; filter: blur(60px); opacity: .4; pointer-events: none;
-    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="dark bg-ink-950 text-slate-100 antialiased">
   <!-- Nav -->
-  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200">
+  <nav class="sticky top-0 z-50 bg-ink-950/80 backdrop-blur-xl border-b border-white/[0.06]">
     <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center">
-          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <div class="w-8 h-8 rounded-lg bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
+          <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
-        <span class="font-bold text-slate-900">跨境电商AI套件</span>
-        <span class="demo-badge px-2 py-0.5 rounded-full ml-1">演示</span>
+        <span class="font-semibold text-slate-50 tracking-tight">跨境电商AI套件</span>
+        <span class="demo-badge px-2 py-0.5 rounded-full ml-1">Demo</span>
       </div>
-      <div class="flex items-center gap-4 text-sm">
-        <a href="#products" class="text-slate-600 hover:text-brand-600 hidden sm:inline">产品矩阵</a>
-        <a href="#platforms" class="text-slate-600 hover:text-brand-600 hidden sm:inline">支持平台</a>
-        <a href="https://github.com/rong001/crossborder-ai-midplatform" target="_blank" class="text-slate-600 hover:text-brand-600">GitHub</a>
-        <a href="midplatform/" class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold hover:bg-brand-700 transition">立即体验</a>
+      <div class="flex items-center gap-5 text-sm">
+        <a href="#products" class="text-slate-400 hover:text-slate-200 hidden sm:inline transition">产品矩阵</a>
+        <a href="#platforms" class="text-slate-400 hover:text-slate-200 hidden sm:inline transition">支持平台</a>
+        <a href="https://github.com/rong001/crossborder-ai-midplatform" target="_blank" class="text-slate-400 hover:text-slate-200 transition">GitHub</a>
+        <a href="midplatform/" class="btn-primary px-3.5 py-1.5 text-xs">立即体验</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section class="hero-bg relative overflow-hidden">
-    <div class="glow-orb w-72 h-72 bg-indigo-400 -top-20 -left-20"></div>
-    <div class="glow-orb w-96 h-96 bg-violet-300 top-10 -right-32"></div>
+  <section class="hero-mesh relative overflow-hidden">
+    <div class="hero-grid absolute inset-0 pointer-events-none"></div>
     <div class="max-w-6xl mx-auto px-5 py-20 md:py-28 relative">
       <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-medium mb-6">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-medium mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
           客户演示专用 · 全链路跨境经营套件
         </div>
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 leading-tight tracking-tight mb-5">
+        <h1 class="text-4xl md:text-[2.75rem] font-semibold text-slate-50 leading-[1.15] tracking-tight mb-5">
           一套系统，打通<br/>
-          <span class="bg-gradient-to-r from-brand-600 to-violet-600 bg-clip-text text-transparent">跨境电商全链路</span>
+          <span class="text-brand-400">跨境电商全链路</span>
         </h1>
-        <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl">
+        <p class="text-base md:text-lg text-slate-400 leading-relaxed mb-8 max-w-2xl">
           从选品、采购、仓储、订单履约，到广告投放、智能客服与财务对账——8 大模块覆盖跨境卖家核心经营场景，AI 驱动决策，适合客户演示与方案讲解。
         </p>
         <div class="flex flex-wrap gap-3">
-          <a href="#products" class="px-5 py-2.5 rounded-xl bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 shadow-soft transition">浏览产品矩阵</a>
-          <a href="midplatform/" class="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-200 hover:text-brand-700 transition">先看 AI 中台 →</a>
+          <a href="#products" class="btn-primary px-5 py-2.5 text-sm">浏览产品矩阵</a>
+          <a href="midplatform/" class="btn-ghost px-5 py-2.5 text-sm">先看 AI 中台 →</a>
         </div>
-        <div class="mt-10 flex flex-wrap gap-6 text-sm text-slate-500">
-          <div><span class="text-2xl font-bold text-slate-900">8</span><span class="ml-1">套演示系统</span></div>
-          <div><span class="text-2xl font-bold text-slate-900">6+</span><span class="ml-1">主流平台</span></div>
-          <div><span class="text-2xl font-bold text-slate-900">100%</span><span class="ml-1">中文界面</span></div>
+        <div class="mt-12 flex flex-wrap gap-8 text-sm text-slate-500">
+          <div><span class="text-2xl font-semibold text-slate-50 tabular">8</span><span class="ml-1.5">套演示系统</span></div>
+          <div><span class="text-2xl font-semibold text-slate-50 tabular">6+</span><span class="ml-1.5">主流平台</span></div>
+          <div><span class="text-2xl font-semibold text-slate-50 tabular">100%</span><span class="ml-1.5">中文界面</span></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Platforms -->
-  <section id="platforms" class="border-y border-slate-200 bg-white">
-    <div class="max-w-6xl mx-auto px-5 py-8">
-      <p class="text-center text-xs font-medium text-slate-400 uppercase tracking-wider mb-5">支持主流跨境平台</p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <span class="px-4 py-2 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 bg-slate-50">Amazon</span><span class="px-4 py-2 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 bg-slate-50">Shopee</span><span class="px-4 py-2 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 bg-slate-50">TikTok Shop</span><span class="px-4 py-2 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 bg-slate-50">Lazada</span><span class="px-4 py-2 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 bg-slate-50">Temu</span><span class="px-4 py-2 rounded-lg border border-slate-200 text-sm font-semibold text-slate-700 bg-slate-50">Walmart</span>
+  <section id="platforms" class="border-y border-white/[0.06] bg-ink-900/50">
+    <div class="max-w-6xl mx-auto px-5 py-7">
+      <p class="text-center section-label mb-5">支持主流跨境平台</p>
+      <div class="flex flex-wrap justify-center gap-2.5">
+        <span class="px-3.5 py-1.5 rounded-md border border-white/[0.08] text-xs font-medium text-slate-300 bg-ink-850">Amazon</span>
+        <span class="px-3.5 py-1.5 rounded-md border border-white/[0.08] text-xs font-medium text-slate-300 bg-ink-850">Shopee</span>
+        <span class="px-3.5 py-1.5 rounded-md border border-white/[0.08] text-xs font-medium text-slate-300 bg-ink-850">TikTok Shop</span>
+        <span class="px-3.5 py-1.5 rounded-md border border-white/[0.08] text-xs font-medium text-slate-300 bg-ink-850">Lazada</span>
+        <span class="px-3.5 py-1.5 rounded-md border border-white/[0.08] text-xs font-medium text-slate-300 bg-ink-850">Temu</span>
+        <span class="px-3.5 py-1.5 rounded-md border border-white/[0.08] text-xs font-medium text-slate-300 bg-ink-850">Walmart</span>
       </div>
     </div>
   </section>
 
   <!-- Products -->
   <section id="products" class="max-w-6xl mx-auto px-5 py-16">
-    <div class="text-center mb-10">
-      <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">产品矩阵</h2>
-      <p class="text-slate-500 max-w-xl mx-auto">每个模块均为独立可演示页面，点击即可进入。数据均为演示用途，适合屏幕共享讲解。</p>
+    <div class="mb-10">
+      <p class="section-label mb-2">Product Suite</p>
+      <h2 class="text-2xl font-semibold text-slate-50 mb-2 tracking-tight">产品矩阵</h2>
+      <p class="text-slate-400 max-w-xl text-sm leading-relaxed">每个模块均为独立可演示页面，点击即可进入。数据均为演示用途，适合屏幕共享讲解。</p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <a href="midplatform/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <a href="midplatform/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">AI运营中台</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">统一数据看板 · AI智能洞察</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">多平台GMV/广告/库存一屏掌控，AI助手驱动经营决策</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">AI运营中台</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">统一数据看板 · AI洞察</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">多平台GMV/广告/库存一屏掌控，AI助手驱动经营决策</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
-      <a href="erp/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+
+      <a href="erp/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">ERP 进销存</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">采购 · 供应商 · 成本核算</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">采购单、SKU成本、库存结转与应付账款全流程管理</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">ERP 进销存</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">采购 · 供应商 · 成本</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">采购单、SKU成本、库存结转与应付账款全流程管理</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
-      <a href="oms/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+
+      <a href="oms/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">OMS 订单履约</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">多平台订单 · 审拆合单</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">Amazon/Shopee/TikTok等订单汇聚，智能审单与物流追踪</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">OMS 订单履约</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">多平台订单 · 审拆合单</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">Amazon/Shopee/TikTok等订单汇聚，智能审单与物流追踪</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
-      <a href="wms/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+
+      <a href="wms/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">WMS 海外仓</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">库位 · 拣货 · 出入库</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">美西/欧仓库存可视化，波次拣货与库存预警</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">WMS 海外仓</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">库位 · 拣货 · 出入库</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">美西/欧仓库存可视化，波次拣货与库存预警</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
-      <a href="ads/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>
+
+      <a href="ads/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">广告投放中心</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">ACOS · 关键词 · AI优化</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">跨平台广告监控，AI自动调价与预算分配建议</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">广告投放中心</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">ACOS · 关键词 · AI优化</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">跨平台广告监控，AI自动调价与预算分配建议</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
-      <a href="cs/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+
+      <a href="cs/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">智能客服中心</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">多语言工单 · 自动回复</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">差评预警、退货拦截、多语种会话一站处理</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">智能客服中心</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">多语言工单 · 自动回复</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">差评预警、退货拦截、多语种会话一站处理</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
-      <a href="bi/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+
+      <a href="bi/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">选品与数据BI</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">趋势 · 竞品 · 利润测算</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">选品榜单、市场趋势图与交互式利润测算器</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">选品与数据BI</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">趋势 · 竞品 · 利润测算</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">选品榜单、市场趋势图与交互式利润测算器</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
-      <a href="finance/" class="group bg-white rounded-2xl border border-slate-200 shadow-card p-6 hover:shadow-soft hover:border-brand-200 transition-all duration-200 flex flex-col">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center mb-4 shadow-soft group-hover:scale-105 transition">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+
+      <a href="finance/" class="product-card group p-5 flex flex-col">
+        <div class="icon-tile mb-4">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-700 transition">财务结算对账</h3>
-        <p class="text-xs font-medium text-brand-600 mb-2">回款 · 毛利 · 差异对账</p>
-        <p class="text-sm text-slate-500 flex-1 leading-relaxed">平台回款、费用明细、毛利净利与对账差异一键清晰</p>
+        <h3 class="text-[15px] font-semibold text-slate-50 mb-1 group-hover:text-brand-400 transition">财务结算对账</h3>
+        <p class="text-[11px] font-medium text-brand-400/80 mb-2 uppercase tracking-wide">回款 · 毛利 · 差异对账</p>
+        <p class="text-sm text-slate-400 flex-1 leading-relaxed">平台回款、费用明细、毛利净利与对账差异一键清晰</p>
         <div class="mt-5 flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold group-hover:bg-brand-700 transition">进入演示
+          <span class="text-xs font-semibold text-brand-400 group-hover:text-brand-300 inline-flex items-center gap-1">进入演示
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </span>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
       </a>
+
     </div>
   </section>
 
   <!-- CTA -->
   <section class="max-w-6xl mx-auto px-5 pb-16">
-    <div class="rounded-2xl bg-gradient-to-br from-brand-700 to-violet-800 p-8 md:p-12 text-white relative overflow-hidden">
+    <div class="rounded-xl border border-white/[0.08] bg-ink-850 p-8 md:p-10 relative overflow-hidden panel-inner">
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 80% at 100% 0%, rgba(99,102,241,.18), transparent 55%);"></div>
       <div class="relative z-10">
-        <h2 class="text-2xl font-bold mb-2">准备好向客户演示了吗？</h2>
-        <p class="text-indigo-100 mb-6 max-w-lg">建议演示路径：总览门户 → AI中台 → OMS/WMS → 广告与财务。全程无需登录。</p>
-        <a href="midplatform/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-brand-700 font-semibold text-sm hover:bg-indigo-50 transition">从 AI 运营中台开始
+        <h2 class="text-xl font-semibold text-slate-50 mb-2 tracking-tight">准备好向客户演示了吗？</h2>
+        <p class="text-slate-400 mb-6 max-w-lg text-sm leading-relaxed">建议演示路径：总览门户 → AI中台 → OMS/WMS → 广告与财务。全程无需登录。</p>
+        <a href="midplatform/" class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 text-sm">从 AI 运营中台开始
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
@@ -264,14 +243,14 @@
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-200 bg-white">
+  <footer class="border-t border-white/[0.06] bg-ink-900/40">
     <div class="max-w-6xl mx-auto px-5 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
       <div>
-        <span class="font-semibold text-slate-700">跨境电商AI套件</span> · 官方演示门户
+        <span class="font-medium text-slate-300">跨境电商AI套件</span> · 官方演示门户
       </div>
       <div class="flex items-center gap-4">
-        <a href="https://github.com/rong001/crossborder-ai-midplatform" class="hover:text-brand-600" target="_blank">GitHub 仓库</a>
-        <span class="text-slate-300">|</span>
+        <a href="https://github.com/rong001/crossborder-ai-midplatform" class="hover:text-brand-400 transition" target="_blank">GitHub 仓库</a>
+        <span class="text-slate-700">|</span>
         <span>演示数据 · 仅供展示</span>
       </div>
     </div>

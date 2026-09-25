@@ -5,149 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="../shared.css" />
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1',
-              600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+              50: '#eef2ff', 100: '#e0e7ff', 400: '#818cf8',
+              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+            },
+            ink: {
+              950: '#0B0F19', 900: '#111827', 850: '#151B2B',
+              800: '#1C2438', 700: '#243049',
             }
           },
           fontFamily: {
             sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
           },
-          boxShadow: {
-            card: '0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04)',
-            soft: '0 4px 24px rgba(15,23,42,.06)',
-          }
         }
       }
     }
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
-    body { font-family: Inter, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
-    .view { display: none; }
-    .view.active { display: block; animation: fadeIn .25s ease; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
-    }
-    .nav-item.active {
-      background: linear-gradient(90deg, #eef2ff 0%, #e0e7ff 100%);
-      color: #4338ca;
-      border-right: 3px solid #4f46e5;
-      font-weight: 600;
-    }
-    .status-pill { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
-    .table-row:hover { background: #f8fafc; }
-    .metric-card { transition: transform .15s, box-shadow .15s; }
-    .metric-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(15,23,42,.08); }
-    .demo-badge {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #78350f;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .02em;
-    }
-    .platform-badge { font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
   </style>
+
+  
+  
   <title>财务结算对账 · 跨境电商AI套件</title>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="dark bg-ink-950 text-slate-100 antialiased">
   <div class="flex h-screen overflow-hidden">
-    <aside class="w-56 shrink-0 bg-white border-r border-slate-200 flex flex-col z-20">
-      <div class="px-4 py-5 border-b border-slate-100">
+    <aside class="w-56 shrink-0 bg-ink-900 border-r border-white/[0.06] flex flex-col z-20">
+      <div class="px-4 py-5 border-b border-white/[0.06]">
         <a href="../" class="flex items-center gap-2.5 group">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-soft">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <div class="w-9 h-9 rounded-lg bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
+            <svg class="w-5 h-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
           <div>
-            <div class="text-sm font-bold text-slate-900 leading-tight group-hover:text-brand-600 transition">财务结算对账</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">回款 · 毛利 · 差异</div>
+            <div class="text-sm font-semibold text-slate-50 leading-tight group-hover:text-brand-400 transition">财务结算对账</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">回款 · 毛利 · 差异</div>
           </div>
         </a>
       </div>
       <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="overview">
+        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="overview">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
           财务总览
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="payout">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="payout">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           平台回款
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="fees">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="fees">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
           费用明细
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="profit">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="profit">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           毛利/净利
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="reconcile">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="reconcile">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
           对账差异
         </button>
-        <div class="pt-3 mt-2 border-t border-slate-100 px-2">
-          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-slate-50 hover:text-brand-600 transition">
+        <div class="pt-3 mt-2 border-t border-white/[0.06] px-2">
+          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] hover:text-brand-400 transition">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             返回总门户
           </a>
         </div>
       </nav>
-      <div class="px-4 py-3 border-t border-slate-100">
+      <div class="px-4 py-3 border-t border-white/[0.06]">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">演</div>
+          <div class="w-8 h-8 rounded-full bg-brand-500/15 text-brand-400 flex items-center justify-center text-xs font-bold">演</div>
           <div class="min-w-0">
             <div class="text-xs font-semibold truncate">演示账号</div>
-            <div class="text-[10px] text-slate-400">demo@crossborder.ai</div>
+            <div class="text-[10px] text-slate-500">demo@crossborder.ai</div>
           </div>
         </div>
       </div>
     </aside>
     <div class="flex-1 flex flex-col min-w-0">
-      <header class="h-14 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 gap-4 z-10">
+      <header class="h-14 shrink-0 bg-ink-950/90 backdrop-blur-xl border-b border-white/[0.06] flex items-center justify-between px-5 gap-4 z-10">
         <div class="flex items-center gap-3 min-w-0">
-          <h1 id="page-title" class="text-base font-semibold text-slate-900">财务总览</h1>
+          <h1 id="page-title" class="text-base font-semibold text-slate-50">财务总览</h1>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
         <div class="flex items-center gap-2 text-xs text-slate-500">
           <span class="hidden md:inline">跨境电商AI套件</span>
-          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 hover:bg-brand-100 font-medium border border-brand-100 transition">总门户</a>
+          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 font-medium border border-brand-500/25 transition">总门户</a>
         </div>
       </header>
       <main class="flex-1 overflow-y-auto p-5">
 
         <section id="view-overview" class="view active space-y-5">
           <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">本月回款</div><div class="text-2xl font-bold">$428,600</div><div class="text-xs text-emerald-600 mt-1">↑ 9.2%</div></div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">平台费用</div><div class="text-2xl font-bold text-rose-600">$86,420</div><div class="text-xs text-slate-400 mt-1">费率 20.2%</div></div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">毛利</div><div class="text-2xl font-bold">$168,240</div><div class="text-xs text-emerald-600 mt-1">毛利率 39.3%</div></div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">净利</div><div class="text-2xl font-bold text-brand-700">$72,180</div><div class="text-xs text-emerald-600 mt-1">净利率 16.8%</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">本月回款</div><div class="text-2xl font-bold tabular">$428,600</div><div class="text-xs text-emerald-400 mt-1">↑ 9.2%</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">平台费用</div><div class="text-2xl font-bold text-rose-400 tabular">$86,420</div><div class="text-xs text-slate-500 mt-1">费率 20.2%</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">毛利</div><div class="text-2xl font-bold tabular">$168,240</div><div class="text-xs text-emerald-400 mt-1">毛利率 39.3%</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">净利</div><div class="text-2xl font-bold text-brand-400 tabular">$72,180</div><div class="text-xs text-emerald-400 mt-1">净利率 16.8%</div></div>
           </div>
           <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5"><h3 class="text-sm font-semibold mb-4">回款 vs 费用（万美元）</h3><div class="h-56"><canvas id="fin-chart-cash"></canvas></div></div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5"><h3 class="text-sm font-semibold mb-4">利润结构</h3><div class="h-56"><canvas id="fin-chart-profit"></canvas></div></div>
+            <div class="metric-card rounded-xl p-5"><h3 class="text-sm font-semibold mb-4">回款 vs 费用（万美元）</h3><div class="h-56"><canvas id="fin-chart-cash"></canvas></div></div>
+            <div class="metric-card rounded-xl p-5"><h3 class="text-sm font-semibold mb-4">利润结构</h3><div class="h-56"><canvas id="fin-chart-profit"></canvas></div></div>
           </div>
         </section>
 
         <section id="view-payout" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+          <div class="panel panel-inner overflow-hidden">
             <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-500 text-xs">
+              <thead class="bg-ink-950 text-slate-500 text-xs">
                 <tr><th class="text-left px-4 py-3">结算批次</th><th class="text-left px-4 py-3">平台</th><th class="text-right px-4 py-3">销售额</th><th class="text-right px-4 py-3">扣除费用</th><th class="text-right px-4 py-3">实收</th><th class="text-left px-4 py-3">到账日</th><th class="text-left px-4 py-3">状态</th></tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SET-AMZ-0922</td><td class="px-4 py-3"><span class="platform-badge bg-orange-100 text-orange-700">Amazon</span></td><td class="px-4 py-3 text-right">$186,400</td><td class="px-4 py-3 text-right text-rose-600">-$38,220</td><td class="px-4 py-3 text-right font-semibold">$148,180</td><td class="px-4 py-3">09-24</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">已到账</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SET-TT-0920</td><td class="px-4 py-3"><span class="platform-badge bg-slate-900 text-white">TikTok</span></td><td class="px-4 py-3 text-right">$92,800</td><td class="px-4 py-3 text-right text-rose-600">-$18,560</td><td class="px-4 py-3 text-right font-semibold">$74,240</td><td class="px-4 py-3">09-25</td><td class="px-4 py-3"><span class="status-pill bg-blue-50 text-blue-700">处理中</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SET-SHP-0918</td><td class="px-4 py-3"><span class="platform-badge bg-orange-50 text-orange-600">Shopee</span></td><td class="px-4 py-3 text-right">$48,200</td><td class="px-4 py-3 text-right text-rose-600">-$9,640</td><td class="px-4 py-3 text-right font-semibold">$38,560</td><td class="px-4 py-3">09-22</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">已到账</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SET-WMT-0915</td><td class="px-4 py-3"><span class="platform-badge bg-blue-50 text-blue-600">Walmart</span></td><td class="px-4 py-3 text-right">$28,600</td><td class="px-4 py-3 text-right text-rose-600">-$5,720</td><td class="px-4 py-3 text-right font-semibold">$22,880</td><td class="px-4 py-3">09-20</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">已到账</span></td></tr>
+              <tbody class="divide-y divide-white/[0.06]">
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SET-AMZ-0922</td><td class="px-4 py-2.5"><span class="platform-badge">Amazon</span></td><td class="px-4 py-2.5 text-right">$186,400</td><td class="px-4 py-2.5 text-right text-rose-400">-$38,220</td><td class="px-4 py-2.5 text-right font-semibold">$148,180</td><td class="px-4 py-2.5">09-24</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">已到账</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SET-TT-0920</td><td class="px-4 py-2.5"><span class="platform-badge">TikTok</span></td><td class="px-4 py-2.5 text-right">$92,800</td><td class="px-4 py-2.5 text-right text-rose-400">-$18,560</td><td class="px-4 py-2.5 text-right font-semibold">$74,240</td><td class="px-4 py-2.5">09-25</td><td class="px-4 py-2.5"><span class="status-pill bg-blue-500/15 text-blue-400">处理中</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SET-SHP-0918</td><td class="px-4 py-2.5"><span class="platform-badge">Shopee</span></td><td class="px-4 py-2.5 text-right">$48,200</td><td class="px-4 py-2.5 text-right text-rose-400">-$9,640</td><td class="px-4 py-2.5 text-right font-semibold">$38,560</td><td class="px-4 py-2.5">09-22</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">已到账</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SET-WMT-0915</td><td class="px-4 py-2.5"><span class="platform-badge">Walmart</span></td><td class="px-4 py-2.5 text-right">$28,600</td><td class="px-4 py-2.5 text-right text-rose-400">-$5,720</td><td class="px-4 py-2.5 text-right font-semibold">$22,880</td><td class="px-4 py-2.5">09-20</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">已到账</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -155,17 +134,17 @@
 
         <section id="view-fees" class="view space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">佣金</div><div class="text-xl font-bold mt-1">$42,860</div><div class="text-xs text-slate-400 mt-1">占比 49.6%</div></div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">FBA/仓储费</div><div class="text-xl font-bold mt-1">$18,240</div><div class="text-xs text-slate-400 mt-1">占比 21.1%</div></div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">广告费</div><div class="text-xl font-bold mt-1">$14,860</div><div class="text-xs text-slate-400 mt-1">占比 17.2%</div></div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">退款/拒付</div><div class="text-xl font-bold mt-1">$6,420</div><div class="text-xs text-slate-400 mt-1">占比 7.4%</div></div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">物流附加费</div><div class="text-xl font-bold mt-1">$2,840</div><div class="text-xs text-slate-400 mt-1">占比 3.3%</div></div>
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500">其他</div><div class="text-xl font-bold mt-1">$1,200</div><div class="text-xs text-slate-400 mt-1">占比 1.4%</div></div>
+            <div class="metric-card rounded-xl p-4"><div class="text-xs text-slate-500">佣金</div><div class="text-xl font-bold mt-1 tabular">$42,860</div><div class="text-xs text-slate-500 mt-1">占比 49.6%</div></div>
+            <div class="metric-card rounded-xl p-4"><div class="text-xs text-slate-500">FBA/仓储费</div><div class="text-xl font-bold mt-1 tabular">$18,240</div><div class="text-xs text-slate-500 mt-1">占比 21.1%</div></div>
+            <div class="metric-card rounded-xl p-4"><div class="text-xs text-slate-500">广告费</div><div class="text-xl font-bold mt-1 tabular">$14,860</div><div class="text-xs text-slate-500 mt-1">占比 17.2%</div></div>
+            <div class="metric-card rounded-xl p-4"><div class="text-xs text-slate-500">退款/拒付</div><div class="text-xl font-bold mt-1 tabular">$6,420</div><div class="text-xs text-slate-500 mt-1">占比 7.4%</div></div>
+            <div class="metric-card rounded-xl p-4"><div class="text-xs text-slate-500">物流附加费</div><div class="text-xl font-bold mt-1 tabular">$2,840</div><div class="text-xs text-slate-500 mt-1">占比 3.3%</div></div>
+            <div class="metric-card rounded-xl p-4"><div class="text-xs text-slate-500">其他</div><div class="text-xl font-bold mt-1 tabular">$1,200</div><div class="text-xs text-slate-500 mt-1">占比 1.4%</div></div>
           </div>
         </section>
 
         <section id="view-profit" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+          <div class="metric-card rounded-xl p-5">
             <h3 class="text-sm font-semibold mb-4">近6月毛利 / 净利趋势（万美元）</h3>
             <div class="h-64"><canvas id="fin-chart-trend"></canvas></div>
           </div>
@@ -173,20 +152,20 @@
 
         <section id="view-reconcile" class="view space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4"><div class="text-xs text-emerald-700">已对平</div><div class="text-2xl font-bold text-emerald-800 mt-1">142</div></div>
-            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><div class="text-xs text-amber-700">差异待查</div><div class="text-2xl font-bold text-amber-800 mt-1">8</div></div>
-            <div class="bg-rose-50 border border-rose-200 rounded-xl p-4"><div class="text-xs text-rose-700">差异金额</div><div class="text-2xl font-bold text-rose-800 mt-1">$2,486</div></div>
+            <div class="bg-emerald-500/15 border border-emerald-500/25 rounded-xl p-4"><div class="text-xs text-emerald-400">已对平</div><div class="text-2xl font-bold text-emerald-800 mt-1 tabular">142</div></div>
+            <div class="bg-amber-500/15 border border-amber-500/25 rounded-xl p-4"><div class="text-xs text-amber-400">差异待查</div><div class="text-2xl font-bold text-amber-800 mt-1 tabular">8</div></div>
+            <div class="bg-rose-500/15 border border-rose-500/25 rounded-xl p-4"><div class="text-xs text-rose-400">差异金额</div><div class="text-2xl font-bold text-rose-800 mt-1 tabular">$2,486</div></div>
           </div>
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+          <div class="panel panel-inner overflow-hidden">
             <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-500 text-xs">
+              <thead class="bg-ink-950 text-slate-500 text-xs">
                 <tr><th class="text-left px-4 py-3">订单/批次</th><th class="text-left px-4 py-3">平台</th><th class="text-right px-4 py-3">系统金额</th><th class="text-right px-4 py-3">平台金额</th><th class="text-right px-4 py-3">差异</th><th class="text-left px-4 py-3">原因</th></tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">AMZ-113-8821001</td><td class="px-4 py-3">Amazon</td><td class="px-4 py-3 text-right">$78.90</td><td class="px-4 py-3 text-right">$74.20</td><td class="px-4 py-3 text-right text-rose-600">-$4.70</td><td class="px-4 py-3 text-xs">促销折扣未同步</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SET-TT-0915-LINE42</td><td class="px-4 py-3">TikTok</td><td class="px-4 py-3 text-right">$1,280.00</td><td class="px-4 py-3 text-right">$1,245.60</td><td class="px-4 py-3 text-right text-rose-600">-$34.40</td><td class="px-4 py-3 text-xs">广告费拆分差异</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">SHP-240910-4412</td><td class="px-4 py-3">Shopee</td><td class="px-4 py-3 text-right">$45.00</td><td class="px-4 py-3 text-right">$0.00</td><td class="px-4 py-3 text-right text-rose-600">-$45.00</td><td class="px-4 py-3 text-xs">退款未回写</td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-mono text-xs">WMT-44810088</td><td class="px-4 py-3">Walmart</td><td class="px-4 py-3 text-right">$39.99</td><td class="px-4 py-3 text-right">$42.49</td><td class="px-4 py-3 text-right text-emerald-600">+$2.50</td><td class="px-4 py-3 text-xs">运费补贴多计</td></tr>
+              <tbody class="divide-y divide-white/[0.06]">
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">AMZ-113-8821001</td><td class="px-4 py-2.5">Amazon</td><td class="px-4 py-2.5 text-right">$78.90</td><td class="px-4 py-2.5 text-right">$74.20</td><td class="px-4 py-2.5 text-right text-rose-400">-$4.70</td><td class="px-4 py-2.5 text-xs">促销折扣未同步</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SET-TT-0915-LINE42</td><td class="px-4 py-2.5">TikTok</td><td class="px-4 py-2.5 text-right">$1,280.00</td><td class="px-4 py-2.5 text-right">$1,245.60</td><td class="px-4 py-2.5 text-right text-rose-400">-$34.40</td><td class="px-4 py-2.5 text-xs">广告费拆分差异</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">SHP-240910-4412</td><td class="px-4 py-2.5">Shopee</td><td class="px-4 py-2.5 text-right">$45.00</td><td class="px-4 py-2.5 text-right">$0.00</td><td class="px-4 py-2.5 text-right text-rose-400">-$45.00</td><td class="px-4 py-2.5 text-xs">退款未回写</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">WMT-44810088</td><td class="px-4 py-2.5">Walmart</td><td class="px-4 py-2.5 text-right">$39.99</td><td class="px-4 py-2.5 text-right">$42.49</td><td class="px-4 py-2.5 text-right text-emerald-400">+$2.50</td><td class="px-4 py-2.5 text-xs">运费补贴多计</td></tr>
               </tbody>
             </table>
           </div>
@@ -231,5 +210,12 @@
     });
 
   </script>
+<script>
+  if (window.Chart) {
+    Chart.defaults.color = '#64748B';
+    Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+    Chart.defaults.plugins.legend.labels.color = '#94A3B8';
+  }
+</script>
 </body>
 </html>

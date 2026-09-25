@@ -5,172 +5,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="../shared.css" />
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1',
-              600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+              50: '#eef2ff', 100: '#e0e7ff', 400: '#818cf8',
+              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+            },
+            ink: {
+              950: '#0B0F19', 900: '#111827', 850: '#151B2B',
+              800: '#1C2438', 700: '#243049',
             }
           },
           fontFamily: {
             sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
           },
-          boxShadow: {
-            card: '0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04)',
-            soft: '0 4px 24px rgba(15,23,42,.06)',
-          }
         }
       }
     }
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
-    body { font-family: Inter, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
-    .view { display: none; }
-    .view.active { display: block; animation: fadeIn .25s ease; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
-    }
-    .nav-item.active {
-      background: linear-gradient(90deg, #eef2ff 0%, #e0e7ff 100%);
-      color: #4338ca;
-      border-right: 3px solid #4f46e5;
-      font-weight: 600;
-    }
-    .status-pill { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
-    .table-row:hover { background: #f8fafc; }
-    .metric-card { transition: transform .15s, box-shadow .15s; }
-    .metric-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(15,23,42,.08); }
-    .demo-badge {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #78350f;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .02em;
-    }
-    .platform-badge { font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
   </style>
+
+  
+  
   <title>选品与数据BI · 跨境电商AI套件</title>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="dark bg-ink-950 text-slate-100 antialiased">
   <div class="flex h-screen overflow-hidden">
-    <aside class="w-56 shrink-0 bg-white border-r border-slate-200 flex flex-col z-20">
-      <div class="px-4 py-5 border-b border-slate-100">
+    <aside class="w-56 shrink-0 bg-ink-900 border-r border-white/[0.06] flex flex-col z-20">
+      <div class="px-4 py-5 border-b border-white/[0.06]">
         <a href="../" class="flex items-center gap-2.5 group">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-soft">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <div class="w-9 h-9 rounded-lg bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
+            <svg class="w-5 h-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
           <div>
-            <div class="text-sm font-bold text-slate-900 leading-tight group-hover:text-brand-600 transition">选品与数据BI</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">趋势 · 竞品 · 利润测算</div>
+            <div class="text-sm font-semibold text-slate-50 leading-tight group-hover:text-brand-400 transition">选品与数据BI</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">趋势 · 竞品 · 利润测算</div>
           </div>
         </a>
       </div>
       <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="overview">
+        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="overview">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
           BI总览
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="ranking">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="ranking">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
           选品榜单
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="trends">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="trends">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
           趋势图
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="compete">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="compete">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
           竞品对比
         </button>
-        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition" data-view="calc">
+        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="calc">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
           利润测算器
         </button>
-        <div class="pt-3 mt-2 border-t border-slate-100 px-2">
-          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-slate-50 hover:text-brand-600 transition">
+        <div class="pt-3 mt-2 border-t border-white/[0.06] px-2">
+          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] hover:text-brand-400 transition">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             返回总门户
           </a>
         </div>
       </nav>
-      <div class="px-4 py-3 border-t border-slate-100">
+      <div class="px-4 py-3 border-t border-white/[0.06]">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">演</div>
+          <div class="w-8 h-8 rounded-full bg-brand-500/15 text-brand-400 flex items-center justify-center text-xs font-bold">演</div>
           <div class="min-w-0">
             <div class="text-xs font-semibold truncate">演示账号</div>
-            <div class="text-[10px] text-slate-400">demo@crossborder.ai</div>
+            <div class="text-[10px] text-slate-500">demo@crossborder.ai</div>
           </div>
         </div>
       </div>
     </aside>
     <div class="flex-1 flex flex-col min-w-0">
-      <header class="h-14 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 gap-4 z-10">
+      <header class="h-14 shrink-0 bg-ink-950/90 backdrop-blur-xl border-b border-white/[0.06] flex items-center justify-between px-5 gap-4 z-10">
         <div class="flex items-center gap-3 min-w-0">
-          <h1 id="page-title" class="text-base font-semibold text-slate-900">BI总览</h1>
+          <h1 id="page-title" class="text-base font-semibold text-slate-50">BI总览</h1>
           <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
         </div>
         <div class="flex items-center gap-2 text-xs text-slate-500">
           <span class="hidden md:inline">跨境电商AI套件</span>
-          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 hover:bg-brand-100 font-medium border border-brand-100 transition">总门户</a>
+          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 font-medium border border-brand-500/25 transition">总门户</a>
         </div>
       </header>
       <main class="flex-1 overflow-y-auto p-5">
 
         <section id="view-overview" class="view active space-y-5">
           <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">监控品类</div><div class="text-2xl font-bold">128</div></div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">本周爆款信号</div><div class="text-2xl font-bold text-emerald-600">23</div></div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">竞品追踪</div><div class="text-2xl font-bold">56</div></div>
-            <div class="metric-card bg-white rounded-xl border border-slate-200 shadow-card p-4"><div class="text-xs text-slate-500 mb-1">测算SKU</div><div class="text-2xl font-bold">312</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">监控品类</div><div class="text-2xl font-bold tabular">128</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">本周爆款信号</div><div class="text-2xl font-bold text-emerald-400 tabular">23</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">竞品追踪</div><div class="text-2xl font-bold tabular">56</div></div>
+            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">测算SKU</div><div class="text-2xl font-bold tabular">312</div></div>
           </div>
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5"><h3 class="text-sm font-semibold mb-4">家居品类搜索热度指数</h3><div class="h-56"><canvas id="bi-chart-heat"></canvas></div></div>
+          <div class="metric-card rounded-xl p-5"><h3 class="text-sm font-semibold mb-4">家居品类搜索热度指数</h3><div class="h-56"><canvas id="bi-chart-heat"></canvas></div></div>
         </section>
 
         <section id="view-ranking" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+          <div class="panel panel-inner overflow-hidden">
             <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-500 text-xs">
+              <thead class="bg-ink-950 text-slate-500 text-xs">
                 <tr><th class="text-left px-4 py-3">排名</th><th class="text-left px-4 py-3">品名/关键词</th><th class="text-left px-4 py-3">平台</th><th class="text-right px-4 py-3">月搜索量</th><th class="text-right px-4 py-3">竞争度</th><th class="text-right px-4 py-3">预估毛利</th><th class="text-left px-4 py-3">信号</th></tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="table-row"><td class="px-4 py-3 font-bold text-brand-600">#1</td><td class="px-4 py-3 font-medium">portable blender bottle</td><td class="px-4 py-3"><span class="platform-badge bg-orange-100 text-orange-700">Amazon</span></td><td class="px-4 py-3 text-right">185K</td><td class="px-4 py-3 text-right">中</td><td class="px-4 py-3 text-right text-emerald-600">38%</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">上升↑</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-bold text-brand-600">#2</td><td class="px-4 py-3 font-medium">desk cable management</td><td class="px-4 py-3"><span class="platform-badge bg-slate-900 text-white">TikTok</span></td><td class="px-4 py-3 text-right">92K</td><td class="px-4 py-3 text-right">低</td><td class="px-4 py-3 text-right text-emerald-600">45%</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">蓝海</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-bold">#3</td><td class="px-4 py-3 font-medium">silicone baking mat set</td><td class="px-4 py-3"><span class="platform-badge bg-orange-100 text-orange-700">Amazon</span></td><td class="px-4 py-3 text-right">140K</td><td class="px-4 py-3 text-right">高</td><td class="px-4 py-3 text-right text-amber-600">28%</td><td class="px-4 py-3"><span class="status-pill bg-amber-50 text-amber-700">稳定</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-bold">#4</td><td class="px-4 py-3 font-medium">travel packing cubes</td><td class="px-4 py-3"><span class="platform-badge bg-orange-50 text-orange-600">Shopee</span></td><td class="px-4 py-3 text-right">76K</td><td class="px-4 py-3 text-right">中</td><td class="px-4 py-3 text-right text-emerald-600">42%</td><td class="px-4 py-3"><span class="status-pill bg-emerald-50 text-emerald-700">上升↑</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-3 font-bold">#5</td><td class="px-4 py-3 font-medium">led strip lights rgb</td><td class="px-4 py-3"><span class="platform-badge bg-orange-100 text-orange-800">Temu</span></td><td class="px-4 py-3 text-right">210K</td><td class="px-4 py-3 text-right">高</td><td class="px-4 py-3 text-right text-rose-600">18%</td><td class="px-4 py-3"><span class="status-pill bg-rose-50 text-rose-700">红海</span></td></tr>
+              <tbody class="divide-y divide-white/[0.06]">
+                <tr class="table-row"><td class="px-4 py-2.5 font-bold text-brand-400">#1</td><td class="px-4 py-2.5 font-medium">portable blender bottle</td><td class="px-4 py-2.5"><span class="platform-badge">Amazon</span></td><td class="px-4 py-2.5 text-right">185K</td><td class="px-4 py-2.5 text-right">中</td><td class="px-4 py-2.5 text-right text-emerald-400">38%</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">上升↑</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-bold text-brand-400">#2</td><td class="px-4 py-2.5 font-medium">desk cable management</td><td class="px-4 py-2.5"><span class="platform-badge">TikTok</span></td><td class="px-4 py-2.5 text-right">92K</td><td class="px-4 py-2.5 text-right">低</td><td class="px-4 py-2.5 text-right text-emerald-400">45%</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">蓝海</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-bold">#3</td><td class="px-4 py-2.5 font-medium">silicone baking mat set</td><td class="px-4 py-2.5"><span class="platform-badge">Amazon</span></td><td class="px-4 py-2.5 text-right">140K</td><td class="px-4 py-2.5 text-right">高</td><td class="px-4 py-2.5 text-right text-amber-400">28%</td><td class="px-4 py-2.5"><span class="status-pill bg-amber-500/15 text-amber-400">稳定</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-bold">#4</td><td class="px-4 py-2.5 font-medium">travel packing cubes</td><td class="px-4 py-2.5"><span class="platform-badge">Shopee</span></td><td class="px-4 py-2.5 text-right">76K</td><td class="px-4 py-2.5 text-right">中</td><td class="px-4 py-2.5 text-right text-emerald-400">42%</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">上升↑</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-bold">#5</td><td class="px-4 py-2.5 font-medium">led strip lights rgb</td><td class="px-4 py-2.5"><span class="platform-badge">Temu</span></td><td class="px-4 py-2.5 text-right">210K</td><td class="px-4 py-2.5 text-right">高</td><td class="px-4 py-2.5 text-right text-rose-400">18%</td><td class="px-4 py-2.5"><span class="status-pill bg-rose-500/15 text-rose-400">红海</span></td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
         <section id="view-trends" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5">
+          <div class="metric-card rounded-xl p-5">
             <h3 class="text-sm font-semibold mb-4">「portable blender」 vs 「desk cable management」搜索趋势</h3>
             <div class="h-64"><canvas id="bi-chart-trend"></canvas></div>
           </div>
         </section>
 
         <section id="view-compete" class="view space-y-4">
-          <div class="bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden">
+          <div class="panel panel-inner overflow-hidden">
             <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-500 text-xs">
+              <thead class="bg-ink-950 text-slate-500 text-xs">
                 <tr><th class="text-left px-4 py-3">维度</th><th class="text-right px-4 py-3">我方 LED台灯 Pro</th><th class="text-right px-4 py-3">竞品 A BrandX</th><th class="text-right px-4 py-3">竞品 B LightY</th></tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="table-row"><td class="px-4 py-3">售价</td><td class="px-4 py-3 text-right font-medium">$39.99</td><td class="px-4 py-3 text-right">$44.99</td><td class="px-4 py-3 text-right">$34.99</td></tr>
-                <tr class="table-row"><td class="px-4 py-3">评分</td><td class="px-4 py-3 text-right font-medium text-emerald-600">4.6 ★</td><td class="px-4 py-3 text-right">4.4 ★</td><td class="px-4 py-3 text-right">4.2 ★</td></tr>
-                <tr class="table-row"><td class="px-4 py-3">评论数</td><td class="px-4 py-3 text-right">1,842</td><td class="px-4 py-3 text-right">3,210</td><td class="px-4 py-3 text-right">890</td></tr>
-                <tr class="table-row"><td class="px-4 py-3">BSR（灯具）</td><td class="px-4 py-3 text-right font-medium">#128</td><td class="px-4 py-3 text-right">#86</td><td class="px-4 py-3 text-right">#210</td></tr>
-                <tr class="table-row"><td class="px-4 py-3">预估月销</td><td class="px-4 py-3 text-right">1,200</td><td class="px-4 py-3 text-right">2,400</td><td class="px-4 py-3 text-right">680</td></tr>
-                <tr class="table-row"><td class="px-4 py-3">广告 ACOS</td><td class="px-4 py-3 text-right text-emerald-600">12.6%</td><td class="px-4 py-3 text-right">18.4%</td><td class="px-4 py-3 text-right">22.1%</td></tr>
+              <tbody class="divide-y divide-white/[0.06]">
+                <tr class="table-row"><td class="px-4 py-2.5">售价</td><td class="px-4 py-2.5 text-right font-medium">$39.99</td><td class="px-4 py-2.5 text-right">$44.99</td><td class="px-4 py-2.5 text-right">$34.99</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5">评分</td><td class="px-4 py-2.5 text-right font-medium text-emerald-400">4.6 ★</td><td class="px-4 py-2.5 text-right">4.4 ★</td><td class="px-4 py-2.5 text-right">4.2 ★</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5">评论数</td><td class="px-4 py-2.5 text-right">1,842</td><td class="px-4 py-2.5 text-right">3,210</td><td class="px-4 py-2.5 text-right">890</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5">BSR（灯具）</td><td class="px-4 py-2.5 text-right font-medium">#128</td><td class="px-4 py-2.5 text-right">#86</td><td class="px-4 py-2.5 text-right">#210</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5">预估月销</td><td class="px-4 py-2.5 text-right">1,200</td><td class="px-4 py-2.5 text-right">2,400</td><td class="px-4 py-2.5 text-right">680</td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5">广告 ACOS</td><td class="px-4 py-2.5 text-right text-emerald-400">12.6%</td><td class="px-4 py-2.5 text-right">18.4%</td><td class="px-4 py-2.5 text-right">22.1%</td></tr>
               </tbody>
             </table>
           </div>
@@ -178,30 +157,30 @@
 
         <section id="view-calc" class="view space-y-4">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <div class="bg-white rounded-xl border border-slate-200 shadow-card p-5 space-y-4">
+            <div class="metric-card rounded-xl p-5 space-y-4">
               <h3 class="text-sm font-semibold">利润测算器（交互演示）</h3>
               <div>
                 <label class="text-xs text-slate-500">售价 ($)</label>
-                <input id="calc-price" type="number" value="39.99" step="0.01" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400" />
+                <input id="calc-price" type="number" value="39.99" step="0.01" class="mt-1 w-full border border-white/[0.06] rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400 bg-ink-800 text-slate-200" />
               </div>
               <div>
                 <label class="text-xs text-slate-500">采购成本 ($)</label>
-                <input id="calc-cost" type="number" value="8.50" step="0.01" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400" />
+                <input id="calc-cost" type="number" value="8.50" step="0.01" class="mt-1 w-full border border-white/[0.06] rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400 bg-ink-800 text-slate-200" />
               </div>
               <div>
                 <label class="text-xs text-slate-500">头程+尾程运费 ($)</label>
-                <input id="calc-ship" type="number" value="6.20" step="0.01" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400" />
+                <input id="calc-ship" type="number" value="6.20" step="0.01" class="mt-1 w-full border border-white/[0.06] rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400 bg-ink-800 text-slate-200" />
               </div>
               <div>
                 <label class="text-xs text-slate-500">平台佣金 (%)</label>
-                <input id="calc-fee" type="number" value="15" step="0.1" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400" />
+                <input id="calc-fee" type="number" value="15" step="0.1" class="mt-1 w-full border border-white/[0.06] rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400 bg-ink-800 text-slate-200" />
               </div>
               <div>
                 <label class="text-xs text-slate-500">广告 ACOS (%)</label>
-                <input id="calc-acos" type="number" value="14" step="0.1" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400" />
+                <input id="calc-acos" type="number" value="14" step="0.1" class="mt-1 w-full border border-white/[0.06] rounded-lg px-3 py-2 text-sm outline-none focus:border-brand-400 bg-ink-800 text-slate-200" />
               </div>
             </div>
-            <div class="bg-gradient-to-br from-brand-600 to-violet-700 rounded-xl shadow-soft p-6 text-white flex flex-col justify-center">
+            <div class="bg-gradient-to-br from-brand-600 to-violet-700 rounded-xl p-6 text-white flex flex-col justify-center">
               <div class="text-indigo-200 text-sm mb-1">预计单件净利润</div>
               <div id="calc-profit" class="text-4xl font-bold mb-4">$12.34</div>
               <div class="space-y-2 text-sm">
@@ -267,5 +246,12 @@
     recalc();
 
   </script>
+<script>
+  if (window.Chart) {
+    Chart.defaults.color = '#64748B';
+    Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+    Chart.defaults.plugins.legend.labels.color = '#94A3B8';
+  }
+</script>
 </body>
 </html>
