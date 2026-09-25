@@ -44,9 +44,11 @@
         <a href="#architecture" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">架构</a>
         <a href="#chain" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">业务链</a>
         <a href="#products" class="text-gray-500 hover:text-gray-900 hidden sm:inline transition">产品矩阵</a>
-        <a href="#why" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">为什么选我们</a>
+        <a href="#design-why" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">为什么这样设计</a>
+        <a href="#how-to-start" class="text-gray-500 hover:text-gray-900 hidden md:inline transition">如何开始</a>
+        <a href="#why" class="text-gray-500 hover:text-gray-900 hidden lg:inline transition">痛点解法</a>
         <a href="https://github.com/rong001/crossborder-ai-midplatform" target="_blank" class="text-gray-500 hover:text-gray-900 transition">GitHub</a>
-        <a href="midplatform/" class="btn-primary px-3.5 py-1.5 text-xs">进入指挥中心</a>
+        <a href="midplatform/?wizard=1" class="btn-primary px-3.5 py-1.5 text-xs">开始上手向导</a>
       </div>
     </div>
   </nav>
@@ -69,7 +71,8 @@
           覆盖 Amazon · Shopee · TikTok Shop · Lazada · Temu · Walmart。以真利润为核心，用 Agent 编排替代人工巡检。
         </p>
         <div class="flex flex-wrap gap-3">
-          <a href="#architecture" class="btn-primary px-5 py-2.5 text-sm">查看四层架构</a>
+          <a href="#how-to-start" class="btn-primary px-5 py-2.5 text-sm">如何开始（上手向导）</a>
+          <a href="#design-why" class="btn-ghost px-5 py-2.5 text-sm">为什么这样设计</a>
           <a href="midplatform/" class="btn-ghost px-5 py-2.5 text-sm">打开指挥中心 →</a>
         </div>
         <div class="mt-12 flex flex-wrap gap-10 text-sm text-gray-500">
@@ -261,7 +264,7 @@
       <div class="mb-8">
         <p class="section-label mb-2">Product Matrix</p>
         <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">八大应用 · 各驻场 Agent</h2>
-        <p class="mt-2 text-sm text-gray-500">每个模块都是 AI 原生壳：编排画布优先，表格次之。点击进入体验。</p>
+        <p class="mt-2 text-sm text-gray-500">每个模块都是 AI 原生壳：顶栏提供「操作手册」与「上手向导」；默认 AI 起草、人确认，全自动仅作进阶演示。</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
@@ -421,6 +424,70 @@
     </div>
   </section>
 
+
+  <!-- Why designed this way -->
+  <section id="design-why" class="border-b border-gray-200 bg-white">
+    <div class="max-w-6xl mx-auto px-5 py-14">
+      <div class="mb-8">
+        <p class="section-label mb-2">Design Philosophy</p>
+        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">为什么这样设计</h2>
+        <p class="mt-2 text-sm text-gray-500 max-w-3xl">许多市场与团队仍在用表格和卖家原生后台。黑盒「一键 Agent 跑完全流程」会制造不信任，也学不到 Day-1 步骤。本套演示刻意做成：引导上手 + 人机协同。</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="pain-card">
+          <div class="text-xs font-semibold text-brand-600 mb-2">信任 Trust</div>
+          <div class="text-sm text-gray-700 leading-relaxed">AI 提出建议与草稿，高风险动作进入审批门；界面清楚展示「等待审批」，而不是静默改价/下单。</div>
+        </div>
+        <div class="pain-card">
+          <div class="text-xs font-semibold text-brand-600 mb-2">本地化 Localization</div>
+          <div class="text-sm text-gray-700 leading-relaxed">阈值、话术、科目映射按站点/平台适配；向导要求先准备知识库与规则，而不是一套全球默认值闷头跑。</div>
+        </div>
+        <div class="pain-card">
+          <div class="text-xs font-semibold text-brand-600 mb-2">上手 Onboarding</div>
+          <div class="text-sm text-gray-700 leading-relaxed">每个模块顶栏有「操作手册」与「上手向导」（5～7 步清单）。进度存 localStorage，可随时重开，无需销售员代点魔法按钮。</div>
+        </div>
+        <div class="pain-card">
+          <div class="text-xs font-semibold text-brand-600 mb-2">人机门 Human Gates</div>
+          <div class="text-sm text-gray-700 leading-relaxed">默认 CTA：按向导下一步 / 查看推荐并确认 / 批准此条。「模拟全自动」收在进阶披露里，仅作架构演示。</div>
+        </div>
+      </div>
+      <div class="mt-6 p-4 rounded-lg border border-amber-200 bg-amber-50 text-sm text-amber-900 leading-relaxed">
+        <strong>给客户演示时请强调：</strong>打开任意模块 → 先看操作手册 → 走上手向导勾选知识库与规则 → 对一条 AI 建议点「批准此条」。不要默认演示「一键跑完」。
+      </div>
+    </div>
+  </section>
+
+  <!-- How to start -->
+  <section id="how-to-start" class="border-b border-gray-200 bg-surface-page">
+    <div class="max-w-6xl mx-auto px-5 py-14">
+      <div class="mb-8">
+        <p class="section-label mb-2">Getting Started</p>
+        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">如何开始</h2>
+        <p class="mt-2 text-sm text-gray-500 max-w-3xl">新手可在无人陪同下完成：读手册 → 走向导 → 批准一条推荐。建议从指挥中台开始。</p>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="panel p-5">
+          <div class="text-xs font-semibold text-gray-400 mb-2">步骤 01</div>
+          <h3 class="font-semibold text-gray-900">打开指挥中台上手向导</h3>
+          <p class="text-sm text-gray-500 mt-2 leading-relaxed">确认业务范围、标记知识库、保存 ODR/ACOS/审批阈值，再载入演示数据。</p>
+          <a href="midplatform/?wizard=1" class="btn-primary inline-block mt-4 px-3.5 py-1.5 text-xs">进入中台向导 →</a>
+        </div>
+        <div class="panel p-5">
+          <div class="text-xs font-semibold text-gray-400 mb-2">步骤 02</div>
+          <h3 class="font-semibold text-gray-900">每个模块都有手册 + 向导</h3>
+          <p class="text-sm text-gray-500 mt-2 leading-relaxed">ERP / OMS / WMS / Ads / CS / BI / Finance 顶栏同样提供「操作手册」与「上手向导」，进度按模块分别保存。</p>
+          <button type="button" class="btn-ghost inline-block mt-4 px-3.5 py-1.5 text-xs" onclick="window.CBGuide&&CBGuide.openManual()">查看门户操作手册</button>
+        </div>
+        <div class="panel p-5">
+          <div class="text-xs font-semibold text-gray-400 mb-2">步骤 03</div>
+          <h3 class="font-semibold text-gray-900">体验「推荐 → 人确认」</h3>
+          <p class="text-sm text-gray-500 mt-2 leading-relaxed">在建议收件箱点「批准此条」或「查看推荐并确认」。全自动编排仅在「进阶」披露中，需显式展开。</p>
+          <a href="#products" class="btn-ghost inline-block mt-4 px-3.5 py-1.5 text-xs">浏览产品矩阵</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Platforms strip -->
   <section class="border-b border-gray-200 bg-surface-page">
     <div class="max-w-6xl mx-auto px-5 py-8">
@@ -439,9 +506,12 @@
   <!-- CTA -->
   <section class="bg-white">
     <div class="max-w-6xl mx-auto px-5 py-14 text-center">
-      <h2 class="text-xl font-semibold text-gray-900 mb-2">30 秒看懂：这是操作系统，不是带聊天框的中台</h2>
-      <p class="text-sm text-gray-500 mb-6">从指挥中心开始，体验 Agent 舰队、编排画布与人机审批。</p>
-      <a href="midplatform/" class="btn-primary inline-block px-6 py-2.5 text-sm">进入 AI 指挥中心</a>
+      <h2 class="text-xl font-semibold text-gray-900 mb-2">从向导开始，而不是从一键全自动开始</h2>
+      <p class="text-sm text-gray-500 mb-6">每个模块都有操作手册与上手向导。AI 起草，人批准高风险；全自动仅作进阶演示。</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="midplatform/?wizard=1" class="btn-primary inline-block px-6 py-2.5 text-sm">开始指挥中台上手向导</a>
+        <a href="#design-why" class="btn-ghost inline-block px-6 py-2.5 text-sm">阅读设计理念</a>
+      </div>
     </div>
   </section>
 
@@ -454,5 +524,9 @@
       </div>
     </div>
   </footer>
+
+<script>window.CB_APP={id:"portal",name:"门户总览"};</script>
+<script src="guides.js"></script>
+<script src="shared.js"></script>
 </body>
 </html>
