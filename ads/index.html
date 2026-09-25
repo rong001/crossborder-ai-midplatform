@@ -3,23 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>广告投放 · 跨境电商AI套件</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="../shared.css" />
+<link rel="stylesheet" href="../shared.css" />
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 400: '#818cf8',
-              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              50: '#EFF6FF', 100: '#DBEAFE', 200: '#BFDBFE',
+              500: '#2563EB', 600: '#1D4ED8', 700: '#1E40AF',
             },
-            ink: {
-              950: '#0B0F19', 900: '#111827', 850: '#151B2B',
-              800: '#1C2438', 700: '#243049',
-            }
+            surface: { DEFAULT: '#FFFFFF', muted: '#F3F4F6', page: '#F6F8FA' },
           },
           fontFamily: {
             sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
@@ -28,209 +25,452 @@
       }
     }
   </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  </style>
-
-  
-  
-  <title>广告投放中心 · 跨境电商AI套件</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');</style>
 </head>
-<body class="dark bg-ink-950 text-slate-100 antialiased">
+
+<body class="bg-surface-page text-gray-900 antialiased">
   <div class="flex h-screen overflow-hidden">
-    <aside class="w-56 shrink-0 bg-ink-900 border-r border-white/[0.06] flex flex-col z-20">
-      <div class="px-4 py-5 border-b border-white/[0.06]">
-        <a href="../" class="flex items-center gap-2.5 group">
-          <div class="w-9 h-9 rounded-lg bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
-            <svg class="w-5 h-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
+    <aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
+      <div class="px-4 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
           </div>
           <div>
-            <div class="text-sm font-semibold text-slate-50 leading-tight group-hover:text-brand-400 transition">广告投放中心</div>
-            <div class="text-[10px] text-slate-500 mt-0.5">ACOS · 关键词 · AI优化</div>
+            <div class="text-sm font-semibold text-gray-900 leading-tight">广告投放</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">套件 · Ads</div>
           </div>
-        </a>
+        </div>
       </div>
-      <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="overview">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="overview" data-title="投放总览">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
           投放总览
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="campaigns">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
-          广告活动
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="agents" data-title="调价 Agent">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          调价 Agent
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="keywords">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
-          关键词
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="negatives" data-title="否定词建议">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+          否定词建议
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="budget">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          预算管理
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="automation" data-title="自动化中心">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          自动化中心
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="ai">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          AI优化建议
-        </button>
-        <div class="pt-3 mt-2 border-t border-white/[0.06] px-2">
-          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] hover:text-brand-400 transition">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <div class="pt-3 mt-2 border-t border-gray-200 px-1">
+          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>
             返回总门户
           </a>
         </div>
       </nav>
-      <div class="px-4 py-3 border-t border-white/[0.06]">
+      <div class="px-4 py-3 border-t border-gray-200">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-brand-500/15 text-brand-400 flex items-center justify-center text-xs font-bold">演</div>
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
           <div class="min-w-0">
-            <div class="text-xs font-semibold truncate">演示账号</div>
-            <div class="text-[10px] text-slate-500">demo@crossborder.ai</div>
+            <div class="text-xs font-semibold text-gray-900 truncate">演示账号</div>
+            <div class="text-[10px] text-gray-400">demo@crossborder.ai</div>
           </div>
         </div>
       </div>
     </aside>
     <div class="flex-1 flex flex-col min-w-0">
-      <header class="h-14 shrink-0 bg-ink-950/90 backdrop-blur-xl border-b border-white/[0.06] flex items-center justify-between px-5 gap-4 z-10">
+      <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10">
         <div class="flex items-center gap-3 min-w-0">
-          <h1 id="page-title" class="text-base font-semibold text-slate-50">投放总览</h1>
-          <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
+          <div class="breadcrumb hidden sm:block">套件 / <span id="breadcrumb-current">投放总览</span></div>
+          <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">投放总览</h1>
+          <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
         </div>
-        <div class="flex items-center gap-2 text-xs text-slate-500">
-          <span class="hidden md:inline">跨境电商AI套件</span>
-          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 font-medium border border-brand-500/25 transition">总门户</a>
+        <div class="flex items-center gap-2.5">
+          
+          <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            AI 自动化在线
+          </span>
         </div>
       </header>
       <main class="flex-1 overflow-y-auto p-5">
 
-        <section id="view-overview" class="view active space-y-5">
-          <div class="grid grid-cols-2 xl:grid-cols-5 gap-4">
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">今日花费</div><div class="text-2xl font-bold tabular">$4,286</div><div class="text-xs text-slate-500 mt-1">预算剩余 38%</div></div>
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">广告销售额</div><div class="text-2xl font-bold tabular">$28,940</div><div class="text-xs text-emerald-400 mt-1">↑ 11.2%</div></div>
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">ACOS</div><div class="text-2xl font-bold text-emerald-400 tabular">14.8%</div><div class="text-xs text-slate-500 mt-1">目标 ≤18%</div></div>
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">ROAS</div><div class="text-2xl font-bold tabular">6.75</div><div class="text-xs text-emerald-400 mt-1">↑ 0.4</div></div>
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">点击率 CTR</div><div class="text-2xl font-bold tabular">0.82%</div><div class="text-xs text-slate-500 mt-1">行业均值 0.6%</div></div>
+        <div id="view-overview" class="view active space-y-5">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            
+        <div class="metric-card p-4">
+          <div class="section-label">过去 24h AI 已节省</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-saved-ads" data-val="1860" data-fmt="money">$1,860</div>
+          <div class="mt-1 text-xs text-gray-500">自动调价+暂停</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">今日花费</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">$18,260</div>
+          <div class="mt-1 text-xs text-gray-500">预算利用率 76%</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">整体 ACOS</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">18.4%</div>
+          <div class="mt-1 text-xs text-gray-500">目标 20%</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">已暂停广告组</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">5</div>
+          <div class="mt-1 text-xs text-gray-500">ACOS 守卫</div>
+        </div>
           </div>
-          <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div class="metric-card rounded-xl p-5"><h3 class="text-sm font-semibold mb-4">花费 vs 广告销售（近14天）</h3><div class="h-56"><canvas id="ads-chart-spend"></canvas></div></div>
-            <div class="metric-card rounded-xl p-5"><h3 class="text-sm font-semibold mb-4">平台 ACOS 对比</h3><div class="h-56"><canvas id="ads-chart-acos"></canvas></div></div>
+          <div class="grid lg:grid-cols-3 gap-4">
+            <div class="lg:col-span-2 panel p-4">
+              <div class="section-label mb-1">Spend vs Savings</div>
+              <h3 class="text-sm font-semibold mb-3">近 7 日花费与 AI 节省</h3>
+              <canvas id="chart-ads" height="120"></canvas>
+            </div>
+            
+      <div class="panel p-4">
+        <div class="section-label mb-1">Activity</div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">AI 刚刚自动完成了…</h3>
+        <div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">刚刚</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：暂停广告组 TG-884（ACOS 42%）</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">11 分钟前</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：将 $420 预算转移至 AMZ-SP-12</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">今日 06:12</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：写入否定词 12 个</div>
+        </div></div>
+      </div>
           </div>
-        </section>
-
-        <section id="view-campaigns" class="view space-y-4">
-          <div class="panel panel-inner overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="bg-ink-950 text-slate-500 text-xs">
-                <tr><th class="text-left px-4 py-3">活动名称</th><th class="text-left px-4 py-3">平台</th><th class="text-right px-4 py-3">花费</th><th class="text-right px-4 py-3">销售</th><th class="text-right px-4 py-3">ACOS</th><th class="text-right px-4 py-3">ROAS</th><th class="text-left px-4 py-3">状态</th></tr>
-              </thead>
-              <tbody class="divide-y divide-white/[0.06]">
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">LED台灯-SP自动</td><td class="px-4 py-2.5"><span class="platform-badge">Amazon</span></td><td class="px-4 py-2.5 text-right">$1,240</td><td class="px-4 py-2.5 text-right">$9,860</td><td class="px-4 py-2.5 text-right text-emerald-400">12.6%</td><td class="px-4 py-2.5 text-right">7.95</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">投放中</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">收纳袋-关键词攻势</td><td class="px-4 py-2.5"><span class="platform-badge">Amazon</span></td><td class="px-4 py-2.5 text-right">$860</td><td class="px-4 py-2.5 text-right">$4,120</td><td class="px-4 py-2.5 text-right text-amber-400">20.9%</td><td class="px-4 py-2.5 text-right">4.79</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">投放中</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">TikTok GMV Max-套装</td><td class="px-4 py-2.5"><span class="platform-badge">TikTok</span></td><td class="px-4 py-2.5 text-right">$1,580</td><td class="px-4 py-2.5 text-right">$11,200</td><td class="px-4 py-2.5 text-right text-emerald-400">14.1%</td><td class="px-4 py-2.5 text-right">7.09</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">投放中</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">Shopee Ads-MY站</td><td class="px-4 py-2.5"><span class="platform-badge">Shopee</span></td><td class="px-4 py-2.5 text-right">$420</td><td class="px-4 py-2.5 text-right">$2,480</td><td class="px-4 py-2.5 text-right text-amber-400">16.9%</td><td class="px-4 py-2.5 text-right">5.90</td><td class="px-4 py-2.5"><span class="status-pill bg-ink-800 text-slate-500">已暂停</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">Walmart Sponsored-灯具</td><td class="px-4 py-2.5"><span class="platform-badge">Walmart</span></td><td class="px-4 py-2.5 text-right">$186</td><td class="px-4 py-2.5 text-right">$1,280</td><td class="px-4 py-2.5 text-right text-emerald-400">14.5%</td><td class="px-4 py-2.5 text-right">6.88</td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">投放中</span></td></tr>
+        </div>
+        <div id="view-agents" class="view space-y-5">
+          
+      <div class="panel overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+          <div>
+            <div class="section-label">Automation Center</div>
+            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">AI Agents</h3>
+          </div>
+          <button class="btn-ghost px-2.5 py-1 text-xs" onclick="toast('已刷新 Agent 状态')">刷新</button>
+        </div>
+        <div class="px-4 py-2 bg-gray-50 border-b border-gray-200 hidden md:flex text-[11px] uppercase tracking-wide text-gray-400 font-semibold gap-4">
+          <div class="flex-1">Agent</div>
+          <div class="w-28">上次运行</div>
+          <div class="w-28 hidden lg:block">下次运行</div>
+          <div class="w-14 text-right">成功率</div>
+          <div class="w-9"></div>
+        </div>
+        
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">自动调价 / 预算分配</span>
+              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">按 ROAS 再分配日预算</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">95.8%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">ACOS 超标自动暂停</span>
+              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">ACOS > 目标则暂停广告组</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">11 分钟前</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">99.2%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">否定词挖掘</span>
+              <span class="status-pill status-scheduled" data-status>已调度</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">低效搜索词入否定库</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">今日 06:00</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">每日</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">92.4%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+      </div>
+          <div class="panel p-4">
+            <div class="section-label mb-1">Budget Reallocation</div>
+            <h3 class="text-sm font-semibold mb-3">模拟：立即执行预算再分配</h3>
+            <p class="text-sm text-gray-500 mb-3">将从低 ROAS 组抽回 $680，加注至高 ROAS 组。</p>
+            <button class="btn-primary px-3 py-1.5 text-xs" onclick="realloc()">执行再分配</button>
+          </div>
+        </div>
+        <div id="view-negatives" class="view space-y-5">
+          
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <div class="section-label">AI Suggestions</div>
+            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">待处理建议</h3>
+          </div>
+          <span class="status-pill status-info">3 条待处理</span>
+        </div>
+        <div class="space-y-3">
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">否定词：cheap fake（花费 $86 / 0 转化）</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">搜索词报告连续 14 天无转化。</div>
+              <div class="mt-3 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-high tabular">96%</span>
+                  <div class="conf-bar w-16"><span style="width:96%"></span></div>
+                </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">节省 ~$90/周</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved-ads',90)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div>
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">否定词：wholesale bulk</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">与品牌定位不符，点击浪费高。</div>
+              <div class="mt-3 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-high tabular">88%</span>
+                  <div class="conf-bar w-16"><span style="width:88%"></span></div>
+                </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">节省 ~$60/周</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved-ads',60)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div>
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">暂停 TG-884 并转移预算</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">过去 24h 已部分执行，建议全量确认。</div>
+              <div class="mt-3 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-high tabular">91%</span>
+                  <div class="conf-bar w-16"><span style="width:91%"></span></div>
+                </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">ACOS 改善 ~6pp</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved-ads',420)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div></div>
+      </div>
+        </div>
+        <div id="view-automation" class="view space-y-5">
+          
+      <div class="panel overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-200">
+          <div class="section-label">Playbooks</div>
+          <h3 class="text-sm font-semibold text-gray-900 mt-0.5">自动化规则</h3>
+        </div>
+        
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">ACOS > 35% 自动暂停</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF acos > 0.35 THEN pause_adgroup</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">ROAS > 4 自动加预算 15%</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF roas > 4 THEN budget *= 1.15</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">无转化花费 > $50 入否定</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF spend > 50 AND orders = 0 THEN negate</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+      </div>
+          <div class="panel p-4">
+            <div class="section-label mb-1">Guardrail</div>
+            <h3 class="text-sm font-semibold mb-2">ACOS 超标自动暂停 · 最近执行</h3>
+            <table class="w-full text-sm dense-table">
+              <tbody>
+                <tr class="table-row border-b border-gray-100"><td class="py-2">TG-884</td><td class="text-rose-600 tabular">42%</td><td><span class="status-pill status-danger">已暂停</span></td></tr>
+                <tr class="table-row border-b border-gray-100"><td class="py-2">TT-221</td><td class="text-rose-600 tabular">38%</td><td><span class="status-pill status-danger">已暂停</span></td></tr>
+                <tr class="table-row"><td class="py-2">SP-019</td><td class="text-amber-600 tabular">33%</td><td><span class="status-pill status-warning">观察中</span></td></tr>
               </tbody>
             </table>
           </div>
-        </section>
-
-        <section id="view-keywords" class="view space-y-4">
-          <div class="panel panel-inner overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="bg-ink-950 text-slate-500 text-xs">
-                <tr><th class="text-left px-4 py-3">关键词</th><th class="text-right px-4 py-3">出价</th><th class="text-right px-4 py-3">点击</th><th class="text-right px-4 py-3">转化</th><th class="text-right px-4 py-3">ACOS</th><th class="text-left px-4 py-3">建议</th></tr>
-              </thead>
-              <tbody class="divide-y divide-white/[0.06]">
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">led desk lamp</td><td class="px-4 py-2.5 text-right">$1.25</td><td class="px-4 py-2.5 text-right">842</td><td class="px-4 py-2.5 text-right">68</td><td class="px-4 py-2.5 text-right text-emerald-400">11.2%</td><td class="px-4 py-2.5 text-xs text-emerald-400">提价 +15%</td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">travel packing cubes</td><td class="px-4 py-2.5 text-right">$0.88</td><td class="px-4 py-2.5 text-right">520</td><td class="px-4 py-2.5 text-right">22</td><td class="px-4 py-2.5 text-right text-rose-400">28.4%</td><td class="px-4 py-2.5 text-xs text-rose-400">降价 / 加否定</td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">usb c cable 6ft</td><td class="px-4 py-2.5 text-right">$0.45</td><td class="px-4 py-2.5 text-right">1,240</td><td class="px-4 py-2.5 text-right">95</td><td class="px-4 py-2.5 text-right text-emerald-400">9.8%</td><td class="px-4 py-2.5 text-xs text-emerald-400">保持</td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-medium">kitchen utensil set silicone</td><td class="px-4 py-2.5 text-right">$1.05</td><td class="px-4 py-2.5 text-right">310</td><td class="px-4 py-2.5 text-right">18</td><td class="px-4 py-2.5 text-right text-amber-400">19.6%</td><td class="px-4 py-2.5 text-xs text-amber-400">观察 3 天</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section id="view-budget" class="view space-y-4">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="metric-card rounded-xl p-5">
-              <div class="text-xs text-slate-500">月度总预算</div>
-              <div class="text-2xl font-bold mt-1 tabular">$120,000</div>
-              <div class="mt-3 h-2 bg-ink-800 rounded-full overflow-hidden"><div class="h-full bg-brand-600 rounded-full" style="width:62%"></div></div>
-              <div class="text-xs text-slate-500 mt-2">已用 $74,400 · 剩余 38%</div>
-            </div>
-            <div class="metric-card rounded-xl p-5">
-              <div class="text-xs text-slate-500">Amazon 分配</div>
-              <div class="text-2xl font-bold mt-1 tabular">$68,000</div>
-              <div class="mt-3 h-2 bg-ink-800 rounded-full overflow-hidden"><div class="h-full bg-orange-500 rounded-full" style="width:71%"></div></div>
-              <div class="text-xs text-slate-500 mt-2">已用 71%</div>
-            </div>
-            <div class="metric-card rounded-xl p-5">
-              <div class="text-xs text-slate-500">TikTok 分配</div>
-              <div class="text-2xl font-bold mt-1 tabular">$32,000</div>
-              <div class="mt-3 h-2 bg-ink-800 rounded-full overflow-hidden"><div class="h-full bg-slate-400 rounded-full" style="width:48%"></div></div>
-              <div class="text-xs text-slate-500 mt-2">已用 48%</div>
-            </div>
-          </div>
-        </section>
-
-        <section id="view-ai" class="view space-y-4">
-          <div class="space-y-3">
-            <div class="bg-ink-850 rounded-xl border border-brand-500/25 p-5 border-l-4 border-l-brand-600">
-              <div class="flex items-center gap-2 mb-2"><span class="w-6 h-6 rounded-lg bg-violet-500/15 text-violet-400 flex items-center justify-center text-xs">AI</span><h4 class="font-semibold text-sm">提价高转化词「led desk lamp」</h4></div>
-              <p class="text-sm text-slate-500">近7日 CVR 8.1%（同行均值 4.2%），当前出价偏低导致展示份额仅 42%。建议出价从 $1.25 → $1.45，预计多获订单 +18/天。</p>
-              <button class="mt-3 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold">一键应用</button>
-            </div>
-            <div class="metric-card rounded-xl p-5 border-l-4 border-l-rose-500">
-              <div class="flex items-center gap-2 mb-2"><span class="w-6 h-6 rounded-lg bg-rose-500/15 text-rose-400 flex items-center justify-center text-xs">AI</span><h4 class="font-semibold text-sm">否定低效词「packing cubes cheap」</h4></div>
-              <p class="text-sm text-slate-500">花费 $186，0 转化。建议添加为否定精确匹配，可节省约 4.3% 日预算。</p>
-              <button class="mt-3 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold">一键应用</button>
-            </div>
-            <div class="metric-card rounded-xl p-5 border-l-4 border-l-amber-500">
-              <div class="flex items-center gap-2 mb-2"><span class="w-6 h-6 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center text-xs">AI</span><h4 class="font-semibold text-sm">TikTok 晚高峰加预算</h4></div>
-              <p class="text-sm text-slate-500">美西 18:00–22:00 ROAS 达 9.2，当前日预算常在 16:00 耗尽。建议开启「日间预算加速」并上调 20%。</p>
-              <button class="mt-3 px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold">一键应用</button>
-            </div>
-          </div>
-        </section>
+        </div>
 
       </main>
     </div>
   </div>
-  <script>
-    document.querySelectorAll('.nav-item').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const view = btn.dataset.view;
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        const el = document.getElementById('view-' + view);
-        if (el) el.classList.add('active');
-        document.getElementById('page-title').textContent = btn.textContent.trim();
-      });
-    });
 
-    new Chart(document.getElementById('ads-chart-spend'), {
-      type: 'line',
-      data: { labels: Array.from({length:14},(_,i)=>'9/'+(11+i)), datasets: [
-        { label: '花费', data: [3.2,3.5,3.8,4.1,3.9,4.0,4.2,3.8,4.5,4.3,4.0,4.1,4.4,4.3], borderColor: '#f43f5e', tension: .35, yAxisID: 'y' },
-        { label: '广告销售', data: [18,21,22,25,24,26,28,23,30,29,27,28,29,29], borderColor: '#10b981', tension: .35, yAxisID: 'y1' }
-      ]},
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
-        scales: { y: { position: 'left', title: { display: true, text: 'k$ 花费', font: { size: 10 } } }, y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'k$ 销售', font: { size: 10 } } } } }
-    });
-    new Chart(document.getElementById('ads-chart-acos'), {
-      type: 'bar',
-      data: { labels: ['Amazon','TikTok','Shopee','Walmart','Lazada'], datasets: [{ data: [14.2,14.1,16.9,14.5,18.2], backgroundColor: ['#FF9900','#1e293b','#EE4D2D','#0071DC','#0F146D'], borderRadius: 6 }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { callback: v => v + '%' } } } }
-    });
+  <div id="drawer-detail" class="drawer">
+    <div class="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-gray-900">建议详情</h3>
+      <button class="text-gray-400 hover:text-gray-700" onclick="closeDrawer()">✕</button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5 space-y-4 text-sm">
+      <div>
+        <div class="section-label mb-1">Reasoning</div>
+        <p class="text-gray-700 leading-relaxed">基于近 14 天销量、库存周转、广告 ACOS 与季节性因子综合评估。模型置信度来自交叉验证与历史同类决策回测。</p>
+      </div>
+      <div>
+        <div class="section-label mb-1">Expected Impact</div>
+        <ul class="text-gray-700 space-y-1.5 list-disc pl-4">
+          <li>预计 7 日内毛利提升 2.1–3.4%</li>
+          <li>库存周转天数缩短约 4 天</li>
+          <li>相关 SKU 缺货风险下降 60%</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label mb-1">Evidence</div>
+        <div class="panel p-3 text-xs text-gray-600 space-y-1">
+          <div>· 销量增速 +28% WoW（同品类均值 +9%）</div>
+          <div>· 当前可售天数 6.2（安全线 14）</div>
+          <div>· 供应商交期 9 天，建议提前下单</div>
+        </div>
+      </div>
+    </div>
+    <div class="px-5 py-3 border-t border-gray-200 flex gap-2">
+      <button class="btn-primary flex-1 py-2 text-sm" onclick="closeDrawer();toast('已从详情页采纳建议')">采纳建议</button>
+      <button class="btn-ghost px-4 py-2 text-sm" onclick="closeDrawer()">关闭</button>
+    </div>
+  </div>
+
+  <div id="toast-host"></div>
+  <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+  <script>
+
+function toast(msg){
+  const host=document.getElementById('toast-host');
+  const el=document.createElement('div');
+  el.className='toast';
+  el.textContent=msg;
+  host.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300)},2800);
+}
+function switchView(id, title){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const t=document.getElementById('view-'+id);
+  if(t) t.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active', n.dataset.view===id));
+  const pt=document.getElementById('page-title');
+  if(pt && title) pt.textContent=title;
+  const bc=document.getElementById('breadcrumb-current');
+  if(bc && title) bc.textContent=title;
+}
+document.querySelectorAll('.nav-item[data-view]').forEach(btn=>{
+  btn.addEventListener('click',()=>switchView(btn.dataset.view, btn.dataset.title||btn.textContent.trim()));
+});
+function acceptSuggestion(btn, impactEl, delta){
+  const card=btn.closest('.suggestion-card');
+  if(card.classList.contains('accepted')) return;
+  card.classList.add('accepted');
+  btn.disabled=true;
+  btn.textContent='已采纳';
+  btn.className='px-2.5 py-1 text-xs font-medium rounded bg-emerald-100 text-emerald-700 cursor-default';
+  if(impactEl && delta){
+    const el=document.getElementById(impactEl);
+    if(el){
+      const cur=parseFloat(el.dataset.val||el.textContent.replace(/[^0-9.-]/g,''))||0;
+      const next=cur+delta;
+      el.dataset.val=next;
+      if(el.dataset.fmt==='money') el.textContent='$'+next.toLocaleString(undefined,{maximumFractionDigits:0});
+      else if(el.dataset.fmt==='pct') el.textContent=next.toFixed(1)+'%';
+      else if(el.dataset.fmt==='int') el.textContent=Math.round(next).toLocaleString();
+      else el.textContent=next;
+      el.classList.add('text-emerald-600');
+    }
+  }
+  toast('已采纳 AI 建议，相关指标已更新');
+}
+function ignoreSuggestion(btn){
+  const card=btn.closest('.suggestion-card');
+  card.style.opacity='0.45';
+  card.querySelectorAll('button').forEach(b=>b.disabled=true);
+  toast('已忽略该建议');
+}
+function toggleAgent(el){
+  el.classList.toggle('on');
+  const row=el.closest('.agent-row')||el.closest('[data-agent]');
+  const pill=row && row.querySelector('[data-status]');
+  if(pill){
+    if(el.classList.contains('on')){
+      pill.className='status-pill status-running';
+      pill.innerHTML='<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中';
+      toast('Agent 已启动');
+    } else {
+      pill.className='status-pill status-paused';
+      pill.innerHTML='已暂停';
+      toast('Agent 已暂停');
+    }
+  }
+}
+function togglePlaybook(el){
+  el.classList.toggle('on');
+  toast(el.classList.contains('on')?'规则已启用':'规则已停用');
+}
+function openDrawer(id){
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById(id).classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
+}
+
+
+function realloc(){
+  const el=document.getElementById('kpi-saved-ads');
+  const cur=parseFloat(el.dataset.val||'1860');
+  el.dataset.val=cur+680;
+  el.textContent='$'+(cur+680).toLocaleString();
+  toast('预算再分配完成，累计节省已更新');
+}
+Chart.defaults.color='#9CA3AF';
+Chart.defaults.borderColor='#E5E7EB';
+new Chart(document.getElementById('chart-ads'),{
+  type:'bar',
+  data:{labels:['D-6','D-5','D-4','D-3','D-2','D-1','今日'],datasets:[
+    {label:'花费',data:[16,17,15,19,18,17,18],backgroundColor:'#BFDBFE',borderRadius:4},
+    {label:'AI节省',data:[0.8,1.1,1.4,1.2,1.6,1.5,1.86],backgroundColor:'#2563EB',borderRadius:4}
+  ]},
+  options:{plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{x:{grid:{display:false}},y:{grid:{color:'#F3F4F6'}}},maintainAspectRatio:true}
+});
 
   </script>
-<script>
-  if (window.Chart) {
-    Chart.defaults.color = '#64748B';
-    Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
-    Chart.defaults.plugins.legend.labels.color = '#94A3B8';
-  }
-</script>
 </body>
 </html>

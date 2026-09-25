@@ -6,21 +6,17 @@
   <title>AI运营中台 · 跨境电商AI套件</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="../shared.css" />
+<link rel="stylesheet" href="../shared.css" />
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 400: '#818cf8',
-              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              50: '#EFF6FF', 100: '#DBEAFE', 200: '#BFDBFE',
+              500: '#2563EB', 600: '#1D4ED8', 700: '#1E40AF',
             },
-            ink: {
-              950: '#0B0F19', 900: '#111827', 850: '#151B2B',
-              800: '#1C2438', 700: '#243049',
-            }
+            surface: { DEFAULT: '#FFFFFF', muted: '#F3F4F6', page: '#F6F8FA' },
           },
           fontFamily: {
             sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
@@ -29,922 +25,549 @@
       }
     }
   </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  </style>
-
-  
-  
+  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');</style>
 </head>
-<body class="dark bg-ink-950 text-slate-100 antialiased">
+
+<body class="bg-surface-page text-gray-900 antialiased">
   <div class="flex h-screen overflow-hidden">
-    <!-- Sidebar -->
-    <aside class="w-56 shrink-0 bg-ink-900 border-r border-white/[0.06] flex flex-col z-20">
-      <div class="px-4 py-5 border-b border-white/[0.06]">
+    <aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
+      <div class="px-4 py-4 border-b border-gray-200">
         <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-lg bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
-            <svg class="w-5 h-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
+          <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
           <div>
-            <div class="text-sm font-semibold text-slate-50 leading-tight">AI运营中台</div>
-            <div class="text-[10px] text-slate-500 mt-0.5">套件 · Midplatform</div>
+            <div class="text-sm font-semibold text-gray-900 leading-tight">AI运营中台</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">套件 · Midplatform</div>
           </div>
         </div>
       </div>
-      <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="overview">
-          <svg class="w-4.5 h-4.5 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="overview" data-title="总览看板">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
           总览看板
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="products">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-          商品中心
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="automation" data-title="自动化中心">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          自动化中心
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="orders">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-          订单中心
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="suggestions" data-title="AI 建议">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+          AI 建议
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="ads">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
-          广告中心
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="tonight" data-title="今夜自动任务">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          今夜自动任务
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="inventory">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
-          库存与供应链
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="assistant" data-title="经营助手">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+          经营助手
         </button>
-        <div class="pt-3 mt-2 border-t border-white/[0.06]">
-          <button id="btn-open-ai" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-white bg-brand-500 hover:bg-brand-400 transition">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-            AI 助手
-          </button>
-        </div>
-        <div class="pt-3 mt-2 border-t border-white/[0.06] px-2">
-          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] hover:text-brand-400 transition">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <div class="pt-3 mt-2 border-t border-gray-200 px-1">
+          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>
             返回总门户
           </a>
         </div>
       </nav>
-      <div class="px-4 py-3 border-t border-white/[0.06]">
+      <div class="px-4 py-3 border-t border-gray-200">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-brand-500/15 text-brand-400 flex items-center justify-center text-xs font-bold">演</div>
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
           <div class="min-w-0">
-            <div class="text-xs font-semibold truncate">演示账号</div>
-            <div class="text-[10px] text-slate-500">demo@crossborder.ai</div>
+            <div class="text-xs font-semibold text-gray-900 truncate">演示账号</div>
+            <div class="text-[10px] text-gray-400">demo@crossborder.ai</div>
           </div>
         </div>
       </div>
     </aside>
-
-    <!-- Main -->
     <div class="flex-1 flex flex-col min-w-0">
-      <!-- Top bar -->
-      <header class="h-14 shrink-0 bg-ink-950/90 backdrop-blur-xl border-b border-white/[0.06] flex items-center justify-between px-5 gap-4 z-10">
+      <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10">
         <div class="flex items-center gap-3 min-w-0">
-          <h1 id="page-title" class="text-base font-semibold text-slate-50">总览看板</h1>
-          <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
+          <div class="breadcrumb hidden sm:block">套件 / <span id="breadcrumb-current">总览看板</span></div>
+          <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">总览看板</h1>
+          <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
         </div>
-        <div class="flex items-center gap-3">
-          <div class="hidden lg:flex items-center gap-1.5 bg-ink-950 border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-xs text-slate-500">
-            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            <select id="date-range" class="bg-transparent outline-none cursor-pointer font-medium">
-              <option value="7">近 7 天</option>
-              <option value="30" selected>近 30 天</option>
-              <option value="90">近 90 天</option>
-            </select>
-          </div>
-          <div id="platform-chips" class="flex items-center gap-1.5 flex-wrap justify-end"></div>
-          <button id="btn-ai-top" class="ml-1 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 border border-brand-500/25 transition">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            AI 分析
-          </button>
-          <a href="../" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-ink-850 text-slate-500 hover:text-brand-400 border border-white/[0.06] transition">总门户</a>
+        <div class="flex items-center gap-2.5">
+          
+          <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            AI 自动化在线
+          </span>
         </div>
       </header>
-
-      <!-- Content -->
       <main class="flex-1 overflow-y-auto p-5">
-        <!-- ===== OVERVIEW ===== -->
-        <section id="view-overview" class="view active space-y-5">
-          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4" id="kpi-cards"></div>
-          <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <div class="xl:col-span-2 panel panel-inner p-5">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-sm font-semibold text-slate-100">GMV 趋势</h3>
-                <span class="text-xs text-slate-500">单位：万美元</span>
-              </div>
-              <div class="h-64"><canvas id="chart-gmv"></canvas></div>
-            </div>
-            <div class="metric-card rounded-xl p-5">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-sm font-semibold text-slate-100">平台销售占比</h3>
-              </div>
-              <div class="h-64 flex items-center justify-center"><canvas id="chart-platform"></canvas></div>
-            </div>
+
+        <div id="view-overview" class="view active space-y-5">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            
+        <div class="metric-card p-4">
+          <div class="section-label">今日 GMV</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-gmv" data-val="128420" data-fmt="money">$128,420</div>
+          <div class="mt-1 text-xs text-gray-500">较昨日 +6.2%</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">广告花费</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">$18,260</div>
+          <div class="mt-1 text-xs text-gray-500">ACOS 18.4%</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">待处理异常</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-alerts" data-val="7" data-fmt="int">7</div>
+          <div class="mt-1 text-xs text-gray-500">3 条高优</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">AI 已处置</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">23</div>
+          <div class="mt-1 text-xs text-gray-500">今日自动闭环</div>
+        </div>
           </div>
-          <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div class="metric-card rounded-xl p-5">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-sm font-semibold text-slate-100">广告花费 vs 销售额</h3>
-              </div>
-              <div class="h-56"><canvas id="chart-ads"></canvas></div>
-            </div>
-            <div class="metric-card rounded-xl p-5">
+          <div class="grid lg:grid-cols-3 gap-4">
+            <div class="lg:col-span-2 panel p-4">
               <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-semibold text-slate-100 flex items-center gap-2">
-                  <span class="w-6 h-6 rounded-lg bg-violet-500/15 text-violet-400 flex items-center justify-center">
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                  </span>
-                  AI 智能洞察
-                </h3>
-                <button onclick="openAI()" class="text-xs text-brand-400 hover:text-brand-400 font-medium">查看更多 →</button>
+                <div><div class="section-label">Performance</div><h3 class="text-sm font-semibold">近 14 日 GMV</h3></div>
+                <button class="filter-chip active text-xs" onclick="document.getElementById('kpi-alerts').textContent='2';document.getElementById('kpi-alerts').dataset.val='2';toast('已应用 AI 洞察：仅显示高风险平台')">应用 AI 筛选</button>
               </div>
-              <div id="insights-list" class="space-y-3"></div>
+              <canvas id="chart-gmv" height="120"></canvas>
             </div>
+            
+      <div class="panel p-4">
+        <div class="section-label mb-1">Activity</div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">AI 刚刚自动完成了…</h3>
+        <div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">刚刚</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：将 Temu 低效关键词移入否定词库（12 个）</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">12 分钟前</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：对 3 笔高风险订单标记人工复核</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">1 小时前</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：生成明日波次预合并方案（WMS）</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">今日 09:14</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：对账匹配成功 148 / 152 笔</div>
+        </div></div>
+      </div>
           </div>
-        </section>
+          <div class="panel p-4">
+            <div class="section-label mb-1">Cross-platform Anomalies</div>
+            <h3 class="text-sm font-semibold mb-3">跨平台异常检测</h3>
+            <table class="w-full text-sm dense-table">
+              <thead class="sticky-th"><tr class="text-left border-b border-gray-200">
+                <th class="py-2 px-2">平台</th><th class="py-2 px-2">指标</th><th class="py-2 px-2">偏离</th><th class="py-2 px-2">状态</th><th class="py-2 px-2"></th>
+              </tr></thead>
+              <tbody>
+                <tr class="table-row border-b border-gray-100"><td class="px-2"><span class="platform-badge">TikTok</span></td><td class="px-2">ACOS</td><td class="px-2 text-rose-600 tabular">+14.2pp</td><td class="px-2"><span class="status-pill status-danger">高</span></td><td class="px-2"><button class="text-xs text-brand-500" onclick="toast('已下钻至广告组 TG-884')">处置</button></td></tr>
+                <tr class="table-row border-b border-gray-100"><td class="px-2"><span class="platform-badge">Shopee</span></td><td class="px-2">可售天数</td><td class="px-2 text-amber-600 tabular">6.2 天</td><td class="px-2"><span class="status-pill status-warning">中</span></td><td class="px-2"><button class="text-xs text-brand-500" onclick="switchView('suggestions','AI 建议');toast('已跳转补货建议')">处置</button></td></tr>
+                <tr class="table-row"><td class="px-2"><span class="platform-badge">Amazon</span></td><td class="px-2">退款率</td><td class="px-2 text-gray-700 tabular">+1.1pp</td><td class="px-2"><span class="status-pill status-info">低</span></td><td class="px-2"><button class="text-xs text-brand-500" onclick="toast('已创建监控规则')">处置</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-        <!-- ===== PRODUCTS ===== -->
-        <section id="view-products" class="view space-y-5">
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div class="lg:col-span-2 panel panel-inner overflow-hidden">
-              <div class="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-                <h3 class="text-sm font-semibold">商品列表</h3>
+        <div id="view-automation" class="view space-y-5">
+          
+      <div class="panel overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+          <div>
+            <div class="section-label">Automation Center</div>
+            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">AI Agents</h3>
+          </div>
+          <button class="btn-ghost px-2.5 py-1 text-xs" onclick="toast('已刷新 Agent 状态')">刷新</button>
+        </div>
+        <div class="px-4 py-2 bg-gray-50 border-b border-gray-200 hidden md:flex text-[11px] uppercase tracking-wide text-gray-400 font-semibold gap-4">
+          <div class="flex-1">Agent</div>
+          <div class="w-28">上次运行</div>
+          <div class="w-28 hidden lg:block">下次运行</div>
+          <div class="w-14 text-right">成功率</div>
+          <div class="w-9"></div>
+        </div>
+        
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">跨平台异常检测</span>
+              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">监控 GMV/ACOS/库存突变并推送</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">2 分钟前</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">98.2%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">今夜自动调价</span>
+              <span class="status-pill status-scheduled" data-status>已调度</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">低转化广告组预算再分配</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">昨日 23:00</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">今晚 23:00</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">94.1%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">库存风险扫描</span>
+              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">可售天数 < 10 自动建任务</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">18 分钟前</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">每小时</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">99.0%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">竞品价格哨兵</span>
+              <span class="status-pill status-paused" data-status>已暂停</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">Top SKU 竞品变价提醒</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">3 天前</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">—</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">91.5%</div>
+          <div class="toggle " onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+      </div>
+          
+      <div class="panel overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-200">
+          <div class="section-label">Playbooks</div>
+          <h3 class="text-sm font-semibold text-gray-900 mt-0.5">自动化规则</h3>
+        </div>
+        
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">GMV 突降 >15% 告警</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF gmv_wow < -0.15 THEN notify + create_task</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">ACOS 超标自动缩预算</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF acos > 0.35 THEN set_budget *= 0.7</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">新品测款自动加预算</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF roas_3d > 3.5 AND spend < 200 THEN boost</div>
+          </div>
+          <div class="toggle " onclick="togglePlaybook(this)"></div>
+        </div>
+      </div>
+        </div>
+
+        <div id="view-suggestions" class="view space-y-5">
+          <div class="grid lg:grid-cols-3 gap-4">
+            <div class="lg:col-span-2">
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <div class="section-label">AI Suggestions</div>
+            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">待处理建议</h3>
+          </div>
+          <span class="status-pill status-info">3 条待处理</span>
+        </div>
+        <div class="space-y-3">
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">暂停 TikTok 广告组 TG-884（ACOS 42%）</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">近 3 天转化骤降，模型建议暂停并转移预算至 AMZ-SP-12。</div>
+              <div class="mt-3 flex items-center gap-4">
                 <div class="flex items-center gap-2">
-                  <input id="product-search" type="text" placeholder="搜索 SKU / 标题…" class="text-xs border border-white/[0.06] rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-brand-500/30 w-48 bg-ink-800 text-slate-200 placeholder:text-slate-500" />
-                  <select id="product-status-filter" class="text-xs border border-white/[0.06] rounded-lg px-2 py-1.5 outline-none bg-ink-850">
-                    <option value="all">全部状态</option>
-                    <option value="在售">在售</option>
-                    <option value="缺货">缺货</option>
-                    <option value="草稿">草稿</option>
-                  </select>
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-high tabular">91%</span>
+                  <div class="conf-bar w-16"><span style="width:91%"></span></div>
                 </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">预计节省 $1,240/周</span></div>
               </div>
-              <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                  <thead class="bg-ink-950 text-xs text-slate-500 uppercase tracking-wide">
-                    <tr>
-                      <th class="text-left px-5 py-3 font-medium">商品</th>
-                      <th class="text-left px-3 py-3 font-medium">平台</th>
-                      <th class="text-right px-3 py-3 font-medium">售价</th>
-                      <th class="text-right px-3 py-3 font-medium">库存</th>
-                      <th class="text-right px-3 py-3 font-medium">30天销量</th>
-                      <th class="text-left px-3 py-3 font-medium">状态</th>
-                    </tr>
-                  </thead>
-                  <tbody id="products-tbody" class="divide-y divide-white/[0.06]"></tbody>
-                </table>
-              </div>
-            </div>
-            <div class="metric-card rounded-xl p-5">
-              <h3 class="text-sm font-semibold mb-1 flex items-center gap-2">
-                <span class="w-6 h-6 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center text-xs">AI</span>
-                AI 选品建议
-              </h3>
-              <p class="text-xs text-slate-500 mb-4">基于跨平台趋势与竞品数据</p>
-              <div id="ai-product-tips" class="space-y-3"></div>
             </div>
           </div>
-        </section>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved',1240)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div>
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">Shopee SKU-A19 补货提前 5 天</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">销量加速 + 交期拉长，建议今晚生成采购草稿。</div>
+              <div class="mt-3 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-high tabular">87%</span>
+                  <div class="conf-bar w-16"><span style="width:87%"></span></div>
+                </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">避免缺货损失 ~$3,800</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved',0)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div>
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">合并 Amazon 两场闪促活动预算</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">受众重叠 67%，合并后预计降低 CPA。</div>
+              <div class="mt-3 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-mid tabular">78%</span>
+                  <div class="conf-bar w-16"><span style="width:78%"></span></div>
+                </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">ROAS +0.4 预估</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-saved',0)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div></div>
+      </div></div>
+            <div class="space-y-4">
+              
+        <div class="metric-card p-4">
+          <div class="section-label">本周 AI 预估节省</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-saved" data-val="0" data-fmt="money">$0</div>
+          <div class="mt-1 text-xs text-gray-500">采纳建议后累加</div>
+        </div>
+              
+      <div class="panel p-4">
+        <div class="section-label mb-1">Activity</div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">AI 刚刚自动完成了…</h3>
+        <div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">刚刚</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：将 Temu 低效关键词移入否定词库（12 个）</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">12 分钟前</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：对 3 笔高风险订单标记人工复核</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">1 小时前</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：生成明日波次预合并方案（WMS）</div>
+        </div></div>
+      </div>
+            </div>
+          </div>
+        </div>
 
-        <!-- ===== ORDERS ===== -->
-        <section id="view-orders" class="view space-y-5">
-          <div class="flex items-center gap-2 flex-wrap" id="order-status-filters"></div>
-          <div class="panel panel-inner overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead class="bg-ink-950 text-xs text-slate-500">
-                  <tr>
-                    <th class="text-left px-5 py-3 font-medium">订单号</th>
-                    <th class="text-left px-3 py-3 font-medium">平台</th>
-                    <th class="text-left px-3 py-3 font-medium">商品</th>
-                    <th class="text-left px-3 py-3 font-medium">买家地区</th>
-                    <th class="text-right px-3 py-3 font-medium">金额</th>
-                    <th class="text-left px-3 py-3 font-medium">状态</th>
-                    <th class="text-left px-5 py-3 font-medium">下单时间</th>
-                  </tr>
-                </thead>
-                <tbody id="orders-tbody" class="divide-y divide-white/[0.06]"></tbody>
-              </table>
+        <div id="view-tonight" class="view space-y-5">
+          <div class="panel overflow-hidden">
+            <div class="px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+              <div><div class="section-label">Tonight</div><h3 class="text-sm font-semibold">今夜自动任务 · 23:00–06:00</h3></div>
+              <button class="btn-primary px-3 py-1.5 text-xs" onclick="toast('已确认今夜任务清单（6 项）')">确认全部</button>
             </div>
+            <table class="w-full text-sm dense-table">
+              <thead class="sticky-th"><tr class="text-left border-b border-gray-200">
+                <th class="py-2 px-4">任务</th><th class="py-2 px-4">模块</th><th class="py-2 px-4">计划</th><th class="py-2 px-4">影响</th><th class="py-2 px-4">状态</th>
+              </tr></thead>
+              <tbody class="divide-y divide-gray-100">
+                <tr class="table-row"><td class="px-4 py-2.5 font-medium">重分配低效广告预算</td><td class="px-4"><span class="platform-badge">Ads</span></td><td class="px-4 text-gray-500 tabular">23:00</td><td class="px-4 text-gray-500">~$800</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-medium">生成 A19/B02 采购草稿</td><td class="px-4"><span class="platform-badge">ERP</span></td><td class="px-4 text-gray-500 tabular">23:30</td><td class="px-4 text-gray-500">2 SKU</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-medium">波次预合并（深圳仓）</td><td class="px-4"><span class="platform-badge">WMS</span></td><td class="px-4 text-gray-500 tabular">00:15</td><td class="px-4 text-gray-500">~18%</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-medium">自动对账 Amazon 结算</td><td class="px-4"><span class="platform-badge">Finance</span></td><td class="px-4 text-gray-500 tabular">01:00</td><td class="px-4 text-gray-500">152 笔</td><td class="px-4"><span class="status-pill status-scheduled">已调度</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-medium">差评危机巡检</td><td class="px-4"><span class="platform-badge">CS</span></td><td class="px-4 text-gray-500 tabular">每 2h</td><td class="px-4 text-gray-500">—</td><td class="px-4"><span class="status-pill status-running">运行中</span></td></tr>
+                <tr class="table-row"><td class="px-4 py-2.5 font-medium">竞品价格快照</td><td class="px-4"><span class="platform-badge">BI</span></td><td class="px-4 text-gray-500 tabular">04:00</td><td class="px-4 text-gray-500">48 SKU</td><td class="px-4"><span class="status-pill status-paused">已暂停</span></td></tr>
+              </tbody>
+            </table>
           </div>
-        </section>
+        </div>
 
-        <!-- ===== ADS ===== -->
-        <section id="view-ads" class="view space-y-5">
-          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4" id="ads-kpi"></div>
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div class="lg:col-span-2 panel panel-inner overflow-hidden">
-              <div class="px-5 py-4 border-b border-white/[0.06]">
-                <h3 class="text-sm font-semibold">广告活动</h3>
-              </div>
-              <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                  <thead class="bg-ink-950 text-xs text-slate-500">
-                    <tr>
-                      <th class="text-left px-5 py-3 font-medium">活动名称</th>
-                      <th class="text-left px-3 py-3 font-medium">平台</th>
-                      <th class="text-right px-3 py-3 font-medium">花费</th>
-                      <th class="text-right px-3 py-3 font-medium">销售额</th>
-                      <th class="text-right px-3 py-3 font-medium">ACOS</th>
-                      <th class="text-right px-3 py-3 font-medium">ROAS</th>
-                      <th class="text-left px-3 py-3 font-medium">状态</th>
-                    </tr>
-                  </thead>
-                  <tbody id="ads-tbody" class="divide-y divide-white/[0.06]"></tbody>
-                </table>
-              </div>
+        <div id="view-assistant" class="view space-y-5">
+          <div class="panel p-4 max-w-2xl">
+            <div class="section-label mb-1">AI 经营助手</div>
+            <h3 class="text-sm font-semibold mb-4">对话式洞察</h3>
+            <div class="space-y-3 mb-4" id="chat-log">
+              <div class="ai-bubble-bot px-3 py-2 text-sm max-w-[90%]">你好。我可以解释异常、生成行动清单，或直接应用筛选。试试：「今晚优先处理什么？」</div>
             </div>
-            <div class="metric-card rounded-xl p-5">
-              <h3 class="text-sm font-semibold mb-1 flex items-center gap-2">
-                <span class="w-6 h-6 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xs">AI</span>
-                广告优化建议
-              </h3>
-              <p class="text-xs text-slate-500 mb-4">实时监测 · 一键采纳</p>
-              <div id="ai-ads-tips" class="space-y-3"></div>
+            <div class="flex gap-2">
+              <button class="btn-ghost px-3 py-1.5 text-xs" onclick="askAI('今晚优先处理什么？')">今晚优先处理什么？</button>
+              <button class="btn-ghost px-3 py-1.5 text-xs" onclick="askAI('哪些平台 ACOS 异常？')">哪些平台 ACOS 异常？</button>
+              <button class="btn-primary px-3 py-1.5 text-xs" onclick="askAI('应用高风险筛选')">应用高风险筛选</button>
             </div>
           </div>
-        </section>
+        </div>
 
-        <!-- ===== INVENTORY ===== -->
-        <section id="view-inventory" class="view space-y-5">
-          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4" id="inv-kpi"></div>
-          <div class="panel panel-inner overflow-hidden">
-            <div class="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-              <h3 class="text-sm font-semibold">库存明细（FBA / 海外仓）</h3>
-              <span class="text-xs text-rose-400 font-medium" id="inv-alert-count"></span>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead class="bg-ink-950 text-xs text-slate-500">
-                  <tr>
-                    <th class="text-left px-5 py-3 font-medium">SKU / 商品</th>
-                    <th class="text-left px-3 py-3 font-medium">仓库</th>
-                    <th class="text-right px-3 py-3 font-medium">可售</th>
-                    <th class="text-right px-3 py-3 font-medium">在途</th>
-                    <th class="text-right px-3 py-3 font-medium">预估可售天数</th>
-                    <th class="text-left px-3 py-3 font-medium">预警</th>
-                  </tr>
-                </thead>
-                <tbody id="inv-tbody" class="divide-y divide-white/[0.06]"></tbody>
-              </table>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
   </div>
 
-  <!-- AI Overlay + Panel -->
-  <div id="ai-overlay" class="fixed inset-0 bg-slate-900/30 z-40" onclick="closeAI()"></div>
-  <aside id="ai-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-ink-850 border-l border-white/[0.06] z-50 flex flex-col border-l border-white/[0.06]">
-    <div class="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between bg-gradient-to-r from-brand-600 to-violet-600 text-white">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-ink-850/20 flex items-center justify-center">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <div>
-          <div class="text-sm font-semibold">AI 运营助手</div>
-          <div class="text-[10px] text-white/70">支持爆款分析 · 竞品对比 · 广告优化</div>
+  <div id="drawer-detail" class="drawer">
+    <div class="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-gray-900">建议详情</h3>
+      <button class="text-gray-400 hover:text-gray-700" onclick="closeDrawer()">✕</button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5 space-y-4 text-sm">
+      <div>
+        <div class="section-label mb-1">Reasoning</div>
+        <p class="text-gray-700 leading-relaxed">基于近 14 天销量、库存周转、广告 ACOS 与季节性因子综合评估。模型置信度来自交叉验证与历史同类决策回测。</p>
+      </div>
+      <div>
+        <div class="section-label mb-1">Expected Impact</div>
+        <ul class="text-gray-700 space-y-1.5 list-disc pl-4">
+          <li>预计 7 日内毛利提升 2.1–3.4%</li>
+          <li>库存周转天数缩短约 4 天</li>
+          <li>相关 SKU 缺货风险下降 60%</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label mb-1">Evidence</div>
+        <div class="panel p-3 text-xs text-gray-600 space-y-1">
+          <div>· 销量增速 +28% WoW（同品类均值 +9%）</div>
+          <div>· 当前可售天数 6.2（安全线 14）</div>
+          <div>· 供应商交期 9 天，建议提前下单</div>
         </div>
       </div>
-      <button onclick="closeAI()" class="w-8 h-8 rounded-lg hover:bg-ink-850/10 flex items-center justify-center transition">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
     </div>
-    <div class="px-4 py-3 border-b border-white/[0.06] flex flex-wrap gap-2" id="ai-prompts"></div>
-    <div id="ai-chat" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
-    <div class="p-4 border-t border-white/[0.06]">
-      <div class="flex gap-2">
-        <input id="ai-input" type="text" placeholder="输入问题，例如：帮我分析本周爆款…" class="flex-1 text-sm border border-white/[0.06] rounded-xl px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-brand-500/30 bg-ink-800 text-slate-200" />
-        <button onclick="sendAI()" class="px-4 py-2.5 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700 transition">发送</button>
-      </div>
-      <p class="text-[10px] text-slate-500 mt-2 text-center">演示模式 · 回复为预设示例</p>
+    <div class="px-5 py-3 border-t border-gray-200 flex gap-2">
+      <button class="btn-primary flex-1 py-2 text-sm" onclick="closeDrawer();toast('已从详情页采纳建议')">采纳建议</button>
+      <button class="btn-ghost px-4 py-2 text-sm" onclick="closeDrawer()">关闭</button>
     </div>
-  </aside>
+  </div>
 
+  <div id="toast-host"></div>
+  <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
   <script>
-    // ========== PLATFORM META ==========
-    const PLATFORMS = {
-      amazon:  { id: 'amazon',  name: 'Amazon',  color: '#FF9900', bg: 'rgba(255,153,0,0.12)', short: 'Amz' },
-      shopee:  { id: 'shopee',  name: 'Shopee',  color: '#EE4D2D', bg: 'rgba(238,77,45,0.12)', short: 'Sho' },
-      tiktok:  { id: 'tiktok',  name: 'TikTok Shop', color: '#E2E8F0', bg: 'rgba(255,255,255,0.06)', short: 'TT' },
-      lazada:  { id: 'lazada',  name: 'Lazada',  color: '#A5B4FC', bg: 'rgba(15,20,109,0.25)', short: 'Laz' },
-      temu:    { id: 'temu',    name: 'Temu',    color: '#FB7701', bg: 'rgba(251,119,1,0.12)', short: 'Tem' },
-      walmart: { id: 'walmart', name: 'Walmart', color: '#0071CE', bg: 'rgba(0,113,206,0.12)', short: 'Wal' },
-    };
-    const PLATFORM_IDS = Object.keys(PLATFORMS);
-    let activePlatforms = new Set(PLATFORM_IDS);
-    let orderStatusFilter = 'all';
-    let productStatusFilter = 'all';
-    let productSearch = '';
-    let charts = {};
 
-    // ========== MOCK DATA ==========
-    const baseMetrics = {
-      amazon:  { gmv: 128.4, orders: 3420, adSpend: 18.6, roi: 4.2 },
-      shopee:  { gmv: 62.1,  orders: 5180, adSpend: 6.8,  roi: 3.8 },
-      tiktok:  { gmv: 89.7,  orders: 6740, adSpend: 14.2, roi: 5.1 },
-      lazada:  { gmv: 41.3,  orders: 2890, adSpend: 4.1,  roi: 3.5 },
-      temu:    { gmv: 56.8,  orders: 8120, adSpend: 5.4,  roi: 4.6 },
-      walmart: { gmv: 73.2,  orders: 1960, adSpend: 9.8,  roi: 3.9 },
-    };
-
-    const gmvTrendBase = {
-      labels: ['W1','W2','W3','W4'],
-      amazon:  [28, 31, 33, 36.4],
-      shopee:  [14, 15, 16, 17.1],
-      tiktok:  [18, 21, 24, 26.7],
-      lazada:  [9, 10, 11, 11.3],
-      temu:    [12, 13, 15, 16.8],
-      walmart: [16, 18, 19, 20.2],
-    };
-
-    const products = [
-      { sku: 'SK-LED-001', name: '智能LED台灯 三色调光', platform: 'amazon', price: '$29.99', priceNum: 29.99, stock: 1240, sales30: 856, status: '在售' },
-      { sku: 'SK-BAG-118', name: '旅行收纳袋套装 6件', platform: 'shopee', price: '₱899', priceNum: 15.8, stock: 320, sales30: 1240, status: '在售' },
-      { sku: 'SK-KIT-220', name: '厨房硅胶铲 5件套', platform: 'tiktok', price: '$12.99', priceNum: 12.99, stock: 45, sales30: 2100, status: '缺货' },
-      { sku: 'SK-PET-045', name: '宠物自动喂食器', platform: 'amazon', price: '$49.99', priceNum: 49.99, stock: 680, sales30: 412, status: '在售' },
-      { sku: 'SK-YOGA-07', name: '天然橡胶瑜伽垫 5mm', platform: 'lazada', price: 'RM89', priceNum: 19.2, stock: 210, sales30: 380, status: '在售' },
-      { sku: 'SK-CAB-332', name: 'Type-C 快充线 2m', platform: 'temu', price: '$4.99', priceNum: 4.99, stock: 5200, sales30: 8900, status: '在售' },
-      { sku: 'SK-HOME-91', name: '北欧风桌面收纳盒', platform: 'walmart', price: '$18.88', priceNum: 18.88, stock: 0, sales30: 156, status: '缺货' },
-      { sku: 'SK-BEAU-55', name: '便携化妆镜 LED', platform: 'tiktok', price: '$9.99', priceNum: 9.99, stock: 890, sales30: 3200, status: '在售' },
-      { sku: 'SK-OUT-77', name: '户外折叠椅 便携', platform: 'amazon', price: '$39.99', priceNum: 39.99, stock: 156, sales30: 278, status: '在售' },
-      { sku: 'SK-BABY-12', name: '婴儿硅胶咬咬乐', platform: 'shopee', price: '₱299', priceNum: 5.3, stock: 1100, sales30: 980, status: '在售' },
-      { sku: 'SK-TECH-88', name: '无线蓝牙耳机 Pro', platform: 'amazon', price: '$59.99', priceNum: 59.99, stock: 420, sales30: 640, status: '在售' },
-      { sku: 'SK-GARD-03', name: '园艺浇水壶 2L', platform: 'lazada', price: 'RM45', priceNum: 9.7, stock: 88, sales30: 120, status: '在售' },
-      { sku: 'SK-SPORT-21', name: '运动腰包 防水', platform: 'temu', price: '$7.49', priceNum: 7.49, stock: 2300, sales30: 4100, status: '在售' },
-      { sku: 'SK-NEW-99', name: '智能温控保温杯', platform: 'walmart', price: '$24.98', priceNum: 24.98, stock: 0, sales30: 0, status: '草稿' },
-      { sku: 'SK-KIT-441', name: '不锈钢量杯套装', platform: 'tiktok', price: '$15.99', priceNum: 15.99, stock: 560, sales30: 780, status: '在售' },
-    ];
-
-    const orders = [
-      { id: 'AMZ-9283741', platform: 'amazon', product: '智能LED台灯', region: '美国 CA', amount: '$29.99', status: '已发货', time: '2026-09-24 09:12' },
-      { id: 'TT-5510283', platform: 'tiktok', product: '便携化妆镜 LED', region: '美国 TX', amount: '$9.99', status: '待发货', time: '2026-09-24 08:45' },
-      { id: 'SHO-882910', platform: 'shopee', product: '旅行收纳袋套装', region: '菲律宾 Manila', amount: '₱899', status: '已完成', time: '2026-09-23 22:10' },
-      { id: 'TEM-441029', platform: 'temu', product: 'Type-C 快充线', region: '美国 NY', amount: '$4.99', status: '已发货', time: '2026-09-23 19:33' },
-      { id: 'LAZ-77201', platform: 'lazada', product: '天然橡胶瑜伽垫', region: '马来西亚 KL', amount: 'RM89', status: '待发货', time: '2026-09-23 16:20' },
-      { id: 'WAL-339201', platform: 'walmart', product: '北欧风桌面收纳盒', region: '美国 FL', amount: '$18.88', status: '已取消', time: '2026-09-23 14:05' },
-      { id: 'AMZ-9283702', platform: 'amazon', product: '宠物自动喂食器', region: '美国 WA', amount: '$49.99', status: '已完成', time: '2026-09-23 11:48' },
-      { id: 'TT-5510199', platform: 'tiktok', product: '厨房硅胶铲套装', region: '美国 IL', amount: '$12.99', status: '待发货', time: '2026-09-23 10:02' },
-      { id: 'SHO-882855', platform: 'shopee', product: '婴儿硅胶咬咬乐', region: '印尼 Jakarta', amount: '₱299', status: '已发货', time: '2026-09-22 21:30' },
-      { id: 'TEM-441001', platform: 'temu', product: '运动腰包 防水', region: '美国 OH', amount: '$7.49', status: '已完成', time: '2026-09-22 18:15' },
-      { id: 'AMZ-9283655', platform: 'amazon', product: '无线蓝牙耳机 Pro', region: '美国 NJ', amount: '$59.99', status: '已发货', time: '2026-09-22 15:40' },
-      { id: 'LAZ-77188', platform: 'lazada', product: '园艺浇水壶', region: '新加坡', amount: 'RM45', status: '待发货', time: '2026-09-22 12:22' },
-      { id: 'WAL-339188', platform: 'walmart', product: '智能温控保温杯', region: '美国 GA', amount: '$24.98', status: '待发货', time: '2026-09-22 09:55' },
-      { id: 'TT-5510088', platform: 'tiktok', product: '不锈钢量杯套装', region: '美国 CA', amount: '$15.99', status: '已完成', time: '2026-09-21 20:18' },
-    ];
-
-    const campaigns = [
-      { name: 'LED台灯 - SP 自动', platform: 'amazon', spend: 4200, sales: 18600, acos: 22.6, roas: 4.4, status: '投放中' },
-      { name: '化妆镜 - GMV Max', platform: 'tiktok', spend: 6800, sales: 41200, acos: 16.5, roas: 6.1, status: '投放中' },
-      { name: '收纳袋 - 搜索广告', platform: 'shopee', spend: 1800, sales: 7200, acos: 25.0, roas: 4.0, status: '投放中' },
-      { name: '快充线 - 全站推广', platform: 'temu', spend: 2100, sales: 15800, acos: 13.3, roas: 7.5, status: '投放中' },
-      { name: '喂食器 - SB 品牌', platform: 'amazon', spend: 3500, sales: 9800, acos: 35.7, roas: 2.8, status: '需优化' },
-      { name: '瑜伽垫 - Sponsored', platform: 'lazada', spend: 920, sales: 3100, acos: 29.7, roas: 3.4, status: '投放中' },
-      { name: '收纳盒 - 搜索', platform: 'walmart', spend: 2400, sales: 6600, acos: 36.4, roas: 2.8, status: '已暂停' },
-      { name: '耳机 Pro - 手动词', platform: 'amazon', spend: 5100, sales: 22400, acos: 22.8, roas: 4.4, status: '投放中' },
-    ];
-
-    const inventory = [
-      { sku: 'SK-LED-001', name: '智能LED台灯', warehouse: 'FBA 美西', available: 1240, inbound: 500, days: 42, alert: '正常' },
-      { sku: 'SK-KIT-220', name: '厨房硅胶铲套装', warehouse: 'FBA 美东', available: 45, inbound: 800, days: 3, alert: '紧急补货' },
-      { sku: 'SK-BEAU-55', name: '便携化妆镜 LED', warehouse: 'TikTok 美仓', available: 890, inbound: 2000, days: 8, alert: '库存偏低' },
-      { sku: 'SK-CAB-332', name: 'Type-C 快充线', warehouse: 'Temu 美仓', available: 5200, inbound: 0, days: 18, alert: '正常' },
-      { sku: 'SK-HOME-91', name: '北欧风桌面收纳盒', warehouse: 'Walmart FC', available: 0, inbound: 600, days: 0, alert: '缺货' },
-      { sku: 'SK-BAG-118', name: '旅行收纳袋套装', warehouse: 'Shopee 菲律宾仓', available: 320, inbound: 1000, days: 7, alert: '库存偏低' },
-      { sku: 'SK-PET-045', name: '宠物自动喂食器', warehouse: 'FBA 美西', available: 680, inbound: 300, days: 48, alert: '正常' },
-      { sku: 'SK-OUT-77', name: '户外折叠椅', warehouse: '海外仓-美东', available: 156, inbound: 400, days: 16, alert: '正常' },
-      { sku: 'SK-TECH-88', name: '无线蓝牙耳机 Pro', warehouse: 'FBA 美东', available: 420, inbound: 200, days: 19, alert: '正常' },
-      { sku: 'SK-YOGA-07', name: '天然橡胶瑜伽垫', warehouse: 'Lazada 马来仓', available: 210, inbound: 0, days: 16, alert: '正常' },
-    ];
-
-    const insights = [
-      { title: 'TikTok 化妆镜爆发', desc: '近7天 GMV 环比 +68%，建议加大预算并上新色号。', tag: '爆款', color: 'violet' },
-      { title: 'Amazon 喂食器 ACOS 偏高', desc: '品牌广告 ACOS 35.7%，建议收紧否定词并降价竞品词出价。', tag: '广告', color: 'amber' },
-      { title: '硅胶铲套装即将断货', desc: 'FBA 可售仅 3 天，在途 800 件预计 5 日后到仓，建议开启预售。', tag: '供应链', color: 'rose' },
-      { title: 'Temu 快充线 ROAS 出色', desc: 'ROAS 7.5，可复制到 Shopee/Lazada 同款链接测试。', tag: '选品', color: 'emerald' },
-    ];
-
-    const aiProductTips = [
-      { title: '便携雾化器', reason: '美区搜索量周环比 +42%，竞品评分 4.2，建议入局 Amazon + TikTok', score: 92 },
-      { title: '磁吸充电宝 10000mAh', reason: 'Temu 同类 TOP10 均价 $11.8，毛利空间充足', score: 88 },
-      { title: '儿童硅胶餐盘', reason: 'Shopee 东南亚母婴类目增速第一，建议布局', score: 85 },
-    ];
-
-    const aiAdsTips = [
-      { title: '下调「喂食器」品牌词出价 15%', impact: '预计 ACOS ↓6pp，节省约 $520/周', action: '一键采纳' },
-      { title: '暂停 Walmart 收纳盒搜索广告', impact: 'ROAS 仅 2.8，低于目标 3.5', action: '一键暂停' },
-      { title: '扩量 TikTok 化妆镜 GMV Max', impact: '建议日预算 +$200，预估 GMV +$1.2k', action: '一键扩量' },
-    ];
-
-    const aiPresets = {
-      '爆款分析': {
-        q: '帮我分析本周各平台爆款商品',
-        a: `本周跨平台爆款 TOP3：\n\n1. **便携化妆镜 LED**（TikTok）\n   · 销量 3,200 · GMV 环比 +68%\n   · 建议：加开 2 个短视频素材 + 扩预算\n\n2. **Type-C 快充线**（Temu）\n   · 销量 8,900 · ROAS 7.5\n   · 建议：复制 listing 到 Amazon 测款\n\n3. **旅行收纳袋套装**（Shopee）\n   · 东南亚搜索热度持续上升\n   · 建议：补货菲律宾仓并开搜索广告`
-      },
-      '竞品对比': {
-        q: '对比我们和竞品在 Amazon 台灯类目的表现',
-        a: `Amazon「智能台灯」类目对比：\n\n| 指标 | 我方 SK-LED-001 | 竞品 A | 竞品 B |\n| BSR | #1,240 | #890 | #2,100 |\n| 售价 | $29.99 | $34.99 | $24.99 |\n| 评分 | 4.6 (856评) | 4.4 | 4.5 |\n| ACOS | 22.6% | ~28% | ~19% |\n\n**洞察**：我方评分与转化领先，但 BSR 落后竞品 A。建议：\n· 补差评回复，冲击 4.7\n· 增加「护眼」「三色调光」核心词广告\n· 考虑捆绑卖（台灯+灯泡）拉高客单`
-      },
-      '广告优化建议': {
-        q: '给出本周广告优化优先级建议',
-        a: `本周广告优化优先级（按 ROI 影响排序）：\n\n🔴 **P0 · 立即处理**\n· Amazon 喂食器 SB：ACOS 35.7% → 收紧否定词，降出价 15%\n· Walmart 收纳盒：ROAS 2.8 → 建议暂停\n\n🟡 **P1 · 本周内**\n· TikTok 化妆镜：扩量日预算 +$200\n· Amazon 台灯自动：加精准词出单词\n\n🟢 **P2 · 观察**\n· Temu 快充线表现优异，维持现状\n\n预计执行后整体 ACOS ↓3.2pp，周节省广告费约 $1,100。`
-      },
-      '库存预警': {
-        q: '哪些 SKU 需要紧急补货？',
-        a: `紧急补货清单：\n\n1. **厨房硅胶铲套装** — FBA 可售仅 **3 天**\n   在途 800 件，ETA 5 天后。建议开启预售或临时提价控单。\n\n2. **便携化妆镜 LED** — 可售 **8 天**\n   销量暴增，建议加急海运/空运 2000 件。\n\n3. **旅行收纳袋** — 菲律宾仓 **7 天**\n   Shopee 旺季将至，建议补 1000+。\n\n4. **北欧风收纳盒** — Walmart **已断货**\n   在途 600，建议同步暂停广告避免无效花费。`
-      },
-    };
-
-    // ========== HELPERS ==========
-    function platformBadge(id) {
-      const p = PLATFORMS[id];
-      if (!p) return '';
-      return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold" style="background:${p.bg};color:${p.color}">
-        <span class="w-1.5 h-1.5 rounded-full" style="background:${p.color}"></span>${p.name}
-      </span>`;
+function toast(msg){
+  const host=document.getElementById('toast-host');
+  const el=document.createElement('div');
+  el.className='toast';
+  el.textContent=msg;
+  host.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300)},2800);
+}
+function switchView(id, title){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const t=document.getElementById('view-'+id);
+  if(t) t.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active', n.dataset.view===id));
+  const pt=document.getElementById('page-title');
+  if(pt && title) pt.textContent=title;
+  const bc=document.getElementById('breadcrumb-current');
+  if(bc && title) bc.textContent=title;
+}
+document.querySelectorAll('.nav-item[data-view]').forEach(btn=>{
+  btn.addEventListener('click',()=>switchView(btn.dataset.view, btn.dataset.title||btn.textContent.trim()));
+});
+function acceptSuggestion(btn, impactEl, delta){
+  const card=btn.closest('.suggestion-card');
+  if(card.classList.contains('accepted')) return;
+  card.classList.add('accepted');
+  btn.disabled=true;
+  btn.textContent='已采纳';
+  btn.className='px-2.5 py-1 text-xs font-medium rounded bg-emerald-100 text-emerald-700 cursor-default';
+  if(impactEl && delta){
+    const el=document.getElementById(impactEl);
+    if(el){
+      const cur=parseFloat(el.dataset.val||el.textContent.replace(/[^0-9.-]/g,''))||0;
+      const next=cur+delta;
+      el.dataset.val=next;
+      if(el.dataset.fmt==='money') el.textContent='$'+next.toLocaleString(undefined,{maximumFractionDigits:0});
+      else if(el.dataset.fmt==='pct') el.textContent=next.toFixed(1)+'%';
+      else if(el.dataset.fmt==='int') el.textContent=Math.round(next).toLocaleString();
+      else el.textContent=next;
+      el.classList.add('text-emerald-600');
     }
-
-    function statusPill(status) {
-      const map = {
-        '在售': 'bg-emerald-500/15 text-emerald-400',
-        '缺货': 'bg-rose-500/15 text-rose-400',
-        '草稿': 'bg-ink-800 text-slate-500',
-        '已发货': 'bg-blue-500/15 text-blue-400',
-        '待发货': 'bg-amber-500/15 text-amber-400',
-        '已完成': 'bg-emerald-500/15 text-emerald-400',
-        '已取消': 'bg-ink-800 text-slate-500',
-        '投放中': 'bg-emerald-500/15 text-emerald-400',
-        '需优化': 'bg-amber-500/15 text-amber-400',
-        '已暂停': 'bg-ink-800 text-slate-500',
-        '正常': 'bg-emerald-500/15 text-emerald-400',
-        '紧急补货': 'bg-rose-500/15 text-rose-400',
-        '库存偏低': 'bg-amber-500/15 text-amber-400',
-        '缺货': 'bg-rose-500/15 text-rose-400',
-      };
-      return `<span class="status-pill ${map[status] || 'bg-ink-800 text-slate-500'}">${status}</span>`;
-    }
-
-    function fmt(n, digits = 1) {
-      return n.toLocaleString('en-US', { maximumFractionDigits: digits, minimumFractionDigits: digits });
-    }
-
-    function filteredPlatforms() {
-      return PLATFORM_IDS.filter(id => activePlatforms.has(id));
-    }
-
-    function aggregateMetrics() {
-      const ids = filteredPlatforms();
-      let gmv = 0, orders = 0, adSpend = 0, roiSum = 0;
-      ids.forEach(id => {
-        gmv += baseMetrics[id].gmv;
-        orders += baseMetrics[id].orders;
-        adSpend += baseMetrics[id].adSpend;
-        roiSum += baseMetrics[id].roi;
-      });
-      const roi = ids.length ? roiSum / ids.length : 0;
-      return { gmv, orders, adSpend, roi };
-    }
-
-    // ========== RENDER PLATFORM CHIPS ==========
-    function renderChips() {
-      const el = document.getElementById('platform-chips');
-      el.innerHTML = PLATFORM_IDS.map(id => {
-        const p = PLATFORMS[id];
-        const active = activePlatforms.has(id);
-        return `<button class="platform-chip ${active ? 'active' : ''} inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-semibold border border-white/[0.06] bg-ink-850"
-          style="--chip-accent:${p.color};color:${p.color}" data-platform="${id}" title="${p.name}">
-          <span class="w-2 h-2 rounded-full" style="background:${p.color}"></span>${p.short}
-        </button>`;
-      }).join('');
-      el.querySelectorAll('.platform-chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.platform;
-          if (activePlatforms.has(id)) {
-            if (activePlatforms.size === 1) return; // keep at least one
-            activePlatforms.delete(id);
-          } else {
-            activePlatforms.add(id);
-          }
-          renderChips();
-          refreshAll();
-        });
-      });
-    }
-
-    // ========== OVERVIEW ==========
-    function renderKPIs() {
-      const m = aggregateMetrics();
-      const cards = [
-        { label: 'GMV（万美元）', value: '$' + fmt(m.gmv), delta: '+12.4%', up: true },
-        { label: '订单量', value: m.orders.toLocaleString(), delta: '+8.1%', up: true },
-        { label: '广告花费（万美元）', value: '$' + fmt(m.adSpend), delta: '+3.2%', up: true },
-        { label: '平均 ROI', value: fmt(m.roi) + 'x', delta: '+0.3x', up: true },
-      ];
-      document.getElementById('kpi-cards').innerHTML = cards.map(c => `
-        <div class="metric-card p-4">
-          <div class="text-[11px] font-medium uppercase tracking-wider text-slate-500 mb-1.5">${c.label}</div>
-          <div class="text-2xl font-semibold text-slate-50 tracking-tight tabular leading-none">${c.value}</div>
-          <div class="text-[11px] mt-2.5 font-medium ${c.up ? 'text-emerald-400' : 'text-rose-400'}">${c.delta} <span class="text-slate-500 font-normal">较上周</span></div>
-        </div>
-      `).join('');
-    }
-
-    function renderInsights() {
-      const colorMap = {
-        violet: 'border-violet-400/40 bg-violet-500/10',
-        amber: 'border-amber-400 bg-amber-500/10',
-        rose: 'border-rose-400 bg-rose-500/10',
-        emerald: 'border-emerald-400 bg-emerald-500/10',
-      };
-      const tagMap = {
-        violet: 'bg-violet-500/15 text-violet-400',
-        amber: 'bg-amber-500/15 text-amber-400',
-        rose: 'bg-rose-500/15 text-rose-400',
-        emerald: 'bg-emerald-500/15 text-emerald-400',
-      };
-      document.getElementById('insights-list').innerHTML = insights.map(i => `
-        <div class="insight-card rounded-lg p-3 ${colorMap[i.color]}">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${tagMap[i.color]}">${i.tag}</span>
-            <span class="text-xs font-semibold text-slate-100">${i.title}</span>
-          </div>
-          <p class="text-xs text-slate-500 leading-relaxed">${i.desc}</p>
-        </div>
-      `).join('');
-    }
-
-    function updateCharts() {
-      const ids = filteredPlatforms();
-      // GMV trend
-      const gmvData = gmvTrendBase.labels.map((_, i) =>
-        ids.reduce((s, id) => s + gmvTrendBase[id][i], 0)
-      );
-      if (charts.gmv) {
-        charts.gmv.data.datasets[0].data = gmvData;
-        charts.gmv.update();
-      } else {
-        charts.gmv = new Chart(document.getElementById('chart-gmv'), {
-          type: 'line',
-          data: {
-            labels: gmvTrendBase.labels.map(l => '第' + l.slice(1) + '周'),
-            datasets: [{
-              label: 'GMV',
-              data: gmvData,
-              borderColor: '#6366F1',
-              backgroundColor: 'rgba(99,102,241,0.15)',
-              fill: true,
-              tension: .35,
-              pointRadius: 4,
-              pointBackgroundColor: '#4f46e5',
-              borderWidth: 2.5,
-            }]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#64748B', font: { size: 11 } } },
-              x: { grid: { display: false }, ticks: { color: '#64748B', font: { size: 11 } } }
-            }
-          }
-        });
-      }
-
-      // Platform pie
-      const pieLabels = ids.map(id => PLATFORMS[id].name);
-      const pieData = ids.map(id => baseMetrics[id].gmv);
-      const pieColors = ids.map(id => PLATFORMS[id].color === '#000000' ? '#334155' : PLATFORMS[id].color);
-      if (charts.platform) {
-        charts.platform.data.labels = pieLabels;
-        charts.platform.data.datasets[0].data = pieData;
-        charts.platform.data.datasets[0].backgroundColor = pieColors;
-        charts.platform.update();
-      } else {
-        charts.platform = new Chart(document.getElementById('chart-platform'), {
-          type: 'doughnut',
-          data: {
-            labels: pieLabels,
-            datasets: [{ data: pieData, backgroundColor: pieColors, borderWidth: 2, borderColor: '#151B2B' }]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            cutout: '62%',
-            plugins: {
-              legend: { position: 'bottom', labels: { boxWidth: 10, padding: 12, font: { size: 11 } } }
-            }
-          }
-        });
-      }
-
-      // Ads vs sales
-      const adLabels = ids.map(id => PLATFORMS[id].short);
-      const spendData = ids.map(id => baseMetrics[id].adSpend);
-      const salesData = ids.map(id => baseMetrics[id].gmv);
-      if (charts.ads) {
-        charts.ads.data.labels = adLabels;
-        charts.ads.data.datasets[0].data = spendData;
-        charts.ads.data.datasets[1].data = salesData;
-        charts.ads.update();
-      } else {
-        charts.ads = new Chart(document.getElementById('chart-ads'), {
-          type: 'bar',
-          data: {
-            labels: adLabels,
-            datasets: [
-              { label: '广告花费', data: spendData, backgroundColor: 'rgba(99,102,241,0.35)', borderRadius: 4 },
-              { label: '销售额', data: salesData, backgroundColor: '#6366F1', borderRadius: 4 },
-            ]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: 'top', align: 'end', labels: { boxWidth: 10, font: { size: 11 } } } },
-            scales: {
-              y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#64748B', font: { size: 11 } } },
-              x: { grid: { display: false }, ticks: { color: '#64748B', font: { size: 11 } } }
-            }
-          }
-        });
-      }
-    }
-
-    // ========== PRODUCTS ==========
-    function renderProducts() {
-      const ids = filteredPlatforms();
-      let list = products.filter(p => ids.includes(p.platform));
-      if (productStatusFilter !== 'all') list = list.filter(p => p.status === productStatusFilter);
-      if (productSearch) {
-        const q = productSearch.toLowerCase();
-        list = list.filter(p => p.sku.toLowerCase().includes(q) || p.name.includes(q) || p.name.toLowerCase().includes(q));
-      }
-      document.getElementById('products-tbody').innerHTML = list.map(p => `
-        <tr class="table-row">
-          <td class="px-5 py-3">
-            <div class="font-medium text-slate-100">${p.name}</div>
-            <div class="text-[11px] text-slate-500 mt-0.5">${p.sku}</div>
-          </td>
-          <td class="px-3 py-3">${platformBadge(p.platform)}</td>
-          <td class="px-3 py-3 text-right font-medium">${p.price}</td>
-          <td class="px-3 py-3 text-right ${p.stock < 100 ? 'text-rose-400 font-semibold' : ''}">${p.stock.toLocaleString()}</td>
-          <td class="px-3 py-3 text-right">${p.sales30.toLocaleString()}</td>
-          <td class="px-3 py-3">${statusPill(p.status)}</td>
-        </tr>
-      `).join('') || `<tr><td colspan="6" class="px-5 py-8 text-center text-slate-500 text-sm">当前筛选无商品</td></tr>`;
-
-      document.getElementById('ai-product-tips').innerHTML = aiProductTips.map(t => `
-        <div class="rounded-xl border border-slate-150 border-white/[0.06] p-3 hover:border-brand-500/40 transition">
-          <div class="flex items-start justify-between gap-2 mb-1">
-            <span class="text-sm font-semibold text-slate-100">${t.title}</span>
-            <span class="shrink-0 text-[11px] font-bold text-brand-400 bg-brand-500/10 px-1.5 py-0.5 rounded">${t.score}分</span>
-          </div>
-          <p class="text-xs text-slate-500 leading-relaxed">${t.reason}</p>
-          <button class="mt-2 text-[11px] font-medium text-brand-400 hover:text-brand-400">加入选品池 →</button>
-        </div>
-      `).join('');
-    }
-
-    // ========== ORDERS ==========
-    function renderOrderFilters() {
-      const statuses = ['all', '待发货', '已发货', '已完成', '已取消'];
-      const labels = { all: '全部', '待发货': '待发货', '已发货': '已发货', '已完成': '已完成', '已取消': '已取消' };
-      document.getElementById('order-status-filters').innerHTML = statuses.map(s => `
-        <button class="order-filter px-3 py-1.5 rounded-lg text-xs font-medium border transition ${orderStatusFilter === s ? 'bg-brand-600 text-white border-brand-600' : 'bg-ink-850 text-slate-500 border-white/[0.06] hover:border-brand-300'}" data-status="${s}">${labels[s]}</button>
-      `).join('');
-      document.querySelectorAll('.order-filter').forEach(btn => {
-        btn.addEventListener('click', () => {
-          orderStatusFilter = btn.dataset.status;
-          renderOrderFilters();
-          renderOrders();
-        });
-      });
-    }
-
-    function renderOrders() {
-      const ids = filteredPlatforms();
-      let list = orders.filter(o => ids.includes(o.platform));
-      if (orderStatusFilter !== 'all') list = list.filter(o => o.status === orderStatusFilter);
-      document.getElementById('orders-tbody').innerHTML = list.map(o => `
-        <tr class="table-row">
-          <td class="px-5 py-3 font-mono text-xs text-slate-200">${o.id}</td>
-          <td class="px-3 py-3">${platformBadge(o.platform)}</td>
-          <td class="px-3 py-3 font-medium">${o.product}</td>
-          <td class="px-3 py-3 text-slate-500 text-xs">${o.region}</td>
-          <td class="px-3 py-3 text-right font-semibold">${o.amount}</td>
-          <td class="px-3 py-3">${statusPill(o.status)}</td>
-          <td class="px-5 py-3 text-xs text-slate-500">${o.time}</td>
-        </tr>
-      `).join('') || `<tr><td colspan="7" class="px-5 py-8 text-center text-slate-500 text-sm">当前筛选无订单</td></tr>`;
-    }
-
-    // ========== ADS ==========
-    function renderAds() {
-      const ids = filteredPlatforms();
-      const list = campaigns.filter(c => ids.includes(c.platform));
-      const totalSpend = list.reduce((s, c) => s + c.spend, 0);
-      const totalSales = list.reduce((s, c) => s + c.sales, 0);
-      const avgAcos = totalSales ? (totalSpend / totalSales * 100) : 0;
-      const avgRoas = totalSpend ? (totalSales / totalSpend) : 0;
-
-      document.getElementById('ads-kpi').innerHTML = [
-        { label: '广告总花费', value: '$' + totalSpend.toLocaleString() },
-        { label: '广告销售额', value: '$' + totalSales.toLocaleString() },
-        { label: '综合 ACOS', value: avgAcos.toFixed(1) + '%' },
-        { label: '综合 ROAS', value: avgRoas.toFixed(2) + 'x' },
-      ].map(c => `
-        <div class="metric-card p-4">
-          <div class="text-xs text-slate-500 mb-1">${c.label}</div>
-          <div class="text-xl font-bold text-slate-50 tabular">${c.value}</div>
-        </div>
-      `).join('');
-
-      document.getElementById('ads-tbody').innerHTML = list.map(c => `
-        <tr class="table-row">
-          <td class="px-5 py-3 font-medium">${c.name}</td>
-          <td class="px-3 py-3">${platformBadge(c.platform)}</td>
-          <td class="px-3 py-3 text-right">$${c.spend.toLocaleString()}</td>
-          <td class="px-3 py-3 text-right font-medium">$${c.sales.toLocaleString()}</td>
-          <td class="px-3 py-3 text-right ${c.acos > 30 ? 'text-rose-400 font-semibold' : ''}">${c.acos.toFixed(1)}%</td>
-          <td class="px-3 py-3 text-right ${c.roas >= 4 ? 'text-emerald-400 font-semibold' : ''}">${c.roas.toFixed(1)}x</td>
-          <td class="px-3 py-3">${statusPill(c.status)}</td>
-        </tr>
-      `).join('') || `<tr><td colspan="7" class="px-5 py-8 text-center text-slate-500 text-sm">当前筛选无广告</td></tr>`;
-
-      document.getElementById('ai-ads-tips').innerHTML = aiAdsTips.map(t => `
-        <div class="rounded-xl border border-white/[0.06] p-3">
-          <div class="text-sm font-semibold text-slate-100 mb-1">${t.title}</div>
-          <p class="text-xs text-slate-500 mb-2">${t.impact}</p>
-          <button class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 transition">${t.action}</button>
-        </div>
-      `).join('');
-    }
-
-    // ========== INVENTORY ==========
-    function renderInventory() {
-      const alertCount = inventory.filter(i => i.alert !== '正常').length;
-      document.getElementById('inv-alert-count').textContent = alertCount ? `${alertCount} 条库存预警` : '无预警';
-
-      const lowStock = inventory.filter(i => i.days > 0 && i.days <= 10).length;
-      const oos = inventory.filter(i => i.available === 0).length;
-      const inbound = inventory.reduce((s, i) => s + i.inbound, 0);
-      const available = inventory.reduce((s, i) => s + i.available, 0);
-
-      document.getElementById('inv-kpi').innerHTML = [
-        { label: '可售总量', value: available.toLocaleString(), sub: '件' },
-        { label: '在途总量', value: inbound.toLocaleString(), sub: '件' },
-        { label: '低库存 SKU', value: lowStock, sub: '需关注' },
-        { label: '缺货 SKU', value: oos, sub: '已断货' },
-      ].map(c => `
-        <div class="metric-card p-4">
-          <div class="text-xs text-slate-500 mb-1">${c.label}</div>
-          <div class="text-xl font-bold text-slate-50 tabular">${c.value} <span class="text-xs font-normal text-slate-500">${c.sub}</span></div>
-        </div>
-      `).join('');
-
-      document.getElementById('inv-tbody').innerHTML = inventory.map(i => `
-        <tr class="table-row">
-          <td class="px-5 py-3">
-            <div class="font-medium">${i.name}</div>
-            <div class="text-[11px] text-slate-500">${i.sku}</div>
-          </td>
-          <td class="px-3 py-3 text-xs text-slate-500">${i.warehouse}</td>
-          <td class="px-3 py-3 text-right ${i.available === 0 ? 'text-rose-400 font-bold' : ''}">${i.available.toLocaleString()}</td>
-          <td class="px-3 py-3 text-right text-slate-500">${i.inbound.toLocaleString()}</td>
-          <td class="px-3 py-3 text-right ${i.days <= 7 ? 'text-rose-400 font-semibold' : i.days <= 14 ? 'text-amber-400' : ''}">${i.days === 0 ? '—' : i.days + ' 天'}</td>
-          <td class="px-3 py-3">${statusPill(i.alert)}</td>
-        </tr>
-      `).join('');
-    }
-
-    // ========== AI PANEL ==========
-    function openAI() {
-      document.getElementById('ai-panel').classList.add('open');
-      document.getElementById('ai-overlay').classList.add('open');
-    }
-    function closeAI() {
-      document.getElementById('ai-panel').classList.remove('open');
-      document.getElementById('ai-overlay').classList.remove('open');
-    }
-    window.openAI = openAI;
-    window.closeAI = closeAI;
-
-    function initAIPrompts() {
-      document.getElementById('ai-prompts').innerHTML = Object.keys(aiPresets).map(k => `
-        <button class="ai-prompt-btn text-[11px] px-2.5 py-1 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 font-medium transition" data-key="${k}">${k}</button>
-      `).join('');
-      document.querySelectorAll('.ai-prompt-btn').forEach(btn => {
-        btn.addEventListener('click', () => runPreset(btn.dataset.key));
-      });
-      // Welcome
-      appendBot('你好！我是跨境电商 AI 运营助手。可以帮你做爆款分析、竞品对比、广告优化和库存预警。点击上方快捷问题开始，或直接输入。');
-    }
-
-    function appendUser(text) {
-      const el = document.getElementById('ai-chat');
-      el.innerHTML += `<div class="flex justify-end"><div class="ai-bubble-user px-3.5 py-2.5 text-sm max-w-[85%] whitespace-pre-wrap">${escapeHtml(text)}</div></div>`;
-      el.scrollTop = el.scrollHeight;
-    }
-    function appendBot(text) {
-      const el = document.getElementById('ai-chat');
-      const html = text
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\n/g, '<br>');
-      el.innerHTML += `<div class="flex justify-start"><div class="ai-bubble-bot px-3.5 py-2.5 text-sm max-w-[90%] leading-relaxed">${html}</div></div>`;
-      el.scrollTop = el.scrollHeight;
-    }
-    function escapeHtml(s) {
-      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    }
-
-    function runPreset(key) {
-      const p = aiPresets[key];
-      if (!p) return;
-      appendUser(p.q);
-      setTimeout(() => appendBot(p.a), 450);
-    }
-
-    function sendAI() {
-      const input = document.getElementById('ai-input');
-      const text = input.value.trim();
-      if (!text) return;
-      input.value = '';
-      appendUser(text);
-      // Match preset by keyword
-      let matched = null;
-      for (const [k, v] of Object.entries(aiPresets)) {
-        if (text.includes(k) || text.includes(v.q.slice(0, 4))) { matched = v; break; }
-      }
-      setTimeout(() => {
-        if (matched) appendBot(matched.a);
-        else appendBot('已收到你的问题。演示模式下，请点击上方快捷提示（爆款分析 / 竞品对比 / 广告优化建议 / 库存预警）查看完整示例回复，或在正式版中接入大模型 API。');
-      }, 500);
-    }
-    window.sendAI = sendAI;
-
-    // ========== NAV ==========
-    const titles = {
-      overview: '总览看板',
-      products: '商品中心',
-      orders: '订单中心',
-      ads: '广告中心',
-      inventory: '库存与供应链',
-    };
-
-    function switchView(view) {
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById('view-' + view).classList.add('active');
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.querySelector(`.nav-item[data-view="${view}"]`).classList.add('active');
-      document.getElementById('page-title').textContent = titles[view];
-      if (view === 'overview') {
-        // charts need visible canvas
-        setTimeout(() => { Object.values(charts).forEach(c => c && c.resize()); }, 50);
-      }
-    }
-
-    function refreshAll() {
-      renderKPIs();
-      updateCharts();
-      renderInsights();
-      renderProducts();
-      renderOrders();
-      renderAds();
-      renderInventory();
-    }
-
-    // ========== INIT ==========
-    document.querySelectorAll('.nav-item').forEach(btn => {
-      btn.addEventListener('click', () => switchView(btn.dataset.view));
-    });
-    document.getElementById('btn-open-ai').addEventListener('click', openAI);
-    document.getElementById('btn-ai-top').addEventListener('click', openAI);
-    document.getElementById('ai-input').addEventListener('keydown', e => { if (e.key === 'Enter') sendAI(); });
-    document.getElementById('product-search').addEventListener('input', e => {
-      productSearch = e.target.value;
-      renderProducts();
-    });
-    document.getElementById('product-status-filter').addEventListener('change', e => {
-      productStatusFilter = e.target.value;
-      renderProducts();
-    });
-    document.getElementById('date-range').addEventListener('change', () => {
-      // Mock: slightly nudge numbers for demo feel
-      refreshAll();
-    });
-
-    renderChips();
-    renderOrderFilters();
-    initAIPrompts();
-    refreshAll();
-  </script>
-<script>
-  if (window.Chart) {
-    Chart.defaults.color = '#64748B';
-    Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
-    Chart.defaults.plugins.legend.labels.color = '#94A3B8';
   }
-</script>
+  toast('已采纳 AI 建议，相关指标已更新');
+}
+function ignoreSuggestion(btn){
+  const card=btn.closest('.suggestion-card');
+  card.style.opacity='0.45';
+  card.querySelectorAll('button').forEach(b=>b.disabled=true);
+  toast('已忽略该建议');
+}
+function toggleAgent(el){
+  el.classList.toggle('on');
+  const row=el.closest('.agent-row')||el.closest('[data-agent]');
+  const pill=row && row.querySelector('[data-status]');
+  if(pill){
+    if(el.classList.contains('on')){
+      pill.className='status-pill status-running';
+      pill.innerHTML='<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中';
+      toast('Agent 已启动');
+    } else {
+      pill.className='status-pill status-paused';
+      pill.innerHTML='已暂停';
+      toast('Agent 已暂停');
+    }
+  }
+}
+function togglePlaybook(el){
+  el.classList.toggle('on');
+  toast(el.classList.contains('on')?'规则已启用':'规则已停用');
+}
+function openDrawer(id){
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById(id).classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
+}
+
+
+function askAI(q){
+  const log=document.getElementById('chat-log');
+  const u=document.createElement('div');
+  u.className='ai-bubble-user px-3 py-2 text-sm max-w-[80%] ml-auto';
+  u.textContent=q;
+  log.appendChild(u);
+  setTimeout(()=>{
+    const b=document.createElement('div');
+    b.className='ai-bubble-bot px-3 py-2 text-sm max-w-[90%]';
+    if(q.includes('今晚')) b.innerHTML='建议优先：① 暂停 TG-884（ACOS 42%）；② 确认 A19 采购草稿；③ 深圳仓波次预合并。可在「今夜自动任务」一键确认。';
+    else if(q.includes('ACOS')) b.innerHTML='TikTok 整体 ACOS 偏高 14pp；Amazon SP 正常。已为你标出 2 个可暂停广告组。';
+    else { b.innerHTML='已应用「高风险」筛选，异常数从 7 → 2。'; document.getElementById('kpi-alerts').textContent='2'; document.getElementById('kpi-alerts').dataset.val='2'; }
+    log.appendChild(b);
+    toast('AI 助手已回复');
+  },400);
+}
+Chart.defaults.color='#9CA3AF';
+Chart.defaults.borderColor='#E5E7EB';
+new Chart(document.getElementById('chart-gmv'),{
+  type:'line',
+  data:{labels:['D-13','D-11','D-9','D-7','D-5','D-3','D-1'],datasets:[
+    {label:'GMV',data:[98,105,112,108,121,118,128],borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.35,pointRadius:0,borderWidth:2}
+  ]},
+  options:{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#F3F4F6'},ticks:{callback:v=>'$'+v+'k'}}},maintainAspectRatio:true}
+});
+
+  </script>
 </body>
 </html>

@@ -3,23 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智能客服 · 跨境电商AI套件</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="../shared.css" />
+<link rel="stylesheet" href="../shared.css" />
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           colors: {
             brand: {
-              50: '#eef2ff', 100: '#e0e7ff', 400: '#818cf8',
-              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              50: '#EFF6FF', 100: '#DBEAFE', 200: '#BFDBFE',
+              500: '#2563EB', 600: '#1D4ED8', 700: '#1E40AF',
             },
-            ink: {
-              950: '#0B0F19', 900: '#111827', 850: '#151B2B',
-              800: '#1C2438', 700: '#243049',
-            }
+            surface: { DEFAULT: '#FFFFFF', muted: '#F3F4F6', page: '#F6F8FA' },
           },
           fontFamily: {
             sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
@@ -28,223 +25,463 @@
       }
     }
   </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  </style>
-
-  
-  
-  <title>智能客服中心 · 跨境电商AI套件</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');</style>
 </head>
-<body class="dark bg-ink-950 text-slate-100 antialiased">
+
+<body class="bg-surface-page text-gray-900 antialiased">
   <div class="flex h-screen overflow-hidden">
-    <aside class="w-56 shrink-0 bg-ink-900 border-r border-white/[0.06] flex flex-col z-20">
-      <div class="px-4 py-5 border-b border-white/[0.06]">
-        <a href="../" class="flex items-center gap-2.5 group">
-          <div class="w-9 h-9 rounded-lg bg-brand-500/15 border border-brand-500/25 flex items-center justify-center">
-            <svg class="w-5 h-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
+    <aside class="w-[220px] shrink-0 bg-white border-r border-gray-200 flex flex-col z-20">
+      <div class="px-4 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-500">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
           </div>
           <div>
-            <div class="text-sm font-semibold text-slate-50 leading-tight group-hover:text-brand-400 transition">智能客服中心</div>
-            <div class="text-[10px] text-slate-500 mt-0.5">多语言 · 工单 · 预警</div>
+            <div class="text-sm font-semibold text-gray-900 leading-tight">智能客服</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">套件 · CS</div>
           </div>
-        </a>
+        </div>
       </div>
-      <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="overview">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-          客服总览
+      <nav class="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+        <button class="nav-item active w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="inbox" data-title="工单收件箱">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+          工单收件箱
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="tickets">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-          多语言工单
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="drafts" data-title="回复草稿">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+          回复草稿
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="sessions">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-          会话列表
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="crisis" data-title="差评危机">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          差评危机
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="rules">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          自动回复规则
+        <button class="nav-item  w-full flex items-center gap-2.5 px-3 py-2 text-sm transition" data-view="automation" data-title="自动化中心">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          自动化中心
         </button>
-        <button class="nav-item w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] transition" data-view="alerts">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-          差评/退货预警
-        </button>
-        <div class="pt-3 mt-2 border-t border-white/[0.06] px-2">
-          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-500 hover:bg-white/[0.04] hover:text-brand-400 transition">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <div class="pt-3 mt-2 border-t border-gray-200 px-1">
+          <a href="../" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-500 hover:bg-gray-50 hover:text-brand-500 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-4 0h4"/></svg>
             返回总门户
           </a>
         </div>
       </nav>
-      <div class="px-4 py-3 border-t border-white/[0.06]">
+      <div class="px-4 py-3 border-t border-gray-200">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-brand-500/15 text-brand-400 flex items-center justify-center text-xs font-bold">演</div>
+          <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs font-bold border border-brand-200">演</div>
           <div class="min-w-0">
-            <div class="text-xs font-semibold truncate">演示账号</div>
-            <div class="text-[10px] text-slate-500">demo@crossborder.ai</div>
+            <div class="text-xs font-semibold text-gray-900 truncate">演示账号</div>
+            <div class="text-[10px] text-gray-400">demo@crossborder.ai</div>
           </div>
         </div>
       </div>
     </aside>
     <div class="flex-1 flex flex-col min-w-0">
-      <header class="h-14 shrink-0 bg-ink-950/90 backdrop-blur-xl border-b border-white/[0.06] flex items-center justify-between px-5 gap-4 z-10">
+      <header class="h-12 shrink-0 bg-white border-b border-gray-200 flex items-center justify-between px-5 gap-4 z-10">
         <div class="flex items-center gap-3 min-w-0">
-          <h1 id="page-title" class="text-base font-semibold text-slate-50">客服总览</h1>
-          <span class="demo-badge px-2 py-0.5 rounded-full">演示数据</span>
+          <div class="breadcrumb hidden sm:block">套件 / <span id="breadcrumb-current">工单收件箱</span></div>
+          <h1 id="page-title" class="text-[15px] font-semibold text-gray-900 sm:hidden">工单收件箱</h1>
+          <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
         </div>
-        <div class="flex items-center gap-2 text-xs text-slate-500">
-          <span class="hidden md:inline">跨境电商AI套件</span>
-          <a href="../" class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-400 hover:bg-brand-500/15 font-medium border border-brand-500/25 transition">总门户</a>
+        <div class="flex items-center gap-2.5">
+          
+          <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 px-2.5 py-1 rounded-md border border-gray-200 bg-white">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            AI 自动化在线
+          </span>
         </div>
       </header>
       <main class="flex-1 overflow-y-auto p-5">
 
-        <section id="view-overview" class="view active space-y-5">
-          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">今日会话</div><div class="text-2xl font-bold tabular">342</div><div class="text-xs text-emerald-400 mt-1">自动解决率 68%</div></div>
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">待处理工单</div><div class="text-2xl font-bold text-amber-400 tabular">47</div><div class="text-xs text-slate-500 mt-1">紧急 8</div></div>
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">平均响应</div><div class="text-2xl font-bold tabular">2.8 min</div><div class="text-xs text-emerald-400 mt-1">SLA 达标 99%</div></div>
-            <div class="metric-card panel panel-inner p-4"><div class="text-xs text-slate-500 mb-1">差评预警</div><div class="text-2xl font-bold text-rose-400 tabular">6</div><div class="text-xs text-amber-400 mt-1">退货意向 14</div></div>
+        <div id="view-inbox" class="view active space-y-5">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            
+        <div class="metric-card p-4">
+          <div class="section-label">待处理工单</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-tickets" data-val="42" data-fmt="int">42</div>
+          <div class="mt-1 text-xs text-gray-500">高优 6</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">AI 已分类</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular">128</div>
+          <div class="mt-1 text-xs text-gray-500">今日</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">预测 CSAT</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-csat" data-val="4.6" data-fmt="pct">4.6</div>
+          <div class="mt-1 text-xs text-gray-500">/ 5.0</div>
+        </div>
+            
+        <div class="metric-card p-4">
+          <div class="section-label">已发送草稿</div>
+          <div class="mt-1.5 text-2xl font-semibold text-gray-900 tabular" id="kpi-sent" data-val="0" data-fmt="int">0</div>
+          <div class="mt-1 text-xs text-gray-500">模拟</div>
+        </div>
           </div>
-          <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div class="metric-card rounded-xl p-5"><h3 class="text-sm font-semibold mb-4">会话量（近7日）</h3><div class="h-56"><canvas id="cs-chart-vol"></canvas></div></div>
-            <div class="metric-card rounded-xl p-5"><h3 class="text-sm font-semibold mb-4">语种分布</h3><div class="h-56"><canvas id="cs-chart-lang"></canvas></div></div>
-          </div>
-        </section>
-
-        <section id="view-tickets" class="view space-y-4">
-          <div class="panel panel-inner overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="bg-ink-950 text-slate-500 text-xs">
-                <tr><th class="text-left px-4 py-3">工单号</th><th class="text-left px-4 py-3">平台</th><th class="text-left px-4 py-3">语种</th><th class="text-left px-4 py-3">主题</th><th class="text-left px-4 py-3">优先级</th><th class="text-left px-4 py-3">状态</th></tr>
-              </thead>
-              <tbody class="divide-y divide-white/[0.06]">
-                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">TK-92841</td><td class="px-4 py-2.5"><span class="platform-badge">Amazon</span></td><td class="px-4 py-2.5">EN</td><td class="px-4 py-2.5">Where is my order?</td><td class="px-4 py-2.5"><span class="status-pill bg-rose-500/15 text-rose-400">紧急</span></td><td class="px-4 py-2.5"><span class="status-pill bg-amber-500/15 text-amber-400">处理中</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">TK-92838</td><td class="px-4 py-2.5"><span class="platform-badge">Shopee</span></td><td class="px-4 py-2.5">MS</td><td class="px-4 py-2.5">Barang rosak / 货损</td><td class="px-4 py-2.5"><span class="status-pill bg-amber-500/15 text-amber-400">高</span></td><td class="px-4 py-2.5"><span class="status-pill bg-blue-500/15 text-blue-400">待分配</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">TK-92830</td><td class="px-4 py-2.5"><span class="platform-badge">TikTok</span></td><td class="px-4 py-2.5">EN</td><td class="px-4 py-2.5">Request return / refund</td><td class="px-4 py-2.5"><span class="status-pill bg-amber-500/15 text-amber-400">高</span></td><td class="px-4 py-2.5"><span class="status-pill bg-violet-500/15 text-violet-400">AI草稿</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">TK-92822</td><td class="px-4 py-2.5"><span class="platform-badge">Lazada</span></td><td class="px-4 py-2.5">ID</td><td class="px-4 py-2.5">Ukuran salah / 尺码错误</td><td class="px-4 py-2.5"><span class="status-pill bg-ink-800 text-slate-500">中</span></td><td class="px-4 py-2.5"><span class="status-pill bg-emerald-500/15 text-emerald-400">已解决</span></td></tr>
-                <tr class="table-row"><td class="px-4 py-2.5 font-mono text-xs">TK-92815</td><td class="px-4 py-2.5"><span class="platform-badge">Walmart</span></td><td class="px-4 py-2.5">EN</td><td class="px-4 py-2.5">Missing item in package</td><td class="px-4 py-2.5"><span class="status-pill bg-rose-500/15 text-rose-400">紧急</span></td><td class="px-4 py-2.5"><span class="status-pill bg-amber-500/15 text-amber-400">处理中</span></td></tr>
+          <div class="panel overflow-hidden">
+            <div class="px-4 py-3 border-b border-gray-200"><h3 class="text-sm font-semibold">工单自动分类 + 优先级</h3></div>
+            <table class="w-full text-sm dense-table">
+              <thead class="sticky-th"><tr class="text-left border-b border-gray-200">
+                <th class="px-4 py-2">工单</th><th class="px-4 py-2">分类</th><th class="px-4 py-2">优先级</th><th class="px-4 py-2">语言</th><th class="px-4 py-2">预测 CSAT</th>
+              </tr></thead>
+              <tbody>
+                <tr class="table-row border-b border-gray-100"><td class="px-4 font-medium">CS-4412</td><td class="px-4">物流延误</td><td class="px-4"><span class="status-pill status-warning">中</span></td><td class="px-4">EN</td><td class="px-4 tabular">4.4</td></tr>
+                <tr class="table-row border-b border-gray-100"><td class="px-4 font-medium">CS-4413</td><td class="px-4">退款申请</td><td class="px-4"><span class="status-pill status-danger">高</span></td><td class="px-4">TH</td><td class="px-4 tabular">3.9</td></tr>
+                <tr class="table-row"><td class="px-4 font-medium">CS-4414</td><td class="px-4">尺码咨询</td><td class="px-4"><span class="status-pill status-info">低</span></td><td class="px-4">ID</td><td class="px-4 tabular">4.8</td></tr>
               </tbody>
             </table>
           </div>
-        </section>
-
-        <section id="view-sessions" class="view space-y-4">
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 h-[420px]">
-            <div class="panel panel-inner overflow-hidden flex flex-col">
-              <div class="px-4 py-3 border-b border-white/[0.06] text-sm font-semibold">会话列表</div>
-              <div class="flex-1 overflow-y-auto divide-y divide-slate-50">
-                <div class="px-4 py-3 hover:bg-brand-500/10 cursor-pointer bg-brand-500/10/50">
-                  <div class="flex justify-between text-xs mb-1"><span class="font-medium">John D.</span><span class="text-slate-500">2 min</span></div>
-                  <div class="text-xs text-slate-500 truncate">Where is my order #AMZ-...</div>
-                </div>
-                <div class="px-4 py-3 hover:bg-white/[0.04] cursor-pointer">
-                  <div class="flex justify-between text-xs mb-1"><span class="font-medium">Aina M.</span><span class="text-slate-500">8 min</span></div>
-                  <div class="text-xs text-slate-500 truncate">Barang saya rosak...</div>
-                </div>
-                <div class="px-4 py-3 hover:bg-white/[0.04] cursor-pointer">
-                  <div class="flex justify-between text-xs mb-1"><span class="font-medium">Mei L.</span><span class="text-slate-500">15 min</span></div>
-                  <div class="text-xs text-slate-500 truncate">Can I get a discount code?</div>
-                </div>
-              </div>
+        </div>
+        <div id="view-drafts" class="view space-y-5">
+          <div class="panel p-4 max-w-2xl">
+            <div class="flex items-center justify-between mb-3">
+              <div><div class="section-label">Draft · CS-4412</div><h3 class="text-sm font-semibold">多语言自动回复草稿</h3></div>
+              <span class="status-pill status-info">预测 CSAT 4.4</span>
             </div>
-            <div class="lg:col-span-2 panel panel-inner flex flex-col overflow-hidden">
-              <div class="px-4 py-3 border-b border-white/[0.06] flex items-center justify-between">
-                <div class="text-sm font-semibold">John D. · Amazon · EN</div>
-                <span class="status-pill bg-violet-500/15 text-violet-400">AI 辅助中</span>
-              </div>
-              <div class="flex-1 p-4 space-y-3 overflow-y-auto bg-ink-950">
-                <div class="max-w-[80%] bg-ink-850 rounded-2xl rounded-tl-sm px-3 py-2 text-sm shadow-sm">Hi, I ordered LED desk lamp 3 days ago (AMZ-113-9284716). Tracking hasn't updated. Can you help?</div>
-                <div class="max-w-[80%] ml-auto bg-brand-600 text-white rounded-2xl rounded-tr-sm px-3 py-2 text-sm">Hi John! I've checked your order — it's currently in transit with YunExpress (YT2492847192CN), departed LAX hub yesterday. Expected delivery: Sep 26–28. Would you like me to send the latest tracking link?</div>
-                <div class="max-w-[80%] bg-ink-850 rounded-2xl rounded-tl-sm px-3 py-2 text-sm shadow-sm">Yes please, thank you!</div>
-              </div>
-              <div class="p-3 border-t border-white/[0.06] flex gap-2">
-                <input class="flex-1 text-sm border border-white/[0.06] rounded-lg px-3 py-2 outline-none focus:border-brand-400 bg-ink-800 text-slate-200" placeholder="输入回复...（演示）" />
-                <button class="px-4 py-2 rounded-lg bg-brand-600 text-white text-xs font-semibold">发送</button>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-700 leading-relaxed mb-3" id="draft-body">
+              Hi Sarah, we're sorry for the delay. Your package is now with the local carrier (tracking updated). Expected delivery in 1–2 business days. We've also applied a $5 courtesy credit to your account. Please let us know if you need anything else.
+            </div>
+            <div class="flex gap-2 mb-3">
+              <button class="filter-chip active" onclick="setLang(this,'en')">English</button>
+              <button class="filter-chip" onclick="setLang(this,'th')">ไทย</button>
+              <button class="filter-chip" onclick="setLang(this,'id')">Indonesia</button>
+            </div>
+            <button class="btn-primary px-3 py-1.5 text-xs" id="btn-send-draft" onclick="sendDraft()">一键发送（模拟）</button>
+          </div>
+          
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <div class="section-label">AI Suggestions</div>
+            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">待处理建议</h3>
+          </div>
+          <span class="status-pill status-info">2 条待处理</span>
+        </div>
+        <div class="space-y-3">
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">将 CS-4413 升级至退款专员</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">高优退款 + 历史投诉，建议专人跟进。</div>
+              <div class="mt-3 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-high tabular">91%</span>
+                  <div class="conf-bar w-16"><span style="width:91%"></span></div>
+                </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">缩短处理 6h</span></div>
               </div>
             </div>
           </div>
-        </section>
-
-        <section id="view-rules" class="view space-y-4">
-          <div class="space-y-3">
-            <div class="metric-card rounded-xl p-4 flex items-center justify-between">
-              <div><div class="font-medium text-sm">物流查询自动回复</div><div class="text-xs text-slate-500 mt-1">触发词: where is / tracking / 物流 · 自动拉取运单轨迹</div></div>
-              <span class="status-pill bg-emerald-500/15 text-emerald-400">已启用</span>
-            </div>
-            <div class="metric-card rounded-xl p-4 flex items-center justify-between">
-              <div><div class="font-medium text-sm">退货政策说明（多语）</div><div class="text-xs text-slate-500 mt-1">EN/MS/ID/TH · 匹配 return/refund/tukar</div></div>
-              <span class="status-pill bg-emerald-500/15 text-emerald-400">已启用</span>
-            </div>
-            <div class="metric-card rounded-xl p-4 flex items-center justify-between">
-              <div><div class="font-medium text-sm">差评挽留话术</div><div class="text-xs text-slate-500 mt-1">检测到 1–2 星评价意图时转人工 + 优惠券草稿</div></div>
-              <span class="status-pill bg-emerald-500/15 text-emerald-400">已启用</span>
-            </div>
-            <div class="metric-card rounded-xl p-4 flex items-center justify-between">
-              <div><div class="font-medium text-sm">非工作时间欢迎语</div><div class="text-xs text-slate-500 mt-1">美西 22:00–08:00 · 承诺 4h 内回复</div></div>
-              <span class="status-pill bg-ink-800 text-slate-500">已暂停</span>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-sent',0)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div>
+        <div class="suggestion-card p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-gray-900">对 CS-4414 使用尺码表模板</div>
+              <div class="text-xs text-gray-500 mt-1 leading-relaxed">同类咨询模板回复满意度更高。</div>
+              <div class="mt-3 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-gray-400">置信度</span>
+                  <span class="text-xs font-semibold conf-high tabular">85%</span>
+                  <div class="conf-bar w-16"><span style="width:85%"></span></div>
+                </div>
+                <div class="text-[11px] text-gray-400">影响 <span class="text-gray-700 font-medium">CSAT +0.2</span></div>
+              </div>
             </div>
           </div>
-        </section>
-
-        <section id="view-alerts" class="view space-y-4">
-          <div class="space-y-3">
-            <div class="bg-rose-500/15 border border-rose-500/25 rounded-xl p-4">
-              <div class="flex items-center gap-2 mb-1"><span class="status-pill bg-rose-500/15 text-rose-400">差评风险</span><span class="text-xs text-slate-500">Amazon · 2 min ago</span></div>
-              <div class="text-sm font-medium">买家提及 "terrible quality" · 订单 AMZ-113-9102001</div>
-              <div class="text-xs text-slate-500 mt-1">AI 已生成挽留草稿 · 建议 15 分钟内介入</div>
-            </div>
-            <div class="bg-amber-500/15 border border-amber-500/25 rounded-xl p-4">
-              <div class="flex items-center gap-2 mb-1"><span class="status-pill bg-amber-500/15 text-amber-400">退货意向</span><span class="text-xs text-slate-500">TikTok · 18 min ago</span></div>
-              <div class="text-sm font-medium">"want to return this, wrong size" · TT-580290100</div>
-              <div class="text-xs text-slate-500 mt-1">可提供免费换码 · 预估挽留成功率 62%</div>
-            </div>
-            <div class="bg-amber-500/15 border border-amber-500/25 rounded-xl p-4">
-              <div class="flex items-center gap-2 mb-1"><span class="status-pill bg-amber-500/15 text-amber-400">退货意向</span><span class="text-xs text-slate-500">Shopee · 1h ago</span></div>
-              <div class="text-sm font-medium">"nak return, tak puas hati" · SHP-240923-1102</div>
-              <div class="text-xs text-slate-500 mt-1">马来语 · 已匹配退货政策模板</div>
+          <div class="mt-3 flex items-center gap-2">
+            <button class="btn-primary px-2.5 py-1 text-xs" onclick="acceptSuggestion(this,'kpi-sent',0)">一键采纳</button>
+            <button class="btn-ghost px-2.5 py-1 text-xs" onclick="ignoreSuggestion(this)">忽略</button>
+            <button class="text-xs text-brand-500 hover:underline px-1" onclick="openDrawer('drawer-detail')">查看详情</button>
+          </div>
+        </div></div>
+      </div>
+        </div>
+        <div id="view-crisis" class="view space-y-5">
+          <div class="panel p-4 border-l-2 border-rose-500">
+            <div class="section-label mb-1 text-rose-600">Crisis Escalation</div>
+            <h3 class="text-sm font-semibold mb-2">差评危机 · 1 星评论 RV-882</h3>
+            <p class="text-sm text-gray-600 mb-3">「Product arrived damaged and support ignored me.」— Amazon · SKU-A19</p>
+            <div class="flex gap-2">
+              <button class="btn-primary px-3 py-1.5 text-xs" onclick="toast('已升级至值班主管 · 工单 CR-09 已创建')">升级主管</button>
+              <button class="btn-ghost px-3 py-1.5 text-xs" onclick="openDrawer('drawer-detail')">查看归因</button>
             </div>
           </div>
-        </section>
+          
+      <div class="panel p-4">
+        <div class="section-label mb-1">Activity</div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">AI 刚刚自动完成了…</h3>
+        <div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">刚刚</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：将 RV-882 标记为危机并通知值班</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">20 分钟前</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：为 14 封工单生成多语言草稿</div>
+        </div>
+        <div class="timeline-item pb-4">
+          <div class="timeline-dot"></div>
+          <div class="text-[11px] text-gray-400 tabular">1 小时前</div>
+          <div class="text-sm text-gray-700 mt-0.5">AI 自动完成了：分类入库 36 条新工单</div>
+        </div></div>
+      </div>
+        </div>
+        <div id="view-automation" class="view space-y-5">
+          
+      <div class="panel overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+          <div>
+            <div class="section-label">Automation Center</div>
+            <h3 class="text-sm font-semibold text-gray-900 mt-0.5">AI Agents</h3>
+          </div>
+          <button class="btn-ghost px-2.5 py-1 text-xs" onclick="toast('已刷新 Agent 状态')">刷新</button>
+        </div>
+        <div class="px-4 py-2 bg-gray-50 border-b border-gray-200 hidden md:flex text-[11px] uppercase tracking-wide text-gray-400 font-semibold gap-4">
+          <div class="flex-1">Agent</div>
+          <div class="w-28">上次运行</div>
+          <div class="w-28 hidden lg:block">下次运行</div>
+          <div class="w-14 text-right">成功率</div>
+          <div class="w-9"></div>
+        </div>
+        
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">工单自动分类</span>
+              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">意图识别 + 优先级</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">97.5%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">多语言回复草稿</span>
+              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">EN/TH/ID/VI 自动起草</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">2 分钟前</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">94.0%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">差评危机升级</span>
+              <span class="status-pill status-running" data-status><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">1–2 星自动升级主管</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">持续</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">99.4%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+        <div class="agent-row flex items-center gap-4 px-4 py-3" data-agent>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-900">满意度预测</span>
+              <span class="status-pill status-scheduled" data-status>已调度</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-0.5 truncate">发送前预测 CSAT</div>
+          </div>
+          <div class="hidden md:block text-xs text-gray-500 w-28 tabular">每封草稿</div>
+          <div class="hidden lg:block text-xs text-gray-500 w-28 tabular">—</div>
+          <div class="text-xs font-medium text-gray-700 w-14 tabular text-right">89.2%</div>
+          <div class="toggle on" onclick="toggleAgent(this)" title="启停"></div>
+        </div>
+      </div>
+          
+      <div class="panel overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-200">
+          <div class="section-label">Playbooks</div>
+          <h3 class="text-sm font-semibold text-gray-900 mt-0.5">自动化规则</h3>
+        </div>
+        
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">1–2 星评价自动升级</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF rating <= 2 THEN escalate</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">物流类自动附带运单卡片</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF intent = shipping THEN attach_tracking</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">预测 CSAT < 4.0 需人工润色</div>
+            <div class="text-xs text-gray-500 mt-0.5 font-mono truncate">IF pred_csat < 4.0 THEN require_human</div>
+          </div>
+          <div class="toggle on" onclick="togglePlaybook(this)"></div>
+        </div>
+      </div>
+        </div>
 
       </main>
     </div>
   </div>
-  <script>
-    document.querySelectorAll('.nav-item').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const view = btn.dataset.view;
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        const el = document.getElementById('view-' + view);
-        if (el) el.classList.add('active');
-        document.getElementById('page-title').textContent = btn.textContent.trim();
-      });
-    });
 
-    new Chart(document.getElementById('cs-chart-vol'), {
-      type: 'bar',
-      data: { labels: ['9/18','9/19','9/20','9/21','9/22','9/23','9/24'], datasets: [{ data: [280,310,295,340,360,320,342], backgroundColor: '#6366f1', borderRadius: 6 }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-    });
-    new Chart(document.getElementById('cs-chart-lang'), {
-      type: 'doughnut',
-      data: { labels: ['English','Bahasa Melayu','Bahasa Indonesia','ไทย','Español','其他'], datasets: [{ data: [48,18,14,8,6,6], backgroundColor: ['#6366f1','#818cf8','#a5b4fc','#c7d2fe','#ddd6fe','#e2e8f0'] }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
-    });
+  <div id="drawer-detail" class="drawer">
+    <div class="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-gray-900">建议详情</h3>
+      <button class="text-gray-400 hover:text-gray-700" onclick="closeDrawer()">✕</button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5 space-y-4 text-sm">
+      <div>
+        <div class="section-label mb-1">Reasoning</div>
+        <p class="text-gray-700 leading-relaxed">基于近 14 天销量、库存周转、广告 ACOS 与季节性因子综合评估。模型置信度来自交叉验证与历史同类决策回测。</p>
+      </div>
+      <div>
+        <div class="section-label mb-1">Expected Impact</div>
+        <ul class="text-gray-700 space-y-1.5 list-disc pl-4">
+          <li>预计 7 日内毛利提升 2.1–3.4%</li>
+          <li>库存周转天数缩短约 4 天</li>
+          <li>相关 SKU 缺货风险下降 60%</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label mb-1">Evidence</div>
+        <div class="panel p-3 text-xs text-gray-600 space-y-1">
+          <div>· 销量增速 +28% WoW（同品类均值 +9%）</div>
+          <div>· 当前可售天数 6.2（安全线 14）</div>
+          <div>· 供应商交期 9 天，建议提前下单</div>
+        </div>
+      </div>
+    </div>
+    <div class="px-5 py-3 border-t border-gray-200 flex gap-2">
+      <button class="btn-primary flex-1 py-2 text-sm" onclick="closeDrawer();toast('已从详情页采纳建议')">采纳建议</button>
+      <button class="btn-ghost px-4 py-2 text-sm" onclick="closeDrawer()">关闭</button>
+    </div>
+  </div>
+
+  <div id="toast-host"></div>
+  <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+  <script>
+
+function toast(msg){
+  const host=document.getElementById('toast-host');
+  const el=document.createElement('div');
+  el.className='toast';
+  el.textContent=msg;
+  host.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300)},2800);
+}
+function switchView(id, title){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const t=document.getElementById('view-'+id);
+  if(t) t.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active', n.dataset.view===id));
+  const pt=document.getElementById('page-title');
+  if(pt && title) pt.textContent=title;
+  const bc=document.getElementById('breadcrumb-current');
+  if(bc && title) bc.textContent=title;
+}
+document.querySelectorAll('.nav-item[data-view]').forEach(btn=>{
+  btn.addEventListener('click',()=>switchView(btn.dataset.view, btn.dataset.title||btn.textContent.trim()));
+});
+function acceptSuggestion(btn, impactEl, delta){
+  const card=btn.closest('.suggestion-card');
+  if(card.classList.contains('accepted')) return;
+  card.classList.add('accepted');
+  btn.disabled=true;
+  btn.textContent='已采纳';
+  btn.className='px-2.5 py-1 text-xs font-medium rounded bg-emerald-100 text-emerald-700 cursor-default';
+  if(impactEl && delta){
+    const el=document.getElementById(impactEl);
+    if(el){
+      const cur=parseFloat(el.dataset.val||el.textContent.replace(/[^0-9.-]/g,''))||0;
+      const next=cur+delta;
+      el.dataset.val=next;
+      if(el.dataset.fmt==='money') el.textContent='$'+next.toLocaleString(undefined,{maximumFractionDigits:0});
+      else if(el.dataset.fmt==='pct') el.textContent=next.toFixed(1)+'%';
+      else if(el.dataset.fmt==='int') el.textContent=Math.round(next).toLocaleString();
+      else el.textContent=next;
+      el.classList.add('text-emerald-600');
+    }
+  }
+  toast('已采纳 AI 建议，相关指标已更新');
+}
+function ignoreSuggestion(btn){
+  const card=btn.closest('.suggestion-card');
+  card.style.opacity='0.45';
+  card.querySelectorAll('button').forEach(b=>b.disabled=true);
+  toast('已忽略该建议');
+}
+function toggleAgent(el){
+  el.classList.toggle('on');
+  const row=el.closest('.agent-row')||el.closest('[data-agent]');
+  const pill=row && row.querySelector('[data-status]');
+  if(pill){
+    if(el.classList.contains('on')){
+      pill.className='status-pill status-running';
+      pill.innerHTML='<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>运行中';
+      toast('Agent 已启动');
+    } else {
+      pill.className='status-pill status-paused';
+      pill.innerHTML='已暂停';
+      toast('Agent 已暂停');
+    }
+  }
+}
+function togglePlaybook(el){
+  el.classList.toggle('on');
+  toast(el.classList.contains('on')?'规则已启用':'规则已停用');
+}
+function openDrawer(id){
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById(id).classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
+}
+
+
+const drafts={
+ en:"Hi Sarah, we're sorry for the delay. Your package is now with the local carrier (tracking updated). Expected delivery in 1–2 business days. We've also applied a $5 courtesy credit to your account. Please let us know if you need anything else.",
+ th:"สวัสดีค่ะ Sarah ขออภัยในความล่าช้า พัสดุอยู่กับขนส่งในพื้นที่แล้ว คาดถึงใน 1–2 วันทำการ และเราได้เพิ่มเครดิต $5 ให้บัญชีของคุณแล้ว",
+ id:"Hai Sarah, mohon maaf atas keterlambatan. Paket Anda sudah di kurir lokal (resi diperbarui). Estimasi 1–2 hari kerja. Kami juga menambahkan kredit $5 ke akun Anda."
+};
+function setLang(btn,lang){
+  document.querySelectorAll('#view-drafts .filter-chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('draft-body').textContent=drafts[lang];
+  toast('已切换草稿语言');
+}
+function sendDraft(){
+  const btn=document.getElementById('btn-send-draft');
+  btn.textContent='已发送';
+  btn.disabled=true;
+  btn.className='px-3 py-1.5 text-xs rounded bg-emerald-100 text-emerald-700';
+  const el=document.getElementById('kpi-sent');
+  el.dataset.val='1'; el.textContent='1';
+  const t=document.getElementById('kpi-tickets');
+  t.dataset.val=String(Math.max(0,parseInt(t.dataset.val||'42',10)-1));
+  t.textContent=t.dataset.val;
+  toast('回复已发送（模拟），工单 CS-4412 已关闭');
+}
 
   </script>
-<script>
-  if (window.Chart) {
-    Chart.defaults.color = '#64748B';
-    Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
-    Chart.defaults.plugins.legend.labels.color = '#94A3B8';
-  }
-</script>
 </body>
 </html>
