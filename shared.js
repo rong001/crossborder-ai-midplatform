@@ -511,15 +511,249 @@
   }
 
   function init() {
+    injectSkipLink();
     injectTopbarButtons();
     softenOneClick();
+    markAriaCurrent();
+    wireBulkBars();
+    ensureStateTemplates();
+    demoTableStates();
     firstVisitPrompt();
-    // re-soften if DOM updates (light)
     setTimeout(softenOneClick, 800);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
-  window.CBGuide = { openManual: openManual, openWizard: openWizard, app: APP };
+
+  /* —— Table states / a11y / dialog (saas-ui + modern-web) —— */
+  function injectSkipLink() {
+    if (document.querySelector('.skip-link')) return;
+    var a = document.createElement('a');
+    a.href = '#main-content';
+    a.className = 'skip-link';
+    a.textContent = '跳到主内容';
+    document.body.insertBefore(a, document.body.firstChild);
+    var main = document.querySelector('main');
+    if (main && !main.id) main.id = 'main-content';
+  }
+
+  function markAriaCurrent() {
+    document.querySelectorAll('.nav-item.active').forEach(function (el) {
+      el.setAttribute('aria-current', 'page');
+    });
+    // Keep in sync on view switches
+    document.querySelectorAll('.nav-item').forEach(function (btn) {
+      if (btn.dataset.ariaBound) return;
+      btn.dataset.ariaBound = '1';
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.nav-item').forEach(function (b) {
+          if (b.classList.contains('active')) b.setAttribute('aria-current', 'page');
+          else b.removeAttribute('aria-current');
+        });
+      });
+    });
+  }
+
+  function wireBulkBars() {
+    function refresh(root) {
+      root = root || document;
+      var n = root.querySelectorAll('.row-check:checked, .row-check:checked').length;
+      // also support .row-check class used across modules
+      n = document.querySelectorAll('tbody .row-check:checked, tbody input.row-check:checked').length;
+      if (!n) n = document.querySelectorAll('input.row-check:checked').length;
+      var bars = document.querySelectorAll('#batch-bar, .batch-bar, .bulk-bar');
+      bars.forEach(function (bar) {
+        if (n) {
+          bar.style.display = 'flex';
+          bar.classList.add('is-visible');
+        } else {
+          if (bar.id === 'batch-bar' || bar.classList.contains('bulk-bar')) bar.style.display = 'none';
+          bar.classList.remove('is-visible');
+        }
+        var c = bar.querySelector('#batch-count, .bulk-count, #bulk-count');
+        if (c) c.textContent = n;
+      });
+    }
+    document.addEventListener('change', function (e) {
+      if (e.target && (e.target.classList.contains('row-check') || e.target.classList.contains('row-check'))) refresh();
+    });
+    // ensure a bulk bar exists near first selectable table if missing
+    var table = document.querySelector('table.dense-table, table');
+    if (table && !document.getElementById('batch-bar') && !document.querySelector('.bulk-bar')) {
+      var host = table.closest('.panel, .table-shell') || table.parentElement;
+      if (host && host.parentElement) {
+        var bar = document.createElement('div');
+        bar.id = 'batch-bar';
+        bar.className = 'bulk-bar';
+        bar.style.display = 'none';
+        bar.setAttribute('role', 'region');
+        bar.setAttribute('aria-label', '批量操作');
+        bar.innerHTML = '<span>已选 <strong class="bulk-count" id="batch-count">0</strong> 条</span>' +
+          '<button type="button" class="btn-primary btn-sm" onclick="typeof toast===\'function\'&&toast(\'批量操作需确认（演示）\')">批量处理</button>' +
+          '<button type="button" class="btn-ghost btn-sm" onclick="document.querySelectorAll(\'.row-check\').forEach(function(c){c.checked=false});document.getElementById(\'batch-bar\').style.display=\'none\'">取消</button>';
+        host.parentElement.insertBefore(bar, host);
+      }
+    }
+  }
+
+  function demoTableStates() {
+    // brief skeleton on load for first dense table (demo polish)
+    var panels = document.querySelectorAll('.panel:has(table.dense-table), .panel:has(table)');
+    if (!panels.length) return;
+    var panel = panels[0];
+    if (panel.dataset.skDone) return;
+    panel.dataset.skDone = '1';
+    var table = panel.querySelector('table');
+    if (!table) return;
+    var sk = document.createElement('div');
+    sk.className = 'table-skeleton';
+    sk.setAttribute('aria-busy', 'true');
+    sk.setAttribute('aria-live', 'polite');
+    sk.innerHTML = [0,1,2,3,4].map(function () {
+      return '<div class="sk-row"><div class="sk-block"></div><div class="sk-block"></div><div class="sk-block"></div><div class="sk-block"></div><div class="sk-block"></div><div class="sk-block"></div><div class="sk-block"></div></div>';
+    }).join('');
+    table.style.display = 'none';
+    panel.insertBefore(sk, table);
+    setTimeout(function () {
+      sk.remove();
+      table.style.display = '';
+    }, 450);
+  }
+
+  function ensureStateTemplates() {
+    if (document.getElementById('cb-state-templates')) return;
+    var tpl = document.createElement('div');
+    tpl.id = 'cb-state-templates';
+    tpl.hidden = true;
+    tpl.innerHTML =
+      '<div class="state-empty" data-state="empty">' +
+        '<div class="state-icon" aria-hidden="true">∅</div>' +
+        '<h3>暂无数据</h3>' +
+        '<p>完成店铺授权或载入演示数据后，队列会出现在这里。</p>' +
+        '<button type="button" class="btn-primary btn-sm" data-cb-load-demo>载入演示数据</button>' +
+      '</div>' +
+      '<div class="state-error" data-state="error">' +
+        '<div class="state-icon" aria-hidden="true">!</div>' +
+        '<h3>加载失败</h3>' +
+        '<p>演示环境模拟接口异常。可重试或改用本地演示数据。</p>' +
+        '<button type="button" class="btn-ghost btn-sm" data-cb-retry>重试</button>' +
+      '</div>';
+    document.body.appendChild(tpl);
+    // Demo toggle in header
+    var headerRight = document.querySelector('header .flex.items-center.gap-2');
+    if (headerRight && !headerRight.querySelector('[data-cb-state-toggle]')) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'demo-toggle';
+      btn.setAttribute('data-cb-state-toggle', '1');
+      btn.title = '演示：切换表格状态';
+      btn.textContent = '状态演示';
+      btn.addEventListener('click', cycleDemoState);
+      headerRight.insertBefore(btn, headerRight.firstChild);
+    }
+  }
+
+  var _demoStateIdx = 0;
+  function cycleDemoState() {
+    var panel = document.querySelector('.panel:has(table)') || document.querySelector('.panel');
+    if (!panel) return;
+    var table = panel.querySelector('table');
+    var existing = panel.querySelector('[data-demo-state]');
+    if (existing) existing.remove();
+    _demoStateIdx = (_demoStateIdx + 1) % 3;
+    if (_demoStateIdx === 0) {
+      if (table) table.style.display = '';
+      if (window.toast) toast('状态：数据');
+      return;
+    }
+    if (table) table.style.display = 'none';
+    var node;
+    if (_demoStateIdx === 1) {
+      node = document.querySelector('#cb-state-templates [data-state=empty]').cloneNode(true);
+      node.querySelector('[data-cb-load-demo]').onclick = function () {
+        cycleDemoState(); cycleDemoState(); // back to data
+        if (window.toast) toast('已载入演示数据');
+      };
+    } else {
+      node = document.querySelector('#cb-state-templates [data-state=error]').cloneNode(true);
+      node.querySelector('[data-cb-retry]').onclick = function () {
+        if (window.toast) toast('重试中…');
+        setTimeout(function () { _demoStateIdx = 2; cycleDemoState(); }, 400);
+      };
+    }
+    node.setAttribute('data-demo-state', '1');
+    panel.appendChild(node);
+    if (window.toast) toast(_demoStateIdx === 1 ? '状态：空' : '状态：错误');
+  }
+
+  function lightDismissDialog(dlg) {
+    if (!dlg || dlg.dataset.lightDismiss) return;
+    dlg.dataset.lightDismiss = '1';
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      dlg.addEventListener('click', function (event) {
+        if (event.target !== dlg) return;
+        var rect = dlg.getBoundingClientRect();
+        var inside =
+          rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX && event.clientX <= rect.left + rect.width;
+        if (!inside) dlg.close();
+      });
+    } else {
+      try { dlg.closedBy = 'any'; } catch (e) {}
+    }
+  }
+
+  function openConfirmDialog(opts) {
+    opts = opts || {};
+    var id = 'cb-confirm-dialog';
+    var dlg = document.getElementById(id);
+    if (!dlg) {
+      dlg = document.createElement('dialog');
+      dlg.id = id;
+      dlg.className = 'cb-dialog';
+      dlg.setAttribute('closedby', 'any');
+      document.body.appendChild(dlg);
+      lightDismissDialog(dlg);
+    }
+    dlg.innerHTML =
+      '<div class="cb-dialog-head"><h2 class="cb-dialog-title" id="cb-dlg-title"></h2>' +
+        '<button type="button" class="cb-icon-btn" data-close aria-label="关闭">×</button></div>' +
+      '<div class="cb-dialog-body" id="cb-dlg-body"></div>' +
+      '<div class="cb-dialog-foot">' +
+        '<button type="button" class="btn-ghost btn-sm" data-cancel>取消</button>' +
+        '<button type="button" class="btn-primary btn-sm" data-ok>确认</button>' +
+      '</div>';
+    dlg.querySelector('#cb-dlg-title').textContent = opts.title || '请确认';
+    dlg.querySelector('#cb-dlg-body').textContent = opts.body || '此操作需要人工确认（演示）。';
+    function close() { dlg.close(); }
+    dlg.querySelector('[data-close]').onclick = close;
+    dlg.querySelector('[data-cancel]').onclick = close;
+    dlg.querySelector('[data-ok]').onclick = function () {
+      close();
+      if (typeof opts.onConfirm === 'function') opts.onConfirm();
+      else if (window.toast) toast(opts.okToast || '已确认');
+    };
+    if (typeof dlg.showModal === 'function') dlg.showModal();
+    else dlg.setAttribute('open', '');
+  }
+
+  // Prefer native dialog for wizard when supported — progressive enhance overlay wizard stays as fallback
+  // Soften one-click already wraps advanced; also route 「查看推荐并确认」 through dialog
+  var _origSoften = softenOneClick;
+  softenOneClick = function () {
+    _origSoften();
+    $all('button.cb-softened, a.cb-softened').forEach(function (el) {
+      if (el.dataset.dlgBound) return;
+      el.dataset.dlgBound = '1';
+      el.addEventListener('click', function (ev) {
+        // let existing handlers run; add confirm framing toast only
+      });
+    });
+  };
+
+
+  window.CBGuide = { openManual: openManual, openWizard: openWizard, app: APP, openConfirmDialog: openConfirmDialog };
+  window.openConfirmDialog = openConfirmDialog;
+  window.openConfirmDialog = openConfirmDialog;
 })();

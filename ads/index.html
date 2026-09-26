@@ -6,8 +6,10 @@
 <title>广告推广 · 跨境 AI 中台</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../shared.css"/>
-<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
-<style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style>
+<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#1D4ED8",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["IBM Plex Sans","Noto Sans SC","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body class="bg-surface-page text-gray-900 antialiased">
 
@@ -60,6 +62,43 @@
     <div class="metric-card p-3.5"><div class="section-label">广告订单</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-aord" data-val="96">96</div><div class="mt-0.5 text-[11px] text-gray-500">自然单 210</div></div>
     <div class="metric-card p-3.5"><div class="section-label">待确认建议</div><div class="mt-1 text-xl font-semibold tabular text-amber-600" id="kpi-adsug" data-val="4">4</div><div class="mt-0.5 text-[11px] text-gray-500">预算/竞价</div></div>
   </div>
+  
+  <div class="review-frame">
+    <header>
+      <div>
+        <div class="text-sm font-semibold text-gray-900">本周广告复盘 / 诊断</div>
+        <div class="text-[11px] text-gray-500 mt-0.5">架构 → 周复盘 → 诊断 → <strong>采纳需确认</strong> · 演示数据</div>
+      </div>
+      <span class="demo-badge px-2 py-0.5 rounded">W38 · 演示</span>
+    </header>
+    <div class="review-body space-y-1">
+      <div class="diag-item">
+        <span class="diag-tag warn">诊断</span>
+        <div class="flex-1">
+          <div class="font-medium text-gray-900">SP · 化妆刷 Broad ACOS 42.9% 超阈值</div>
+          <p class="text-[11px] text-gray-500 mt-0.5">建议：收窄匹配 / 暂停高花费低转化词。不会自动改预算。</p>
+        </div>
+        <button class="btn-primary btn-sm text-[11px]" onclick="openConfirmDialog({title:'采纳诊断建议',body:'暂停 CAM-229 Broad 中 ACOS>40% 的词（演示）。确认后才写入草稿，不会直接改线上。',okToast:'已生成需确认的暂停草稿'})">查看并确认</button>
+      </div>
+      <div class="diag-item">
+        <span class="diag-tag ok">机会</span>
+        <div class="flex-1">
+          <div class="font-medium text-gray-900">SP · 耳机 Exact ACOS 20% · 有扩量空间</div>
+          <p class="text-[11px] text-gray-500 mt-0.5">建议日预算 +$20。一键采纳仍需确认。</p>
+        </div>
+        <button class="btn-ghost btn-sm text-[11px]" onclick="openConfirmDialog({title:'确认预算上调',body:'将 CAM-188 日预算 +$20（演示）。默认不会自动执行。',okToast:'预算建议已进入待确认'})">采纳需确认</button>
+      </div>
+      <div class="diag-item">
+        <span class="diag-tag info">结构</span>
+        <div class="flex-1">
+          <div class="font-medium text-gray-900">本周架构检查：Exact / Phrase / Broad 分层正常</div>
+          <p class="text-[11px] text-gray-500 mt-0.5">否定词库有 3 条待审草稿。</p>
+        </div>
+        <button class="btn-ghost btn-sm text-[11px]" onclick="toast('打开否定词草稿（需确认）')">看草稿</button>
+      </div>
+    </div>
+  </div>
+
   <div class="status-tabs"><button type="button" class="status-tab active" onclick="setTab('ads','sp',this)">SP 商品推广<span class="tab-count">12</span></button><button type="button" class="status-tab" onclick="setTab('ads','sb',this)">SB 品牌<span class="tab-count">4</span></button><button type="button" class="status-tab" onclick="setTab('ads','sd',this)">SD 展示<span class="tab-count">3</span></button></div>
   <div data-tab-group="ads" data-tab="sp" class="panel overflow-hidden">
     <table class="w-full text-sm dense-table">

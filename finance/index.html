@@ -6,8 +6,10 @@
 <title>财务对账 / 毛利 · 跨境 AI 中台</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../shared.css"/>
-<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#2563EB",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["Inter","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
-<style>@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");</style>
+<script>tailwind.config={theme:{extend:{colors:{brand:{50:"#EFF6FF",100:"#DBEAFE",200:"#BFDBFE",500:"#1D4ED8",600:"#1D4ED8",700:"#1E40AF"},surface:{DEFAULT:"#FFFFFF",muted:"#F3F4F6",page:"#F6F8FA"}},fontFamily:{sans:["IBM Plex Sans","Noto Sans SC","PingFang SC","Microsoft YaHei","system-ui","sans-serif"]}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body class="bg-surface-page text-gray-900 antialiased">
 
@@ -62,7 +64,56 @@
     <div class="metric-card p-3.5"><div class="section-label">结算利润</div><div class="mt-1 text-xl font-semibold tabular " id="kpi-settle" data-val="64880">$64,880</div><div class="mt-0.5 text-[11px] text-gray-500">结算口径</div></div>
   </div>
 
-  <div class="grid lg:grid-cols-5 gap-4">
+  
+  <div class="panel p-4">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <div class="text-sm font-semibold">贡献毛利瀑布 · CM1 → CM2 → CM3</div>
+        <p class="text-[11px] text-gray-500 mt-0.5">销售毛利 → 净毛利；<strong>结算回款 ≠ 收入</strong>。费项可在左侧勾选，演示数据仅供说明结构。</p>
+      </div>
+      <span class="demo-badge px-2 py-0.5 rounded">演示数据</span>
+    </div>
+    <div class="waterfall">
+      <div class="wf-row">
+        <div><div class="wf-label">销售额（成交）</div><div class="wf-sub">平台订单金额 · 非结算到账</div></div>
+        <div class="wf-amt tabular">$128,420</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" style="width:100%;background:#1D4ED8"></div></div>
+      </div>
+      <div class="wf-row deduct">
+        <div><div class="wf-label">− 变动履约成本</div><div class="wf-sub">采购 + 头程 + FBA/配送 + 佣金 + 退款</div></div>
+        <div class="wf-amt tabular">−$50,170</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" style="width:39%;background:#FCA5A5"></div></div>
+      </div>
+      <div class="wf-row cm1">
+        <div><div class="wf-label">CM1 · 销售毛利</div><div class="wf-sub">成交 − 履约变动成本</div></div>
+        <div class="wf-amt tabular text-emerald-700">$78,250</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" style="width:61%;background:#34D399"></div></div>
+      </div>
+      <div class="wf-row deduct">
+        <div><div class="wf-label">− 仓储 / 广告 / Coupon</div><div class="wf-sub">可配置成本栈（左侧勾选）</div></div>
+        <div class="wf-amt tabular">−$11,200</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" style="width:9%;background:#FCD34D"></div></div>
+      </div>
+      <div class="wf-row cm2">
+        <div><div class="wf-label">CM2 · 净毛利</div><div class="wf-sub">销售毛利 − 仓储 − 广告（− Coupon）</div></div>
+        <div class="wf-amt tabular text-emerald-700">$67,050</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" style="width:52%;background:#10B981"></div></div>
+      </div>
+      <div class="wf-row deduct">
+        <div><div class="wf-label">− 汇损 / 包装 / 未入账差异</div><div class="wf-sub">预估 ↔ 结算口径差</div></div>
+        <div class="wf-amt tabular">−$2,170</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" style="width:2%;background:#FDBA74"></div></div>
+      </div>
+      <div class="wf-row cm3">
+        <div><div class="wf-label">CM3 · 结算利润</div><div class="wf-sub">以结算报告为准 · payout ≠ revenue</div></div>
+        <div class="wf-amt tabular">$64,880</div>
+        <div class="wf-bar-wrap"><div class="wf-bar" style="width:50%;background:#059669"></div></div>
+      </div>
+    </div>
+    <div class="waterfall-note">费率与金额为演示快照，非实时平台费率事实。落地时请接入结算报告与费用明细。</div>
+  </div>
+
+<div class="grid lg:grid-cols-5 gap-4">
     <div class="lg:col-span-3 panel p-4">
       <div class="flex items-center justify-between mb-3">
         <div>
@@ -124,7 +175,7 @@
     </div>
     <div class="lg:col-span-2 space-y-3">
       <div class="panel p-4">
-        <div class="section-label mb-2">结算利润 vs 销售利润（预估）</div>
+        <div class="section-label mb-2">结算利润 vs 销售利润（预估）· payout ≠ revenue</div>
         <div class="space-y-2 text-sm">
           <div class="flex justify-between"><span class="text-gray-500">销售利润（预估）</span><span class="tabular font-medium" id="cmp-sales">$67,050</span></div>
           <div class="flex justify-between"><span class="text-gray-500">结算利润（账单）</span><span class="tabular font-medium" id="cmp-settle">$64,880</span></div>

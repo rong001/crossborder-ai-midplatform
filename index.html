@@ -11,15 +11,17 @@
       theme: {
         extend: {
           colors: {
-            brand: { 50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',500:'#2563EB',600:'#1D4ED8',700:'#1E40AF' },
+            brand: { 50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',500:'#1D4ED8',600:'#1D4ED8',700:'#1E40AF' },
             surface: { DEFAULT:'#FFFFFF', muted:'#F3F4F6', page:'#F6F8FA' },
           },
-          fontFamily: { sans: ['Inter','PingFang SC','Microsoft YaHei','system-ui','sans-serif'] },
+          fontFamily: { sans: ["IBM Plex Sans","Noto Sans SC","PingFang SC","Microsoft YaHei","system-ui","sans-serif"] },
         }
       }
     }
   </script>
-  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body class="bg-surface-page text-gray-900 antialiased">
 
@@ -67,8 +69,8 @@
       </p>
       <div class="flex flex-wrap gap-3">
         <a href="#playbooks" class="btn-primary px-5 py-2.5 text-sm">选一条 15–20 分钟剧本</a>
-        <a href="oms/" class="btn-ghost px-5 py-2.5 text-sm">直接打开订单（待审核）→</a>
-        <a href="finance/" class="btn-ghost px-5 py-2.5 text-sm">看毛利公式 →</a>
+        <a href="oms/" class="btn-ghost px-5 py-2.5 text-sm">直接打开订单（待审核）</a>
+        <a href="finance/" class="btn-ghost px-5 py-2.5 text-sm">看毛利公式 </a>
       </div>
       <div class="mt-10 flex flex-wrap gap-8 text-sm text-gray-500">
         <div><span class="text-2xl font-semibold text-gray-900 tabular">8</span><span class="ml-1.5">业务模块</span></div>
@@ -83,7 +85,7 @@
 <section id="playbooks" class="border-b border-gray-200 bg-surface-page">
   <div class="max-w-6xl mx-auto px-5 py-12">
     <div class="mb-6">
-      <div class="section-label mb-1">Playbooks</div>
+      <div class="section-label mb-1">剧本</div>
       <h2 class="text-xl font-semibold text-gray-900">三条剧本 · 按卖家成熟度选</h2>
     </div>
     <div class="grid md:grid-cols-3 gap-4">
@@ -128,7 +130,7 @@
 <section id="competitors" class="bg-white border-b border-gray-200">
   <div class="max-w-6xl mx-auto px-5 py-12">
     <div class="mb-6">
-      <div class="section-label mb-1">Competitive</div>
+      <div class="section-label mb-1">对标</div>
       <h2 class="text-xl font-semibold text-gray-900">对标熟悉的工具 · 我们多了什么</h2>
     </div>
     <div class="panel overflow-hidden">
@@ -154,7 +156,7 @@
 <section id="products" class="border-b border-gray-200 bg-surface-page">
   <div class="max-w-6xl mx-auto px-5 py-12">
     <div class="mb-6">
-      <div class="section-label mb-1">Modules</div>
+      <div class="section-label mb-1">模块</div>
       <h2 class="text-xl font-semibold text-gray-900">模块入口 · 用卖家的词</h2>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -198,7 +200,7 @@
 <section id="data-in" class="bg-white border-b border-gray-200">
   <div class="max-w-6xl mx-auto px-5 py-12">
     <div class="mb-6">
-      <div class="section-label mb-1">Data</div>
+      <div class="section-label mb-1">数据接入</div>
       <h2 class="text-xl font-semibold text-gray-900">平台数据怎么进</h2>
     </div>
     <div class="grid md:grid-cols-3 gap-4">
@@ -223,7 +225,7 @@
 <section id="design-why" class="border-b border-gray-200 bg-surface-page">
   <div class="max-w-6xl mx-auto px-5 py-12">
     <div class="mb-6">
-      <div class="section-label mb-1">Design</div>
+      <div class="section-label mb-1">设计说明</div>
       <h2 class="text-xl font-semibold text-gray-900">为什么这样设计</h2>
     </div>
     <div class="grid md:grid-cols-2 gap-4">
