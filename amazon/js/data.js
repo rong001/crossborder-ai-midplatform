@@ -1,237 +1,193 @@
-/* NovaHome US — Amazon US 演示店铺数据（全部为演示测算，非后台实数） */
-window.NH = window.NH || {};
+/* 北冕北美店 — 选品裁决 + 运营中台
+ * SAMPLE = 虚构样例；CALC = 页面内真实计算
+ */
+window.BX = window.BX || {};
+BX.meta = {
+  shop: "北冕北美店",
+  marketplace: "Amazon.com 北美（规则口径亦适用于欧站）",
+  demoNote: "费用为公开规则量级演示测算，非后台实数",
+  sampleNote: "店铺与候选品均为虚构样例，非真实品牌",
+};
+BX.rules = { marginMin: 0.18, acosMax: 0.35, safetyDays: 21, headhaulDays: 25 };
 
-NH.shop = {
-  name: "NovaHome US",
-  marketplace: "Amazon.com",
-  sellerId: "A1NOVDEMOUS",
-  currency: "USD",
-  timezone: "America/Los_Angeles",
-  demoNote: "演示测算 · 非卖家后台实数",
+BX.agents = [
+  { id:"verdict", name:"选品裁决", on:true, processedToday:0 },
+  { id:"listing", name:"Listing", on:true, processedToday:0 },
+  { id:"ads", name:"广告守门", on:true, processedToday:0 },
+  { id:"fba", name:"FBA补货", on:true, processedToday:0 },
+  { id:"cs", name:"评论消息", on:true, processedToday:0 },
+  { id:"weekly", name:"经营周报", on:true, processedToday:0 },
+];
+
+BX.dailyMap = [
+  { job:"选品", human:"定类目/拍板做不做", system:"八维打分+净利拦截+趋势阶段", mustConfirm:"认领进短名单 / 否决" },
+  { job:"Listing", human:"改文案、过合规、确认上架", system:"标题五点搜索词A+主图脚本草稿", mustConfirm:"确认进草稿（不上架）" },
+  { job:"广告", human:"否词、暂停、改价策略", system:"ACOS/TACOS超阈值标红+建议", mustConfirm:"改预算/启停活动" },
+  { job:"补货", human:"下采购单、约头程", system:"可售天/建议量/最晚发货日", mustConfirm:"确认采购单" },
+  { job:"差评/消息", human:"定调、法务、是否退款", system:"英文回复草稿+退货归类+高风险标红", mustConfirm:"确认后才标已回复/发信" },
+  { job:"利润/周报", human:"看净利决定加投或收缩", system:"销量广告毛利退货断货一页汇总", mustConfirm:"对外发周报给团队" },
+];
+
+/** 6 候选 — SAMPLE 字段；裁决由 CALC 函数生成 */
+BX.candidates = [
+  {
+    id:"p1", nameZh:"免钉墙钩 12 件套", nameEn:"Adhesive Wall Hook Set",
+    keyword:"adhesive wall hooks",
+    demandTrend:"up", demandWeeksUp:3, demandPhase:"启动", demandDropPct:0,
+    brandMonopoly:false, reviewBarrier:"中（TOP10均评~380）", monthlySalesEst:4200,
+    price:16.99, cogs:2.60, headhaul:0.95, fba:3.45, referralRate:0.15, adReserve:1.80, returnReserve:0.55,
+    compliance:"清（无儿童/电子/食品；外观专利待抽检）", complianceClear:true,
+    supplyLeadDays:12, moq:500, canSmallTrial:true,
+    returnRisk:"低", returnNote:"标准家居配件",
+    diff:"加强防水背胶+承重实测图，对差评「掉落」",
+    timing:"刚好", timingLate:false,
+  },
+  {
+    id:"p2", nameZh:"竹制桌面收纳", nameEn:"Bamboo Desk Organizer",
+    keyword:"bamboo desk organizer",
+    demandTrend:"flat", demandWeeksUp:0, demandPhase:"持平", demandDropPct:0,
+    brandMonopoly:false, reviewBarrier:"中高（均评~900）", monthlySalesEst:6800,
+    price:29.99, cogs:6.80, headhaul:2.35, fba:5.88, referralRate:0.15, adReserve:2.40, returnReserve:0.90,
+    compliance:"清", complianceClear:true,
+    supplyLeadDays:18, moq:300, canSmallTrial:true,
+    returnRisk:"中", returnNote:"组装件，退货预留可控",
+    diff:"加宽线缆孔+防滑垫，对差评「底座滑」",
+    timing:"刚好", timingLate:false,
+  },
+  {
+    id:"p3", nameZh:"硅胶水槽垫", nameEn:"Silicone Sink Mat",
+    keyword:"silicone sink mat",
+    demandTrend:"up", demandWeeksUp:2, demandPhase:"启动", demandDropPct:0,
+    brandMonopoly:false, reviewBarrier:"低", monthlySalesEst:5100,
+    price:13.99, cogs:2.40, headhaul:1.10, fba:3.55, referralRate:0.15, adReserve:2.20, returnReserve:0.95,
+    compliance:"清", complianceClear:true,
+    supplyLeadDays:10, moq:1000, canSmallTrial:true,
+    returnRisk:"中", returnNote:"异味投诉多，退货预留偏高",
+    diff:"食品级硅胶除味工艺说明",
+    timing:"刚好", timingLate:false,
+  },
+  {
+    id:"p4", nameZh:"记忆棉坐垫", nameEn:"Memory Foam Seat Cushion",
+    keyword:"memory foam seat cushion",
+    demandTrend:"down", demandWeeksUp:0, demandPhase:"衰退", demandDropPct:28,
+    brandMonopoly:false, reviewBarrier:"中", monthlySalesEst:9000,
+    price:34.99, cogs:7.50, headhaul:2.40, fba:6.05, referralRate:0.15, adReserve:3.20, returnReserve:1.60,
+    compliance:"清（泡沫气味需关注）", complianceClear:true,
+    supplyLeadDays:20, moq:800, canSmallTrial:true,
+    returnRisk:"高", returnNote:"塌陷/异味，退货预留高",
+    diff:"加高密度芯+可换套",
+    timing:"晚", timingLate:true,
+  },
+  {
+    id:"p5", nameZh:"儿童保温杯（带吸管）", nameEn:"Kids Insulated Bottle",
+    keyword:"kids water bottle straw",
+    demandTrend:"up", demandWeeksUp:4, demandPhase:"爆发", demandDropPct:0,
+    brandMonopoly:true, reviewBarrier:"极高（首页大牌）", monthlySalesEst:22000,
+    price:24.99, cogs:5.10, headhaul:1.80, fba:4.90, referralRate:0.15, adReserve:3.50, returnReserve:1.20,
+    compliance:"不清（儿童接触+食品接触认证未齐）", complianceClear:false,
+    supplyLeadDays:35, moq:2000, canSmallTrial:false,
+    returnRisk:"高", returnNote:"儿童品退货与安全投诉敏感",
+    diff:"无明确可改卖点（同质化）",
+    timing:"晚", timingLate:true,
+  },
+  {
+    id:"p6", nameZh:"磁吸香料罐 6 件", nameEn:"Magnetic Spice Jars 6pc",
+    keyword:"magnetic spice jars",
+    demandTrend:"up", demandWeeksUp:2, demandPhase:"启动", demandDropPct:0,
+    brandMonopoly:false, reviewBarrier:"中", monthlySalesEst:3500,
+    price:27.99, cogs:5.20, headhaul:1.85, fba:5.20, referralRate:0.15, adReserve:2.50, returnReserve:0.85,
+    compliance:"清", complianceClear:true,
+    supplyLeadDays:14, moq:400, canSmallTrial:true,
+    returnRisk:"低", returnNote:"玻璃易碎预留已计入",
+    diff:"加强磁+可写标签，对差评「磁力弱/标签掉」",
+    timing:"早", timingLate:false,
+  },
+];
+
+BX.calcUnit = function (x) {
+  const referral = +(x.price * x.referralRate).toFixed(2);
+  const net = +(x.price - x.cogs - x.headhaul - x.fba - referral - x.adReserve - x.returnReserve).toFixed(2);
+  const rate = x.price ? net / x.price : 0;
+  return { referral, net, rate };
 };
 
-NH.agents = [
-  { id: "sourcing", name: "选品", role: "选品/市场分析岗", on: true, lastRun: "2026-10-01 22:10" },
-  { id: "listing", name: "Listing", role: "运营/文案岗", on: true, lastRun: "2026-10-01 21:40" },
-  { id: "ads", name: "广告守门", role: "广告运营岗", on: true, lastRun: "2026-10-02 01:15" },
-  { id: "fba", name: "FBA库存", role: "供应链/物流岗", on: true, lastRun: "2026-10-02 00:30" },
-  { id: "cs", name: "客服评论", role: "客服/VOC岗", on: true, lastRun: "2026-10-01 23:55" },
-  { id: "profit", name: "利润日报", role: "财务/老板岗", on: true, lastRun: "2026-10-02 01:00" },
-];
+/** CALC: 八维齐备才可「可做」；衰退强制停补收缩；缺项不能可做 */
+BX.verdict = function (p) {
+  const m = BX.calcUnit(p);
+  const checks = [];
+  // 1 需求
+  if (p.demandPhase === "衰退" || (p.demandTrend === "down" && p.demandDropPct >= 20)) {
+    checks.push({ key:"需求", pass:false, hard:"不可做", detail:`衰退（连续下跌约${p.demandDropPct}%）→ 停补+收缩，禁止建议补货` });
+  } else if (!p.demandTrend) {
+    checks.push({ key:"需求", pass:false, hard:"观察", detail:"需求趋势数据缺失" });
+  } else {
+    checks.push({ key:"需求", pass:true, detail:`${p.demandPhase} · ${p.demandTrend==="up"?"上升":p.demandTrend==="flat"?"持平":"下跌"}` });
+  }
+  // 2 竞争
+  if (p.brandMonopoly && p.monthlySalesEst >= 10000) {
+    checks.push({ key:"竞争", pass:false, hard:"不可做", detail:`月销约${p.monthlySalesEst}且首页品牌垄断` });
+  } else if (p.brandMonopoly) {
+    checks.push({ key:"竞争", pass:false, hard:"观察", detail:"存在品牌垄断迹象" });
+  } else {
+    checks.push({ key:"竞争", pass:true, detail:p.reviewBarrier });
+  }
+  // 3 净利
+  if (m.rate < BX.rules.marginMin) {
+    checks.push({ key:"净利", pass:false, hard:"不可做", detail:`净利率 ${(m.rate*100).toFixed(1)}% < 18%（净利 $${m.net.toFixed(2)}）` });
+  } else {
+    checks.push({ key:"净利", pass:true, detail:`净利率 ${(m.rate*100).toFixed(1)}% · 单件 $${m.net.toFixed(2)}` });
+  }
+  // 4 合规
+  if (!p.complianceClear) {
+    checks.push({ key:"合规", pass:false, hard:"观察", detail:p.compliance + " → 不清不能可做" });
+  } else {
+    checks.push({ key:"合规", pass:true, detail:p.compliance });
+  }
+  // 5 供应
+  if (!p.canSmallTrial) {
+    checks.push({ key:"供应", pass:false, hard:"观察", detail:`交期${p.supplyLeadDays}天 · MOQ ${p.moq} · 不能小单试` });
+  } else {
+    checks.push({ key:"供应", pass:true, detail:`交期${p.supplyLeadDays}天 · MOQ ${p.moq} · 可小单试` });
+  }
+  // 6 退货
+  const retPct = p.returnReserve / p.price;
+  if (p.returnRisk === "高" || retPct > 0.04) {
+    checks.push({ key:"退货", pass:false, hard:"不可做", detail:`${p.returnNote} · 退货预留 ${(retPct*100).toFixed(1)}%` });
+  } else {
+    checks.push({ key:"退货", pass:true, detail:p.returnNote });
+  }
+  // 7 差异
+  if (!p.diff || p.diff.indexOf("无明确") >= 0) {
+    checks.push({ key:"差异", pass:false, hard:"不可做", detail:"无可改差异点" });
+  } else {
+    checks.push({ key:"差异", pass:true, detail:p.diff });
+  }
+  // 8 节奏
+  if (p.timingLate || p.timing === "晚") {
+    checks.push({ key:"节奏", pass:false, hard:"不可做", detail:"进场已晚" });
+  } else {
+    checks.push({ key:"节奏", pass:true, detail:p.timing });
+  }
 
-NH.todos = [
-  { id: "t1", type: "ads", severity: "danger", title: "广告超支：NH-MAT-02 ACOS 48% 超 cap 35%", sku: "NH-MAT-02", action: "去广告守门", view: "ads" },
-  { id: "t2", type: "fba", severity: "warning", title: "断货风险：NH-ORG-03 可售天数 9 天（安全库存 21）", sku: "NH-ORG-03", action: "去补货", view: "fba" },
-  { id: "t3", type: "cs", severity: "danger", title: "差评待处理：NH-CUSH-04 ★2「塌陷/异味」", sku: "NH-CUSH-04", action: "去客服", view: "cs" },
-  { id: "t4", type: "listing", severity: "info", title: "Listing 待复核：NH-HOOK-05 墙钩套装草稿", sku: "NH-HOOK-05", action: "去复核", view: "listing" },
-];
-
-NH.skus = [
-  {
-    sku: "NH-LAMP-01", asin: "B0DEMO LAMP", title: "LED Desk Lamp with USB", titleZh: "USB LED 台灯",
-    status: "healthy", statusLabel: "在售健康",
-    price: 29.99, cost: 6.8, fbaFee: 5.42, referral: 0.15, headhaul: 1.85, adSpendDay: 18.4,
-    orders7d: 86, units7d: 92, revenue7d: 2759.08, acos: 22, tacos: 11, stars: 4.6, reviews: 312,
-    fbaAvail: 420, inbound: 200, velocity: 13.1, daysCover: 32,
-    tags: ["主力款"],
-  },
-  {
-    sku: "NH-MAT-02", asin: "B0DEMO MAT2", title: "TPE Yoga Mat 6mm Non-Slip", titleZh: "TPE 瑜伽垫 6mm",
-    status: "ads_over", statusLabel: "广告超标",
-    price: 24.99, cost: 5.2, fbaFee: 4.88, referral: 0.15, headhaul: 2.10, adSpendDay: 62.5,
-    orders7d: 54, units7d: 58, revenue7d: 1449.42, acos: 48, tacos: 30, stars: 4.4, reviews: 187,
-    fbaAvail: 280, inbound: 0, velocity: 8.3, daysCover: 34,
-    tags: ["ACOS超cap"],
-  },
-  {
-    sku: "NH-ORG-03", asin: "B0DEMO ORG3", title: "Bamboo Desk Organizer Set", titleZh: "竹制桌面收纳套装",
-    status: "stockout", statusLabel: "即将断货",
-    price: 34.99, cost: 8.5, fbaFee: 6.15, referral: 0.15, headhaul: 2.40, adSpendDay: 14.2,
-    orders7d: 71, units7d: 74, revenue7d: 2589.26, acos: 18, tacos: 9, stars: 4.7, reviews: 502,
-    fbaAvail: 68, inbound: 120, velocity: 10.6, daysCover: 9,
-    tags: ["断货风险"],
-  },
-  {
-    sku: "NH-CUSH-04", asin: "B0DEMO CUSH", title: "Memory Foam Seat Cushion", titleZh: "记忆棉坐垫",
-    status: "bad_review", statusLabel: "有差评",
-    price: 32.99, cost: 7.1, fbaFee: 5.95, referral: 0.15, headhaul: 2.20, adSpendDay: 21.0,
-    orders7d: 39, units7d: 41, revenue7d: 1352.59, acos: 28, tacos: 16, stars: 3.9, reviews: 96,
-    fbaAvail: 190, inbound: 0, velocity: 5.9, daysCover: 32,
-    tags: ["VOC差评"],
-  },
-  {
-    sku: "NH-HOOK-05", asin: "—", title: "Adhesive Wall Hook Set 12pcs", titleZh: "免钉墙钩套装 12件",
-    status: "pending_list", statusLabel: "待刊登复核",
-    price: 15.99, cost: 2.4, fbaFee: 3.22, referral: 0.15, headhaul: 0.95, adSpendDay: 0,
-    orders7d: 0, units7d: 0, revenue7d: 0, acos: 0, tacos: 0, stars: null, reviews: 0,
-    fbaAvail: 0, inbound: 500, velocity: 0, daysCover: null,
-    tags: ["待复核"],
-  },
-];
-
-/* 选品候选 — 权重披露 */
-NH.sourcingWeights = [
-  { key: "capacity", label: "类目容量", w: 0.25 },
-  { key: "competition", label: "竞争强度(反)", w: 0.20 },
-  { key: "margin", label: "测算净利率", w: 0.30 },
-  { key: "pain", label: "评论痛点可解性", w: 0.15 },
-  { key: "supply", label: "货源稳定度", w: 0.10 },
-];
-NH.marginThreshold = 0.12; /* 净利率门槛 12% */
-
-NH.candidates = [
-  {
-    id: "c1", name: "Over-door Towel Rack", nameZh: "门后毛巾架",
-    category: "Home Storage", capacity: "中高", priceBand: "$18–28",
-    competitorAvg: 22.5, reviewPains: ["掉落", "生锈", "安装麻烦"],
-    scores: { capacity: 78, competition: 62, margin: 86, pain: 74, supply: 80 },
-    price: 24.99, cost: 4.8, headhaul: 1.6, fba: 4.55, commission: 3.75, adEst: 2.5,
-    claimed: false,
-  },
-  {
-    id: "c2", name: "Cable Management Box", nameZh: "桌下理线盒",
-    category: "Office Products", capacity: "高", priceBand: "$16–26",
-    competitorAvg: 19.9, reviewPains: ["太小", "散热差", "盖子松"],
-    scores: { capacity: 85, competition: 55, margin: 72, pain: 81, supply: 88 },
-    price: 21.99, cost: 3.9, headhaul: 1.4, fba: 4.20, commission: 3.30, adEst: 2.8,
-    claimed: false,
-  },
-  {
-    id: "c3", name: "Silicone Sink Mat", nameZh: "硅胶水槽垫",
-    category: "Kitchen", capacity: "中", priceBand: "$12–18",
-    competitorAvg: 14.5, reviewPains: ["异味", "发霉", "尺寸不准"],
-    scores: { capacity: 60, competition: 40, margin: 45, pain: 58, supply: 70 },
-    price: 14.99, cost: 2.1, headhaul: 1.1, fba: 3.45, commission: 2.25, adEst: 2.2,
-    claimed: false, belowThreshold: true,
-  },
-  {
-    id: "c4", name: "Magnetic Spice Jars 6pc", nameZh: "磁吸香料罐 6件",
-    category: "Kitchen", capacity: "中高", priceBand: "$22–32",
-    competitorAvg: 26.0, reviewPains: ["磁力弱", "标签脱落", "容量小"],
-    scores: { capacity: 72, competition: 68, margin: 78, pain: 76, supply: 75 },
-    price: 27.99, cost: 5.5, headhaul: 1.9, fba: 5.10, commission: 4.20, adEst: 2.6,
-    claimed: true,
-  },
-];
-
-NH.listingDraft = {
-  sku: "NH-HOOK-05",
-  status: "pending_review",
-  statusLabel: "待复核",
-  title: "Adhesive Wall Hooks Heavy Duty 12 Pack, Waterproof Removable Damage-Free Hooks for Hanging Coats Towels Keys, Bathroom Kitchen Bedroom",
-  bullets: [
-    "Heavy-duty adhesive — holds up to 15 lbs each when applied to clean tile/glass/metal",
-    "Damage-free remove — twist to release without wall marks (smooth surfaces)",
-    "Waterproof & rust-resistant — bathroom and kitchen ready",
-    "12-pack assortment — 6 large + 6 medium for coats, towels, keys, utensils",
-    "Tool-free install in 60 seconds — no drills, no nails, no screws",
-  ],
-  searchTerms: "wall hooks adhesive heavy duty, removable hooks bathroom, damage free hanging hooks, towel hooks no drill, sticky hooks for wall",
-  aplus: [
-    "模块1：痛点对比图 — 打孔 vs 免钉",
-    "模块2：承重实测对比（15lbs）",
-    "模块3：场景拼图：浴室/厨房/玄关/卧室",
-    "模块4：安装四步 GIF 脚本",
-    "模块5：包装清单 + Q&A",
-  ],
-  imageScripts: [
-    { slot: "主图", script: "白底 · 12件套平铺 · 角标「15lbs」" },
-    { slot: "副图1", script: "浴室毛巾场景 · 水珠特写防水" },
-    { slot: "副图2", script: "安装四步分格" },
-    { slot: "副图3", script: "承重哑铃演示" },
-    { slot: "副图4", script: "尺寸标注大/中钩" },
-    { slot: "副图5", script: "多色可选（若有）" },
-  ],
+  const hardNo = checks.find(c => c.hard === "不可做");
+  const hardWatch = checks.find(c => c.hard === "观察");
+  const allPass = checks.every(c => c.pass);
+  let conclusion, reason;
+  if (hardNo) {
+    conclusion = "不可做";
+    reason = hardNo.key + "：" + hardNo.detail;
+  } else if (!allPass || hardWatch) {
+    conclusion = "观察";
+    const w = hardWatch || checks.find(c => !c.pass);
+    reason = (w ? w.key + "：" + w.detail : "八维未齐");
+  } else {
+    conclusion = "可做";
+    reason = "八维均过 · 净利与需求节奏成立";
+  }
+  // 衰退附加动作
+  let action = conclusion === "可做" ? "可进短名单（人工认领）" : conclusion === "观察" ? "补数据/认证后再裁" : "停止立项";
+  if (p.demandPhase === "衰退") action = "停补+收缩广告 · 不建议补货";
+  return { conclusion, reason, action, checks, margin:m };
 };
 
-NH.adsCaps = { acos: 35, tacos: 18 };
-NH.campaigns = [
-  { id: "camp1", sku: "NH-LAMP-01", name: "SP Auto · Lamp", type: "auto", spend7d: 98.2, sales7d: 446.4, acos: 22, status: "ok", suggest: null },
-  { id: "camp2", sku: "NH-LAMP-01", name: "SP Manual Exact · Lamp", type: "manual", spend7d: 42.0, sales7d: 210.0, acos: 20, status: "ok",
-    suggest: { type: "boost", text: "出单词 desk lamp usb charging 转化好，建议日预算 +$8", blocked: false } },
-  { id: "camp3", sku: "NH-MAT-02", name: "SP Auto · Yoga Mat", type: "auto", spend7d: 285.0, sales7d: 593.8, acos: 48, status: "over_cap",
-    suggest: { type: "pause", text: "烧钱词 yoga mat thick / exercise mat cheap ACOS>70%，建议暂停", blocked: true, blockReason: "活动 ACOS 48% 已超 cap 35%，拦截加预算；仅允许暂停/降价词" } },
-  { id: "camp4", sku: "NH-MAT-02", name: "SP Manual Phrase · Mat", type: "manual", spend7d: 152.5, sales7d: 280.0, acos: 54, status: "over_cap",
-    suggest: { type: "pause", text: "建议暂停 phrase「cheap yoga mat」并否定化", blocked: true, blockReason: "超 ACOS cap，禁止加预算" } },
-  { id: "camp5", sku: "NH-ORG-03", name: "SP Auto · Organizer", type: "auto", spend7d: 68.4, sales7d: 380.0, acos: 18, status: "ok",
-    suggest: { type: "boost", text: "出单词 bamboo desk organizer 建议加预算 +$5", blocked: false } },
-  { id: "camp6", sku: "NH-CUSH-04", name: "SP Auto · Cushion", type: "auto", spend7d: 105.0, sales7d: 375.0, acos: 28, status: "watch",
-    suggest: { type: "watch", text: "接近 cap，观察 3 天；差评期建议控投", blocked: false } },
-];
-
-NH.fba = NH.skus.filter(s => s.status !== "pending_list").map(s => ({
-  sku: s.sku, titleZh: s.titleZh, avail: s.fbaAvail, inbound: s.inbound,
-  velocity: s.velocity, daysCover: s.daysCover,
-  safetyDays: 21, reorderQty: s.daysCover < 21 ? Math.ceil((21 - s.daysCover) * s.velocity + 14 * s.velocity) : 0,
-  risk: s.daysCover < 14 ? "high" : s.daysCover < 21 ? "mid" : "low",
-}));
-
-NH.csItems = [
-  {
-    id: "cs1", type: "message", risk: "low", sku: "NH-LAMP-01",
-    from: "Buyer · A***k", subject: "Missing USB cable?",
-    body: "Hi, my lamp arrived but I can't find the USB cable in the box. Can you help?",
-    draftZh: "您好，非常抱歉给您带来不便。台灯包装内 USB 线应在底座泡棉夹层；若确认缺失，我们可为您补发一根线（约 5–7 个工作日送达）。请回复订单号确认收货地址。",
-    draftEn: "Hi, sorry for the trouble. The USB cable is usually tucked in the foam under the base. If it's missing, we can reship a cable (5–7 business days). Please reply with your order ID to confirm the address.",
-    suggest: "补发配件", status: "pending",
-  },
-  {
-    id: "cs2", type: "review", risk: "high", sku: "NH-CUSH-04", stars: 2,
-    from: "Review · M***e", subject: "Flattens in a week / chemical smell",
-    body: "Cushion went flat after 1 week and had a strong chemical smell for days. Not worth it.",
-    draftZh: "【需人工】差评涉及产品安全/气味与品质承诺，禁止私信诱导删评。建议：公开回复致歉 + 站内信提供退款/换货选项 + 同步品控抽检批次。",
-    draftEn: "[HUMAN REQUIRED] Do NOT offer review removal. Public apology + private refund/replace offer + QA batch check.",
-    suggest: "退款或换货 · 禁止承诺删评", status: "pending", highRiskReason: "差评承诺/气味安全敏感",
-  },
-  {
-    id: "cs3", type: "qa", risk: "low", sku: "NH-ORG-03",
-    from: "Q&A", subject: "Does it fit dual monitors?",
-    body: "Will this organizer fit under a dual-monitor arm setup?",
-    draftZh: "可以。套装配件高度约 4.5cm，多数双屏支架底座可穿过；建议测量支架立柱直径是否 ≤ 桌面预留孔。",
-    draftEn: "Yes for most dual-monitor arms. Tray height ~4.5cm; please measure your pole diameter against the desk cutout.",
-    suggest: "发布 Q&A 回答", status: "pending",
-  },
-  {
-    id: "cs4", type: "message", risk: "high", sku: "NH-MAT-02",
-    from: "Buyer · T***r", subject: "Your listing copies BrandX patent??",
-    body: "This looks identical to BrandX patented texture. Are you infringing?",
-    draftZh: "【需人工·侵权风险】请法务/品牌同事复核后再回复。演示草稿：我们重视知识产权，已内部核查中，将通过亚马逊消息正式回复。切勿承认侵权或提供设计图。",
-    draftEn: "[HUMAN · IP RISK] Escalate to brand/legal before reply. Do not admit infringement or share design files.",
-    suggest: "升级法务 · 暂缓发送", status: "pending", highRiskReason: "侵权指控",
-  },
-];
-
-NH.orders = [
-  { id: "111-2840193-5521847", date: "2026-10-01", sku: "NH-LAMP-01", qty: 1, sales: 29.99, ads: 3.20, refund: 0, headhaul: 1.85, fba: 5.42, referral: 4.50, cost: 6.80 },
-  { id: "111-9382011-1200442", date: "2026-10-01", sku: "NH-MAT-02", qty: 2, sales: 49.98, ads: 12.40, refund: 0, headhaul: 4.20, fba: 9.76, referral: 7.50, cost: 10.40 },
-  { id: "111-5528190-7712033", date: "2026-10-01", sku: "NH-ORG-03", qty: 1, sales: 34.99, ads: 2.10, refund: 0, headhaul: 2.40, fba: 6.15, referral: 5.25, cost: 8.50 },
-  { id: "111-1029384-6610291", date: "2026-09-30", sku: "NH-CUSH-04", qty: 1, sales: 32.99, ads: 4.80, refund: 32.99, headhaul: 2.20, fba: 5.95, referral: 4.95, cost: 7.10 },
-  { id: "111-7782910-3301928", date: "2026-09-30", sku: "NH-LAMP-01", qty: 1, sales: 29.99, ads: 2.90, refund: 0, headhaul: 1.85, fba: 5.42, referral: 4.50, cost: 6.80 },
-  { id: "111-4410293-8829104", date: "2026-09-30", sku: "NH-ORG-03", qty: 1, sales: 34.99, ads: 1.80, refund: 0, headhaul: 2.40, fba: 6.15, referral: 5.25, cost: 8.50 },
-  { id: "111-2201938-5510293", date: "2026-09-29", sku: "NH-MAT-02", qty: 1, sales: 24.99, ads: 8.50, refund: 0, headhaul: 2.10, fba: 4.88, referral: 3.75, cost: 5.20 },
-  { id: "111-8829104-1029384", date: "2026-09-29", sku: "NH-LAMP-01", qty: 2, sales: 59.98, ads: 5.10, refund: 0, headhaul: 3.70, fba: 10.84, referral: 9.00, cost: 13.60 },
-];
-
-NH.logs = [
-  { ts: "2026-10-02 01:15:22", agent: "广告守门", msg: "扫描 6 个活动 · 拦截 2 条超 cap 加预算建议" },
-  { ts: "2026-10-02 01:00:08", agent: "利润日报", msg: "生成 10/01 日报 · 净利演示测算完成" },
-  { ts: "2026-10-02 00:30:41", agent: "FBA库存", msg: "NH-ORG-03 可售 9 天 · 触发补货建议" },
-  { ts: "2026-10-01 23:55:03", agent: "客服评论", msg: "新差评 NH-CUSH-04 ★2 · 标高风险待人工" },
-  { ts: "2026-10-01 22:10:17", agent: "选品", msg: "跑完 4 条候选 · 1 条低于净利门槛" },
-  { ts: "2026-10-01 21:40:55", agent: "Listing", msg: "NH-HOOK-05 草稿生成 · 状态：待复核" },
-];
-
-NH.calcNet = function (o) {
-  return +(o.sales - o.ads - o.refund - o.headhaul - o.fba - o.referral - o.cost).toFixed(2);
-};
-
-NH.calcCandidateMargin = function (c) {
-  const net = c.price - c.cost - c.headhaul - c.fba - c.commission - c.adEst;
-  return { net: +net.toFixed(2), rate: +(net / c.price).toFixed(4) };
-};
-
-NH.calcScore = function (c) {
-  let s = 0;
-  NH.sourcingWeights.forEach(w => { s += (c.scores[w.key] || 0) * w.w; });
-  return Math.round(s);
-};
+BX.logs = [];

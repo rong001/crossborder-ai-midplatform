@@ -1,57 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>跨境电商 AI 中台 · 亚马逊美站岗位链路</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/app.css" />
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>亚马逊 AI 运营中台 · 北冕北美店 · 选品裁决</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-  <div class="shell">
-    <aside class="side" aria-label="主导航">
-      <div class="brand">
-        <h1>跨境电商 AI 中台</h1>
-        <p>NovaHome US · Amazon.com</p>
-      </div>
-      <nav class="nav">
-        <div class="grp">总控</div>
-        <button type="button" data-view="overview" class="active">总览 · 待办 / Agent</button>
-        <div class="grp">岗位链路</div>
-        <button type="button" data-view="sourcing">1 选品</button>
-        <button type="button" data-view="listing">2 Listing</button>
-        <button type="button" data-view="ads">3 广告守门</button>
-        <button type="button" data-view="fba">4 FBA 库存</button>
-        <button type="button" data-view="cs">5 客服与评论</button>
-        <button type="button" data-view="profit">6 利润日报</button>
-        <div class="grp">其他</div>
-        <a href="../" style="display:block;padding:9px 10px;color:#64748B;text-decoration:none;border-radius:6px">← 返回门户</a>
-      </nav>
-    </aside>
-    <div class="main">
-      <header class="top">
-        <div>
-          <strong id="page-title">总览</strong>
-          <span class="badge demo" style="margin-left:8px">演示测算 · 非后台实数 · 未接卖家账号</span>
-        </div>
-        <div class="row-actions">
-          <span class="badge">美站仿真 · 5 SKU</span>
-        </div>
-      </header>
-      <div class="content">
-        <section id="view-overview" class="view active"></section>
-        <section id="view-sourcing" class="view"></section>
-        <section id="view-listing" class="view"></section>
-        <section id="view-ads" class="view"></section>
-        <section id="view-fba" class="view"></section>
-        <section id="view-cs" class="view"></section>
-        <section id="view-profit" class="view"></section>
-      </div>
-    </div>
-  </div>
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+<div class="shell">
+<aside class="side">
+  <div class="brand"><h1>亚马逊 AI 运营中台</h1><p id="shop-name">北冕北美店</p></div>
+  <nav class="nav">
+    <div class="grp">总控</div>
+    <button type="button" data-view="overview" class="active">总览</button>
+    <div class="grp">核心</div>
+    <button type="button" data-view="verdict">选品裁决</button>
+    <button type="button" data-view="map">每天在做什么</button>
+    <div class="grp">链路</div>
+    <button type="button" data-view="listing">Listing</button>
+    <button type="button" data-view="ads">广告守门</button>
+    <button type="button" data-view="fba">FBA 补货</button>
+    <button type="button" data-view="cs">评论消息</button>
+    <button type="button" data-view="weekly">经营周报</button>
+    <div class="grp">其他</div>
+    <a href="../" style="display:block;padding:9px 10px;color:#64748B;text-decoration:none">← 返回门户</a>
+  </nav>
+</aside>
+<div class="main">
+<header class="top">
+  <div><strong id="page-title">总览</strong>
+    <span class="badge demo" style="margin-left:8px">样例店 · 非真实品牌 · 未接后台</span></div>
+  <button class="btn primary" id="btn-run-all">一键跑全部</button>
+</header>
+<div class="content">
+  <section id="view-overview" class="view active"></section>
+  <section id="view-verdict" class="view"></section>
+  <section id="view-map" class="view"></section>
+  <section id="view-listing" class="view"></section>
+  <section id="view-ads" class="view"></section>
+  <section id="view-fba" class="view"></section>
+  <section id="view-cs" class="view"></section>
+  <section id="view-weekly" class="view"></section>
+</div>
+</div>
+</div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

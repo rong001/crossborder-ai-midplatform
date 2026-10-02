@@ -1,370 +1,231 @@
-/* NovaHome US Amazon AI Midplatform app */
-(function () {
-  const $ = (s, el = document) => el.querySelector(s);
-  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const state = {
-    view: "overview",
-    agents: JSON.parse(JSON.stringify(NH.agents)),
-    logs: JSON.parse(JSON.stringify(NH.logs)),
-    listing: JSON.parse(JSON.stringify(NH.listingDraft)),
-    candidates: JSON.parse(JSON.stringify(NH.candidates)),
-    campaigns: JSON.parse(JSON.stringify(NH.campaigns)),
-    cs: JSON.parse(JSON.stringify(NH.csItems)),
-    fba: JSON.parse(JSON.stringify(NH.fba)),
-    todos: JSON.parse(JSON.stringify(NH.todos)),
-  };
+(function(){
+  const $=(s,el=document)=>el.querySelector(s);
+  const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+  const state={ view:"overview", agents:JSON.parse(JSON.stringify(BX.agents)), logs:[...BX.logs],
+    listing:{ title:"Adhesive Wall Hooks Heavy Duty 12 Pack Waterproof Removable",
+      bullets:["Holds up to 15 lbs on clean tile/glass/metal","Damage-free twist removal","Waterproof for bath/kitchen","12-pack large+medium","Tool-free install ~60s"],
+      search:"adhesive wall hooks, damage free hooks, towel hooks no drill",
+      aplus:["打孔vs免钉","承重15lbs","场景拼图","安装四步","清单Q&A"],
+      main:"白底平铺12件 · 角标15lbs", status:"editing" } };
 
-  function money(n){ return "$" + Number(n).toFixed(2); }
-  function pct(n){ return (Number(n)*100).toFixed(1) + "%"; }
-  function nowTs(){
-    const d = new Date();
-    const p = n => String(n).padStart(2,"0");
-    return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
-  }
-  function pushLog(agent, msg){
-    state.logs.unshift({ ts: nowTs(), agent, msg });
-    renderLogs();
-  }
-  function flowBox(input, ai, gate, out){
-    return `<div class="flow">
-      <div><b>输入</b>${input}</div>
-      <div><b>AI 做什么</b>${ai}</div>
-      <div><b>人工卡点</b>${gate}</div>
-      <div><b>输出</b>${out}</div>
-    </div>`;
-  }
+  function ts(){const d=new Date(),p=n=>String(n).padStart(2,"0");return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;}
+  function log(agent,msg){state.logs.unshift({ts:ts(),agent,msg});}
+  function money(n){return "$"+Number(n).toFixed(2);}
+  function pct(n){return (n*100).toFixed(1)+"%";}
+  function vBadge(c){return c==="可做"?"verdict-ok":c==="观察"?"verdict-watch":"verdict-no";}
+
   function setView(v){
-    state.view = v;
-    $$(".nav button[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view===v));
-    $$(".view").forEach(el => el.classList.toggle("active", el.id === "view-"+v));
-    $("#page-title").textContent = ({
-      overview:"总览", sourcing:"选品", listing:"Listing", ads:"广告守门",
-      fba:"FBA 库存", cs:"客服与评论", profit:"利润日报"
-    })[v] || v;
+    state.view=v;
+    $$(".nav button[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+    $$(".view").forEach(el=>el.classList.toggle("active",el.id==="view-"+v));
+    $("#page-title").textContent={overview:"总览",verdict:"选品裁决",map:"卖家每天在做什么",listing:"Listing",ads:"广告守门",fba:"FBA 补货",cs:"评论消息",weekly:"经营周报"}[v]||v;
   }
 
   function renderOverview(){
-    const todos = state.todos.map(t => `
-      <div class="todo ${t.severity}">
-        <div>
-          <div style="font-weight:600">${t.title}</div>
-          <div class="tiny muted">SKU ${t.sku}</div>
-        </div>
-        <button class="btn primary" data-goto="${t.view}">${t.action}</button>
-      </div>`).join("");
-    const agents = state.agents.map(a => `
-      <div class="agent">
-        <div>
-          <div style="font-weight:600">${a.name} <span class="tiny muted">· ${a.role}</span></div>
-          <div class="tiny muted">上次运行 ${a.lastRun || "—"}</div>
-        </div>
-        <button class="switch ${a.on?"on":""}" data-agent="${a.id}" aria-label="切换${a.name}"><i></i></button>
-      </div>`).join("");
-    const skus = NH.skus.map(s => `
-      <tr>
-        <td>${s.sku}<div class="tiny muted">${s.titleZh}</div></td>
-        <td><span class="badge ${s.status==='healthy'?'ok':s.status==='ads_over'||s.status==='bad_review'?'bad':s.status==='stockout'?'warn':'info'}">${s.statusLabel}</span></td>
-        <td class="num">${money(s.price)}</td>
-        <td class="num">${s.acos?s.acos+"%":"—"}</td>
-        <td class="num">${s.daysCover ?? "—"}</td>
-        <td class="num">${s.stars ?? "—"}</td>
-      </tr>`).join("");
-    $("#view-overview").innerHTML = `
-      <div class="grid g3" style="margin-bottom:12px">
-        <div class="card"><div class="muted tiny">店铺</div><div class="kpi" style="font-size:16px">${NH.shop.name}</div><div class="tiny muted">${NH.shop.marketplace} · 美站仿真</div></div>
-        <div class="card"><div class="muted tiny">今日待办</div><div class="kpi">${state.todos.length}</div><div class="tiny muted">广告超标 / 断货 / 差评 / Listing 复核</div></div>
-        <div class="card"><div class="muted tiny">Agent 开启</div><div class="kpi">${state.agents.filter(a=>a.on).length}/6</div><div class="tiny muted">只建议与拦截 · 不接真实后台</div></div>
+    const verdicts=BX.candidates.map(p=>({p,v:BX.verdict(p)}));
+    const counts={可做:0,观察:0,不可做:0};verdicts.forEach(x=>counts[x.v.conclusion]++);
+    const processed=state.agents.reduce((a,x)=>a+x.processedToday,0);
+    $("#view-overview").innerHTML=`
+      <div class="grid g4" style="margin-bottom:12px">
+        <div class="card"><div class="tiny muted">店铺</div><div style="font-weight:600">${BX.meta.shop}</div><div class="tiny muted">${BX.meta.marketplace}</div></div>
+        <div class="card"><div class="tiny muted">今日已处理</div><div class="kpi">${processed}</div></div>
+        <div class="card"><div class="tiny muted">裁决 · 可做/观察/不可做</div><div class="kpi" style="font-size:16px">${counts.可做} / ${counts.观察} / ${counts.不可做}</div></div>
+        <div class="card"><div class="tiny muted">Agent 开启</div><div class="kpi">${state.agents.filter(a=>a.on).length}/6</div></div>
       </div>
       <div class="grid g2">
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <h3 style="margin:0">今日待办</h3>
-            <button class="btn primary" id="btn-run-demo">一键跑演示数据</button>
-          </div>
-          ${todos}
+        <div class="card"><h3>各 Agent</h3>
+          ${state.agents.map(a=>`<div class="agent"><div><b>${a.name}</b><div class="tiny muted">今日处理 ${a.processedToday}</div></div>
+            <div class="row-actions">
+              <button class="switch ${a.on?"on":""}" data-tog="${a.id}"><i></i></button>
+              <button class="btn" data-run="${a.id}">立即运行</button>
+            </div></div>`).join("")}
         </div>
-        <div class="card">
-          <h3>各 Agent 开关</h3>
-          ${agents}
+        <div class="card"><h3>运行日志</h3><div class="log" id="log-box"></div>
+          <p class="tiny muted" style="margin-top:8px">花钱/对外动作一律停在「待人工确认」。${BX.meta.demoNote}</p>
         </div>
       </div>
       <div class="card" style="margin-top:12px">
-        <h3>仿真店铺 SKU（5 个）</h3>
-        <table><thead><tr><th>SKU</th><th>状态</th><th class="num">售价</th><th class="num">ACOS</th><th class="num">可售天</th><th class="num">星级</th></tr></thead><tbody>${skus}</tbody></table>
-      </div>
-      <div class="card" style="margin-top:12px">
-        <h3>运行日志</h3>
-        <div class="log" id="log-box"></div>
-      </div>
-      <p class="footer-note"><span class="badge demo">${NH.shop.demoNote}</span> 未连接 Seller Central / Ads。所有费用为公开规则量级演示测算。</p>`;
-    renderLogs();
-    $("#btn-run-demo")?.addEventListener("click", runDemo);
-    $$("[data-goto]").forEach(b => b.addEventListener("click", () => setView(b.dataset.goto)));
-    $$(".switch[data-agent]").forEach(b => b.addEventListener("click", () => {
-      const a = state.agents.find(x => x.id === b.dataset.agent);
-      a.on = !a.on;
-      pushLog(a.name, a.on ? "已开启" : "已关闭");
-      renderOverview();
-    }));
-  }
-
-  function renderLogs(){
-    const box = $("#log-box");
-    if (!box) return;
-    box.innerHTML = state.logs.slice(0,40).map(l => `<div><span style="color:#94A3B8">${l.ts}</span> · <span style="color:#93C5FD">${l.agent}</span> · ${l.msg}</div>`).join("");
-  }
-
-  function runDemo(){
-    const on = state.agents.filter(a=>a.on);
-    if (!on.length){ pushLog("总览","没有开启的 Agent"); return; }
-    on.forEach((a,i) => {
-      setTimeout(() => {
-        a.lastRun = nowTs();
-        const msgs = {
-          sourcing: "重跑选品候选 · 毛利门槛拦截已应用",
-          listing: "刷新 Listing 草稿 · 仍待人工复核",
-          ads: "扫描活动 · 超 cap 建议已拦截加预算",
-          fba: "刷新可售天数 · 生成补货建议",
-          cs: "生成中英回复草稿 · 高风险已标红",
-          profit: "重算订单级净利瀑布 · 演示测算",
-        };
-        pushLog(a.name, msgs[a.id] || "演示运行完成");
-        if (i === on.length-1) renderOverview();
-      }, 180*i);
-    });
-  }
-
-  function renderSourcing(){
-    const rows = state.candidates.map(c => {
-      const m = NH.calcCandidateMargin(c);
-      const score = NH.calcScore(c);
-      const below = m.rate < NH.marginThreshold || c.belowThreshold;
-      return `<tr>
-        <td>${c.nameZh}<div class="tiny muted">${c.category} · ${c.priceBand}</div></td>
-        <td class="num">${score}</td>
-        <td class="num">${pct(m.rate)} <div class="tiny muted">净利 ${money(m.net)}</div></td>
-        <td>${below?'<span class="badge bad">低于门槛·不建议做</span>':'<span class="badge ok">过门槛</span>'}</td>
-        <td class="tiny">${(c.reviewPains||[]).join(" / ")}</td>
-        <td>${c.claimed?'<span class="badge info">已认领</span>':(below?'—':`<button class="btn primary" data-claim="${c.id}">认领进短名单</button>`)}</td>
-      </tr>`;
-    }).join("");
-    const weights = NH.sourcingWeights.map(w=>`${w.label} ${(w.w*100).toFixed(0)}%`).join(" · ");
-    $("#view-sourcing").innerHTML = `
-      ${flowBox("类目容量、竞品价格带、评论痛点、成本项","多维打分 + 头程/FBA/佣金/广告后毛利；低于阈值拦截","认领进短名单","短名单候选表 + 不建议做标记")}
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
-          <h3 style="margin:0">选品候选 · 净利率门槛 ${(NH.marginThreshold*100).toFixed(0)}%</h3>
-          <span class="badge demo">权重：${weights}</span>
-        </div>
-        <p class="tiny muted" style="margin:8px 0 12px">毛利 = 售价 − 采购 − 头程 − FBA − 佣金 − 广告预估。${NH.shop.demoNote}</p>
-        <table><thead><tr><th>品类</th><th class="num">综合分</th><th class="num">测算净利率</th><th>守门</th><th>评论痛点</th><th>动作</th></tr></thead><tbody>${rows}</tbody></table>
+        <h3>一眼看懂：哪个品能做</h3>
+        <table><thead><tr><th>候选品</th><th>结论</th><th>关键原因</th><th></th></tr></thead>
+        <tbody>${verdicts.map(x=>`<tr>
+          <td>${x.p.nameZh}<div class="tiny muted">${x.p.keyword}</div></td>
+          <td><span class="${vBadge(x.v.conclusion)}">${x.v.conclusion}</span></td>
+          <td class="tiny">${x.v.reason}</td>
+          <td><button class="btn" data-goto="verdict">看八维</button></td>
+        </tr>`).join("")}</tbody></table>
       </div>`;
-    $$("[data-claim]").forEach(b => b.addEventListener("click", () => {
-      const c = state.candidates.find(x=>x.id===b.dataset.claim);
-      c.claimed = true;
-      pushLog("选品", `认领 ${c.nameZh} 进入短名单`);
-      renderSourcing();
-    }));
+    paintLog();
+    $$("[data-tog]").forEach(b=>b.onclick=()=>{const a=state.agents.find(x=>x.id===b.dataset.tog);a.on=!a.on;log(a.name,a.on?"开启":"关闭");renderOverview();});
+    $$("[data-run]").forEach(b=>b.onclick=()=>runOne(b.dataset.run));
+    $$("[data-goto]").forEach(b=>b.onclick=()=>{setView(b.dataset.goto);renderAll();});
+  }
+  function paintLog(){
+    const box=$("#log-box"); if(!box)return;
+    box.innerHTML=(state.logs.slice(0,50).map(l=>`<div><span style="color:#94A3B8">${l.ts}</span> · <span style="color:#93C5FD">${l.agent}</span> · ${l.msg}</div>`).join(""))||"<div class='muted'>暂无日志</div>";
+  }
+
+  function runOne(id){
+    const a=state.agents.find(x=>x.id===id); if(!a||!a.on){log("系统", (a?a.name:"?")+"未开启");paintLog();return;}
+    a.processedToday++;
+    if(id==="verdict"){
+      const vs=BX.candidates.map(p=>BX.verdict(p));
+      log("选品裁决", `完成6品裁决 · 可做${vs.filter(v=>v.conclusion==="可做").length} · 观察${vs.filter(v=>v.conclusion==="观察").length} · 不可做${vs.filter(v=>v.conclusion==="不可做").length}`);
+    } else if(id==="listing") log("Listing","生成草稿 · 待人工确认进草稿（不上架）");
+    else if(id==="ads") log("广告守门","扫描SP · 超ACOS35%已标红 · 建议待确认（不改预算）");
+    else if(id==="fba") log("FBA补货","刷新可售天 · 低于21天出补货建议 · 待确认采购单");
+    else if(id==="cs") log("评论消息","英文草稿已备 · 待确认后才标已回复");
+    else if(id==="weekly") log("经营周报","周报页已刷新 · 对外发送需人工");
+    renderAll();
+  }
+  function runAll(){
+    ["verdict","listing","ads","fba","cs","weekly"].forEach((id,i)=>setTimeout(()=>runOne(id),120*i));
+  }
+
+  function renderVerdict(){
+    const cards=BX.candidates.map(p=>{
+      const v=BX.verdict(p); const m=v.margin;
+      return `<div class="card" style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:flex-start">
+          <div>
+            <div style="font-weight:600;font-size:14px">${p.nameZh} <span class="tiny muted">${p.nameEn}</span></div>
+            <div class="tiny muted">核心词 ${p.keyword} · 月销估 ${p.monthlySalesEst}</div>
+          </div>
+          <div style="text-align:right">
+            <span class="${vBadge(v.conclusion)}">${v.conclusion}</span>
+            <div class="tiny muted" style="margin-top:4px">${v.action}</div>
+          </div>
+        </div>
+        <p style="margin:8px 0;font-size:12px"><b>关键原因：</b>${v.reason}</p>
+        <div class="tiny muted" style="margin-bottom:6px">CALC 净利 = 售价${money(p.price)} − 采购${money(p.cogs)} − 头程${money(p.headhaul)} − 佣金${money(m.referral)} − FBA${money(p.fba)} − 广告预留${money(p.adReserve)} − 退货预留${money(p.returnReserve)} = <b>${money(m.net)}</b>（${pct(m.rate)}）</div>
+        <div class="check-grid">${v.checks.map(c=>`
+          <div class="check-item ${c.pass?"ok":"fail"}"><b>${c.key}</b> ${c.pass?"✓":"×"} ${c.hard?`<span class="${vBadge(c.hard)}" style="margin-left:4px">${c.hard}</span>`:""}
+            <div>${c.detail}</div></div>`).join("")}</div>
+      </div>`;
+    }).join("");
+    $("#view-verdict").innerHTML=`
+      <div class="card" style="margin-bottom:12px">
+        <h3 style="margin:0 0 6px">选品裁决 · 八维齐备才可「可做」</h3>
+        <p class="tiny muted" style="margin:0">需求 · 竞争 · 净利(≥18%) · 合规 · 供应 · 退货 · 差异 · 节奏。缺一项不能给可做。衰退品强制停补+收缩。${BX.meta.sampleNote}</p>
+      </div>${cards}`;
+  }
+
+  function renderMap(){
+    $("#view-map").innerHTML=`
+      <div class="card">
+        <h3>卖家每天在做什么 → 系统替掉什么</h3>
+        <table><thead><tr><th>环节</th><th>卖家仍要做</th><th>系统替掉/加速</th><th>必须人工确认</th></tr></thead>
+        <tbody>${BX.dailyMap.map(r=>`<tr><td><b>${r.job}</b></td><td>${r.human}</td><td>${r.system}</td><td><span class="badge warn">${r.mustConfirm}</span></td></tr>`).join("")}</tbody></table>
+        <p class="tiny muted">上架、改预算、发信、下采购单 —— 一律不自动执行。</p>
+      </div>`;
   }
 
   function renderListing(){
-    const L = state.listing;
-    const canPublish = L.status === "approved";
-    $("#view-listing").innerHTML = `
-      ${flowBox("短名单 SKU / 卖点","生成标题、五点、搜索词、A+大纲、主副图脚本","人工复核通过后才能刊登","待复核草稿 → 可刊登")}
+    const L=state.listing;
+    $("#view-listing").innerHTML=`
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-          <h3 style="margin:0">SKU ${L.sku} · <span class="badge ${L.status==='approved'?'ok':L.status==='rejected'?'bad':'warn'}">${L.statusLabel}</span></h3>
-          <div class="row-actions">
-            <button class="btn" id="btn-reject" ${L.status==='pending_review'?'':'disabled'}>驳回修改</button>
-            <button class="btn primary" id="btn-approve" ${L.status==='pending_review'?'':'disabled'}>通过复核</button>
-            <button class="btn primary" id="btn-publish" ${canPublish?'':'disabled'}>刊登</button>
-          </div>
+        <h3>Listing 草稿（可改 · 确认进草稿 · 不上架）</h3>
+        <label class="tiny muted">标题</label><textarea id="l-title" style="width:100%;min-height:48px;margin:4px 0 8px">${L.title}</textarea>
+        <label class="tiny muted">五点（每行一条）</label><textarea id="l-bullets" style="width:100%;min-height:90px;margin:4px 0 8px">${L.bullets.join("\n")}</textarea>
+        <label class="tiny muted">搜索词</label><textarea id="l-search" style="width:100%;min-height:40px;margin:4px 0 8px">${L.search}</textarea>
+        <label class="tiny muted">A+ 要点</label><textarea id="l-aplus" style="width:100%;min-height:60px;margin:4px 0 8px">${L.aplus.join("\n")}</textarea>
+        <label class="tiny muted">主图脚本</label><textarea id="l-main" style="width:100%;min-height:40px;margin:4px 0 8px">${L.main}</textarea>
+        <div class="row-actions">
+          <span class="badge ${L.status==="in_draft"?"ok":"warn"}">${L.status==="in_draft"?"已进草稿":"编辑中 · 待确认"}</span>
+          <button class="btn primary" id="btn-draft">确认进草稿（不上架）</button>
         </div>
-        <p class="tiny muted">AI 只出草稿。未通过复核时「刊登」不可用。</p>
-        <h3>标题</h3><div class="pre">${L.title}</div>
-        <h3 style="margin-top:12px">五点</h3><div class="pre">${L.bullets.map((b,i)=>`${i+1}. ${b}`).join("\n")}</div>
-        <h3 style="margin-top:12px">搜索词</h3><div class="pre">${L.searchTerms}</div>
-        <h3 style="margin-top:12px">A+ 大纲</h3><div class="pre">${L.aplus.map((b,i)=>`${i+1}. ${b}`).join("\n")}</div>
-        <h3 style="margin-top:12px">主图 / 副图脚本</h3>
-        <table><thead><tr><th>位置</th><th>脚本</th></tr></thead><tbody>${L.imageScripts.map(x=>`<tr><td>${x.slot}</td><td>${x.script}</td></tr>`).join("")}</tbody></table>
       </div>`;
-    $("#btn-approve")?.addEventListener("click", () => {
-      L.status = "approved"; L.statusLabel = "已复核·可刊登";
-      pushLog("Listing", `${L.sku} 人工复核通过`);
-      state.todos = state.todos.filter(t => t.id !== "t4");
-      renderListing();
-    });
-    $("#btn-reject")?.addEventListener("click", () => {
-      L.status = "rejected"; L.statusLabel = "已驳回·待改";
-      pushLog("Listing", `${L.sku} 驳回，退回修改`);
-      renderListing();
-    });
-    $("#btn-publish")?.addEventListener("click", () => {
-      if (L.status !== "approved") return;
-      L.status = "published"; L.statusLabel = "已刊登（演示）";
-      pushLog("Listing", `${L.sku} 演示刊登成功（未接真实后台）`);
-      renderListing();
-    });
+    $("#btn-draft").onclick=()=>{
+      L.title=$("#l-title").value; L.bullets=$("#l-bullets").value.split("\n").filter(Boolean);
+      L.search=$("#l-search").value; L.aplus=$("#l-aplus").value.split("\n").filter(Boolean); L.main=$("#l-main").value;
+      L.status="in_draft"; log("Listing","人工确认 · 已进草稿 · 未上架"); renderListing(); paintLog();
+    };
   }
 
   function renderAds(){
-    const rows = state.campaigns.map(c => {
-      const over = c.status === "over_cap";
-      const sug = c.suggest;
-      let action = "—";
-      if (sug){
-        if (sug.blocked){
-          action = `<span class="badge bad">已拦截加预算</span><div class="tiny">${sug.text}</div><div class="tiny muted">${sug.blockReason}</div>
-            <button class="btn" data-adopt="${c.id}" data-mode="pause">采纳暂停</button>`;
-        } else {
-          action = `<div class="tiny">${sug.text}</div><button class="btn primary" data-adopt="${c.id}" data-mode="ok">采纳建议</button>`;
-        }
-      }
-      return `<tr>
-        <td>${c.name}<div class="tiny muted">${c.sku} · ${c.type}</div></td>
-        <td class="num">${money(c.spend7d)}</td>
-        <td class="num">${money(c.sales7d)}</td>
-        <td class="num">${c.acos}% ${over?'<span class="badge bad">超cap</span>':''}</td>
-        <td>${action}</td>
-      </tr>`;
-    }).join("");
-    $("#view-ads").innerHTML = `
-      ${flowBox("自动/手动活动、ACOS/TACOS 上限","烧钱词暂停、出单词加预算；超 cap 拦截","采纳建议","活动调整清单（演示）")}
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-          <h3 style="margin:0">广告守门 · ACOS cap ${NH.adsCaps.acos}% / TACOS cap ${NH.adsCaps.tacos}%</h3>
-          <span class="badge bad">未连接广告后台 · 只建议与拦截</span>
-        </div>
-        <p class="tiny muted" style="margin:8px 0">超标活动禁止「加预算」，仅允许暂停/否定词类动作。</p>
-        <table><thead><tr><th>活动</th><th class="num">7日花费</th><th class="num">7日销售额</th><th class="num">ACOS</th><th>AI建议</th></tr></thead><tbody>${rows}</tbody></table>
-      </div>`;
-    $$("[data-adopt]").forEach(b => b.addEventListener("click", () => {
-      const c = state.campaigns.find(x=>x.id===b.dataset.adopt);
-      pushLog("广告守门", `${c.name} · 已采纳${b.dataset.mode==='pause'?'暂停':'优化'}建议（演示，未改后台）`);
-      c.suggest = null;
-      if (b.dataset.mode==='pause'){ c.status='paused'; c.acos = Math.min(c.acos, NH.adsCaps.acos-1); }
-      renderAds();
-    }));
+    const camps=[
+      {name:"SP Auto · 瑜伽垫",sku:"BX-MAT",spend:310,sales:660,orders:24,loss:4},
+      {name:"SP Manual · 瑜伽垫",sku:"BX-MAT",spend:188,sales:320,orders:12,loss:5},
+      {name:"SP Auto · 台灯",sku:"BX-LAMP",spend:112,sales:468,orders:14,loss:0},
+      {name:"SP Auto · 收纳",sku:"BX-ORG",spend:79,sales:420,orders:14,loss:0},
+    ];
+    $("#view-ads").innerHTML=`
+      <div class="card"><h3>广告守门 · ACOS 阈值 ${pct(BX.rules.acosMax)} · 不自动改预算</h3>
+      <table><thead><tr><th>活动</th><th class="num">花费</th><th class="num">销售额</th><th class="num">出单</th><th class="num">ACOS</th><th>状态</th><th>建议（待确认）</th></tr></thead>
+      <tbody>${camps.map(c=>{
+        const acos=c.sales?c.spend/c.sales:1; const bad=acos>BX.rules.acosMax||c.loss>=3;
+        const tip=bad?(acos>BX.rules.acosMax?"暂停烧钱词 / 否词 / 降价测转化":"连续亏损·建议暂停"):"观察";
+        return `<tr><td>${c.name}</td><td class="num">${money(c.spend)}</td><td class="num">${money(c.sales)}</td><td class="num">${c.orders}</td>
+          <td class="num">${pct(acos)}</td><td>${bad?'<span class="verdict-no">标红</span>':'<span class="verdict-ok">正常</span>'}</td>
+          <td class="tiny">${tip} <button class="btn" data-ad="${c.name}">待人工确认</button></td></tr>`;
+      }).join("")}</tbody></table></div>`;
+    $$("[data-ad]").forEach(b=>b.onclick=()=>{log("广告守门",b.dataset.ad+" · 建议已记录，预算未改");paintLog();alert("已记入待确认，未改后台预算");});
   }
 
   function renderFba(){
-    const rows = state.fba.map(r => `
-      <tr>
-        <td>${r.sku}<div class="tiny muted">${r.titleZh}</div></td>
-        <td class="num">${r.avail}</td>
-        <td class="num">${r.inbound}</td>
-        <td class="num">${r.velocity}</td>
-        <td class="num">${r.daysCover}</td>
-        <td class="num">${r.safetyDays}</td>
-        <td>${r.risk==='high'?'<span class="badge bad">断货风险</span>':r.risk==='mid'?'<span class="badge warn">偏低</span>':'<span class="badge ok">健康</span>'}</td>
-        <td class="num">${r.reorderQty||"—"}</td>
-        <td>${r.reorderQty?`<button class="btn primary" data-reorder="${r.sku}">确认补货单</button>`:"—"}</td>
-      </tr>`).join("");
-    $("#view-fba").innerHTML = `
-      ${flowBox("FBA可售、在途、销速","可售天数、安全库存、补货量、断货风险","确认补货单","补货建议单（演示）")}
-      <div class="card">
-        <h3>FBA 库存与补货</h3>
-        <table><thead><tr><th>SKU</th><th class="num">可售</th><th class="num">在途</th><th class="num">日均销</th><th class="num">可售天</th><th class="num">安全库存天</th><th>风险</th><th class="num">建议补货</th><th>动作</th></tr></thead><tbody>${rows}</tbody></table>
-      </div>`;
-    $$("[data-reorder]").forEach(b => b.addEventListener("click", () => {
-      pushLog("FBA库存", `${b.dataset.reorder} 补货单已确认（演示）`);
-      const r = state.fba.find(x=>x.sku===b.dataset.reorder);
-      if (r){ r.inbound += r.reorderQty; r.reorderQty = 0; r.risk='low'; r.daysCover = Math.round((r.avail+r.inbound)/Math.max(r.velocity,0.1)); }
-      state.todos = state.todos.filter(t => t.id !== "t2");
-      renderFba();
-    }));
+    const rows=[
+      {sku:"BX-ORG-03",name:"竹制桌面收纳",avail:72,inbound:100,daily:10.5},
+      {sku:"BX-LAMP-01",name:"LED台灯",avail:380,inbound:0,daily:11.2},
+      {sku:"BX-MAT-02",name:"瑜伽垫",avail:260,inbound:0,daily:9.0},
+      {sku:"BX-CUSH-04",name:"记忆棉坐垫",avail:210,inbound:0,daily:6.2},
+    ];
+    $("#view-fba").innerHTML=`
+      <div class="card"><h3>FBA · 安全天数 ${BX.rules.safetyDays} · 补货待确认采购单</h3>
+      <table><thead><tr><th>SKU</th><th class="num">可售</th><th class="num">在途</th><th class="num">日销</th><th class="num">可售天</th><th class="num">建议补货</th><th>最晚发货</th><th></th></tr></thead>
+      <tbody>${rows.map(r=>{
+        const cover=(r.avail+r.inbound)/r.daily; const need=cover<BX.rules.safetyDays?Math.ceil((BX.rules.safetyDays-cover+14)*r.daily):0;
+        const d=new Date(); d.setDate(d.getDate()+Math.max(1,Math.floor(cover-5)));
+        const ship=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+        return `<tr><td>${r.sku}<div class="tiny muted">${r.name}</div></td>
+          <td class="num">${r.avail}</td><td class="num">${r.inbound}</td><td class="num">${r.daily}</td>
+          <td class="num">${cover.toFixed(1)}${cover<BX.rules.safetyDays?' <span class="verdict-no">低</span>':''}</td>
+          <td class="num">${need||"—"}</td><td>${need?ship:"—"}</td>
+          <td>${need?`<button class="btn primary" data-po="${r.sku}">确认采购单</button>`:"—"}</td></tr>`;
+      }).join("")}</tbody></table></div>`;
+    $$("[data-po]").forEach(b=>b.onclick=()=>{log("FBA补货",b.dataset.po+" 采购单待执行（演示确认）");paintLog();});
   }
 
   function renderCs(){
-    const cards = state.cs.map(item => `
-      <div class="card ${item.risk==='high'?'high':''}" style="margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
-          <div>
-            <span class="badge ${item.risk==='high'?'bad':'info'}">${item.type}${item.risk==='high'?' · 高风险必须人工':''}</span>
-            <strong style="margin-left:6px">${item.subject}</strong>
-            <div class="tiny muted">${item.from} · ${item.sku}${item.stars?` · ★${item.stars}`:''}</div>
-          </div>
-          <div class="row-actions">
-            <button class="btn primary" data-cs="${item.id}" ${item.status!=='pending'||item.risk==='high'?'disabled':''}>确认发送草稿</button>
-            <button class="btn" data-cs-human="${item.id}">标记人工已处理</button>
-          </div>
-        </div>
-        ${item.highRiskReason?`<div class="badge bad" style="margin-top:8px">原因：${item.highRiskReason}</div>`:''}
-        <div class="tiny muted" style="margin-top:8px">原文</div>
-        <div class="pre">${item.body}</div>
-        <div class="grid g2" style="margin-top:8px">
-          <div><div class="tiny muted">中文草稿</div><div class="pre">${item.draftZh}</div></div>
-          <div><div class="tiny muted">英文草稿</div><div class="pre">${item.draftEn}</div></div>
-        </div>
-        <div class="tiny" style="margin-top:6px">建议动作：${item.suggest} · 状态 ${item.status}</div>
-      </div>`).join("");
-    $("#view-cs").innerHTML = `
-      ${flowBox("买家消息 / 差评 / QA","中英回复草稿 + 退款/补发建议；侵权·安全·差评承诺标红","高风险必须人工；发送前确认","可发送回复 / 升级工单")}
-      ${cards}`;
-    $$("[data-cs]").forEach(b => b.addEventListener("click", () => {
-      const item = state.cs.find(x=>x.id===b.dataset.cs);
-      if (item.risk==='high') return;
-      item.status = "sent_demo";
-      pushLog("客服评论", `${item.id} 草稿已确认发送（演示）`);
-      renderCs();
-    }));
-    $$("[data-cs-human]").forEach(b => b.addEventListener("click", () => {
-      const item = state.cs.find(x=>x.id===b.dataset.csHuman);
-      item.status = "human_done";
-      pushLog("客服评论", `${item.id} 人工已处理`);
-      if (item.id==="cs2") state.todos = state.todos.filter(t => t.id !== "t3");
-      renderCs();
-    }));
+    const items=[
+      {id:"m1",type:"消息",risk:"low",sku:"BX-LAMP-01",draft:"Hi, sorry for the trouble. We can reship the USB cable in 5–7 business days if missing. Please reply with your order ID.",reason:null},
+      {id:"m2",type:"差评★2",risk:"high",sku:"BX-CUSH-04",draft:"[HUMAN] Sorry about the smell/flattening. Message us for refund/replace. We never ask to remove reviews.",reason:"品质-塌陷/异味"},
+      {id:"m3",type:"退货",risk:"low",sku:"BX-MAT-02",draft:"We received your size-mismatch return. Refund follows Amazon policy after scan-in.",reason:"尺寸不符"},
+    ];
+    $("#view-cs").innerHTML=`<div class="card"><h3>评论与买家消息 · 英文草稿 · 确认后才标已回复</h3>
+      ${items.map(m=>`<div class="card ${m.risk==="high"?"high":""}" style="margin:8px 0">
+        <b>${m.type}</b> ${m.sku} ${m.reason?`<span class="badge warn">退货归类：${m.reason}</span>`:""}
+        ${m.risk==="high"?'<span class="verdict-no">高风险必须人工</span>':""}
+        <div class="pre" style="margin:8px 0">${m.draft}</div>
+        <button class="btn primary" data-cs="${m.id}">人工确认 · 标已回复</button>
+      </div>`).join("")}</div>`;
+    $$("[data-cs]").forEach(b=>b.onclick=()=>{log("评论消息",b.dataset.cs+" 已人工确认并标已回复（未真实发信）");b.disabled=true;b.textContent="已回复";paintLog();});
   }
 
-  function renderProfit(){
-    const rows = NH.orders.map(o => {
-      const net = NH.calcNet(o);
-      return `<tr>
-        <td>${o.id}<div class="tiny muted">${o.date} · ${o.sku} ×${o.qty}</div></td>
-        <td class="num">${money(o.sales)}</td>
-        <td class="num">${money(o.ads)}</td>
-        <td class="num">${money(o.refund)}</td>
-        <td class="num">${money(o.headhaul)}</td>
-        <td class="num">${money(o.fba)}</td>
-        <td class="num">${money(o.referral)}</td>
-        <td class="num">${money(o.cost)}</td>
-        <td class="num" style="font-weight:600;color:${net>=0?'#047857':'#B91C1C'}">${money(net)}</td>
-      </tr>`;
-    }).join("");
-    const tot = NH.orders.reduce((a,o)=>({
-      sales:a.sales+o.sales, ads:a.ads+o.ads, refund:a.refund+o.refund,
-      headhaul:a.headhaul+o.headhaul, fba:a.fba+o.fba, referral:a.referral+o.referral, cost:a.cost+o.cost
-    }),{sales:0,ads:0,refund:0,headhaul:0,fba:0,referral:0,cost:0});
-    const netAll = NH.calcNet(tot);
-    $("#view-profit").innerHTML = `
-      ${flowBox("订单/广告/退款/费用项","拆到一单：销售−广告−退款−头程−FBA−佣金−采购","老板确认口径","日报/周报净利表")}
+  function renderWeekly(){
+    const sales=32.99*78+26.99*63+29.99*73+34.99*43;
+    const ads=310+188+112+79;
+    const returns=(2+3+1+5)/(78+63+73+43);
+    $("#view-weekly").innerHTML=`
       <div class="grid g4" style="margin-bottom:12px">
-        <div class="card"><div class="tiny muted">销售额</div><div class="kpi" style="font-size:18px">${money(tot.sales)}</div></div>
-        <div class="card"><div class="tiny muted">广告花费</div><div class="kpi" style="font-size:18px">${money(tot.ads)}</div></div>
-        <div class="card"><div class="tiny muted">退款</div><div class="kpi" style="font-size:18px">${money(tot.refund)}</div></div>
-        <div class="card"><div class="tiny muted">净利（演示）</div><div class="kpi" style="font-size:18px">${money(netAll)}</div></div>
+        <div class="card"><div class="tiny muted">周销量额</div><div class="kpi" style="font-size:18px">${money(sales)}</div></div>
+        <div class="card"><div class="tiny muted">广告花费</div><div class="kpi" style="font-size:18px">${money(ads)}</div></div>
+        <div class="card"><div class="tiny muted">退货率</div><div class="kpi" style="font-size:18px">${pct(returns)}</div></div>
+        <div class="card"><div class="tiny muted">断货风险</div><div class="kpi" style="font-size:18px">1 SKU</div><div class="tiny muted">BX-ORG-03 可售天偏低</div></div>
       </div>
-      <div class="card">
-        <div style="display:flex;justify-content:space-between"><h3 style="margin:0">订单级利润瀑布</h3><span class="badge demo">${NH.shop.demoNote}</span></div>
-        <p class="tiny muted">净利 = 销售 − 广告 − 退款 − 头程摊销 − FBA − 佣金 − 采购成本</p>
-        <table><thead><tr><th>订单</th><th class="num">销售</th><th class="num">广告</th><th class="num">退款</th><th class="num">头程</th><th class="num">FBA</th><th class="num">佣金</th><th class="num">采购</th><th class="num">净利</th></tr></thead>
-        <tbody>${rows}</tbody></table>
+      <div class="card"><h3>老板一页周报</h3>
+        <p>毛利：按选品公式口径演示测算（非 Settlement）。广告占销 ${pct(ads/sales)}。</p>
+        <p>行动：瑜伽垫广告标红待否词；收纳补货待确认采购单；坐垫差评高风险待人工。</p>
+        <p class="tiny muted">${BX.meta.demoNote} · 对外发送周报需人工。</p>
       </div>`;
   }
 
   function renderAll(){
-    renderOverview(); renderSourcing(); renderListing(); renderAds(); renderFba(); renderCs(); renderProfit();
+    renderOverview();renderVerdict();renderMap();renderListing();renderAds();renderFba();renderCs();renderWeekly();
   }
-
-  function boot(){
-    $$(".nav button[data-view]").forEach(b => b.addEventListener("click", () => {
-      setView(b.dataset.view);
-      renderAll();
-    }));
-    setView("overview");
-    renderAll();
-  }
-  document.addEventListener("DOMContentLoaded", boot);
+  document.addEventListener("DOMContentLoaded",()=>{
+    $$(".nav button[data-view]").forEach(b=>b.addEventListener("click",()=>{setView(b.dataset.view);renderAll();}));
+    $("#btn-run-all").onclick=runAll;
+    setView("overview"); renderAll();
+    // precompute for console
+    console.table(BX.candidates.map(p=>{const v=BX.verdict(p);return{品:p.nameZh,结论:v.conclusion,原因:v.reason};}));
+  });
 })();
