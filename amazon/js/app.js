@@ -25,12 +25,12 @@
 
   function feeBar(p,m){
     const parts=[
-      ["采购",p.cogs,"#020617"],["头程",p.headhaul,"#334155"],["佣金",m.referral,"#64748B"],
-      ["FBA",p.fba,"#94A3B8"],["广告",p.adReserve,"#CBD5E1"],["退货",p.returnReserve,"#E2E8F0"],["净利",Math.max(m.net,0),"#0369A1"]
+      ["采购",p.cogs,"g1"],["头程",p.headhaul,"g3"],["佣金",m.referral,"g2"],
+      ["FBA",p.fba,"g4"],["广告",p.adReserve,"g1"],["退货",p.returnReserve,"g3"],["净利",Math.max(m.net,0),"net"]
     ];
     const sum=parts.reduce((a,x)=>a+x[1],0)||1;
-    return `<div class="fee">${parts.map(x=>`<span title="${x[0]} ${money(x[1])}" style="width:${(x[1]/sum*100).toFixed(1)}%;background:${x[2]}"></span>`).join("")}</div>
-      <div class="legend">${parts.map(x=>`<span><i style="background:${x[2]}"></i>${x[0]} ${money(x[1])}</span>`).join("")}</div>`;
+    return `<div class="fee">${parts.map(x=>`<span class="${x[2]}" title="${x[0]} ${money(x[1])}" style="width:${(x[1]/sum*100).toFixed(1)}%"></span>`).join("")}</div>
+      <div class="legend">${parts.map(x=>`<span><i class="${x[2]}"></i>${x[0]} ${money(x[1])}</span>`).join("")}</div>`;
   }
 
   function renderOverview(){
@@ -86,7 +86,7 @@
   }
   function paintLog(){
     const box=$("#log-box"); if(!box)return;
-    box.innerHTML=(state.logs.slice(0,50).map(l=>`<div><span style="color:#475569">${l.ts}</span> · <span style="color:#0369A1">${l.agent}</span> · ${l.msg}</div>`).join(""))||"<div>暂无日志</div>";
+    box.innerHTML=(state.logs.slice(0,50).map(l=>`<div><span class="log-ts">${l.ts}</span> · <span class="log-agent">${l.agent}</span> · ${l.msg}</div>`).join(""))||"<div>暂无日志</div>";
   }
 
   function runOne(id){
@@ -123,7 +123,7 @@
           </div>
           <div style="text-align:right">
             <span class="${vBadge(v.conclusion)}">${v.conclusion}</span>
-            <div class="tiny" style="margin-top:6px;font-weight:650;color:#475569">${v.action}</div>
+            <div class="tiny muted" style="margin-top:6px;font-weight:650">${v.action}</div>
           </div>
         </div>
         <p style="margin:10px 0 4px;font-size:13px"><b>关键原因：</b>${v.reason}</p>
