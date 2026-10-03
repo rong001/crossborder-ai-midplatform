@@ -25,8 +25,8 @@
 
   function feeBar(p,m){
     const parts=[
-      ["采购",p.cogs,"#1E3A5F"],["头程",p.headhaul,"#0E7490"],["佣金",m.referral,"#6D28D9"],
-      ["FBA",p.fba,"#1D4ED8"],["广告",p.adReserve,"#C2410C"],["退货",p.returnReserve,"#BE123C"],["净利",Math.max(m.net,0),"#047857"]
+      ["采购",p.cogs,"#020617"],["头程",p.headhaul,"#334155"],["佣金",m.referral,"#64748B"],
+      ["FBA",p.fba,"#94A3B8"],["广告",p.adReserve,"#CBD5E1"],["退货",p.returnReserve,"#E2E8F0"],["净利",Math.max(m.net,0),"#0369A1"]
     ];
     const sum=parts.reduce((a,x)=>a+x[1],0)||1;
     return `<div class="fee">${parts.map(x=>`<span title="${x[0]} ${money(x[1])}" style="width:${(x[1]/sum*100).toFixed(1)}%;background:${x[2]}"></span>`).join("")}</div>
@@ -46,12 +46,12 @@
         <div class="tiny">今日 Agent 已处理 <b style="font-size:20px">${processed}</b></div>
       </div>
       <div class="grid g6" style="margin-bottom:12px">
-        <div class="kpi-tile k-teal"><div class="lbl">可做</div><div class="kpi">${counts.可做}</div><div class="tiny muted">八维全过</div></div>
+        <div class="kpi-tile k-ok"><div class="lbl">可做</div><div class="kpi">${counts.可做}</div><div class="tiny muted">八维全过</div></div>
         <div class="kpi-tile k-warn"><div class="lbl">观察</div><div class="kpi">${counts.观察}</div><div class="tiny muted">合规或供应未齐</div></div>
         <div class="kpi-tile k-bad"><div class="lbl">不可做</div><div class="kpi">${counts.不可做}</div><div class="tiny muted">净利/垄断/衰退</div></div>
-        <div class="kpi-tile k-navy"><div class="lbl">周销售额</div><div class="kpi" style="font-size:18px">${money(sales)}</div><div class="tiny muted">样例 SKU 合计</div></div>
-        <div class="kpi-tile k-warn"><div class="lbl">广告花费</div><div class="kpi" style="font-size:18px">${money(ads)}</div><div class="tiny muted">占销 ${pct(ads/sales)}</div></div>
-        <div class="kpi-tile k-cyan"><div class="lbl">Agent 开启</div><div class="kpi">${state.agents.filter(a=>a.on).length}/6</div><div class="tiny muted">花钱动作仍待确认</div></div>
+        <div class="kpi-tile"><div class="lbl">周销售额</div><div class="kpi" style="font-size:18px">${money(sales)}</div><div class="tiny muted">样例 SKU 合计</div></div>
+        <div class="kpi-tile"><div class="lbl">广告花费</div><div class="kpi" style="font-size:18px">${money(ads)}</div><div class="tiny muted">占销 ${pct(ads/sales)}</div></div>
+        <div class="kpi-tile"><div class="lbl">Agent 开启</div><div class="kpi">${state.agents.filter(a=>a.on).length}/6</div><div class="tiny muted">花钱动作仍待确认</div></div>
       </div>
       <div class="grid g2">
         <div class="card t-navy"><h3>各模块 Agent</h3>
@@ -86,7 +86,7 @@
   }
   function paintLog(){
     const box=$("#log-box"); if(!box)return;
-    box.innerHTML=(state.logs.slice(0,50).map(l=>`<div><span style="color:#94A3B8">${l.ts}</span> · <span style="color:#5EEAD4">${l.agent}</span> · ${l.msg}</div>`).join(""))||"<div>暂无日志</div>";
+    box.innerHTML=(state.logs.slice(0,50).map(l=>`<div><span style="color:#475569">${l.ts}</span> · <span style="color:#0369A1">${l.agent}</span> · ${l.msg}</div>`).join(""))||"<div>暂无日志</div>";
   }
 
   function runOne(id){
@@ -123,7 +123,7 @@
           </div>
           <div style="text-align:right">
             <span class="${vBadge(v.conclusion)}">${v.conclusion}</span>
-            <div class="tiny" style="margin-top:6px;font-weight:650;color:#0F766E">${v.action}</div>
+            <div class="tiny" style="margin-top:6px;font-weight:650;color:#475569">${v.action}</div>
           </div>
         </div>
         <p style="margin:10px 0 4px;font-size:13px"><b>关键原因：</b>${v.reason}</p>
@@ -179,9 +179,9 @@
         <p>标题、五点、搜索词、A+、主图脚本都可改。点确认只进草稿，不调用上架接口。</p></div>
       </div>
       <div class="grid g4" style="margin-bottom:12px">
-        <div class="kpi-tile k-blue"><div class="lbl">标题字符</div><div class="kpi">${titleLen}</div><div class="tiny muted">建议 ≤200</div></div>
-        <div class="kpi-tile k-teal"><div class="lbl">五点</div><div class="kpi">${L.bullets.length}</div><div class="tiny muted">每条一个卖点</div></div>
-        <div class="kpi-tile k-violet"><div class="lbl">搜索词</div><div class="kpi">${L.search.split(",").length}</div><div class="tiny muted">后台搜索词，非前台标题</div></div>
+        <div class="kpi-tile"><div class="lbl">标题字符</div><div class="kpi">${titleLen}</div><div class="tiny muted">建议 ≤200</div></div>
+        <div class="kpi-tile"><div class="lbl">五点</div><div class="kpi">${L.bullets.length}</div><div class="tiny muted">每条一个卖点</div></div>
+        <div class="kpi-tile"><div class="lbl">搜索词</div><div class="kpi">${L.search.split(",").length}</div><div class="tiny muted">后台搜索词，非前台标题</div></div>
         <div class="kpi-tile ${L.status==="in_draft"?"k-ok":"k-warn"}"><div class="lbl">状态</div><div class="kpi" style="font-size:16px">${L.status==="in_draft"?"已进草稿":"待确认"}</div><div class="tiny muted">未上架</div></div>
       </div>
       <div class="card t-blue">
@@ -217,8 +217,8 @@
         <p>超阈值或连续亏损标红，只出建议。改预算、否词、暂停活动都要人确认。</p></div>
       </div>
       <div class="grid g4" style="margin-bottom:12px">
-        <div class="kpi-tile k-warn"><div class="lbl">花费</div><div class="kpi">${money(spend)}</div></div>
-        <div class="kpi-tile k-navy"><div class="lbl">广告销售额</div><div class="kpi">${money(sales)}</div></div>
+        <div class="kpi-tile"><div class="lbl">花费</div><div class="kpi">${money(spend)}</div></div>
+        <div class="kpi-tile"><div class="lbl">广告销售额</div><div class="kpi">${money(sales)}</div></div>
         <div class="kpi-tile ${spend/sales>BX.rules.acosMax?"k-bad":"k-ok"}"><div class="lbl">整体 ACOS</div><div class="kpi">${pct(spend/sales)}</div></div>
         <div class="kpi-tile k-bad"><div class="lbl">标红活动</div><div class="kpi">${camps.filter(c=>(c.sales?c.spend/c.sales:1)>BX.rules.acosMax||c.loss>=3).length}</div></div>
       </div>
@@ -230,10 +230,10 @@
         const acos=c.sales?c.spend/c.sales:1; const bad=acos>BX.rules.acosMax||c.loss>=3;
         const tip=bad?(acos>BX.rules.acosMax?"暂停烧钱词 / 否词 / 降价测转化":"连续亏损 · 建议暂停"):"观察";
         const cpc=c.clicks?c.spend/c.clicks:0;
-        return `<tr style="${bad?"background:#FFF7F5":""}"><td><b>${c.name}</b></td><td>${c.sku}</td>
+        return `<tr><td><b>${c.name}</b></td><td>${c.sku}</td>
           <td class="num">${money(c.spend)}</td><td class="num">${money(c.sales)}</td>
           <td class="num">${c.clicks}</td><td class="num">${money(cpc)}</td><td class="num">${c.orders}</td>
-          <td class="num"><span class="fld ${bad?"fld-ad":"fld-net"}">${pct(acos)}</span></td>
+          <td class="num"><span class="${bad?"badge bad":"badge ok"}">${pct(acos)}</span></td>
           <td class="tiny">${c.waste}</td>
           <td>${bad?'<span class="verdict-no">标红</span>':'<span class="verdict-ok">正常</span>'}</td>
           <td class="tiny">${tip}<div style="margin-top:4px"><button class="btn" data-ad="${c.name}">待人工确认</button></div></td></tr>`;
@@ -264,10 +264,10 @@
         const d=new Date(); d.setDate(d.getDate()+Math.max(1,Math.floor(cover-5)));
         const ship=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
         const low=cover<BX.rules.safetyDays;
-        return `<tr style="${low?"background:#F3FBF7":""}"><td><b>${r.sku}</b><div class="tiny muted">${r.name}</div></td>
+        return `<tr><td><b>${r.sku}</b><div class="tiny muted">${r.name}</div></td>
           <td class="tiny">${r.wh}</td>
           <td class="num">${r.avail}</td><td class="num">${r.inbound}</td><td class="num">${r.daily}</td>
-          <td class="num"><span class="fld ${low?"fld-ad":"fld-net"}">${cover.toFixed(1)}天</span></td>
+          <td class="num"><span class="${low?"badge bad":"badge ok"}">${cover.toFixed(1)}天</span></td>
           <td class="num">${money((r.avail+r.inbound)*r.cost)}</td>
           <td class="num">${need||"—"}</td><td>${need?ship:"—"}</td><td>${r.eta}</td>
           <td>${need?`<button class="btn primary" data-po="${r.sku}">确认采购单</button>`:"—"}</td></tr>`;
@@ -290,14 +290,14 @@
       <div class="grid g3" style="margin-bottom:12px">
         <div class="kpi-tile k-bad"><div class="lbl">高风险</div><div class="kpi">${items.filter(m=>m.risk==="high").length}</div><div class="tiny muted">必须人工定调</div></div>
         <div class="kpi-tile k-warn"><div class="lbl">待回复</div><div class="kpi" id="cs-open">${items.length}</div><div class="tiny muted">确认后才减</div></div>
-        <div class="kpi-tile k-rose" style="border-left-color:#BE123C"><div class="lbl">超时</div><div class="kpi">1</div><div class="tiny muted">差评已超买家消息 SLA</div></div>
+        <div class="kpi-tile k-bad"><div class="lbl">超时</div><div class="kpi">1</div><div class="tiny muted">差评已超买家消息 SLA</div></div>
       </div>
       ${items.map(m=>`<div class="card ${m.risk==="high"?"t-rose high":"t-rose"}" style="margin-bottom:10px">
         <div class="row-actions">
           <b>${m.type}</b>
           <span class="fld fld-price">${m.sku}</span>
           <span class="fld fld-time">${m.order}</span>
-          <span class="fld ${m.sla.indexOf("超时")>=0?"fld-ad":"fld-net"}">${m.sla}</span>
+          <span class="${m.sla.indexOf("超时")>=0?"badge bad":"badge ok"}">${m.sla}</span>
           <span class="fld fld-comp">${m.topic}</span>
           ${m.reason?`<span class="badge warn">退货归类：${m.reason}</span>`:""}
           ${m.risk==="high"?'<span class="verdict-no">高风险必须人工</span>':""}
@@ -330,10 +330,10 @@
         <p>口径是演示测算，不是 Settlement 报表。对外发给团队仍要人工点发送。</p></div>
       </div>
       <div class="grid g4" style="margin-bottom:12px">
-        <div class="kpi-tile k-navy"><div class="lbl">周销售额</div><div class="kpi" style="font-size:18px">${money(sales)}</div><div class="tiny muted">${units} 件</div></div>
-        <div class="kpi-tile k-warn"><div class="lbl">广告花费</div><div class="kpi" style="font-size:18px">${money(ads)}</div><div class="tiny muted">占销 ${pct(ads/sales)}</div></div>
+        <div class="kpi-tile"><div class="lbl">周销售额</div><div class="kpi" style="font-size:18px">${money(sales)}</div><div class="tiny muted">${units} 件</div></div>
+        <div class="kpi-tile"><div class="lbl">广告花费</div><div class="kpi" style="font-size:18px">${money(ads)}</div><div class="tiny muted">占销 ${pct(ads/sales)}</div></div>
         <div class="kpi-tile k-bad"><div class="lbl">退货率</div><div class="kpi" style="font-size:18px">${pct(rets/units)}</div><div class="tiny muted">${rets} 件 / ${units} 件</div></div>
-        <div class="kpi-tile k-cyan"><div class="lbl">断货风险</div><div class="kpi" style="font-size:18px">1 SKU</div><div class="tiny muted">BX-ORG-03 可售天偏低</div></div>
+        <div class="kpi-tile k-warn"><div class="lbl">断货风险</div><div class="kpi" style="font-size:18px">1 SKU</div><div class="tiny muted">BX-ORG-03 可售天偏低</div></div>
       </div>
       <div class="card t-cyan">
         <h3>按 SKU</h3>
@@ -348,9 +348,9 @@
           else if(s.sku==="BX-ORG-03") note="动销好但可售天不够，采购单待确认";
           return `<tr><td><b>${s.sku}</b><div class="tiny muted">${s.name}</div></td>
             <td class="num">${s.units}</td><td class="num">${money(rev)}</td><td class="num">${money(s.ad)}</td>
-            <td class="num"><span class="fld ${share>0.35?"fld-ad":"fld-net"}">${pct(share)}</span></td>
+            <td class="num"><span class="${share>0.35?"badge bad":"badge ok"}">${pct(share)}</span></td>
             <td class="num">${s.ret}</td>
-            <td class="num"><span class="fld ${rr>0.08?"fld-ret":"fld-net"}">${pct(rr)}</span></td>
+            <td class="num"><span class="${rr>0.08?"badge bad":"badge ok"}">${pct(rr)}</span></td>
             <td class="tiny">${note}</td></tr>`;
         }).join("")}
         </tbody></table>
