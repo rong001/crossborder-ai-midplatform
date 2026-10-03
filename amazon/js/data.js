@@ -20,12 +20,12 @@ BX.agents = [
 ];
 
 BX.dailyMap = [
-  { job:"选品", human:"定类目/拍板做不做", system:"八维打分+净利拦截+趋势阶段", mustConfirm:"认领进短名单 / 否决" },
-  { job:"Listing", human:"改文案、过合规、确认上架", system:"标题五点搜索词A+主图脚本草稿", mustConfirm:"确认进草稿（不上架）" },
-  { job:"广告", human:"否词、暂停、改价策略", system:"ACOS/TACOS超阈值标红+建议", mustConfirm:"改预算/启停活动" },
-  { job:"补货", human:"下采购单、约头程", system:"可售天/建议量/最晚发货日", mustConfirm:"确认采购单" },
-  { job:"差评/消息", human:"定调、法务、是否退款", system:"英文回复草稿+退货归类+高风险标红", mustConfirm:"确认后才标已回复/发信" },
-  { job:"利润/周报", human:"看净利决定加投或收缩", system:"销量广告毛利退货断货一页汇总", mustConfirm:"对外发周报给团队" },
+  { job:"选品", who:"选品", human:"定类目、拍板做不做", system:"八维打分、净利拦截、趋势阶段", mustConfirm:"认领进短名单 / 否决", saved:"约 40 分钟/批" },
+  { job:"Listing", who:"运营/文案", human:"改文案、过合规、确认上架", system:"标题、五点、搜索词、A+、主图脚本草稿", mustConfirm:"确认进草稿（不上架）", saved:"约 1 小时/条" },
+  { job:"广告", who:"广告运营", human:"否词、暂停、改价策略", system:"ACOS 超 35% 标红并给建议", mustConfirm:"改预算 / 启停活动", saved:"早会前 15 分钟" },
+  { job:"补货", who:"供应链", human:"下采购单、约头程", system:"可售天、建议量、最晚发货日", mustConfirm:"确认采购单", saved:"避免漏看断货" },
+  { job:"差评/消息", who:"客服", human:"定调、是否退款", system:"英文回复草稿、退货归类、高风险标红", mustConfirm:"确认后才标已回复 / 发信", saved:"首响草稿即时" },
+  { job:"利润/周报", who:"财务/老板", human:"看净利决定加投或收缩", system:"销量、广告、退货、断货一页汇总", mustConfirm:"对外发周报给团队", saved:"周一早会一页" },
 ];
 
 /** 6 候选 — SAMPLE 字段；裁决由 CALC 函数生成 */
